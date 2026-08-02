@@ -1,0 +1,204 @@
+/* =====================================================
+   GESP 学习中心 · Apple 设计系统
+   统一：排版、卡片、按钮、导航、深色模式
+   放在各页面内联样式之后加载，以覆盖全局外观
+   ===================================================== */
+
+:root {
+  --accent: #0071e3;
+  --bg: #f5f5f7;
+  --card: #ffffff;
+  --ink: #1d1d1f;
+  --ink2: #6e6e73;
+  --hairline: rgba(0, 0, 0, .08);
+}
+
+* {
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+}
+
+/* ---- 标题：去渐变，统一近黑色大标题 ---- */
+h1 {
+  background: none !important;
+  -webkit-background-clip: border-box !important;
+  background-clip: border-box !important;
+  -webkit-text-fill-color: currentColor !important;
+  color: var(--ink) !important;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+h2 { color: var(--ink); letter-spacing: -0.01em; }
+h3 { color: var(--ink); }
+.slogan, .sub { color: var(--ink2); }
+
+/* ---- 导航：毛玻璃吸顶 ---- */
+nav.chips {
+  position: sticky;
+  top: 10px;
+  z-index: 60;
+  background: rgba(245, 245, 247, .78);
+  -webkit-backdrop-filter: blur(18px) saturate(180%);
+  backdrop-filter: blur(18px) saturate(180%);
+  border-radius: 999px;
+  padding: 8px 12px;
+  margin: 16px 0 12px;
+  box-shadow: 0 1px 0 rgba(0,0,0,.04), 0 8px 24px rgba(0,0,0,.05);
+}
+.chip {
+  background: #fff;
+  border: 1px solid var(--hairline);
+  color: var(--ink);
+  border-radius: 999px;
+  font-weight: 600;
+  box-shadow: none;
+}
+.chip:hover { border-color: var(--chip, var(--accent)); }
+
+/* ---- 卡片：白底、大圆角、细边框、轻阴影 ---- */
+section.topic, .panel, .part {
+  background: var(--card);
+  border: 1px solid var(--hairline);
+  border-top-width: 4px;
+  border-top-color: var(--tc, var(--pc, var(--accent)));
+  border-radius: 20px;
+  box-shadow: 0 1px 2px rgba(0,0,0,.04), 0 10px 30px rgba(0,0,0,.05);
+}
+.box {
+  background: var(--bg);
+  border: 1px solid var(--hairline);
+  border-radius: 14px;
+  box-shadow: none;
+}
+.box .name { color: var(--ink); }
+.box .desc { color: var(--ink2); }
+
+/* ---- 按钮：胶囊、统一强调色 ---- */
+.btn {
+  background: #fff;
+  border: 1px solid rgba(0,0,0,.14);
+  color: var(--ink);
+  border-radius: 999px;
+  font-weight: 600;
+  box-shadow: none;
+}
+.btn.go { background: var(--tc, var(--accent)); border-color: transparent; color: #fff; }
+.btn:hover { transform: translateY(-1px); }
+
+/* ---- 信息条 ---- */
+.msg, .tip, .goal, .warn, .fb, .callout {
+  border-radius: 12px;
+}
+.tip, .warn { margin-top: 12px; }
+
+/* ---- 表格 ---- */
+table {
+  border-collapse: separate;
+  border-spacing: 0;
+  border: 1px solid var(--hairline);
+  border-radius: 14px;
+  overflow: hidden;
+}
+th { background: var(--bg); }
+th, td { border-color: rgba(0,0,0,.06); }
+
+/* ---- 代码 ---- */
+code {
+  background: #eef0f2;
+  color: var(--accent);
+  border-radius: 6px;
+}
+.code, .codebox pre { border-radius: 14px; }
+
+/* ---- 课时折叠卡、地图、打卡 ---- */
+details.lesson, details.lvl {
+  border-radius: 18px;
+  border: 1px solid var(--hairline);
+  box-shadow: none;
+}
+.station {
+  background: var(--bg);
+  border: 1px solid var(--hairline);
+  border-radius: 14px;
+  box-shadow: none;
+}
+.checks label {
+  background: var(--bg);
+  border: 1px solid var(--hairline);
+  border-radius: 12px;
+}
+.lqi { background: var(--bg); border-radius: 14px; }
+.lqb {
+  background: #fff;
+  border: 1px solid rgba(0,0,0,.12);
+  border-radius: 12px;
+  box-shadow: none;
+}
+.bar { background: rgba(0,0,0,.06); }
+.chkbtn { border-radius: 999px; }
+.pnav a { border-radius: 999px; border: 1px solid rgba(0,0,0,.1); }
+.exambox { border-radius: 14px; }
+.toc { border-radius: 16px; }
+
+/* ---- 考纲页 ---- */
+.lvhead b { color: #fff; }
+.callout.info, .callout.key, .callout.warn { border-radius: 14px; }
+
+/* ---- 页脚 ---- */
+footer { color: #86868b; }
+footer a { color: var(--accent); }
+
+/* ---- 主页（Tailwind）微调 ---- */
+.bg-slate-50 { background: var(--bg); }
+.text-slate-800 { color: var(--ink); }
+.text-slate-500, .text-slate-400 { color: var(--ink2); }
+.border-slate-200 { border-color: rgba(0,0,0,.08); }
+.bg-white { background: #fff; }
+.shadow-sm { box-shadow: 0 1px 2px rgba(0,0,0,.05); }
+.hover\:shadow-md:hover { box-shadow: 0 8px 24px rgba(0,0,0,.08); }
+
+/* ================= 深色模式 ================= */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #000000;
+    --card: #1c1c1e;
+    --ink: #f5f5f7;
+    --ink2: #98989d;
+    --hairline: rgba(255, 255, 255, .12);
+  }
+  body { background: var(--bg); color: var(--ink); }
+  h1, h2, h3 { color: var(--ink); }
+  .slogan, .sub { color: var(--ink2); }
+  nav.chips { background: rgba(0, 0, 0, .72); box-shadow: 0 1px 0 rgba(255,255,255,.06); }
+  .chip, .btn { background: #1c1c1e; border-color: rgba(255,255,255,.18); color: #f5f5f7; }
+  .chip:hover { border-color: var(--chip, var(--accent)); }
+  .box, .lqi, .station, .checks label, th { background: #2c2c2e; }
+  .box .desc { color: var(--ink2); }
+  .lqb { background: #2c2c2e; border-color: rgba(255,255,255,.16); color: #f5f5f7; }
+  .bar { background: rgba(255,255,255,.14); }
+  code { background: #2c2c2e; }
+  .msg { background: #2c2c2e; }
+  .goal { background: rgba(0,113,227,.16); border-color: rgba(0,113,227,.4); }
+  .tip { background: rgba(255,214,10,.1); border-color: rgba(255,214,10,.35); }
+  .warn, .callout.key { background: rgba(255,69,58,.12); border-color: rgba(255,69,58,.4); }
+  .callout.info { background: rgba(0,113,227,.12); border-color: rgba(0,113,227,.35); }
+  .callout.warn { background: rgba(255,214,10,.1); border-color: rgba(255,214,10,.35); }
+  .fb.ok { background: rgba(52,199,89,.14); border-color: rgba(52,199,89,.4); }
+  .fb.no { background: rgba(255,69,58,.14); border-color: rgba(255,69,58,.4); }
+  .pnav a { background: #2c2c2e; border-color: rgba(255,255,255,.16); color: var(--ink); }
+  .toc, .exambox { background: #2c2c2e; }
+  /* 主页 Tailwind */
+  .bg-white { background: #1c1c1e !important; }
+  .border-slate-200 { border-color: rgba(255,255,255,.12); }
+  .text-slate-800 { color: #f5f5f7; }
+  .text-slate-500, .text-slate-400 { color: #98989d; }
+  .bg-slate-100 { background: #2c2c2e; }
+  .hover\:bg-indigo-50:hover, .hover\:bg-teal-50:hover, .hover\:bg-violet-50:hover, .hover\:bg-sky-50:hover { background: rgba(255,255,255,.08); }
+  .shadow-sm { box-shadow: 0 1px 2px rgba(0,0,0,.4); }
+  footer { color: #86868b; }
+}
