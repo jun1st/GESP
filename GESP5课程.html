@@ -1,0 +1,610 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="GESP C++ 五级课程：初等数论、高精度、链表、二分、递归、贪心、分治。">
+<title>GESP C++ 五级课程 📙</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans SC", sans-serif;
+    background: linear-gradient(170deg, #fff1f2 0%, #ffffff 50%, #f0fdfa 100%);
+    color: #2b2d42;
+    line-height: 1.8;
+    min-height: 100vh;
+  }
+  .wrap { max-width: 920px; margin: 0 auto; padding: 14px 18px 50px; }
+  header { text-align: center; padding: 26px 12px 8px; }
+  header .mascot { font-size: 50px; display: block; animation: float 3s ease-in-out infinite; }
+  @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+  h1 {
+    font-size: clamp(25px, 5vw, 38px);
+    background: linear-gradient(90deg, #ef476f, #f472b6, #10b981);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    margin: 8px 0 4px;
+  }
+  .slogan { color: #6c6f93; font-size: 15px; }
+  nav.chips { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin: 18px 0 10px; }
+  .chip {
+    text-decoration: none;
+    background: #fff;
+    border: 2px solid #dce3f5;
+    color: #2b2d42;
+    padding: 7px 13px;
+    border-radius: 999px;
+    font-size: 14px;
+    font-weight: 600;
+    transition: transform .15s, border-color .15s, box-shadow .15s;
+  }
+  .chip:hover { transform: translateY(-2px); border-color: #ef476f; box-shadow: 0 4px 12px rgba(43,45,66,.12); }
+  .panel {
+    background: #fff;
+    border-radius: 22px;
+    padding: 20px 20px 24px;
+    margin: 20px 0;
+    box-shadow: 0 6px 24px rgba(43,45,66,.07);
+    border-top: 7px solid #ef476f;
+  }
+  .panel h2 { font-size: clamp(20px, 4vw, 26px); color: #be123c; margin-bottom: 8px; }
+  .callout { border-radius: 14px; padding: 12px 15px; font-size: 14.5px; margin: 12px 0; }
+  .callout.info { background: #eef4ff; border: 2px solid #bcd0ff; }
+  .callout.key { background: #ffeef1; border: 2px solid #fda4af; }
+  .goal {
+    background: #eef4ff;
+    border: 2px solid #bcd0ff;
+    border-radius: 14px;
+    padding: 10px 14px;
+    font-size: 14.5px;
+    margin: 10px 0;
+  }
+  details.lesson {
+    background: #fff;
+    border-radius: 18px;
+    border: 2px solid #e2e8f8;
+    margin: 14px 0;
+    overflow: hidden;
+  }
+  details.lesson[open] { box-shadow: 0 8px 24px rgba(43,45,66,.1); }
+  details.lesson summary {
+    list-style: none;
+    cursor: pointer;
+    padding: 13px 18px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: linear-gradient(90deg, #ef476f, #f472b6);
+    color: #fff;
+    font-weight: 800;
+  }
+  details.lesson summary::-webkit-details-marker { display: none; }
+  .lnum {
+    background: rgba(255,255,255,.22);
+    border: 2px solid rgba(255,255,255,.55);
+    border-radius: 999px;
+    padding: 2px 11px;
+    font-size: 13px;
+    white-space: nowrap;
+  }
+  .lgoal { font-size: 13px; font-weight: 600; opacity: .95; }
+  .ltoggle { margin-left: auto; font-size: 18px; }
+  details.lesson[open] .ltoggle { transform: rotate(180deg); }
+  .lbody { padding: 16px 18px 18px; }
+  .lbody h4 { font-size: 15.5px; color: #be123c; margin: 14px 0 6px; }
+  .lbody h4:first-child { margin-top: 0; }
+  .lbody p, .lbody ul, .lbody ol { font-size: 14.5px; margin: 6px 0; }
+  .lbody ul, .lbody ol { padding-left: 22px; }
+  code {
+    font-family: "SF Mono", Consolas, monospace;
+    background: #eef1fa;
+    color: #9f1239;
+    padding: 1px 7px;
+    border-radius: 7px;
+    font-size: 13.5px;
+  }
+  .codebox { position: relative; margin: 10px 0; }
+  .codebox pre {
+    background: #20232e;
+    color: #d6f5e3;
+    border-radius: 14px;
+    padding: 14px 16px;
+    overflow-x: auto;
+    font-size: 13.5px;
+    line-height: 1.65;
+    font-family: "SF Mono", Consolas, "Courier New", monospace;
+  }
+  .cpy {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    border: none;
+    background: rgba(255,255,255,.14);
+    color: #fff;
+    border-radius: 8px;
+    padding: 4px 10px;
+    font-size: 12px;
+    cursor: pointer;
+    font-family: inherit;
+  }
+  .lquiz { margin: 12px 0 6px; }
+  .lqi { background: #f7f9ff; border-radius: 14px; padding: 12px 14px; margin: 10px 0; }
+  .lqq { font-weight: 700; font-size: 14.5px; margin-bottom: 6px; }
+  .lqb {
+    display: block;
+    width: 100%;
+    text-align: left;
+    margin: 5px 0;
+    border: 2px solid #dce3f5;
+    background: #fff;
+    border-radius: 12px;
+    padding: 7px 12px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: inherit;
+  }
+  .lqb.right { background: #d1fae5 !important; border-color: #10b981 !important; color: #065f46 !important; }
+  .lqb.wrong { background: #ffe4e6 !important; border-color: #f43f5e !important; color: #881337 !important; }
+  .lqf { font-size: 13px; margin-top: 6px; font-weight: 600; }
+  .lqf.ok { color: #047857; }
+  .lqf.no { color: #be123c; }
+  .checks { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 8px; margin: 12px 0; }
+  .checks label {
+    background: #f7f9ff;
+    border: 2px solid #e2e8f8;
+    border-radius: 14px;
+    padding: 9px 12px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .checks input { width: 17px; height: 17px; accent-color: #ef476f; flex: none; }
+  .checks label.done { background: #eafaf1; border-color: #3ecf8e; }
+  .bar { background: #e7ebf8; border-radius: 999px; height: 13px; overflow: hidden; margin: 8px 0; }
+  .bar i { display: block; height: 100%; width: 0; background: linear-gradient(90deg, #ef476f, #34d399); transition: width .4s; }
+  .stations { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin: 12px 0; }
+  .station {
+    text-decoration: none;
+    background: #f7f9ff;
+    border: 2px solid #e2e8f8;
+    border-radius: 14px;
+    padding: 10px 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #2b2d42;
+    font-size: 13.5px;
+    font-weight: 600;
+  }
+  .station b { background: #ef476f; color: #fff; border-radius: 999px; width: 24px; height: 24px; display: grid; place-items: center; font-size: 12px; flex: none; }
+  .station i { margin-left: auto; font-style: normal; }
+  .station.done { background: #eafaf1; border-color: #3ecf8e; }
+  .station.done b { background: #10b981; }
+  .station.cur { border-color: #ef476f; box-shadow: 0 0 0 2px rgba(239,71,111,.18); }
+  footer { text-align: center; color: #6c6f93; font-size: 14px; padding: 18px 0 6px; }
+  footer a { color: #be123c; font-weight: 700; text-decoration: none; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <span class="mascot">📙</span>
+    <h1>GESP C++ 五级课程</h1>
+    <p class="slogan">数论、链表、二分、递归、贪心、分治——真正的算法入门！</p>
+  </header>
+
+  <nav class="chips" aria-label="快捷入口">
+    <a class="chip" href="index.html">🏠 主页</a>
+    <a class="chip" href="GESP官方考纲.html">📋 官方考纲</a>
+    <a class="chip" href="GESP4课程.html">📗 四级</a>
+    <a class="chip" href="GESP6课程.html">📕 六级</a>
+    <a class="chip" href="复习站.html">📒 复习站</a>
+    <a class="chip" href="家长中心.html">👨‍👩‍👧 家长中心</a>
+  </nav>
+
+  <div class="panel">
+    <h2>📌 五级学什么？</h2>
+    <div class="callout info">考纲知识内容：初等数论、C++ 数组模拟高精度加减乘除、单链表/双链表/循环链表、辗转相除法、素数表的埃氏筛法和线性筛法、唯一分解定理、二分查找/二分答案、贪心算法、分治算法（归并排序和快速排序）、递归、算法复杂度估算。</div>
+    <div class="callout key">🎯 知识目标：掌握初等数论、线性表的知识，二分法、分治法、贪心法的思想，完成指定功能的程序；C++ 掌握数组模拟高精度的运算。题型：单选 15×2 + 判断 10×2 + 编程 2×25 ｜ 考试时间：180 分钟。</div>
+    <div class="goal">💡 学习建议：五级是"算法分水岭"。把每个算法的<b>思想</b>讲给自己听（为什么对？），再亲手实现一遍，比刷十道题都有用。</div>
+
+    <h2>🗺️ 学习地图</h2>
+    <div class="stations" id="lvStations"></div>
+    <h2>📝 课程打卡</h2>
+    <div class="checks" id="lvChecks"></div>
+    <div class="bar"><i id="progBar"></i></div>
+    <p class="goal" id="progMsg" style="margin:6px 0 0">进度 0 / 8 课</p>
+  </div>
+
+  <details class="lesson" id="lv5l1">
+    <summary><span class="lnum">第 1 课</span><span class="lgoal">初等数论：数字世界的"基本零件"</span><span class="ltoggle">▾</span></summary>
+    <div class="lbody">
+      <div class="goal">🎯 本节目标：1. 分清素数/合数；2. 会求最大公约数 gcd、最小公倍数 lcm；3. 知道同余和质因数分解。</div>
+      <h4>📖 讲解</h4>
+      <ul>
+        <li><b>素数</b>：只有 1 和它本身两个约数（2、3、5、7…）；<b>合数</b>：还有别的约数（4、6、8…）。1 既不是素数也不是合数。</li>
+        <li><b>gcd</b> 最大公约数、<b>lcm</b> 最小公倍数，记住公式：lcm(a,b) = a × b ÷ gcd(a,b)。</li>
+        <li><b>同余</b>：a、b 除以 m 余数一样，就说 a ≡ b (mod m)。</li>
+        <li><b>质因数分解</b>：把数拆成质数相乘，如 12 = 2×2×3。</li>
+      </ul>
+      <div class="codebox"><pre>#include &lt;iostream&gt;
+using namespace std;
+bool isPrime(int n) {
+    if (n &lt; 2) return false;
+    for (int i = 2; i * i &lt;= n; i++)   // 试到 sqrt(n) 就够了
+        if (n % i == 0) return false;
+    return true;
+}
+int main() {
+    int n;
+    cin &gt;&gt; n;
+    cout &lt;&lt; (isPrime(n) ? "是素数" : "不是素数") &lt;&lt; endl;
+    return 0;
+}</pre><button class="cpy" onclick="copyCode(this)">📋 复制</button></div>
+      <div class="lquiz" id="qz-l1"></div>
+      <div class="callout info">📌 本节小结：素数=只有 1 和本身；gcd/lcm 是数论好搭档；判断素数试除到 sqrt(n) 就够。</div>
+    </div>
+  </details>
+
+  <details class="lesson" id="lv5l2">
+    <summary><span class="lnum">第 2 课</span><span class="lgoal">高精度运算：装不下的超级大数</span><span class="ltoggle">▾</span></summary>
+    <div class="lbody">
+      <div class="goal">🎯 本节目标：1. 知道 int/long long 装不下的大数要用数组存；2. 会写高精度加法。</div>
+      <h4>📖 讲解</h4>
+      <ul>
+        <li>100 位的大数 int 和 long long 都装不下，怎么办？<b>一位一位存进数组</b>，像列竖式一样算。</li>
+        <li>套路：字符串读入 → <b>倒着存</b>（个位存下标 0，方便进位）→ 逐位相加 → 处理进位 → 倒着输出。</li>
+        <li>乘法、减法、除法思路一样：模拟手算竖式。</li>
+      </ul>
+      <div class="codebox"><pre>#include &lt;iostream&gt;
+#include &lt;string&gt;
+using namespace std;
+int a[105], b[105], c[105];
+int main() {
+    string s1, s2;
+    cin &gt;&gt; s1 &gt;&gt; s2;
+    for (int i = 0; i &lt; s1.size(); i++) a[s1.size()-1-i] = s1[i]-'0';
+    for (int i = 0; i &lt; s2.size(); i++) b[s2.size()-1-i] = s2[i]-'0';
+    int len = max(s1.size(), s2.size());
+    for (int i = 0; i &lt; len; i++) {
+        c[i] += a[i] + b[i];
+        if (c[i] &gt;= 10) { c[i+1]++; c[i] -= 10; }  // 进位
+    }
+    if (c[len]) len++;
+    for (int i = len-1; i &gt;= 0; i--) cout &lt;&lt; c[i];
+    cout &lt;&lt; endl;
+    return 0;
+}</pre><button class="cpy" onclick="copyCode(this)">📋 复制</button></div>
+      <div class="lquiz" id="qz-l2"></div>
+      <div class="callout info">📌 本节小结：大数逐位存数组；倒着存、逐位算、处理进位、倒着输出——"竖式搬家"。</div>
+    </div>
+  </details>
+
+  <details class="lesson" id="lv5l3">
+    <summary><span class="lnum">第 3 课</span><span class="lgoal">链表：手拉手的节点们</span><span class="ltoggle">▾</span></summary>
+    <div class="lbody">
+      <div class="goal">🎯 本节目标：1. 知道链表由"节点 + 指针"组成；2. 区分单链表、双链表、循环链表。</div>
+      <h4>📖 讲解</h4>
+      <ul>
+        <li>链表像小朋友手拉手：每个<b>节点</b>存自己的数据，还握着一个指向下一个的"指针"。</li>
+        <li><b>单链表</b>：只能从前往后走（next）。</li>
+        <li><b>双链表</b>：有 next 还有 prev，前后都能走。</li>
+        <li><b>循环链表</b>：最后一个又指回第一个，首尾相连。</li>
+        <li>链表插入/删除快，但"按下标访问"慢——和数组正好互补。</li>
+      </ul>
+      <div class="codebox"><pre>#include &lt;iostream&gt;
+using namespace std;
+struct Node {
+    int val;
+    Node* next;
+};
+int main() {
+    Node a, b, c;
+    a.val = 1; b.val = 2; c.val = 3;
+    a.next = &amp;b; b.next = &amp;c; c.next = nullptr;
+    for (Node* p = &amp;a; p != nullptr; p = p-&gt;next)
+        cout &lt;&lt; p-&gt;val &lt;&lt; " ";   // 1 2 3
+    cout &lt;&lt; endl;
+    return 0;
+}</pre><button class="cpy" onclick="copyCode(this)">📋 复制</button></div>
+      <div class="lquiz" id="qz-l3"></div>
+      <div class="callout info">📌 本节小结：节点 = 数据 + 指针；单链表往后走、双链表前后走、循环链表首尾相连。</div>
+    </div>
+  </details>
+
+  <details class="lesson" id="lv5l4">
+    <summary><span class="lnum">第 4 课</span><span class="lgoal">辗转相除法与素数筛法</span><span class="ltoggle">▾</span></summary>
+    <div class="lbody">
+      <div class="goal">🎯 本节目标：1. 会用辗转相除法求 gcd；2. 知道埃氏筛"划掉倍数"的思路。</div>
+      <h4>📖 讲解</h4>
+      <ul>
+        <li><b>辗转相除法</b>（欧几里得算法）：gcd(a,b) = gcd(b, a%b)，一直除到余 0，最后的除数就是答案。</li>
+        <li><b>埃氏筛</b>：先假设全是素数，然后从 2 开始，把每个素数的倍数全部"划掉"，剩下的就是素数表。</li>
+        <li>唯一分解定理：每个大于 1 的整数都能唯一写成质数相乘。</li>
+      </ul>
+      <div class="codebox"><pre>#include &lt;iostream&gt;
+using namespace std;
+int gcd(int a, int b) {           // 辗转相除法
+    while (b) {
+        int t = a % b;
+        a = b;
+        b = t;
+    }
+    return a;
+}
+int main() {
+    int a, b;
+    cin &gt;&gt; a &gt;&gt; b;
+    cout &lt;&lt; gcd(a, b) &lt;&lt; endl;
+    return 0;
+}</pre><button class="cpy" onclick="copyCode(this)">📋 复制</button></div>
+      <div class="lquiz" id="qz-l4"></div>
+      <div class="callout info">📌 本节小结：gcd 用辗转相除"余数接力"；埃氏筛划掉倍数求素数表；质因数分解唯一。</div>
+    </div>
+  </details>
+
+  <details class="lesson" id="lv5l5">
+    <summary><span class="lnum">第 5 课</span><span class="lgoal">二分查找与二分答案</span><span class="ltoggle">▾</span></summary>
+    <div class="lbody">
+      <div class="goal">🎯 本节目标：1. 会写有序数组的二分查找；2. 知道二分答案"判断后砍一半"的套路。</div>
+      <h4>📖 讲解</h4>
+      <ul>
+        <li><b>二分查找</b>：猜中间的数，大了往左、小了往右，每次<b>砍掉一半</b>，O(log n) 飞快。</li>
+        <li>前提：数组必须<b>有序</b>！</li>
+        <li><b>二分答案</b>：当"答案在一个范围内、能判断行不行"时，对答案二分：行就往一边走，不行就往另一边。</li>
+      </ul>
+      <div class="codebox"><pre>#include &lt;iostream&gt;
+using namespace std;
+int a[100005];
+int main() {
+    int n, x;
+    cin &gt;&gt; n &gt;&gt; x;
+    for (int i = 0; i &lt; n; i++) cin &gt;&gt; a[i];
+    int l = 0, r = n - 1, ans = -1;
+    while (l &lt;= r) {
+        int mid = (l + r) / 2;
+        if (a[mid] &gt;= x) { ans = mid; r = mid - 1; }  // 第一个 >= x 的位置
+        else l = mid + 1;
+    }
+    cout &lt;&lt; ans &lt;&lt; endl;
+    return 0;
+}</pre><button class="cpy" onclick="copyCode(this)">📋 复制</button></div>
+      <div class="lquiz" id="qz-l5"></div>
+      <div class="callout info">📌 本节小结：二分 = 每次砍一半；查找要数组有序；答案也能"二分"：判断行不行再缩范围。</div>
+    </div>
+  </details>
+
+  <details class="lesson" id="lv5l6">
+    <summary><span class="lnum">第 6 课</span><span class="lgoal">递归：函数调用自己</span><span class="ltoggle">▾</span></summary>
+    <div class="lbody">
+      <div class="goal">🎯 本节目标：1. 会写递归函数；2. 知道递归必须有"出口"；3. 能分析简单递归的复杂度。</div>
+      <h4>📖 讲解</h4>
+      <ul>
+        <li><b>递归</b> = 函数自己调用自己，把大问题拆成"小一号的自己"。</li>
+        <li>两个必备零件：<b>出口</b>（最小的情况直接返回）+ <b>递推调用</b>（变小再调用）。</li>
+        <li>没有出口会无限调用，直到<b>栈溢出</b>崩溃。</li>
+        <li>例子：n! = n × (n-1)!，出口是 0! = 1。</li>
+      </ul>
+      <div class="codebox"><pre>#include &lt;iostream&gt;
+using namespace std;
+int fact(int n) {
+    if (n &lt;= 1) return 1;       // 出口
+    return n * fact(n - 1);     // 自己调用自己
+}
+int main() {
+    int n;
+    cin &gt;&gt; n;
+    cout &lt;&lt; fact(n) &lt;&lt; endl;
+    return 0;
+}</pre><button class="cpy" onclick="copyCode(this)">📋 复制</button></div>
+      <div class="lquiz" id="qz-l6"></div>
+      <div class="callout info">📌 本节小结：递归 = 出口 + 自己调用自己；每次调用都把问题变小；没有出口会栈溢出。</div>
+    </div>
+  </details>
+
+  <details class="lesson" id="lv5l7">
+    <summary><span class="lnum">第 7 课</span><span class="lgoal">贪心算法：每次都选最好的</span><span class="ltoggle">▾</span></summary>
+    <div class="lbody">
+      <div class="goal">🎯 本节目标：1. 理解贪心"每步选当前最优"；2. 知道贪心不一定对，要验证。</div>
+      <h4>📖 讲解</h4>
+      <ul>
+        <li><b>贪心</b>：每一步都选"眼前看起来最好"的，希望最后整体也最好。</li>
+        <li>经典例子：找零钱用最少硬币——先拿大面额（10 元 → 5 元 → 1 元）。</li>
+        <li>注意：贪心<b>不是一定对</b>！只有"局部最优能推出全局最优"时才能用，要会证明或验证。</li>
+      </ul>
+      <div class="codebox"><pre>#include &lt;iostream&gt;
+using namespace std;
+int main() {
+    int n;
+    cin &gt;&gt; n;                  // 需要找的钱
+    int cnt = 0;
+    cnt += n / 10;  n %= 10;   // 先拿 10 元
+    cnt += n / 5;   n %= 5;    // 再拿 5 元
+    cnt += n;                  // 剩下 1 元
+    cout &lt;&lt; cnt &lt;&lt; endl;       // 最少硬币数
+    return 0;
+}</pre><button class="cpy" onclick="copyCode(this)">📋 复制</button></div>
+      <div class="lquiz" id="qz-l7"></div>
+      <div class="callout info">📌 本节小结：贪心每步选当前最优；用之前要想清楚"局部最优 = 整体最优"是否成立。</div>
+    </div>
+  </details>
+
+  <details class="lesson" id="lv5l8">
+    <summary><span class="lnum">第 8 课</span><span class="lgoal">分治算法：归并排序与快速排序</span><span class="ltoggle">▾</span></summary>
+    <div class="lbody">
+      <div class="goal">🎯 本节目标：1. 记住分治三步：分解 → 解决 → 合并；2. 知道归并、快排的思路。</div>
+      <h4>📖 讲解</h4>
+      <ul>
+        <li><b>分治</b> = 分而治之：把大问题拆成小问题，分别解决，再合并结果。</li>
+        <li><b>归并排序</b>：把数组分成两半，各自排好，再"合并"成有序的（合并两个有序序列很快）。</li>
+        <li><b>快速排序</b>：选一个"基准数"，比它小的放左边、大的放右边，再对两边递归。</li>
+      </ul>
+      <div class="codebox"><pre>#include &lt;iostream&gt;
+using namespace std;
+int a[100005], tmp[100005];
+void mergeSort(int l, int r) {
+    if (l &gt;= r) return;                 // 出口
+    int mid = (l + r) / 2;
+    mergeSort(l, mid);                  // 分：左半
+    mergeSort(mid + 1, r);              // 分：右半
+    int i = l, j = mid + 1, k = l;      // 合并两个有序部分
+    while (i &lt;= mid &amp;&amp; j &lt;= r)
+        tmp[k++] = (a[i] &lt;= a[j]) ? a[i++] : a[j++];
+    while (i &lt;= mid) tmp[k++] = a[i++];
+    while (j &lt;= r) tmp[k++] = a[j++];
+    for (int t = l; t &lt;= r; t++) a[t] = tmp[t];
+}
+int main() {
+    int n;
+    cin &gt;&gt; n;
+    for (int i = 0; i &lt; n; i++) cin &gt;&gt; a[i];
+    mergeSort(0, n - 1);
+    for (int i = 0; i &lt; n; i++) cout &lt;&lt; a[i] &lt;&lt; " ";
+    return 0;
+}</pre><button class="cpy" onclick="copyCode(this)">📋 复制</button></div>
+      <div class="lquiz" id="qz-l8"></div>
+      <div class="callout info">📌 本节小结：分治三步 = 分解、解决、合并；归并先排两半再合并，快排选基准数分两边。</div>
+    </div>
+  </details>
+
+  <footer>
+    GESP C++ 五级课程 📙 ｜ 内容依据 CCF《C++&amp;Python 认证标准》五级<br>
+    <a href="index.html">🏠 学习中心</a> ｜ <a href="复习站.html">📒 复习站</a> ｜ <a href="家长中心.html">👨‍👩‍👧 家长中心</a> ｜ <a href="GESP官方考纲.html">📋 考纲</a> ｜ <a href="GESP6课程.html">📕 六级课程 →</a>
+  </footer>
+</div>
+
+<script>
+const LQ = {
+  l1: [
+    { q: '素数是指？', o: ['只有 1 和它本身两个约数', '能被 2 整除', '大于 100 的数', '小数'], a: 0, e: '素数只有两个约数；1 既不是素数也不是合数。' },
+    { q: 'lcm(a, b) 等于？', o: ['a × b ÷ gcd(a, b)', 'a + b', 'a ÷ b', 'gcd(a, b) × 2'], a: 0, e: '最小公倍数 = 两数乘积 ÷ 最大公约数。' }
+  ],
+  l2: [
+    { q: '100 位的大数用什么存？', o: ['数组逐位存', 'double', 'char 一个格子', 'int 多开几个'], a: 0, e: 'int/long long 都装不下，必须数组逐位存。' },
+    { q: '高精度加法从哪一位开始算？', o: ['个位（存的时候倒着存）', '最高位', '中间', '随便'], a: 0, e: '个位存下标 0，进位才方便。' }
+  ],
+  l3: [
+    { q: '单链表只能怎么走？', o: ['从头往后走', '从后往前走', '随便走', '不走'], a: 0, e: '单链表只有 next，只能往后走。' },
+    { q: '循环链表的特点是？', o: ['首尾相连', '没有头', '不能遍历', '一定是空的'], a: 0, e: '最后一个节点又指回第一个，首尾相连。' }
+  ],
+  l4: [
+    { q: '辗转相除法求的是？', o: ['最大公约数', '最小公倍数', '素数', '总和'], a: 0, e: 'gcd(a,b)=gcd(b,a%b) 除到余 0，就是最大公约数。' },
+    { q: '埃氏筛法用来？', o: ['快速求素数表', '排序', '找最大值', '反转数组'], a: 0, e: '从 2 开始划掉每个素数的倍数，剩下的就是素数。' }
+  ],
+  l5: [
+    { q: '二分查找的前提是？', o: ['数组有序', '数组乱序', '数组很大', '没有前提'], a: 0, e: '必须有序才能二分！' },
+    { q: '二分每次把搜索范围？', o: ['砍掉一半', '减一', '翻一倍', '不变'], a: 0, e: '每次砍一半，所以复杂度是 O(log n)。' }
+  ],
+  l6: [
+    { q: '递归函数必须有？', o: ['出口 + 自己调用自己', '循环 + 排序', '指针 + 数组', '文件 + 异常'], a: 0, e: '没有出口会无限调用到栈溢出。' },
+    { q: '没有出口的递归会？', o: ['栈溢出崩溃', '马上停止', '报错提示后继续', '正常运行'], a: 0, e: '一直调用自己，把栈撑爆。' }
+  ],
+  l7: [
+    { q: '贪心算法的特点是？', o: ['每一步选当前最优', '每一步选最差', '随机选', '全部试一遍'], a: 0, e: '贪心 = 眼前最优，希望整体最优。' },
+    { q: '贪心算法一定正确吗？', o: ['不一定，要验证局部最优能否推出全局最优', '一定正确', '一定错误', '看运气'], a: 0, e: '能用贪心的前提是"局部最优 = 整体最优"。' }
+  ],
+  l8: [
+    { q: '分治的三步是？', o: ['分解 → 解决 → 合并', '输入 → 输出', '循环 → 判断', '读入 → 排序'], a: 0, e: '分而治之：分解、解决、合并。' },
+    { q: '快速排序的关键是？', o: ['选基准数把数组分成两边', '数个数', '交换相邻元素', '找最小元素'], a: 0, e: '基准数左边小、右边大，再递归排两边。' }
+  ]
+};
+function buildLessonQuizzes() {
+  for (const k in LQ) {
+    const box = document.getElementById('qz-' + k);
+    if (!box) continue;
+    box.innerHTML = '<div class="goal">📝 考一考：点一点，立刻知道对错！答错的题会进复习站。</div>';
+    LQ[k].forEach((q, idx) => {
+      const w = document.createElement('div');
+      w.className = 'lqi';
+      w.innerHTML = '<div class="lqq">' + (idx + 1) + '. ' + q.q + '</div>';
+      q.o.forEach((t, j) => {
+        const b = document.createElement('button');
+        b.className = 'lqb';
+        b.textContent = 'ABCD'[j] + '. ' + t;
+        b.onclick = () => {
+          if (w.dataset.done) return;
+          w.dataset.done = '1';
+          b.classList.add(j === q.a ? 'right' : 'wrong');
+          if (j !== q.a) recordWrong({ lv: '五级', lesson: '第 ' + Number(k.slice(1)) + ' 课', q: q.q, o: q.o, a: q.a, chosen: j });
+          [...w.querySelectorAll('.lqb')].forEach((x) => { x.disabled = true; });
+          const f = document.createElement('div');
+          f.className = 'lqf ' + (j === q.a ? 'ok' : 'no');
+          f.textContent = (j === q.a ? '✅ 答对啦！' : '❌ 已记入复习站～') + q.e;
+          w.appendChild(f);
+        };
+        w.appendChild(b);
+      });
+      box.appendChild(w);
+    });
+  }
+}
+function copyCode(btn) {
+  const t = btn.closest('.codebox').querySelector('pre').textContent;
+  const done = () => { btn.textContent = '✅ 已复制'; setTimeout(() => { btn.textContent = '📋 复制'; }, 1200); };
+  if (navigator.clipboard) navigator.clipboard.writeText(t).then(done);
+  else { btn.textContent = '😅 请手动复制'; }
+}
+function recordWrong(item) {
+  try {
+    const list = JSON.parse(localStorage.getItem('gesp_wrong') || '[]');
+    list.push(Object.assign({ time: Date.now() }, item));
+    localStorage.setItem('gesp_wrong', JSON.stringify(list));
+  } catch (e) {}
+}
+const LESSON_NAMES = ['初等数论', '高精度运算', '链表', '欧几里得与筛法', '二分算法', '递归算法', '贪心算法', '分治算法'];
+function loadProg() {
+  try {
+    const v = JSON.parse(localStorage.getItem('gesp_lv5_prog'));
+    if (Array.isArray(v) && v.length === LESSON_NAMES.length) return v.map(Boolean);
+  } catch (e) {}
+  return new Array(LESSON_NAMES.length).fill(false);
+}
+let prog = loadProg();
+function saveProg() { try { localStorage.setItem('gesp_lv5_prog', JSON.stringify(prog)); } catch (e) {} }
+function renderChecks() {
+  const box = document.getElementById('lvChecks');
+  box.innerHTML = '';
+  LESSON_NAMES.forEach((n, i) => {
+    const lab = document.createElement('label');
+    lab.className = prog[i] ? 'done' : '';
+    lab.innerHTML = '<input type="checkbox" ' + (prog[i] ? 'checked' : '') + '>' + (i + 1) + '. ' + n;
+    lab.querySelector('input').addEventListener('change', () => {
+      prog[i] = lab.querySelector('input').checked;
+      lab.className = prog[i] ? 'done' : '';
+      saveProg();
+      paintProg();
+    });
+    box.appendChild(lab);
+  });
+}
+function paintProg() {
+  const n = prog.filter(Boolean).length;
+  document.getElementById('progBar').style.width = (n / LESSON_NAMES.length * 100) + '%';
+  document.getElementById('progMsg').textContent = '进度 ' + n + ' / ' + LESSON_NAMES.length + ' 课' + (n === LESSON_NAMES.length ? ' 🎓 五级毕业！' : '');
+}
+function renderStations() {
+  const box = document.getElementById('lvStations');
+  if (!box) return;
+  box.innerHTML = '';
+  const first = prog.indexOf(false);
+  LESSON_NAMES.forEach((n, i) => {
+    const a = document.createElement('a');
+    a.className = 'station' + (prog[i] ? ' done' : '') + (i === first ? ' cur' : '');
+    a.href = '#lv5l' + (i + 1);
+    a.innerHTML = '<b>' + (i + 1) + '</b><span>' + n + '</span><i>' + (prog[i] ? '✅' : (i === first ? '▶️' : '🔒')) + '</i>';
+    box.appendChild(a);
+  });
+}
+buildLessonQuizzes();
+renderChecks();
+paintProg();
+renderStations();
+</script>
+</body>
+</html>

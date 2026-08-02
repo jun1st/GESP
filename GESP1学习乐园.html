@@ -326,6 +326,72 @@
   .fb { border-radius: 14px; padding: 10px 14px; font-size: 14.5px; margin: 10px 0; min-height: 20px; }
   .fb.ok { background: #eafaf1; border: 2px solid #3ecf8e; }
   .fb.no { background: #ffeef1; border: 2px solid #ef476f; }
+  .goal {
+    background: #eef4ff;
+    border: 2px solid #bcd0ff;
+    border-radius: 14px;
+    padding: 10px 14px;
+    font-size: 14.5px;
+    margin: 10px 0;
+  }
+  .lquiz { margin: 12px 0 6px; }
+  .lqi { background: #f7f9ff; border-radius: 14px; padding: 12px 14px; margin: 10px 0; }
+  .lqq { font-weight: 700; font-size: 14.5px; margin-bottom: 6px; }
+  .lqb {
+    display: block;
+    width: 100%;
+    text-align: left;
+    margin: 5px 0;
+    border: 2px solid #dce3f5;
+    background: #fff;
+    border-radius: 12px;
+    padding: 7px 12px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: inherit;
+  }
+  .lqb:hover { border-color: var(--tc); }
+  .lqb.right { background: #d1fae5 !important; border-color: #10b981 !important; color: #065f46 !important; }
+  .lqb.wrong { background: #ffe4e6 !important; border-color: #f43f5e !important; color: #881337 !important; }
+  .lqf { font-size: 13px; margin-top: 6px; font-weight: 600; }
+  .lqf.ok { color: #047857; }
+  .lqf.no { color: #be123c; }
+  .map { margin: 16px 0 4px; }
+  .stations { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; margin: 12px 0; }
+  .station {
+    text-decoration: none;
+    background: #f7f9ff;
+    border: 2px solid #e2e8f8;
+    border-radius: 14px;
+    padding: 10px 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #2b2d42;
+    font-size: 13.5px;
+    font-weight: 600;
+  }
+  .station b { background: #2ec4b6; color: #fff; border-radius: 999px; width: 24px; height: 24px; display: grid; place-items: center; font-size: 12px; flex: none; }
+  .station i { margin-left: auto; font-style: normal; }
+  .station.done { background: #eafaf1; border-color: #3ecf8e; }
+  .station.done b { background: #10b981; }
+  .station.cur { border-color: #2ec4b6; box-shadow: 0 0 0 2px rgba(46,196,182,.18); }
+  .chkbtn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #eafaf1;
+    border: 2px solid #3ecf8e;
+    color: #047857;
+    font-weight: 700;
+    font-size: 14px;
+    border-radius: 999px;
+    padding: 8px 16px;
+    margin-top: 12px;
+    cursor: pointer;
+  }
+  .chkbtn input { width: 16px; height: 16px; accent-color: #10b981; }
 
   /* ---------- 编程练习场 ---------- */
   .edwrap { display: flex; margin-top: 8px; align-items: stretch; }
@@ -411,21 +477,34 @@
     <a class="chip" style="--chip:#2ec4b6" href="#s4">📥 输入输出</a>
     <a class="chip" style="--chip:#ff9f43" href="#s5">➗ 算术</a>
     <a class="chip" style="--chip:#06d6a0" href="#s6">🕵️ 关系逻辑</a>
-    <a class="chip" style="--chip:#5e60ce" href="#s7">🧱 三大结构</a>
+    <a class="chip" style="--chip:#5e60ce" href="#s7">🌿 分支</a>
+    <a class="chip" style="--chip:#5e60ce" href="#s7b">🔁 循环</a>
     <a class="chip" style="--chip:#e76f51" href="#s8">🐛 注释找虫</a>
     <a class="chip" style="--chip:#118ab2" href="#editor">🛠️ 编程场</a>
     <a class="chip" style="--chip:#06d6a0" href="#s9">🏆 大闯关</a>
     <a class="chip" style="--chip:#0ea5e9" href="基础常识乐园.html">🧠 基础常识</a>
     <a class="chip" style="--chip:#f43f5e" href="GESP官方考纲.html">📋 考纲</a>
+    <a class="chip" style="--chip:#a855f7" href="复习站.html">📒 复习站</a>
+    <a class="chip" style="--chip:#0284c7" href="家长中心.html">👨‍👩‍👧 家长中心</a>
     <a class="chip" style="--chip:#118ab2" href="index.html">🏠 主页</a>
     <a class="chip" style="--chip:#5e60ce" href="GESP2学习乐园.html">🚀 去二级乐园</a>
   </nav>
 
+  <section class="topic" id="lvmap" style="--tc:#2ec4b6">
+    <div class="big-emoji">🗺️</div>
+    <h2>学习地图（一级）</h2>
+    <p class="sub">按 1 → 9 的顺序学，一课一课打卡点亮！</p>
+    <div class="stations" id="lvStations"></div>
+    <div class="bar"><i id="mapBar"></i></div>
+    <div class="goal" id="mapMsg" style="margin:6px 0 0">学完一课点一下"打卡"，地图就会点亮！</div>
+  </section>
+
   <!-- ========== 1 认识电脑 ========== -->
   <section class="topic" id="s1" style="--tc:#4f8ef7">
     <div class="big-emoji">🖥️</div>
-    <h2>1. 认识电脑的"身体"</h2>
+    <h2>第 1 课：认识电脑，准备出发</h2>
     <p class="sub">点一点下面的零件，看看它们都是干什么的！</p>
+    <div class="goal">🎯 本节目标：1. 认识电脑的五大"零件"（CPU/内存/硬盘/输入/输出）；2. 知道操作系统是什么；3. 了解电脑的历史。</div>
 
     <div class="cards">
       <div class="box part" style="--tc:#4f8ef7" onclick="pickPart(0)">
@@ -470,13 +549,17 @@
     <div class="msg" id="eraMsg">电脑从"一间大房子"变成"掌上手机"，好神奇！</div>
     <div class="tip">🧠 一句话：CPU 负责想，内存负责放正在用的东西，硬盘负责存所有东西。</div>
     <div class="tip">💡 电脑在现代社会到处都在：手机、游戏机、ATM 取款机、医院的仪器、火箭……全是程序在背后帮忙！</div>
+    <div class="tip">📌 本节小结：CPU 是大脑、内存是工作台（断电就忘）、硬盘是大仓库（断电不忘）、键盘鼠标输入、显示器输出，操作系统是"大管家"。</div>
+    <div class="lquiz" id="qz-l1"></div>
+    <label class="chkbtn"><input type="checkbox" onchange="toggleLesson(0, this)"> 学完了，打卡！</label>
   </section>
 
   <!-- ========== 2 编程第一课 ========== -->
   <section class="topic" id="s2" style="--tc:#9b6ef3">
     <div class="big-emoji">🏗️</div>
-    <h2>2. 编程第一课：写代码的流程</h2>
+    <h2>第 2 课：让电脑开口说话（IDE 与第一个程序）</h2>
     <p class="sub">写一个程序要经过 5 步，点"下一步"走一遍！</p>
+    <div class="goal">🎯 本节目标：1. 知道写程序要走"写代码→编译→运行"；2. 会拼出 C++ 程序的标准框架；3. 亲手写出第一句话：cout 输出！</div>
 
     <div class="pipe" id="idePipe">
       <div class="step">📄 新建文件</div>
@@ -499,13 +582,17 @@
     <div class="btnrow">
       <button class="btn" onclick="initSkel()">🔄 重新打乱</button>
     </div>
+    <div class="tip">📌 本节小结：程序 = 头文件 + main 函数 + 一句句话。写代码 → 保存 → 编译 → 运行，Dev C++ 帮你完成。第一句话就用 cout！</div>
+    <div class="lquiz" id="qz-l2"></div>
+    <label class="chkbtn"><input type="checkbox" onchange="toggleLesson(1, this)"> 学完了，打卡！</label>
   </section>
 
   <!-- ========== 3 变量 ========== -->
   <section class="topic" id="s3" style="--tc:#ef476f">
     <div class="big-emoji">📦</div>
-    <h2>3. 变量：给数据做一个"有名字的盒子"</h2>
+    <h2>第 3 课：变量和数据类型</h2>
     <p class="sub">给盒子起个名字、选个类型、放进一个值，点"装盒"看看！</p>
+    <div class="goal">🎯 本节目标：1. 知道变量是"有名字的盒子"；2. 会背 5 种基本类型（int/long long/double/char/bool）；3. 遵守命名规则；4. 认识常量。</div>
 
     <div class="btnrow">
       <label>名字：<input type="text" id="vbName" value="age" maxlength="12" style="width:110px"></label>
@@ -556,13 +643,17 @@
 
     <h3>📏 类型量身高</h3>
     <div class="vtype" id="vtypeGrid"></div>
+    <div class="tip">📌 本节小结：先定义（做盒子）再使用；类型决定盒子大小；变量能改、常量不能改；名字要守规矩（字母数字下划线、不能数字开头、不能是关键字）。</div>
+    <div class="lquiz" id="qz-l3"></div>
+    <label class="chkbtn"><input type="checkbox" onchange="toggleLesson(2, this)"> 学完了，打卡！</label>
   </section>
 
   <!-- ========== 4 输入输出 ========== -->
   <section class="topic" id="s4" style="--tc:#2ec4b6">
     <div class="big-emoji">📥</div>
-    <h2>4. 输入输出：程序和你"对话"</h2>
+    <h2>第 4 课：输入输出（cin/cout 与 scanf/printf）</h2>
     <p class="sub">cin 负责"听"（输入），cout 负责"说"（输出）。填好下面的内容，点运行！</p>
+    <div class="goal">🎯 本节目标：1. 会用 cin 读入、cout 输出；2. 认识老式 scanf/printf；3. 背下 %d/%f/%c/%s 占位符。</div>
 
     <div class="btnrow">
       <label>你的名字：<input type="text" id="echoName" value="小明" maxlength="8" style="width:120px"></label>
@@ -586,13 +677,17 @@ scanf("%d", &amp;age);        <span class="cm">// 读入一个整数（注意变
 printf("%d", age);         <span class="cm">// 输出整数</span>
 printf("我 %d 岁", age);    <span class="cm">// 在句子里塞数字</span></code></div>
     <div class="tip">🎯 占位符对照：<code>%d</code> 整数、<code>%f</code> 小数、<code>%c</code> 字符、<code>%s</code> 字符串。scanf 的普通变量前要写 <code>&amp;</code>，printf 不用。</div>
+    <div class="tip">📌 本节小结：cin>> 和 cout<< 是新式、scanf/printf 是老式；输出 endl 换行；scanf 读变量要加 &。</div>
+    <div class="lquiz" id="qz-l4"></div>
+    <label class="chkbtn"><input type="checkbox" onchange="toggleLesson(3, this)"> 学完了，打卡！</label>
   </section>
 
   <!-- ========== 5 算术 ========== -->
   <section class="topic" id="s5" style="--tc:#ff9f43">
     <div class="big-emoji">➗</div>
-    <h2>5. 算术运算：加减乘除和求余</h2>
+    <h2>第 5 课：算术和表达式</h2>
     <p class="sub">改两个数字，五种运算立刻算给你看！</p>
+    <div class="goal">🎯 本节目标：1. 会算 + - * / %；2. 知道整数除法"去尾"；3. 会用 i++ / i--；4. 知道什么是表达式。</div>
 
     <div class="btnrow">
       <label>a：<input type="number" id="arA" value="7" style="width:80px"></label>
@@ -616,13 +711,17 @@ printf("我 %d 岁", age);    <span class="cm">// 在句子里塞数字</span></
     <div class="msg" id="cntMsg">int i = 0; 点"i++"试试！</div>
     <div class="tip">🧠 记住：7 ÷ 3 整数除法得 2，剩下的 1 用 7 % 3 取出来。% 就是"求余数"！</div>
     <div class="tip">🧮 <b>表达式</b>就是"用运算符把值连起来的算式"，比如 <code>a + b * 2</code>、<code>(a - b) % 3</code>。电脑和数学一样，先乘除后加减，括号最优先。</div>
+    <div class="tip">📌 本节小结：5 种基本运算 + 取余 % + 自增自减 i++；整数除整数还是整数；表达式=算式，先乘除后加减。</div>
+    <div class="lquiz" id="qz-l5"></div>
+    <label class="chkbtn"><input type="checkbox" onchange="toggleLesson(4, this)"> 学完了，打卡！</label>
   </section>
 
   <!-- ========== 6 关系逻辑 ========== -->
   <section class="topic" id="s6" style="--tc:#06d6a0">
     <div class="big-emoji">🕵️</div>
-    <h2>6. 关系与逻辑：判断"真假"的侦探</h2>
+    <h2>第 6 课：关系与逻辑</h2>
     <p class="sub">改两个数字，看看每个"比较"是真还是假！</p>
+    <div class="goal">🎯 本节目标：1. 会背 6 种关系运算符；2. 会用 &&（都真才真）、||（一真就真）、!（反着来）；3. 知道比较的结果只有"真/假"。</div>
 
     <div class="btnrow">
       <label>a：<input type="number" id="rlA" value="5" style="width:80px"></label>
@@ -641,12 +740,16 @@ printf("我 %d 岁", age);    <span class="cm">// 在句子里塞数字</span></
       <div class="trow"><span class="tled" id="ledOr"></span><span class="formula">A || B（一个真就真）</span><span id="txtOr">真</span></div>
       <div class="trow"><span class="tled" id="ledNot"></span><span class="formula">!A（真变假，假变真）</span><span id="txtNot">假</span></div>
     </div>
+    <div class="tip">📌 本节小结：> < >= <= == != 是关系（比大小）；&& || ! 是逻辑（合起来判断）；非 0 即真，0 是假。</div>
+    <div class="lquiz" id="qz-l6"></div>
+    <label class="chkbtn"><input type="checkbox" onchange="toggleLesson(5, this)"> 学完了，打卡！</label>
   </section>
 
   <!-- ========== 7 三大结构 ========== -->
   <section class="topic" id="s7" style="--tc:#5e60ce">
-    <div class="big-emoji">🧱</div>
-    <h2>7. 三大结构：顺序、分支、循环</h2>
+    <div class="big-emoji">🌿</div>
+    <h2>第 7 课：分支结构（if/switch/三目）</h2>
+    <div class="goal">🎯 本节目标：1. 知道程序的三种基本结构；2. 会用 if-else 二选一；3. 会用 switch 多选一，知道漏写 break 会"穿透"；4. 认识三目运算。</div>
 
     <h3>📜 顺序结构：一步一步做蛋糕</h3>
     <div class="cake" id="cakeSteps">
@@ -689,6 +792,17 @@ int x = (score &gt;= 60) ? 1 : 0;
 <span class="cm">// 等于下面的 if-else：</span>
 if (score &gt;= 60) x = 1;
 else x = 0;</code></div>
+
+    <div class="tip">📌 本节小结：顺序结构"从上到下"；if-else 二选一；switch 按编号多选（漏 break 会穿透）；三目是 if-else 的速写。写程序就是让电脑"做选择"！</div>
+    <div class="lquiz" id="qz-l7"></div>
+    <label class="chkbtn"><input type="checkbox" onchange="toggleLesson(6, this)"> 学完了，打卡！</label>
+  </section>
+
+  <!-- ========== 8 循环 ========== -->
+  <section class="topic" id="s7b" style="--tc:#5e60ce">
+    <div class="big-emoji">🔁</div>
+    <h2>第 8 课：循环结构（for/while/do-while）</h2>
+    <div class="goal">🎯 本节目标：1. 会用 for 循环数数；2. 知道 while、do-while 的区别；3. 会用 break 跳出循环、continue 跳过本次。</div>
 
     <h3>⭐ 循环结构：数星星（for 循环）</h3>
     <div class="btnrow">
@@ -746,13 +860,17 @@ do {
     j++;
 } while (j &lt;= 5);   <span class="cm">// 注意结尾有分号</span></code></div>
     <div class="tip">🧠 三种循环都能"重复做事"，选哪种都行；但 do-while 一定先做一次。还有，花括号 <code>{ }</code> 把好几句话包成一块，叫<b>复合语句</b>，循环和 if 里经常用到。</div>
+    <div class="tip">📌 本节小结：for 知道次数、while 先问再做、do-while 至少做一次；break 直接停，continue 跳过本次。三种循环考试都会考！</div>
+    <div class="lquiz" id="qz-l8"></div>
+    <label class="chkbtn"><input type="checkbox" onchange="toggleLesson(7, this)"> 学完了，打卡！</label>
   </section>
 
   <!-- ========== 8 注释与找虫 ========== -->
   <section class="topic" id="s8" style="--tc:#e76f51">
     <div class="big-emoji">🐛</div>
-    <h2>8. 注释和调试：给程序写"便签"、抓"虫子"</h2>
+    <h2>第 9 课：注释、调试与好习惯</h2>
     <p class="sub">注释是写给人的便签，电脑不会执行它。先看看，再当一回"捉虫小侦探"！</p>
+    <div class="goal">🎯 本节目标：1. 会用 // 和 /* */ 写注释；2. 能找出程序里的常见"虫子"（分号、括号、没定义）；3. 养成写注释的好习惯。</div>
 
     <div class="code"><code><span class="cm">// 这一行是注释，电脑不执行</span>
 int age = 10;          <span class="cm">// 注释可以写在代码后面</span>
@@ -768,12 +886,15 @@ cout &lt;&lt; age &lt;&lt; endl;</code></div>
       <button class="btn go" id="bugNext" onclick="bugNext()" style="display:none">下一只虫子 ➡️</button>
     </div>
     <div class="msg" id="bugMsg">一共 4 只虫子，找出每一只！</div>
+    <div class="tip">📌 本节小结：注释写给"人"看（电脑跳过）；报错别慌——先看分号、再看括号、再查变量；边写边注释是好习惯！</div>
+    <div class="lquiz" id="qz-l9"></div>
+    <label class="chkbtn"><input type="checkbox" onchange="toggleLesson(8, this)"> 学完了，打卡！</label>
   </section>
 
   <!-- ========== 9 编程练习场 ========== -->
   <section class="topic" id="editor" style="--tc:#118ab2">
     <div class="big-emoji">🛠️</div>
-    <h2>9. 编程练习场：在线编译 C++</h2>
+    <h2>🧪 编程练习场（课后实验室）</h2>
     <p class="sub">选一个示例，或者自己写代码，点"运行"！云端编译器马上帮你编译执行。</p>
 
     <div class="btnrow">
@@ -806,7 +927,7 @@ cout &lt;&lt; age &lt;&lt; endl;</code></div>
   <!-- ========== 10 大闯关 ========== -->
   <section class="topic" id="s9" style="--tc:#06d6a0">
     <div class="big-emoji">🏆</div>
-    <h2>10. 大闯关：考考自己！</h2>
+    <h2>🏆 期末大闯关：考考自己！</h2>
     <p class="sub">一共 12 题，答对越多，勋章越大！</p>
 
     <div id="quizWrap">
@@ -827,7 +948,7 @@ cout &lt;&lt; age &lt;&lt; endl;</code></div>
     <p>这个网页严格对照 CCF《C++ 编程一级标准》制作，覆盖官方考纲一级的全部 7 个知识块：计算机基础知识、集成开发环境、结构化程序设计、程序的基本语句（cin/scanf/cout/printf）、程序的基本概念（标识符/关键字/常量/变量/表达式）、基本运算（含三目运算）、基本数据类型，外加循环三兄弟（for/while/do-while）和 12 题闯关。一级是"打地基"，建议按顺序玩：先认识电脑和框架（1、2 关），再玩变量和输入输出（3、4 关），接着是运算和三大结构（5~7 关），最后找虫子和闯关（8、9 关）。配合<a href="基础常识乐园.html">《基础常识乐园》</a>、<a href="GESP官方考纲.html">《官方考纲》</a>、<a href="GESP二级知识点精讲.html">《GESP二级知识点精讲》</a>和二级乐园网页，可以一路学到二级。「编程练习场」需要联网使用免费的在线编译器（Compiler Explorer），家长可先陪孩子试运行一次确认网络可用。</p>
   </details>
 
-  <footer>每天学一点，考试没问题！🎒 <a href="index.html">🏠 主页</a> ｜ <a href="基础常识乐园.html">🧠 基础常识</a> ｜ <a href="GESP官方考纲.html">📋 考纲</a> ｜ <a href="GESP2学习乐园.html">学完一级，去二级乐园玩 →</a></footer>
+  <footer>每天学一点，考试没问题！🎒 <a href="index.html">🏠 学习中心</a> ｜ <a href="复习站.html">📒 复习站</a> ｜ <a href="家长中心.html">👨‍👩‍👧 家长中心</a> ｜ <a href="基础常识乐园.html">🧠 基础常识</a> ｜ <a href="GESP官方考纲.html">📋 考纲</a> ｜ <a href="GESP2学习乐园.html">学完一级，去二级乐园玩 →</a></footer>
 </div>
 
 <div id="confetti" aria-hidden="true"></div>
@@ -1402,6 +1523,84 @@ function ternDemo(score) {
   const x = score >= 60 ? 1 : 0;
   document.getElementById('ternMsg').textContent = 'score = ' + score + '，条件成立？' + (score >= 60 ? '成立' : '不成立') + ' → x = ' + x;
 }
+/* ---- 每课小测 ---- */
+const LQ = {
+  l1: [
+    { q: '电脑的"大脑"是哪个？', o: ['CPU', '硬盘', '显示器', '鼠标'], a: 0, e: 'CPU 负责所有计算和指挥！' },
+    { q: '断电之后，哪个会"忘光光"？', o: ['内存（RAM）', '硬盘', 'U 盘', '光盘'], a: 0, e: '内存是临时工作台，断电就忘；硬盘断电不忘。' },
+    { q: '操作系统是干什么的？', o: ['管理电脑的"大管家"', '一种游戏', 'CPU 的别称', '键盘上的按钮'], a: 0, e: 'Windows、Linux 都是操作系统，负责管理整个电脑。' }
+  ],
+  l2: [
+    { q: 'C++ 程序一定从哪个函数开始运行？', o: ['main()', 'cout', '#include', 'endl'], a: 0, e: '程序一定从 main() 的第一句话开始！' },
+    { q: '想输出"你好"，应该写哪行？', o: ['cout << "你好";', 'cin >> "你好";', 'int "你好";', 'printf "你好"'], a: 0, e: 'cout << 负责输出；cin >> 是输入，方向别搞反！' },
+    { q: '写程序的正确顺序是？', o: ['写代码 → 编译 → 运行', '运行 → 写代码 → 编译', '编译 → 运行 → 写代码', '保存 → 运行 → 写代码'], a: 0, e: '先写好代码，再编译成电脑能懂的语言，最后运行。' }
+  ],
+  l3: [
+    { q: '下面哪个变量名是合法的？', o: ['myName', '2x', 'int', 'my name'], a: 0, e: '不能数字开头、不能是关键字、不能有空格。' },
+    { q: '想存"真假"（对/错），用哪个类型？', o: ['bool', 'char', 'double', 'long long'], a: 0, e: 'bool 只存 true（真）或 false（假）。' },
+    { q: 'const 声明的常量是什么意思？', o: ['定下来后不能改', '随时能改', '是注释', '只能存小数'], a: 0, e: '常量定下来就不能改，改它编译器会报错提醒你。' }
+  ],
+  l4: [
+    { q: 'scanf("%d", &x) 里的 %d 表示读入什么？', o: ['整数', '小数', '字符', '字符串'], a: 0, e: '%d 整数、%f 小数、%c 字符、%s 字符串。' },
+    { q: 'scanf 读普通变量前为什么要加 &？', o: ['把变量的"地址"告诉 scanf', '不加会变快', '为了好看', '可加可不加'], a: 0, e: 'scanf 要往变量的"地址"里写数据，所以普通变量要加 &。' },
+    { q: 'cout << a << endl; 里的 endl 是干什么的？', o: ['换行', '加空格', '退出程序', '给 a 加 1'], a: 0, e: 'endl = end line，输出完这一行就换行。' }
+  ],
+  l5: [
+    { q: '7 % 3 等于多少？', o: ['1', '2', '2.33', '3'], a: 0, e: '% 是求余数：7 除以 3 余 1。' },
+    { q: 'C++ 里 9 / 2 等于多少？', o: ['4', '4.5', '5', '2'], a: 0, e: '两个整数相除结果是整数：9/2 = 4（余 1 被丢掉）。' },
+    { q: 'i++ 是什么意思？', o: ['i 加 1', 'i 减 1', 'i 乘 1', 'i 变成 0'], a: 0, e: 'i++ 就是 i = i + 1 的缩写；i-- 是减 1。' }
+  ],
+  l6: [
+    { q: '5 > 3 的结果是？', o: ['真（true）', '假（false）', '2', '报错'], a: 0, e: '关系运算的结果只有真或假。' },
+    { q: 'A 真、B 假，A && B 等于？', o: ['假', '真', '不知道', '报错'], a: 0, e: '&& 两个都真才真，一个假就是假。' },
+    { q: '!(5 > 3) 等于？', o: ['假', '真', '5', '3'], a: 0, e: '5>3 是真的，! 把它反成假。' }
+  ],
+  l7: [
+    { q: 'if-else 是做什么的？', o: ['二选一：满足走一条路，不满足走另一条', '一直重复', '从头到尾走一遍', '让程序退出'], a: 0, e: 'if-else 就是"是 → 这样，否 → 那样"。' },
+    { q: 'switch 里漏写 break 会发生什么？', o: ['穿透：继续往下执行', '编译错误', '死循环', '什么都没发生'], a: 0, e: '漏 break 会"掉下去"继续执行，是经典考点！' },
+    { q: '(score >= 60) ? "及格" : "不及格"，score = 50 时结果是？', o: ['不及格', '及格', '报错', '60'], a: 0, e: '50 不满足 score>=60，所以选冒号后面的"不及格"。' }
+  ],
+  l8: [
+    { q: 'for (int i = 1; i <= 3; i++) 会循环几次？', o: ['3 次', '2 次', '4 次', '无数次'], a: 0, e: 'i = 1、2、3 都满足 i<=3，一共 3 次。' },
+    { q: 'do-while 和 while 最大的区别是？', o: ['do-while 至少执行一次', 'do-while 更快', 'do-while 更慢', 'do-while 不能退出'], a: 0, e: 'do-while 先做一次再问；while 先问再做。' },
+    { q: '循环里 continue 的作用是？', o: ['跳过这一次，继续下一次', '退出整个循环', '让程序暂停', '多循环一次'], a: 0, e: 'continue = 跳过本次；break = 退出整个循环。' }
+  ],
+  l9: [
+    { q: '注释会被电脑执行吗？', o: ['不会', '会', '有时会', '会变慢'], a: 0, e: '注释是写给"人"看的，电脑直接跳过。' },
+    { q: '程序报错说缺分号，最可能是哪里错了？', o: ['某句代码结尾少了 ;', '变量名太长', '电脑坏了', '注释写太多'], a: 0, e: 'C++ 里每句话结束都要写分号 ;。' },
+    { q: '写注释是为了什么？', o: ['给读程序的人看', '让电脑跑更快', '让程序变短', '让电脑不打字'], a: 0, e: '注释帮你和别人看懂代码，是好习惯！' }
+  ]
+};
+function buildLessonQuizzes() {
+  for (const k in LQ) {
+    const box = document.getElementById('qz-' + k);
+    if (!box) continue;
+    box.innerHTML = '<div class="msg" style="background:#eef4ff">📝 考一考：点一点，立刻知道对错！答错的题会进复习站。</div>';
+    LQ[k].forEach((q, idx) => {
+      const w = document.createElement('div');
+      w.className = 'lqi';
+      w.innerHTML = '<div class="lqq">' + (idx + 1) + '. ' + q.q + '</div>';
+      q.o.forEach((t, j) => {
+        const b = document.createElement('button');
+        b.className = 'lqb';
+        b.textContent = 'ABCD'[j] + '. ' + t;
+        b.onclick = () => {
+          if (w.dataset.done) return;
+          w.dataset.done = '1';
+          b.classList.add(j === q.a ? 'right' : 'wrong');
+          if (j !== q.a) recordWrong({ lv: '一级', lesson: '第 ' + Number(k.slice(1)) + ' 课', q: q.q, o: q.o, a: q.a, chosen: j });
+          [...w.querySelectorAll('.lqb')].forEach((x) => { x.disabled = true; });
+          const f = document.createElement('div');
+          f.className = 'lqf ' + (j === q.a ? 'ok' : 'no');
+          f.textContent = (j === q.a ? '✅ 答对啦！' : '❌ 已记入复习站～') + q.e;
+          w.appendChild(f);
+        };
+        w.appendChild(b);
+      });
+      box.appendChild(w);
+    });
+  }
+}
 const questions = [
   { q: '下面哪个是合法的变量名？', opts: ['2x', 'int', 'myName', 'my name'], ans: 2, exp: '变量名不能数字开头、不能是关键字、不能有空格。myName 最棒！' },
   { q: 'char 类型用来存什么？', opts: ['很大的整数', '单个字符', '小数', '真或假'], ans: 1, exp: 'char 存一个字符，比如 \'A\'、\'5\'，要用单引号包起来。' },
@@ -1443,6 +1642,7 @@ function answerQ(i, btn) {
   const q = questions[qi];
   const ok = i === q.ans;
   if (ok) score++;
+  if (!ok) recordWrong({ lv: '一级', lesson: '期末闯关', q: q.q, o: q.opts, a: q.ans, chosen: i });
   document.querySelectorAll('#quizOpts .qopt').forEach((b, k) => {
     b.disabled = true;
     if (k === q.ans) b.classList.add('right');
@@ -1452,6 +1652,53 @@ function answerQ(i, btn) {
   fb.className = 'fb ' + (ok ? 'ok' : 'no');
   fb.textContent = (ok ? '✅ 答对啦！' : '❌ 不对哦。') + q.exp;
   document.getElementById('quizNext').style.display = 'inline-block';
+}
+function recordWrong(item) {
+  try {
+    const list = JSON.parse(localStorage.getItem('gesp_wrong') || '[]');
+    list.push(Object.assign({ time: Date.now() }, item));
+    localStorage.setItem('gesp_wrong', JSON.stringify(list));
+  } catch (e) {}
+}
+const LV1_NAMES = ['认识电脑', '第一个程序', '变量和类型', '输入输出', '算术', '关系逻辑', '分支', '循环', '注释调试'];
+const LV1_ANCHORS = ['#s1', '#s2', '#s3', '#s4', '#s5', '#s6', '#s7', '#s7b', '#s8'];
+function loadLv1() {
+  try {
+    const v = JSON.parse(localStorage.getItem('gesp_lv1_prog'));
+    if (Array.isArray(v) && v.length === 9) return v.map(Boolean);
+  } catch (e) {}
+  return new Array(9).fill(false);
+}
+let lv1 = loadLv1();
+function saveLv1() { try { localStorage.setItem('gesp_lv1_prog', JSON.stringify(lv1)); } catch (e) {} }
+function toggleLesson(i, el) {
+  lv1[i] = el.checked;
+  saveLv1();
+  renderStations();
+  paintChk();
+}
+function paintChk() {
+  document.querySelectorAll('.chkbtn input').forEach((el, i) => {
+    el.checked = !!lv1[i];
+  });
+}
+function renderStations() {
+  const box = document.getElementById('lvStations');
+  if (!box) return;
+  box.innerHTML = '';
+  const first = lv1.indexOf(false);
+  LV1_NAMES.forEach((n, i) => {
+    const a = document.createElement('a');
+    a.className = 'station' + (lv1[i] ? ' done' : '') + (i === first ? ' cur' : '');
+    a.href = LV1_ANCHORS[i];
+    a.innerHTML = '<b>' + (i + 1) + '</b><span>' + n + '</span><i>' + (lv1[i] ? '✅' : (i === first ? '▶️' : '🔒')) + '</i>';
+    box.appendChild(a);
+  });
+  const n = lv1.filter(Boolean).length;
+  const bar = document.getElementById('mapBar');
+  if (bar) bar.style.width = (n / 9 * 100) + '%';
+  const msg = document.getElementById('mapMsg');
+  if (msg) msg.textContent = '进度 ' + n + ' / 9 课' + (n === 9 ? ' 🎓 一级毕业！去学二级吧！' : '');
 }
 function quizNext() {
   qi++;
@@ -1503,6 +1750,9 @@ buildStars();
 renderBug();
 if (!loadState()) loadSample();
 updateCodeGutter();
+buildLessonQuizzes();
+renderStations();
+paintChk();
 renderQ();
 </script>
 </body>

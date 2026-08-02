@@ -1,0 +1,579 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="GESP C++ 四级课程：指针、二维数组、结构体、函数、递推、排序、文件读写与异常处理。">
+<title>GESP C++ 四级课程 📗</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans SC", sans-serif;
+    background: linear-gradient(170deg, #fffbeb 0%, #ffffff 50%, #f0fdfa 100%);
+    color: #2b2d42;
+    line-height: 1.8;
+    min-height: 100vh;
+  }
+  .wrap { max-width: 920px; margin: 0 auto; padding: 14px 18px 50px; }
+  header { text-align: center; padding: 26px 12px 8px; }
+  header .mascot { font-size: 50px; display: block; animation: float 3s ease-in-out infinite; }
+  @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+  h1 {
+    font-size: clamp(25px, 5vw, 38px);
+    background: linear-gradient(90deg, #f59e0b, #fbbf24, #10b981);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    margin: 8px 0 4px;
+  }
+  .slogan { color: #6c6f93; font-size: 15px; }
+  nav.chips { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin: 18px 0 10px; }
+  .chip {
+    text-decoration: none;
+    background: #fff;
+    border: 2px solid #dce3f5;
+    color: #2b2d42;
+    padding: 7px 13px;
+    border-radius: 999px;
+    font-size: 14px;
+    font-weight: 600;
+    transition: transform .15s, border-color .15s, box-shadow .15s;
+  }
+  .chip:hover { transform: translateY(-2px); border-color: #f59e0b; box-shadow: 0 4px 12px rgba(43,45,66,.12); }
+  .panel {
+    background: #fff;
+    border-radius: 22px;
+    padding: 20px 20px 24px;
+    margin: 20px 0;
+    box-shadow: 0 6px 24px rgba(43,45,66,.07);
+    border-top: 7px solid #f59e0b;
+  }
+  .panel h2 { font-size: clamp(20px, 4vw, 26px); color: #b45309; margin-bottom: 8px; }
+  .callout { border-radius: 14px; padding: 12px 15px; font-size: 14.5px; margin: 12px 0; }
+  .callout.info { background: #eef4ff; border: 2px solid #bcd0ff; }
+  .callout.key { background: #ffeef1; border: 2px solid #fda4af; }
+  .goal {
+    background: #eef4ff;
+    border: 2px solid #bcd0ff;
+    border-radius: 14px;
+    padding: 10px 14px;
+    font-size: 14.5px;
+    margin: 10px 0;
+  }
+  details.lesson {
+    background: #fff;
+    border-radius: 18px;
+    border: 2px solid #e2e8f8;
+    margin: 14px 0;
+    overflow: hidden;
+  }
+  details.lesson[open] { box-shadow: 0 8px 24px rgba(43,45,66,.1); }
+  details.lesson summary {
+    list-style: none;
+    cursor: pointer;
+    padding: 13px 18px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: linear-gradient(90deg, #f59e0b, #fbbf24);
+    color: #fff;
+    font-weight: 800;
+  }
+  details.lesson summary::-webkit-details-marker { display: none; }
+  .lnum {
+    background: rgba(255,255,255,.22);
+    border: 2px solid rgba(255,255,255,.55);
+    border-radius: 999px;
+    padding: 2px 11px;
+    font-size: 13px;
+    white-space: nowrap;
+  }
+  .lgoal { font-size: 13px; font-weight: 600; opacity: .95; }
+  .ltoggle { margin-left: auto; font-size: 18px; }
+  details.lesson[open] .ltoggle { transform: rotate(180deg); }
+  .lbody { padding: 16px 18px 18px; }
+  .lbody h4 { font-size: 15.5px; color: #b45309; margin: 14px 0 6px; }
+  .lbody h4:first-child { margin-top: 0; }
+  .lbody p, .lbody ul, .lbody ol { font-size: 14.5px; margin: 6px 0; }
+  .lbody ul, .lbody ol { padding-left: 22px; }
+  code {
+    font-family: "SF Mono", Consolas, monospace;
+    background: #eef1fa;
+    color: #92400e;
+    padding: 1px 7px;
+    border-radius: 7px;
+    font-size: 13.5px;
+  }
+  .codebox { position: relative; margin: 10px 0; }
+  .codebox pre {
+    background: #20232e;
+    color: #d6f5e3;
+    border-radius: 14px;
+    padding: 14px 16px;
+    overflow-x: auto;
+    font-size: 13.5px;
+    line-height: 1.65;
+    font-family: "SF Mono", Consolas, "Courier New", monospace;
+  }
+  .cpy {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    border: none;
+    background: rgba(255,255,255,.14);
+    color: #fff;
+    border-radius: 8px;
+    padding: 4px 10px;
+    font-size: 12px;
+    cursor: pointer;
+    font-family: inherit;
+  }
+  .lquiz { margin: 12px 0 6px; }
+  .lqi { background: #f7f9ff; border-radius: 14px; padding: 12px 14px; margin: 10px 0; }
+  .lqq { font-weight: 700; font-size: 14.5px; margin-bottom: 6px; }
+  .lqb {
+    display: block;
+    width: 100%;
+    text-align: left;
+    margin: 5px 0;
+    border: 2px solid #dce3f5;
+    background: #fff;
+    border-radius: 12px;
+    padding: 7px 12px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: inherit;
+  }
+  .lqb.right { background: #d1fae5 !important; border-color: #10b981 !important; color: #065f46 !important; }
+  .lqb.wrong { background: #ffe4e6 !important; border-color: #f43f5e !important; color: #881337 !important; }
+  .lqf { font-size: 13px; margin-top: 6px; font-weight: 600; }
+  .lqf.ok { color: #047857; }
+  .lqf.no { color: #be123c; }
+  .checks { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 8px; margin: 12px 0; }
+  .checks label {
+    background: #f7f9ff;
+    border: 2px solid #e2e8f8;
+    border-radius: 14px;
+    padding: 9px 12px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .checks input { width: 17px; height: 17px; accent-color: #f59e0b; flex: none; }
+  .checks label.done { background: #eafaf1; border-color: #3ecf8e; }
+  .bar { background: #e7ebf8; border-radius: 999px; height: 13px; overflow: hidden; margin: 8px 0; }
+  .bar i { display: block; height: 100%; width: 0; background: linear-gradient(90deg, #f59e0b, #34d399); transition: width .4s; }
+  .stations { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin: 12px 0; }
+  .station {
+    text-decoration: none;
+    background: #f7f9ff;
+    border: 2px solid #e2e8f8;
+    border-radius: 14px;
+    padding: 10px 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #2b2d42;
+    font-size: 13.5px;
+    font-weight: 600;
+  }
+  .station b { background: #f59e0b; color: #fff; border-radius: 999px; width: 24px; height: 24px; display: grid; place-items: center; font-size: 12px; flex: none; }
+  .station i { margin-left: auto; font-style: normal; }
+  .station.done { background: #eafaf1; border-color: #3ecf8e; }
+  .station.done b { background: #10b981; }
+  .station.cur { border-color: #f59e0b; box-shadow: 0 0 0 2px rgba(245,158,11,.18); }
+  footer { text-align: center; color: #6c6f93; font-size: 14px; padding: 18px 0 6px; }
+  footer a { color: #b45309; font-weight: 700; text-decoration: none; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <span class="mascot">📗</span>
+    <h1>GESP C++ 四级课程</h1>
+    <p class="slogan">函数、数组、排序——编程的"正式装备"！</p>
+  </header>
+
+  <nav class="chips" aria-label="快捷入口">
+    <a class="chip" href="index.html">🏠 主页</a>
+    <a class="chip" href="GESP官方考纲.html">📋 官方考纲</a>
+    <a class="chip" href="GESP3课程.html">📘 三级</a>
+    <a class="chip" href="GESP二级知识点精讲.html">📖 笔记</a>
+    <a class="chip" href="复习站.html">📒 复习站</a>
+    <a class="chip" href="家长中心.html">👨‍👩‍👧 家长中心</a>
+  </nav>
+
+  <div class="panel">
+    <h2>📌 四级学什么？</h2>
+    <div class="callout info">考纲知识内容：函数定义与调用、形参实参、作用域、C++ 指针、参数传递（值/引用/指针）、结构体、二维及多维数组、递推、排序概念与稳定性、排序算法（冒泡/插入/选择）、简单算法复杂度估算、文件重定向与读写、异常处理。</div>
+    <div class="callout key">🎯 知识目标：掌握函数的定义、调用及参数传递；掌握二维数组与多维数组；掌握常用排序算法、文件读写和异常处理；能够解决递推相关问题。题型：单选 15×2 + 判断 10×2 + 编程 2×25 ｜ 考试时间：120 分钟。</div>
+    <div class="goal">💡 学习建议：指针和引用是"老友记"里的新人，先理解"地址"；函数是代码的"积木"，参数传递必须分清；排序算法建议亲手模拟一遍过程。</div>
+
+    <h2>🗺️ 学习地图</h2>
+    <div class="stations" id="lvStations"></div>
+    <h2>📝 课程打卡</h2>
+    <div class="checks" id="lvChecks"></div>
+    <div class="bar"><i id="progBar"></i></div>
+    <p class="goal" id="progMsg" style="margin:6px 0 0">进度 0 / 8 课</p>
+  </div>
+
+  <details class="lesson" id="lv4l1">
+    <summary><span class="lnum">第 1 课</span><span class="lgoal">指针：存"地址"的变量</span><span class="ltoggle">▾</span></summary>
+    <div class="lbody">
+      <div class="goal">🎯 本节目标：1. 理解"地址"和"指针"；2. 会写 int *p = &amp;x; 并用 *p 解引用。</div>
+      <h4>📖 讲解</h4>
+      <ul>
+        <li>变量住在内存里，每个变量都有自己的<b>地址</b>（就像房间号）。</li>
+        <li><b>指针</b>就是"存地址的变量"：<code>int *p = &amp;x;</code> 让 p 记住 x 的房间号。</li>
+        <li><code>&amp;</code> 是取地址，<code>*p</code> 是解引用——"顺着地址找到那个变量"。</li>
+        <li>改 <code>*p</code> 就等于改 <code>x</code>，因为指向的是同一个变量！</li>
+      </ul>
+      <div class="codebox"><pre>#include &lt;iostream&gt;
+using namespace std;
+int main() {
+    int x = 10;
+    int *p = &amp;x;        // p 存 x 的地址
+    cout &lt;&lt; *p &lt;&lt; endl; // 10：顺着地址取值
+    *p = 20;            // 改 *p 就是改 x
+    cout &lt;&lt; x &lt;&lt; endl;  // 20
+    return 0;
+}</pre><button class="cpy" onclick="copyCode(this)">📋 复制</button></div>
+      <div class="lquiz" id="qz-l1"></div>
+      <div class="callout info">📌 本节小结：&amp; 取地址，* 解引用；指针存的是地址，*p 才是它"指向的变量"。</div>
+    </div>
+  </details>
+
+  <details class="lesson" id="lv4l2">
+    <summary><span class="lnum">第 2 课</span><span class="lgoal">二维及多维数组：表格</span><span class="ltoggle">▾</span></summary>
+    <div class="lbody">
+      <div class="goal">🎯 本节目标：1. 会定义二维数组；2. 会用双重循环遍历（外层行、内层列）。</div>
+      <h4>📖 讲解</h4>
+      <ul>
+        <li>二维数组像一张表格：<code>a[i][j]</code> 表示第 i 行第 j 列（下标还是从 0 开始）。</li>
+        <li>遍历套路：外层循环管<b>行</b>，内层循环管<b>列</b>。</li>
+        <li>二维数组可以做矩阵题、图形题（画 X、日字、N 字都是它的天下）。</li>
+      </ul>
+      <div class="codebox"><pre>#include &lt;iostream&gt;
+using namespace std;
+int a[105][105];
+int main() {
+    int n, m;
+    cin &gt;&gt; n &gt;&gt; m;
+    for (int i = 0; i &lt; n; i++)
+        for (int j = 0; j &lt; m; j++)
+            cin &gt;&gt; a[i][j];
+    for (int i = 0; i &lt; n; i++) {   // 每行求和
+        int s = 0;
+        for (int j = 0; j &lt; m; j++) s += a[i][j];
+        cout &lt;&lt; s &lt;&lt; endl;
+    }
+    return 0;
+}</pre><button class="cpy" onclick="copyCode(this)">📋 复制</button></div>
+      <div class="lquiz" id="qz-l2"></div>
+      <div class="callout info">📌 本节小结：a[行][列]；外层管行、内层管列；图形题先想清楚 i、j 的关系再打字符。</div>
+    </div>
+  </details>
+
+  <details class="lesson" id="lv4l3">
+    <summary><span class="lnum">第 3 课</span><span class="lgoal">结构体：把数据"打包"</span><span class="ltoggle">▾</span></summary>
+    <div class="lbody">
+      <div class="goal">🎯 本节目标：1. 会定义 struct；2. 会用点号 . 访问成员；3. 会用结构体数组存多个对象。</div>
+      <h4>📖 讲解</h4>
+      <ul>
+        <li><code>struct</code> 让我们自己造一种"新类型"，把相关数据打包：比如学生 = 名字 + 分数。</li>
+        <li>访问成员用<b>点号</b>：<code>s.name</code>、<code>s.score</code>。</li>
+        <li>结构体数组 <code>Student a[100];</code> 可以存全班同学！</li>
+      </ul>
+      <div class="codebox"><pre>#include &lt;iostream&gt;
+#include &lt;string&gt;
+using namespace std;
+struct Student {
+    string name;
+    int score;
+};
+int main() {
+    Student s;
+    s.name = "小明";
+    s.score = 95;
+    cout &lt;&lt; s.name &lt;&lt; " " &lt;&lt; s.score &lt;&lt; endl;
+    return 0;
+}</pre><button class="cpy" onclick="copyCode(this)">📋 复制</button></div>
+      <div class="lquiz" id="qz-l3"></div>
+      <div class="callout info">📌 本节小结：struct = 自定义打包类型；用 . 访问成员；还能做结构体数组、结构体指针。</div>
+    </div>
+  </details>
+
+  <details class="lesson" id="lv4l4">
+    <summary><span class="lnum">第 4 课</span><span class="lgoal">函数：定义、调用、形参实参、作用域</span><span class="ltoggle">▾</span></summary>
+    <div class="lbody">
+      <div class="goal">🎯 本节目标：1. 会写函数并调用；2. 分清形参和实参；3. 知道全局/局部变量的作用域。</div>
+      <h4>📖 讲解</h4>
+      <ul>
+        <li>函数 = 把一段代码"打包"起来，起个名字，随时调用（代码的积木）。</li>
+        <li><b>形参</b>：函数定义里的小括号占位；<b>实参</b>：调用时给的真实值。</li>
+        <li><b>全局变量</b>写在所有函数外面，谁都能用；<b>局部变量</b>写在 { } 里，出括号就"消失"。</li>
+        <li>返回结果用 <code>return 值;</code>，没有结果就写 <code>void</code>。</li>
+      </ul>
+      <div class="codebox"><pre>#include &lt;iostream&gt;
+using namespace std;
+int add(int a, int b) {   // a、b 是形参
+    return a + b;
+}
+int main() {
+    cout &lt;&lt; add(3, 5) &lt;&lt; endl;  // 3、5 是实参，输出 8
+    return 0;
+}</pre><button class="cpy" onclick="copyCode(this)">📋 复制</button></div>
+      <div class="lquiz" id="qz-l4"></div>
+      <div class="callout info">📌 本节小结：形参是"占位"，实参是"真值"；函数外 = 全局，函数内 = 局部；void 表示没有返回值。</div>
+    </div>
+  </details>
+
+  <details class="lesson" id="lv4l5">
+    <summary><span class="lnum">第 5 课</span><span class="lgoal">参数传递：值、引用、指针</span><span class="ltoggle">▾</span></summary>
+    <div class="lbody">
+      <div class="goal">🎯 本节目标：1. 知道值传递改不动外面；2. 会用引用 &amp; 和指针直接改外面。</div>
+      <h4>📖 讲解</h4>
+      <ul>
+        <li><b>值传递</b> <code>f(int x)</code>：把值复制一份进去，函数里怎么改都不影响外面。</li>
+        <li><b>引用传递</b> <code>f(int &amp;x)</code>：直接"贴上"外面的变量，改它外面就变。</li>
+        <li><b>指针传递</b> <code>f(int *x)</code>：把地址传进去，用 *x 改外面的变量。</li>
+        <li>想"换掉"外面的值（比如交换两个数），就用引用或指针。</li>
+      </ul>
+      <div class="codebox"><pre>#include &lt;iostream&gt;
+using namespace std;
+void f1(int x) { x = 100; }      // 值传递：外面不变
+void f2(int &amp;x) { x = 100; }     // 引用传递：外面变 100
+void f3(int *x) { *x = 100; }    // 指针传递：外面也变
+int main() {
+    int a = 1, b = 1, c = 1;
+    f1(a); f2(b); f3(&amp;c);
+    cout &lt;&lt; a &lt;&lt; " " &lt;&lt; b &lt;&lt; " " &lt;&lt; c &lt;&lt; endl; // 1 100 100
+    return 0;
+}</pre><button class="cpy" onclick="copyCode(this)">📋 复制</button></div>
+      <div class="lquiz" id="qz-l5"></div>
+      <div class="callout info">📌 本节小结：值传递复制一份（改不动外面）；引用 &amp; 和指针 * 都能改外面；交换两个数用引用或指针。</div>
+    </div>
+  </details>
+
+  <details class="lesson" id="lv4l6">
+    <summary><span class="lnum">第 6 课</span><span class="lgoal">递推算法：一步一步往前推</span><span class="ltoggle">▾</span></summary>
+    <div class="lbody">
+      <div class="goal">🎯 本节目标：1. 会写递推关系式；2. 能用数组"从前往后"推（如斐波那契）。</div>
+      <h4>📖 讲解</h4>
+      <ul>
+        <li><b>递推</b>：从已知的"开头几项"出发，用关系式一步步推出后面的项。</li>
+        <li>经典例子：爬楼梯，第 i 阶只能从 i-1 或 i-2 阶上来，所以 f[i] = f[i-1] + f[i-2]。</li>
+        <li>套路：先找<b>初始值</b>（f[1]、f[2]），再写<b>关系式</b>，最后 for 循环推到底。</li>
+      </ul>
+      <div class="codebox"><pre>#include &lt;iostream&gt;
+using namespace std;
+int f[50];
+int main() {
+    int n;
+    cin &gt;&gt; n;
+    f[1] = 1; f[2] = 1;              // 初始值
+    for (int i = 3; i &lt;= n; i++)
+        f[i] = f[i - 1] + f[i - 2];  // 递推关系式
+    cout &lt;&lt; f[n] &lt;&lt; endl;             // 第 n 项
+    return 0;
+}</pre><button class="cpy" onclick="copyCode(this)">📋 复制</button></div>
+      <div class="lquiz" id="qz-l6"></div>
+      <div class="callout info">📌 本节小结：递推 = 初始值 + 关系式 + 循环；斐波那契 f[i]=f[i-1]+f[i-2] 是最典型的例子。</div>
+    </div>
+  </details>
+
+  <details class="lesson" id="lv4l7">
+    <summary><span class="lnum">第 7 课</span><span class="lgoal">排序算法：冒泡、插入、选择</span><span class="ltoggle">▾</span></summary>
+    <div class="lbody">
+      <div class="goal">🎯 本节目标：1. 会写冒泡排序；2. 知道插入、选择的思想；3. 理解"稳定性"。</div>
+      <h4>📖 讲解</h4>
+      <ul>
+        <li><b>冒泡</b>：相邻两个比较，大的往后"冒"，每趟把最大的送到最后。</li>
+        <li><b>选择</b>：每趟挑最小的放到最前面。</li>
+        <li><b>插入</b>：像抓扑克牌，把新牌插到已排好序列的合适位置。</li>
+        <li><b>稳定性</b>：相同元素排序后相对顺序不变，叫稳定（冒泡、插入稳定，选择不稳定）。</li>
+      </ul>
+      <div class="codebox"><pre>#include &lt;iostream&gt;
+using namespace std;
+int main() {
+    int n, a[105];
+    cin &gt;&gt; n;
+    for (int i = 0; i &lt; n; i++) cin &gt;&gt; a[i];
+    for (int i = 0; i &lt; n - 1; i++)            // 冒泡排序
+        for (int j = 0; j &lt; n - 1 - i; j++)
+            if (a[j] &gt; a[j + 1]) swap(a[j], a[j + 1]);
+    for (int i = 0; i &lt; n; i++) cout &lt;&lt; a[i] &lt;&lt; " ";
+    cout &lt;&lt; endl;
+    return 0;
+}</pre><button class="cpy" onclick="copyCode(this)">📋 复制</button></div>
+      <div class="lquiz" id="qz-l7"></div>
+      <div class="callout info">📌 本节小结：冒泡每趟冒最大的、选择每趟挑最小的、插入像插扑克牌；稳定 = 相同元素顺序不变。</div>
+    </div>
+  </details>
+
+  <details class="lesson" id="lv4l8">
+    <summary><span class="lnum">第 8 课</span><span class="lgoal">文件读写与异常处理</span><span class="ltoggle">▾</span></summary>
+    <div class="lbody">
+      <div class="goal">🎯 本节目标：1. 会用 freopen 把输入输出重定向到文件；2. 了解 try-catch 异常处理。</div>
+      <h4>📖 讲解</h4>
+      <ul>
+        <li>考试看到"文件读写"提示，就在 main 开头加两行 <code>freopen</code>，之后 cin/cout 照常用。</li>
+        <li><code>freopen("in.txt", "r", stdin)</code> 从 in.txt 读；<code>freopen("out.txt", "w", stdout)</code> 写到 out.txt。</li>
+        <li><b>异常处理</b>：把可能出错的代码放进 try，出错时 catch 接住，程序不会直接崩。</li>
+      </ul>
+      <div class="codebox"><pre>#include &lt;iostream&gt;
+#include &lt;cstdio&gt;
+using namespace std;
+int main() {
+    // freopen("in.txt", "r", stdin);   // 从文件读入
+    // freopen("out.txt", "w", stdout); // 写到文件
+    int a, b;
+    cin &gt;&gt; a &gt;&gt; b;
+    cout &lt;&lt; a + b &lt;&lt; endl;
+    return 0;
+}</pre><button class="cpy" onclick="copyCode(this)">📋 复制</button></div>
+      <div class="lquiz" id="qz-l8"></div>
+      <div class="callout info">📌 本节小结：freopen("文件名","r",stdin) 读、("w",stdout) 写；try 里放可能出错的代码，catch 接住异常。</div>
+    </div>
+  </details>
+
+  <footer>
+    GESP C++ 四级课程 📗 ｜ 内容依据 CCF《C++&amp;Python 认证标准》四级<br>
+    <a href="index.html">🏠 学习中心</a> ｜ <a href="复习站.html">📒 复习站</a> ｜ <a href="家长中心.html">👨‍👩‍👧 家长中心</a> ｜ <a href="GESP官方考纲.html">📋 考纲</a> ｜ <a href="GESP5课程.html">📙 五级课程 →</a>
+  </footer>
+</div>
+
+<script>
+const LQ = {
+  l1: [
+    { q: 'int *p = &amp;x; 里的 &amp;x 表示什么？', o: ['x 的地址', 'x 的值', '指针的指针', '报错'], a: 0, e: '&amp; 是取地址，&amp;x 就是 x 的地址。' },
+    { q: '*p 这个操作叫？', o: ['解引用：顺着地址找变量', '取地址', '乘法', '赋值'], a: 0, e: '*p 是解引用，找到 p 指向的那个变量。' }
+  ],
+  l2: [
+    { q: '二维数组 a[i][j] 里，i 表示？', o: ['行', '列', '值', '地址'], a: 0, e: 'a[行][列]，外层循环管行。' },
+    { q: '访问第 2 行第 3 列（从 0 开始数）写？', o: ['a[2][3]', 'a[3][2]', 'a[1][2]', 'a[2][2]'], a: 0, e: '行是 2、列是 3，所以是 a[2][3]。' }
+  ],
+  l3: [
+    { q: 'struct 的作用是？', o: ['把相关数据打包成一种新类型', '定义函数', '写循环', '做输入'], a: 0, e: 'struct = 自定义打包类型，比如学生(名字+分数)。' },
+    { q: '访问结构体成员用什么符号？', o: ['点号 .', '逗号 ,', '空格', '箭头 &gt;'], a: 0, e: 's.name、s.score 用点号访问。' }
+  ],
+  l4: [
+    { q: '函数定义里的 a、b 叫什么？', o: ['形参', '实参', '常量', '数组'], a: 0, e: '定义里的占位叫形参，调用时给的真值叫实参。' },
+    { q: '全局变量应该写在哪里？', o: ['所有函数的外面', 'main 函数里面', '任何位置', '注释里'], a: 0, e: '全局变量在函数外面定义，谁都看得见。' }
+  ],
+  l5: [
+    { q: '值传递修改的是？', o: ['副本，外面不变', '原来的变量', '地址', '报错'], a: 0, e: '值传递复制一份，函数里怎么改都影响不到外面。' },
+    { q: 'void f(int &amp;x) 是哪种传递？', o: ['引用传递', '值传递', '指针传递', '数组传递'], a: 0, e: 'int &amp;x 是引用，直接绑定外面的变量。' }
+  ],
+  l6: [
+    { q: '斐波那契的递推关系式是？', o: ['f[i] = f[i-1] + f[i-2]', 'f[i] = f[i-1] * 2', 'f[i] = i * i', 'f[i] = f[i+1] - 1'], a: 0, e: '每一项等于前两项之和。' },
+    { q: '写递推要准备哪两样？', o: ['初始值 + 关系式', '循环 + 排序', '指针 + 结构体', '文件 + 异常'], a: 0, e: '先定初始值，再写关系式，然后循环推。' }
+  ],
+  l7: [
+    { q: '冒泡排序每一趟把什么送到最后？', o: ['当前最大的', '当前最小的', '中间的', '第一个'], a: 0, e: '相邻比较，大的往后冒。' },
+    { q: '"稳定排序"指什么？', o: ['相同元素排序后相对顺序不变', '排序非常快', '永远不会崩', '只能排整数'], a: 0, e: '稳定性 = 相同元素前后顺序不变。' }
+  ],
+  l8: [
+    { q: '从文件读入应该写？', o: ['freopen("in.txt","r",stdin)', 'freopen("in.txt","w",stdin)', 'cin 自动读', '不需要写'], a: 0, e: '"r" 是读，"w" 是写，别忘了写 stdin/stdout。' },
+    { q: '异常处理用哪对关键字？', o: ['try / catch', 'if / else', 'for / while', 'class / struct'], a: 0, e: 'try 里放可能出错的代码，catch 接住异常。' }
+  ]
+};
+function buildLessonQuizzes() {
+  for (const k in LQ) {
+    const box = document.getElementById('qz-' + k);
+    if (!box) continue;
+    box.innerHTML = '<div class="goal">📝 考一考：点一点，立刻知道对错！答错的题会进复习站。</div>';
+    LQ[k].forEach((q, idx) => {
+      const w = document.createElement('div');
+      w.className = 'lqi';
+      w.innerHTML = '<div class="lqq">' + (idx + 1) + '. ' + q.q + '</div>';
+      q.o.forEach((t, j) => {
+        const b = document.createElement('button');
+        b.className = 'lqb';
+        b.textContent = 'ABCD'[j] + '. ' + t;
+        b.onclick = () => {
+          if (w.dataset.done) return;
+          w.dataset.done = '1';
+          b.classList.add(j === q.a ? 'right' : 'wrong');
+          if (j !== q.a) recordWrong({ lv: '四级', lesson: '第 ' + Number(k.slice(1)) + ' 课', q: q.q, o: q.o, a: q.a, chosen: j });
+          [...w.querySelectorAll('.lqb')].forEach((x) => { x.disabled = true; });
+          const f = document.createElement('div');
+          f.className = 'lqf ' + (j === q.a ? 'ok' : 'no');
+          f.textContent = (j === q.a ? '✅ 答对啦！' : '❌ 已记入复习站～') + q.e;
+          w.appendChild(f);
+        };
+        w.appendChild(b);
+      });
+      box.appendChild(w);
+    });
+  }
+}
+function copyCode(btn) {
+  const t = btn.closest('.codebox').querySelector('pre').textContent;
+  const done = () => { btn.textContent = '✅ 已复制'; setTimeout(() => { btn.textContent = '📋 复制'; }, 1200); };
+  if (navigator.clipboard) navigator.clipboard.writeText(t).then(done);
+  else { btn.textContent = '😅 请手动复制'; }
+}
+function recordWrong(item) {
+  try {
+    const list = JSON.parse(localStorage.getItem('gesp_wrong') || '[]');
+    list.push(Object.assign({ time: Date.now() }, item));
+    localStorage.setItem('gesp_wrong', JSON.stringify(list));
+  } catch (e) {}
+}
+const LESSON_NAMES = ['指针', '二维数组', '结构体', '函数', '参数传递', '递推算法', '排序算法', '文件与异常'];
+function loadProg() {
+  try {
+    const v = JSON.parse(localStorage.getItem('gesp_lv4_prog'));
+    if (Array.isArray(v) && v.length === LESSON_NAMES.length) return v.map(Boolean);
+  } catch (e) {}
+  return new Array(LESSON_NAMES.length).fill(false);
+}
+let prog = loadProg();
+function saveProg() { try { localStorage.setItem('gesp_lv4_prog', JSON.stringify(prog)); } catch (e) {} }
+function renderChecks() {
+  const box = document.getElementById('lvChecks');
+  box.innerHTML = '';
+  LESSON_NAMES.forEach((n, i) => {
+    const lab = document.createElement('label');
+    lab.className = prog[i] ? 'done' : '';
+    lab.innerHTML = '<input type="checkbox" ' + (prog[i] ? 'checked' : '') + '>' + (i + 1) + '. ' + n;
+    lab.querySelector('input').addEventListener('change', () => {
+      prog[i] = lab.querySelector('input').checked;
+      lab.className = prog[i] ? 'done' : '';
+      saveProg();
+      paintProg();
+    });
+    box.appendChild(lab);
+  });
+}
+function paintProg() {
+  const n = prog.filter(Boolean).length;
+  document.getElementById('progBar').style.width = (n / LESSON_NAMES.length * 100) + '%';
+  document.getElementById('progMsg').textContent = '进度 ' + n + ' / ' + LESSON_NAMES.length + ' 课' + (n === LESSON_NAMES.length ? ' 🎓 四级毕业！' : '');
+}
+function renderStations() {
+  const box = document.getElementById('lvStations');
+  if (!box) return;
+  box.innerHTML = '';
+  const first = prog.indexOf(false);
+  LESSON_NAMES.forEach((n, i) => {
+    const a = document.createElement('a');
+    a.className = 'station' + (prog[i] ? ' done' : '') + (i === first ? ' cur' : '');
+    a.href = '#lv4l' + (i + 1);
+    a.innerHTML = '<b>' + (i + 1) + '</b><span>' + n + '</span><i>' + (prog[i] ? '✅' : (i === first ? '▶️' : '🔒')) + '</i>';
+    box.appendChild(a);
+  });
+}
+buildLessonQuizzes();
+renderChecks();
+paintProg();
+renderStations();
+</script>
+</body>
+</html>

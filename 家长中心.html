@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="GESP 家长中心：学习进度、错题统计、8 周备考计划。">
+<title>GESP 家长中心 👨‍👩‍👧</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans SC", sans-serif;
+    background: linear-gradient(170deg, #f0f9ff 0%, #ffffff 50%, #fefce8 100%);
+    color: #2b2d42;
+    line-height: 1.8;
+    min-height: 100vh;
+  }
+  .wrap { max-width: 900px; margin: 0 auto; padding: 14px 18px 50px; }
+  header { text-align: center; padding: 26px 12px 8px; }
+  header .mascot { font-size: 50px; display: block; animation: float 3s ease-in-out infinite; }
+  @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+  h1 {
+    font-size: clamp(25px, 5vw, 38px);
+    background: linear-gradient(90deg, #0284c7, #06b6d4, #f59e0b);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    margin: 8px 0 4px;
+  }
+  .slogan { color: #6c6f93; font-size: 15px; }
+  nav.chips { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin: 18px 0 10px; }
+  .chip {
+    text-decoration: none;
+    background: #fff;
+    border: 2px solid #dce3f5;
+    color: #2b2d42;
+    padding: 7px 13px;
+    border-radius: 999px;
+    font-size: 14px;
+    font-weight: 600;
+    transition: transform .15s, border-color .15s, box-shadow .15s;
+  }
+  .chip:hover { transform: translateY(-2px); border-color: #0284c7; box-shadow: 0 4px 12px rgba(43,45,66,.12); }
+  .panel {
+    background: #fff;
+    border-radius: 22px;
+    padding: 20px 20px 24px;
+    margin: 20px 0;
+    box-shadow: 0 6px 24px rgba(43,45,66,.07);
+    border-top: 7px solid #0284c7;
+  }
+  .panel h2 { font-size: clamp(20px, 4vw, 26px); color: #0369a1; margin-bottom: 8px; }
+  .callout { border-radius: 14px; padding: 12px 15px; font-size: 14.5px; margin: 12px 0; }
+  .callout.info { background: #eef4ff; border: 2px solid #bcd0ff; }
+  .callout.warn { background: #fff8e6; border: 2px solid #ffd166; }
+  table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 14px; }
+  th, td { border: 1.5px solid #dce3f5; padding: 8px 10px; text-align: left; vertical-align: middle; }
+  th { background: #f1f4fb; }
+  .bar { background: #e7ebf8; border-radius: 999px; height: 10px; overflow: hidden; min-width: 90px; }
+  .bar i { display: block; height: 100%; width: 0; background: linear-gradient(90deg, #0284c7, #34d399); }
+  .plan { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 10px; margin: 12px 0; }
+  .wk { background: #f7f9ff; border: 2px solid #e2e8f8; border-radius: 14px; padding: 12px 14px; font-size: 14px; }
+  .wk b { color: #0369a1; display: block; margin-bottom: 4px; }
+  .total { font-size: 18px; font-weight: 800; color: #0369a1; text-align: center; padding: 6px 0; }
+  footer { text-align: center; color: #6c6f93; font-size: 14px; padding: 18px 0 6px; }
+  footer a { color: #0369a1; font-weight: 700; text-decoration: none; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <span class="mascot">👨‍👩‍👧</span>
+    <h1>GESP 家长中心</h1>
+    <p class="slogan">看看孩子的进度，一起把备考变成轻松的日常。</p>
+  </header>
+
+  <nav class="chips" aria-label="快捷入口">
+    <a class="chip" href="index.html">🏠 学习中心</a>
+    <a class="chip" href="复习站.html">📒 复习站</a>
+    <a class="chip" href="GESP官方考纲.html">📋 官方考纲</a>
+    <a class="chip" href="GESP二级知识点精讲.html">📖 知识笔记</a>
+  </nav>
+
+  <div class="panel">
+    <h2>📊 学习进度总览</h2>
+    <div class="total" id="totalMsg">读取中……</div>
+    <table id="progTable">
+      <tr><th>模块</th><th>进度</th><th>完成</th></tr>
+    </table>
+    <div class="callout info" id="wrongMsg">错题统计读取中……</div>
+  </div>
+
+  <div class="panel">
+    <h2>🗓️ 8 周备考计划（一级 → 二级）</h2>
+    <p style="font-size:14px;color:#6c6f93">每天 30~60 分钟即可，周末可以多练编程题。</p>
+    <div class="plan">
+      <div class="wk"><b>第 1 周</b>基础常识 3 课 + 一级第 1~2 课（认识电脑、第一个程序）</div>
+      <div class="wk"><b>第 2 周</b>一级第 3~5 课（变量、输入输出、算术）</div>
+      <div class="wk"><b>第 3 周</b>一级第 6~7 课（关系逻辑、分支）</div>
+      <div class="wk"><b>第 4 周</b>一级第 8~9 课（循环、注释调试）+ 一级期末闯关</div>
+      <div class="wk"><b>第 5 周</b>二级第 1~3 课（存储、网络、语言）</div>
+      <div class="wk"><b>第 6 周</b>二级第 4~6 课（流程图、ASCII、类型转换）</div>
+      <div class="wk"><b>第 7 周</b>二级第 7~9 课（分支、循环、数学函数）</div>
+      <div class="wk"><b>第 8 周</b>二级期末闯关 + 复习站刷错题 + 真题编程场</div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h2>🚀 三~八级进阶路线（长期）</h2>
+    <div class="callout info">
+      三级（6 课：编码/进制/位运算/数组/字符串/枚举模拟）→ 四级（8 课：指针/函数/结构体/排序…）→ 五级（8 课：数论/高精度/链表/二分/递归/贪心/分治）→ 六级（6 课：树/搜索/DP/面向对象）→ 七级（5 课：复杂 DP/图/哈希）→ 八级（8 课：组合数学/图论综合/算法优化）。<br>
+      建议每级 2~4 周，学完一级再进下一级，别跳级。
+    </div>
+  </div>
+
+  <div class="panel">
+    <h2>💡 给家长的小建议</h2>
+    <div class="callout warn">
+      <ul style="padding-left:20px;font-size:14.5px">
+        <li><b>先体验再理论</b>：让孩子先点"运行"看程序跑起来，再讲概念，兴趣最重要。</li>
+        <li><b>错题是宝贝</b>：每周带孩子去一次"复习站"，把做错的题重做一遍。</li>
+        <li><b>编程题一定要动手</b>：光看永远学不会，用「编程练习场」亲手敲代码。</li>
+        <li><b>时间控制</b>：小学阶段每次 30~60 分钟，累了就停，明天再来。</li>
+        <li><b>进度数据</b>：本页数据来自孩子当前使用的浏览器；换浏览器或清缓存后不保留。</li>
+      </ul>
+    </div>
+  </div>
+
+  <footer>
+    GESP 家长中心 👨‍👩‍👧 ｜ <a href="index.html">🏠 学习中心</a> ｜ <a href="复习站.html">📒 复习站</a> ｜ <a href="GESP官方考纲.html">📋 考纲</a>
+  </footer>
+</div>
+
+<script>
+const MODULES = [
+  ['🧠 基础常识', 'gesp_lv0_prog', 3, '基础常识乐园.html'],
+  ['🎒 一级', 'gesp_lv1_prog', 9, 'GESP1学习乐园.html'],
+  ['🚀 二级', 'gesp_lv2_prog', 9, 'GESP2学习乐园.html'],
+  ['📘 三级', 'gesp_lv3_prog', 6, 'GESP3课程.html'],
+  ['📗 四级', 'gesp_lv4_prog', 8, 'GESP4课程.html'],
+  ['📙 五级', 'gesp_lv5_prog', 8, 'GESP5课程.html'],
+  ['📕 六级', 'gesp_lv6_prog', 6, 'GESP6课程.html'],
+  ['📓 七级', 'gesp_lv7_prog', 5, 'GESP7课程.html'],
+  ['📔 八级', 'gesp_lv8_prog', 8, 'GESP8课程.html']
+];
+function getArr(key, n) {
+  try {
+    const v = JSON.parse(localStorage.getItem(key));
+    if (Array.isArray(v) && v.length === n) return v.map(Boolean);
+  } catch (e) {}
+  return new Array(n).fill(false);
+}
+function render() {
+  const tb = document.getElementById('progTable');
+  let totalDone = 0, totalAll = 0;
+  MODULES.forEach(([name, key, n, url]) => {
+    const arr = getArr(key, n);
+    const done = arr.filter(Boolean).length;
+    totalDone += done; totalAll += n;
+    const tr = document.createElement('tr');
+    tr.innerHTML = '<td><a href="' + url + '" style="color:#0369a1;font-weight:700">' + name + '</a></td>'
+      + '<td><div class="bar"><i style="width:' + (done / n * 100) + '%"></i></div></td>'
+      + '<td>' + done + ' / ' + n + ' 课' + (done === n ? ' ✅' : '') + '</td>';
+    tb.appendChild(tr);
+  });
+  document.getElementById('totalMsg').textContent = '总进度：' + totalDone + ' / ' + totalAll + ' 课完成（' + Math.round(totalDone / totalAll * 100) + '%）';
+  try {
+    const w = JSON.parse(localStorage.getItem('gesp_wrong') || '[]');
+    document.getElementById('wrongMsg').textContent = w.length ? '📚 错题本里有 ' + w.length + ' 道错题，建议每周去「复习站」重做一遍。' : '🎉 错题本是空的，继续保持！';
+  } catch (e) {}
+}
+render();
+</script>
+</body>
+</html>

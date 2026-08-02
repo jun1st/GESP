@@ -1,0 +1,512 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="GESP C++ 七级课程：数学库函数、复杂动态规划、图、图论算法、哈希表。">
+<title>GESP C++ 七级课程 📓</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans SC", sans-serif;
+    background: linear-gradient(170deg, #f5f3ff 0%, #ffffff 50%, #f0fdfa 100%);
+    color: #2b2d42;
+    line-height: 1.8;
+    min-height: 100vh;
+  }
+  .wrap { max-width: 920px; margin: 0 auto; padding: 14px 18px 50px; }
+  header { text-align: center; padding: 26px 12px 8px; }
+  header .mascot { font-size: 50px; display: block; animation: float 3s ease-in-out infinite; }
+  @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+  h1 {
+    font-size: clamp(25px, 5vw, 38px);
+    background: linear-gradient(90deg, #8b5cf6, #a78bfa, #06b6d4);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    margin: 8px 0 4px;
+  }
+  .slogan { color: #6c6f93; font-size: 15px; }
+  nav.chips { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin: 18px 0 10px; }
+  .chip {
+    text-decoration: none;
+    background: #fff;
+    border: 2px solid #dce3f5;
+    color: #2b2d42;
+    padding: 7px 13px;
+    border-radius: 999px;
+    font-size: 14px;
+    font-weight: 600;
+    transition: transform .15s, border-color .15s, box-shadow .15s;
+  }
+  .chip:hover { transform: translateY(-2px); border-color: #8b5cf6; box-shadow: 0 4px 12px rgba(43,45,66,.12); }
+  .panel {
+    background: #fff;
+    border-radius: 22px;
+    padding: 20px 20px 24px;
+    margin: 20px 0;
+    box-shadow: 0 6px 24px rgba(43,45,66,.07);
+    border-top: 7px solid #8b5cf6;
+  }
+  .panel h2 { font-size: clamp(20px, 4vw, 26px); color: #6d28d9; margin-bottom: 8px; }
+  .callout { border-radius: 14px; padding: 12px 15px; font-size: 14.5px; margin: 12px 0; }
+  .callout.info { background: #eef4ff; border: 2px solid #bcd0ff; }
+  .callout.key { background: #ffeef1; border: 2px solid #fda4af; }
+  .goal {
+    background: #eef4ff;
+    border: 2px solid #bcd0ff;
+    border-radius: 14px;
+    padding: 10px 14px;
+    font-size: 14.5px;
+    margin: 10px 0;
+  }
+  .map { margin: 16px 0 4px; }
+  .stations { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin: 12px 0; }
+  .station {
+    text-decoration: none;
+    background: #f7f9ff;
+    border: 2px solid #e2e8f8;
+    border-radius: 14px;
+    padding: 10px 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #2b2d42;
+    font-size: 13.5px;
+    font-weight: 600;
+  }
+  .station b { background: #8b5cf6; color: #fff; border-radius: 999px; width: 24px; height: 24px; display: grid; place-items: center; font-size: 12px; flex: none; }
+  .station i { margin-left: auto; font-style: normal; }
+  .station.done { background: #eafaf1; border-color: #3ecf8e; }
+  .station.done b { background: #10b981; }
+  .station.cur { border-color: #8b5cf6; box-shadow: 0 0 0 2px rgba(139,92,246,.18); }
+  .bar { background: #e7ebf8; border-radius: 999px; height: 13px; overflow: hidden; margin: 8px 0; }
+  .bar i { display: block; height: 100%; width: 0; background: linear-gradient(90deg, #8b5cf6, #06b6d4); transition: width .4s; }
+  details.lesson {
+    background: #fff;
+    border-radius: 18px;
+    border: 2px solid #e2e8f8;
+    margin: 14px 0;
+    overflow: hidden;
+  }
+  details.lesson[open] { box-shadow: 0 8px 24px rgba(43,45,66,.1); }
+  details.lesson summary {
+    list-style: none;
+    cursor: pointer;
+    padding: 13px 18px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: linear-gradient(90deg, #8b5cf6, #a78bfa);
+    color: #fff;
+    font-weight: 800;
+  }
+  details.lesson summary::-webkit-details-marker { display: none; }
+  .lnum {
+    background: rgba(255,255,255,.22);
+    border: 2px solid rgba(255,255,255,.55);
+    border-radius: 999px;
+    padding: 2px 11px;
+    font-size: 13px;
+    white-space: nowrap;
+  }
+  .lgoal { font-size: 13px; font-weight: 600; opacity: .95; }
+  .ltoggle { margin-left: auto; font-size: 18px; }
+  details.lesson[open] .ltoggle { transform: rotate(180deg); }
+  .lbody { padding: 16px 18px 18px; }
+  .lbody h4 { font-size: 15.5px; color: #6d28d9; margin: 14px 0 6px; }
+  .lbody h4:first-child { margin-top: 0; }
+  .lbody p, .lbody ul, .lbody ol { font-size: 14.5px; margin: 6px 0; }
+  .lbody ul, .lbody ol { padding-left: 22px; }
+  code {
+    font-family: "SF Mono", Consolas, monospace;
+    background: #eef1fa;
+    color: #6d28d9;
+    padding: 1px 7px;
+    border-radius: 7px;
+    font-size: 13.5px;
+  }
+  .codebox { position: relative; margin: 10px 0; }
+  .codebox pre {
+    background: #20232e;
+    color: #d6f5e3;
+    border-radius: 14px;
+    padding: 14px 16px;
+    overflow-x: auto;
+    font-size: 13.5px;
+    line-height: 1.65;
+    font-family: "SF Mono", Consolas, "Courier New", monospace;
+  }
+  .cpy {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    border: none;
+    background: rgba(255,255,255,.14);
+    color: #fff;
+    border-radius: 8px;
+    padding: 4px 10px;
+    font-size: 12px;
+    cursor: pointer;
+    font-family: inherit;
+  }
+  .pnav { display: flex; justify-content: space-between; gap: 10px; margin-top: 14px; }
+  .pnav a {
+    text-decoration: none;
+    background: #f7f9ff;
+    border: 2px solid #e2e8f8;
+    color: #6d28d9;
+    font-weight: 700;
+    font-size: 14px;
+    border-radius: 999px;
+    padding: 7px 16px;
+  }
+  .pnav a:hover { border-color: #8b5cf6; }
+  .chkbtn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #eafaf1;
+    border: 2px solid #3ecf8e;
+    color: #047857;
+    font-weight: 700;
+    font-size: 14px;
+    border-radius: 999px;
+    padding: 8px 16px;
+    margin-top: 12px;
+    cursor: pointer;
+  }
+  .chkbtn input { width: 16px; height: 16px; accent-color: #10b981; }
+  .lquiz { margin: 12px 0 6px; }
+  .lqi { background: #f7f9ff; border-radius: 14px; padding: 12px 14px; margin: 10px 0; }
+  .lqq { font-weight: 700; font-size: 14.5px; margin-bottom: 6px; }
+  .lqb {
+    display: block;
+    width: 100%;
+    text-align: left;
+    margin: 5px 0;
+    border: 2px solid #dce3f5;
+    background: #fff;
+    border-radius: 12px;
+    padding: 7px 12px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: inherit;
+  }
+  .lqb.right { background: #d1fae5 !important; border-color: #10b981 !important; color: #065f46 !important; }
+  .lqb.wrong { background: #ffe4e6 !important; border-color: #f43f5e !important; color: #881337 !important; }
+  .lqf { font-size: 13px; margin-top: 6px; font-weight: 600; }
+  .lqf.ok { color: #047857; }
+  .lqf.no { color: #be123c; }
+  .checks { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 8px; margin: 12px 0; }
+  .checks label {
+    background: #f7f9ff;
+    border: 2px solid #e2e8f8;
+    border-radius: 14px;
+    padding: 9px 12px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .checks input { width: 17px; height: 17px; accent-color: #8b5cf6; flex: none; }
+  .checks label.done { background: #eafaf1; border-color: #3ecf8e; }
+  footer { text-align: center; color: #6c6f93; font-size: 14px; padding: 18px 0 6px; }
+  footer a { color: #6d28d9; font-weight: 700; text-decoration: none; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <span class="mascot">📓</span>
+    <h1>GESP C++ 七级课程</h1>
+    <p class="slogan">图论与动态规划——算法高手的必修课！</p>
+  </header>
+
+  <nav class="chips" aria-label="快捷入口">
+    <a class="chip" href="index.html">🏠 学习中心</a>
+    <a class="chip" href="复习站.html">📒 复习站</a>
+    <a class="chip" href="GESP官方考纲.html">📋 考纲</a>
+    <a class="chip" href="GESP6课程.html">📕 六级</a>
+    <a class="chip" href="GESP8课程.html">📔 八级</a>
+  </nav>
+
+  <div class="panel">
+    <h2>📌 七级学什么？</h2>
+    <div class="callout info">考纲知识内容：数学库常用函数（三角/对数/指数）、复杂动态规划（二维动态规划、区间 DP、LIS、LCS、滚动数组）、图的定义及遍历、图论算法（DFS/BFS/泛洪 flood fill）、哈希表。</div>
+    <div class="callout key">🎯 知识目标：掌握图的定义与遍历相关算法，掌握图论基本概念及基础算法，能使用二维动态规划、动态规划最值优化的知识完成复杂的动态规划算法。题型：单选 15×2 + 判断 10×2 + 编程 2×25 ｜ 考试时间：180 分钟。</div>
+    <div class="goal">💡 学习建议：图 = "朋友圈"（人和人的关系）；DP = "记下小问题的答案"；哈希 = "直接按名字找抽屉"。先懂类比，再写代码。</div>
+
+    <h2>🗺️ 学习地图</h2>
+    <div class="stations" id="lvStations"></div>
+    <div class="bar"><i id="mapBar"></i></div>
+    <p class="goal" id="mapMsg" style="margin:6px 0 0">学完一课点一下"打卡"，地图就会点亮！</p>
+  </div>
+
+  <details class="lesson" id="lv7l1" open>
+    <summary><span class="lnum">第 1 课</span><span class="lgoal">数学库函数：三角、对数、指数</span><span class="ltoggle">▾</span></summary>
+    <div class="lbody">
+      <div class="goal">🎯 本节目标：1. 会用 sin/cos、log10/log2、exp；2. 知道它们都在 &lt;cmath&gt; 里。</div>
+      <h4>📖 讲解</h4>
+      <ul>
+        <li><b>三角函数</b>：<code>sin(x)</code>、<code>cos(x)</code>（注意：参数是<b>弧度</b>，不是角度）。</li>
+        <li><b>对数函数</b>：<code>log10(x)</code> = 以 10 为底，<code>log2(x)</code> = 以 2 为底。</li>
+        <li><b>指数函数</b>：<code>exp(x)</code> = e 的 x 次方（e ≈ 2.718）。</li>
+        <li>考试常考"会读函数名、知道它算什么"，写代码前先想清楚定义域（log 里不能是负数或 0）。</li>
+      </ul>
+      <div class="codebox"><pre>#include &lt;iostream&gt;
+#include &lt;cmath&gt;
+using namespace std;
+int main() {
+    cout &lt;&lt; sin(0) &lt;&lt; endl;        // 0
+    cout &lt;&lt; log10(1000) &lt;&lt; endl;   // 3
+    cout &lt;&lt; log2(8) &lt;&lt; endl;       // 3
+    cout &lt;&lt; exp(1) &lt;&lt; endl;        // e ≈ 2.71828
+    return 0;
+}</pre><button class="cpy" onclick="copyCode(this)">📋 复制</button></div>
+      <div class="lquiz" id="qz-l1"></div>
+      <div class="callout info">📌 本节小结：sin/cos 管角度、log10/log2 管对数、exp 管 e 的次方；都来自 &lt;cmath&gt;。</div>
+      <label class="chkbtn"><input type="checkbox" onchange="toggleLesson(0, this)"> 学完了，打卡！</label>
+      <div class="pnav"><a href="#lv7l2">下一课：复杂动态规划 →</a></div>
+    </div>
+  </details>
+
+  <details class="lesson" id="lv7l2">
+    <summary><span class="lnum">第 2 课</span><span class="lgoal">复杂动态规划：二维、区间、LIS、LCS</span><span class="ltoggle">▾</span></summary>
+    <div class="lbody">
+      <div class="goal">🎯 本节目标：1. 会用 dp[i][j] 二维表格；2. 认识 LIS、LCS；3. 知道滚动数组省空间。</div>
+      <h4>📖 讲解</h4>
+      <ul>
+        <li><b>二维 DP</b>：用 <code>dp[i][j]</code> 这张"表格"记答案，比如区间 DP 记 dp[i][j] = 区间 i~j 的答案。</li>
+        <li><b>LIS</b>：最长上升子序列——在序列里挑一个"越来越大的子序列"，越长越好。</li>
+        <li><b>LCS</b>：最长公共子序列——两个字符串共同的最长"子序列"（可以跳着选，顺序不变）。</li>
+        <li><b>滚动数组</b>：很多 DP 只用到上一行，用两行数组"滚着用"，把空间从 O(n²) 省到 O(n)。</li>
+      </ul>
+      <div class="codebox"><pre>#include &lt;iostream&gt;
+using namespace std;
+int a[1005], dp[1005];
+int main() {
+    int n; cin &gt;&gt; n;
+    for (int i = 1; i &lt;= n; i++) cin &gt;&gt; a[i];
+    int ans = 0;
+    for (int i = 1; i &lt;= n; i++) {        // LIS 最长上升子序列
+        dp[i] = 1;
+        for (int j = 1; j &lt; i; j++)
+            if (a[j] &lt; a[i]) dp[i] = max(dp[i], dp[j] + 1);
+        ans = max(ans, dp[i]);
+    }
+    cout &lt;&lt; ans &lt;&lt; endl;
+    return 0;
+}</pre><button class="cpy" onclick="copyCode(this)">📋 复制</button></div>
+      <div class="lquiz" id="qz-l2"></div>
+      <div class="callout info">📌 本节小结：dp[i][j] 是二维表格；LIS 找最长上升子序列、LCS 找最长公共子序列；滚动数组省空间。</div>
+      <label class="chkbtn"><input type="checkbox" onchange="toggleLesson(1, this)"> 学完了，打卡！</label>
+      <div class="pnav"><a href="#lv7l1">← 上一课</a><a href="#lv7l3">下一课：图的定义与遍历 →</a></div>
+    </div>
+  </details>
+
+  <details class="lesson" id="lv7l3">
+    <summary><span class="lnum">第 3 课</span><span class="lgoal">图的定义与遍历</span><span class="ltoggle">▾</span></summary>
+    <div class="lbody">
+      <div class="goal">🎯 本节目标：1. 知道图 = 顶点 + 边；2. 会分有向/无向；3. 会用 DFS/BFS 遍历图。</div>
+      <h4>📖 讲解</h4>
+      <ul>
+        <li>图就像"朋友圈"：<b>顶点</b>是人，<b>边</b>是朋友关系。</li>
+        <li><b>无向图</b>：边没有方向（你认识我，我也认识你）；<b>有向图</b>：边有方向（我关注了你）。</li>
+        <li>顶点的<b>度</b> = 连着它的边数；有向图里分<b>入度</b>（指向它的）和<b>出度</b>（它指出的）。</li>
+        <li>存图：<b>邻接矩阵</b> g[u][v]（简单直观）或<b>邻接表</b>（省空间）。遍历用 DFS/BFS。</li>
+      </ul>
+      <div class="codebox"><pre>#include &lt;iostream&gt;
+using namespace std;
+int g[105][105], n, m;   // 邻接矩阵
+bool vis[105];
+void dfs(int u) {        // 深度优先遍历
+    vis[u] = true;
+    cout &lt;&lt; u &lt;&lt; " ";
+    for (int v = 1; v &lt;= n; v++)
+        if (g[u][v] &amp;&amp; !vis[v]) dfs(v);
+}</pre><button class="cpy" onclick="copyCode(this)">📋 复制</button></div>
+      <div class="lquiz" id="qz-l3"></div>
+      <div class="callout info">📌 本节小结：图 = 顶点 + 边；无向图边没方向、有向图有方向；度 = 连着几条边；邻接矩阵/邻接表存图，DFS/BFS 遍历。</div>
+      <label class="chkbtn"><input type="checkbox" onchange="toggleLesson(2, this)"> 学完了，打卡！</label>
+      <div class="pnav"><a href="#lv7l2">← 上一课</a><a href="#lv7l4">下一课：图论算法 →</a></div>
+    </div>
+  </details>
+
+  <details class="lesson" id="lv7l4">
+    <summary><span class="lnum">第 4 课</span><span class="lgoal">图论算法：泛洪 flood fill</span><span class="ltoggle">▾</span></summary>
+    <div class="lbody">
+      <div class="goal">🎯 本节目标：1. 知道泛洪算法"从起点往四周蔓延"；2. 会用 DFS 数连通块。</div>
+      <h4>📖 讲解</h4>
+      <ul>
+        <li><b>泛洪算法（flood fill）</b>：从起点开始，向上下左右"蔓延"，把连成一片的格子全部标记。</li>
+        <li>典型应用：<b>数岛屿</b>（几块 # 连在一起算 1 个岛）、画图软件的"油漆桶填充"。</li>
+        <li>四连通是上下左右 4 个方向；八连通再加 4 个斜角。</li>
+      </ul>
+      <div class="codebox"><pre>#include &lt;iostream&gt;
+using namespace std;
+int n, m;
+char mp[105][105];
+bool vis[105][105];
+int dx[4] = {0, 0, 1, -1};
+int dy[4] = {1, -1, 0, 0};
+void flood(int x, int y) {
+    vis[x][y] = true;
+    for (int k = 0; k &lt; 4; k++) {
+        int nx = x + dx[k], ny = y + dy[k];
+        if (nx &gt;= 1 &amp;&amp; nx &lt;= n &amp;&amp; ny &gt;= 1 &amp;&amp; ny &lt;= m
+            &amp;&amp; !vis[nx][ny] &amp;&amp; mp[nx][ny] == '#')
+            flood(nx, ny);   // 蔓延到下一格
+    }
+}</pre><button class="cpy" onclick="copyCode(this)">📋 复制</button></div>
+      <div class="lquiz" id="qz-l4"></div>
+      <div class="callout info">📌 本节小结：flood fill = 从起点四周蔓延，把连通块全部标记；数岛屿、油漆桶都是它。</div>
+      <label class="chkbtn"><input type="checkbox" onchange="toggleLesson(3, this)"> 学完了，打卡！</label>
+      <div class="pnav"><a href="#lv7l3">← 上一课</a><a href="#lv7l5">下一课：哈希表 →</a></div>
+    </div>
+  </details>
+
+  <details class="lesson" id="lv7l5">
+    <summary><span class="lnum">第 5 课</span><span class="lgoal">哈希表：直接按名字找抽屉</span><span class="ltoggle">▾</span></summary>
+    <div class="lbody">
+      <div class="goal">🎯 本节目标：1. 知道哈希 = "算出位置直接拿"；2. 了解冲突和解决方法；3. 会用"桶"统计出现次数。</div>
+      <h4>📖 讲解</h4>
+      <ul>
+        <li><b>哈希表</b>：用哈希函数算出数据该放哪个"抽屉"，查找平均只要 O(1)，超快。</li>
+        <li><b>冲突</b>：两个不同的 key 算出同一个位置 → 用<b>链地址法</b>（一个位置挂一串）或<b>开放寻址</b>解决。</li>
+        <li>简单应用：用数组当"桶"，统计每个字母/数字出现几次。</li>
+      </ul>
+      <div class="codebox"><pre>#include &lt;iostream&gt;
+#include &lt;string&gt;
+using namespace std;
+int cnt[26];
+int main() {
+    string s;
+    cin &gt;&gt; s;
+    for (char c : s) cnt[c - 'a']++;   // 用"桶"计数
+    for (int i = 0; i &lt; 26; i++)
+        if (cnt[i]) cout &lt;&lt; char('a' + i) &lt;&lt; ":" &lt;&lt; cnt[i] &lt;&lt; endl;
+    return 0;
+}</pre><button class="cpy" onclick="copyCode(this)">📋 复制</button></div>
+      <div class="lquiz" id="qz-l5"></div>
+      <div class="callout info">📌 本节小结：哈希 = 算位置直接取（平均 O(1)）；冲突用链地址/开放寻址解决；桶计数是最简单用法。</div>
+      <label class="chkbtn"><input type="checkbox" onchange="toggleLesson(4, this)"> 学完了，打卡！</label>
+      <div class="pnav"><a href="#lv7l4">← 上一课</a><a href="GESP8课程.html">去八级课程 →</a></div>
+    </div>
+  </details>
+
+  <footer>
+    GESP C++ 七级课程 📓 ｜ 内容依据 CCF《C++&amp;Python 认证标准》七级<br>
+    <a href="index.html">🏠 学习中心</a> ｜ <a href="复习站.html">📒 复习站</a> ｜ <a href="家长中心.html">👨‍👩‍👧 家长中心</a> ｜ <a href="GESP官方考纲.html">📋 考纲</a>
+  </footer>
+</div>
+
+<script>
+const LQ = {
+  l1: [
+    { q: 'log2(8) 等于多少？', o: ['3', '2', '8', '4'], a: 0, e: '2 的 3 次方是 8，所以 log2(8)=3。' },
+    { q: 'exp(x) 表示什么？', o: ['e 的 x 次方', 'x 的平方', '10 的 x 次方', '绝对值'], a: 0, e: 'exp(x) = eˣ，e ≈ 2.718。' }
+  ],
+  l2: [
+    { q: '滚动数组的作用是？', o: ['节省空间', '让程序变快', '自动排序', '处理输入'], a: 0, e: '只用两行滚动覆盖，把空间从 O(n²) 省到 O(n)。' },
+    { q: 'LCS 指的是？', o: ['最长公共子序列', '最长上升子序列', '最小生成树', '最短路径'], a: 0, e: 'LCS = Longest Common Subsequence，两个序列共同的最长子序列。' }
+  ],
+  l3: [
+    { q: '无向图里，一个顶点的"度"是？', o: ['连着它的边的数量', '顶点总数', '边的总数', '深度'], a: 0, e: '度 = 和它相连的边数。' },
+    { q: '有向图和无向图的区别是？', o: ['有向图的边有方向', '有向图一定更大', '无向图一定更快', '没有区别'], a: 0, e: '有向图边带箭头，方向很重要。' }
+  ],
+  l4: [
+    { q: 'flood fill 常用来？', o: ['数连通块（比如岛屿）', '排序', '求素数', '反转字符串'], a: 0, e: '从起点蔓延，把连成片的格子全标出来。' },
+    { q: '四连通的 flood fill 往几个方向蔓延？', o: ['4 个（上下左右）', '2 个', '8 个', '1 个'], a: 0, e: '四连通 = 上下左右 4 个方向。' }
+  ],
+  l5: [
+    { q: '哈希表查找的平均时间复杂度是？', o: ['O(1)', 'O(n)', 'O(log n)', 'O(n²)'], a: 0, e: '算出位置直接拿，平均 O(1)。' },
+    { q: '两个不同的 key 算到同一个位置，叫？', o: ['冲突', '合并', '排序', '溢出'], a: 0, e: '冲突用链地址法或开放寻址解决。' }
+  ]
+};
+function recordWrong(item) {
+  try {
+    const list = JSON.parse(localStorage.getItem('gesp_wrong') || '[]');
+    list.push(Object.assign({ time: Date.now() }, item));
+    localStorage.setItem('gesp_wrong', JSON.stringify(list));
+  } catch (e) {}
+}
+function buildLessonQuizzes() {
+  for (const k in LQ) {
+    const box = document.getElementById('qz-' + k);
+    if (!box) continue;
+    box.innerHTML = '<div class="goal">📝 考一考：点一点，立刻知道对错！答错的题会进复习站。</div>';
+    LQ[k].forEach((q, idx) => {
+      const w = document.createElement('div');
+      w.className = 'lqi';
+      w.innerHTML = '<div class="lqq">' + (idx + 1) + '. ' + q.q + '</div>';
+      q.o.forEach((t, j) => {
+        const b = document.createElement('button');
+        b.className = 'lqb';
+        b.textContent = 'ABCD'[j] + '. ' + t;
+        b.onclick = () => {
+          if (w.dataset.done) return;
+          w.dataset.done = '1';
+          b.classList.add(j === q.a ? 'right' : 'wrong');
+          if (j !== q.a) recordWrong({ lv: '七级', lesson: '第 ' + Number(k.slice(1)) + ' 课', q: q.q, o: q.o, a: q.a, chosen: j });
+          [...w.querySelectorAll('.lqb')].forEach((x) => { x.disabled = true; });
+          const f = document.createElement('div');
+          f.className = 'lqf ' + (j === q.a ? 'ok' : 'no');
+          f.textContent = (j === q.a ? '✅ 答对啦！' : '❌ 已记入复习站～') + q.e;
+          w.appendChild(f);
+        };
+        w.appendChild(b);
+      });
+      box.appendChild(w);
+    });
+  }
+}
+function copyCode(btn) {
+  const t = btn.closest('.codebox').querySelector('pre').textContent;
+  const done = () => { btn.textContent = '✅ 已复制'; setTimeout(() => { btn.textContent = '📋 复制'; }, 1200); };
+  if (navigator.clipboard) navigator.clipboard.writeText(t).then(done);
+  else { btn.textContent = '😅 请手动复制'; }
+}
+const LESSON_NAMES = ['数学库函数', '复杂动态规划', '图的定义遍历', '图论算法', '哈希表'];
+function loadProg() {
+  try {
+    const v = JSON.parse(localStorage.getItem('gesp_lv7_prog'));
+    if (Array.isArray(v) && v.length === LESSON_NAMES.length) return v.map(Boolean);
+  } catch (e) {}
+  return new Array(LESSON_NAMES.length).fill(false);
+}
+let prog = loadProg();
+function saveProg() { try { localStorage.setItem('gesp_lv7_prog', JSON.stringify(prog)); } catch (e) {} }
+function toggleLesson(i, el) {
+  prog[i] = el.checked;
+  saveProg();
+  renderStations();
+}
+function renderStations() {
+  const box = document.getElementById('lvStations');
+  box.innerHTML = '';
+  const first = prog.indexOf(false);
+  LESSON_NAMES.forEach((n, i) => {
+    const a = document.createElement('a');
+    a.className = 'station' + (prog[i] ? ' done' : '') + (i === first ? ' cur' : '');
+    a.href = '#lv7l' + (i + 1);
+    a.innerHTML = '<b>' + (i + 1) + '</b><span>' + n + '</span><i>' + (prog[i] ? '✅' : (i === first ? '▶️' : '🔒')) + '</i>';
+    box.appendChild(a);
+  });
+  const n = prog.filter(Boolean).length;
+  document.getElementById('mapBar').style.width = (n / LESSON_NAMES.length * 100) + '%';
+  document.getElementById('mapMsg').textContent = '进度 ' + n + ' / ' + LESSON_NAMES.length + ' 课' + (n === LESSON_NAMES.length ? ' 🎓 七级完成！去解锁八级吧！' : '');
+}
+function checkCurrent() {
+  const q = document.querySelector('details.lesson[open]');
+  if (q) q.querySelector('summary').scrollIntoView({ block: 'start' });
+}
+buildLessonQuizzes();
+renderStations();
+</script>
+</body>
+</html>

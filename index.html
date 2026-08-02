@@ -3,230 +3,186 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="GESP C++ 备考学习网站：一级、二级互动学习乐园，附在线 C++ 编译器和历年真题。">
-<title>GESP C++ 备考学习网站</title>
+<meta name="description" content="GESP C++ 备考学习中心：1-8 级课程地图、学习进度、错题复习与家长看板。">
+<title>GESP C++ 学习中心 🏠</title>
 <link rel="stylesheet" href="gesp-style.css">
 </head>
 <body class="bg-slate-50 text-slate-800 antialiased">
 <div class="max-w-5xl mx-auto px-4 sm:px-6 pb-16">
 
   <!-- 顶部导航 -->
-  <header class="flex items-center justify-between py-5">
+  <header class="flex items-center justify-between py-5 flex-wrap gap-2">
     <a href="index.html" class="flex items-center gap-2 font-bold text-lg text-indigo-600">
       <span class="w-9 h-9 rounded-xl bg-indigo-600 text-white grid place-items-center text-xl">C</span>
-      GESP 备考站
+      GESP 学习中心
     </a>
-    <nav class="hidden sm:flex gap-1 text-sm font-medium text-slate-600">
-      <a class="px-3 py-2 rounded-lg hover:bg-indigo-50 hover:text-indigo-600 transition" href="#levels">学习乐园</a>
-      <a class="px-3 py-2 rounded-lg hover:bg-indigo-50 hover:text-indigo-600 transition" href="#path">学习路线</a>
-      <a class="px-3 py-2 rounded-lg hover:bg-indigo-50 hover:text-indigo-600 transition" href="#progress">进度打卡</a>
-      <a class="px-3 py-2 rounded-lg hover:bg-indigo-50 hover:text-indigo-600 transition" href="基础常识乐园.html">基础常识</a>
-      <a class="px-3 py-2 rounded-lg hover:bg-indigo-50 hover:text-indigo-600 transition" href="GESP官方考纲.html">官方考纲</a>
-      <a class="px-3 py-2 rounded-lg hover:bg-indigo-50 hover:text-indigo-600 transition" href="GESP二级知识点精讲.html">知识笔记</a>
+    <nav class="flex gap-1 text-sm font-medium text-slate-600 flex-wrap">
+      <a class="px-3 py-2 rounded-lg hover:bg-indigo-50 hover:text-indigo-600 transition" href="复习站.html">📒 复习站</a>
+      <a class="px-3 py-2 rounded-lg hover:bg-indigo-50 hover:text-indigo-600 transition" href="家长中心.html">👨‍👩‍👧 家长中心</a>
+      <a class="px-3 py-2 rounded-lg hover:bg-indigo-50 hover:text-indigo-600 transition" href="GESP官方考纲.html">📋 官方考纲</a>
+      <a class="px-3 py-2 rounded-lg hover:bg-indigo-50 hover:text-indigo-600 transition" href="GESP二级知识点精讲.html">📖 知识笔记</a>
     </nav>
   </header>
 
   <!-- Hero -->
-  <section class="mt-4 rounded-3xl bg-gradient-to-br from-indigo-600 via-violet-600 to-fuchsia-600 text-white px-6 sm:px-12 py-12 sm:py-16 relative overflow-hidden shadow-xl">
+  <section class="mt-2 rounded-3xl bg-gradient-to-br from-indigo-600 via-violet-600 to-fuchsia-600 text-white px-6 sm:px-10 py-10 sm:py-12 relative overflow-hidden shadow-xl">
     <div class="absolute -top-10 -right-10 w-48 h-48 bg-white/10 rounded-full"></div>
     <div class="absolute -bottom-16 -left-8 w-56 h-56 bg-white/10 rounded-full"></div>
     <div class="relative">
-      <p class="text-indigo-200 text-sm font-semibold tracking-widest uppercase">GESP C++ 认证备考</p>
-      <h1 class="mt-3 text-3xl sm:text-5xl font-extrabold leading-tight">一级打地基，二级盖大楼</h1>
-      <p class="mt-4 max-w-2xl text-indigo-100 text-base sm:text-lg">专为小朋友准备的互动学习网站：知识点边玩边学，打开网页就能在线编译运行 C++ 代码，还有 GESP 历年真题可以练习。</p>
-      <div class="mt-8 flex flex-wrap gap-3">
-        <a href="GESP1学习乐园.html" class="bg-white text-indigo-700 font-bold px-6 py-3 rounded-xl shadow hover:-translate-y-0.5 transition">🎒 进入一级乐园</a>
-        <a href="GESP2学习乐园.html" class="border border-white/60 text-white font-bold px-6 py-3 rounded-xl hover:bg-white/10 transition">🚀 进入二级乐园</a>
+      <p class="text-indigo-200 text-sm font-semibold tracking-widest uppercase">GESP C++ 1-8 级 · 闯关学习</p>
+      <h1 class="mt-2 text-3xl sm:text-4xl font-extrabold" id="helloMsg">嗨，小勇士！</h1>
+      <p class="mt-2 max-w-2xl text-indigo-100 text-base">从"0 和 1"到"算法高手"，8 个级别一条路：学一课、打卡一课，错题自动进复习站。</p>
+      <div class="mt-5 bg-white/15 border border-white/25 rounded-2xl p-4 sm:p-5">
+        <div class="flex items-center justify-between text-sm font-bold mb-2">
+          <span>🚀 总闯关进度</span><span id="totalPct">0%</span>
+        </div>
+        <div class="h-3.5 rounded-full bg-white/25 overflow-hidden">
+          <div id="totalBar" class="h-full w-0 rounded-full bg-gradient-to-r from-amber-300 to-yellow-400 transition-all duration-700"></div>
+        </div>
+        <p class="mt-2 text-indigo-100 text-sm" id="totalMsg">共 62 课</p>
       </div>
     </div>
   </section>
 
-  <!-- 数据一览 -->
-  <section class="mt-8 grid grid-cols-2 md:grid-cols-4 gap-3">
-    <div class="bg-white rounded-2xl border border-slate-200 p-4 text-center">
-      <div class="text-2xl font-extrabold text-indigo-600">10</div>
-      <div class="text-sm text-slate-500">一级知识点</div>
-    </div>
-    <div class="bg-white rounded-2xl border border-slate-200 p-4 text-center">
-      <div class="text-2xl font-extrabold text-violet-600">11</div>
-      <div class="text-sm text-slate-500">二级知识点</div>
-    </div>
-    <div class="bg-white rounded-2xl border border-slate-200 p-4 text-center">
-      <div class="text-2xl font-extrabold text-emerald-600">9</div>
-      <div class="text-sm text-slate-500">历年真题示例</div>
-    </div>
-    <div class="bg-white rounded-2xl border border-slate-200 p-4 text-center">
-      <div class="text-2xl font-extrabold text-amber-600">∞</div>
-      <div class="text-sm text-slate-500">在线编译（免费）</div>
-    </div>
-  </section>
-
-  <!-- 两个乐园 -->
-  <section id="levels" class="mt-14 scroll-mt-6">
-    <h2 class="text-2xl sm:text-3xl font-extrabold">选择你的乐园</h2>
-    <p class="mt-2 text-slate-500">建议按顺序：先逛基础常识，再学一级、二级，基础打得牢，考试不怕考。</p>
-    <div class="mt-6 bg-gradient-to-r from-sky-500 to-cyan-500 text-white rounded-3xl p-6 sm:p-8 shadow-md flex flex-wrap items-center justify-between gap-4">
-      <div>
-        <h3 class="text-xl font-extrabold">🧠 第 0 站：基础常识乐园</h3>
-        <p class="mt-1 text-sm text-sky-100">什么是字节？为什么电脑只用 0 和 1？点开关拼字节、玩进制转换、看存储单位——先来这里打个卡！</p>
-      </div>
-      <a href="基础常识乐园.html" class="bg-white text-sky-600 font-bold px-5 py-2.5 rounded-xl hover:-translate-y-0.5 transition">进入基础常识 →</a>
-    </div>
-    <div class="mt-6 grid md:grid-cols-2 gap-6">
-      <div class="bg-white rounded-3xl border border-slate-200 p-6 sm:p-8 shadow-sm hover:shadow-md transition">
-        <div class="flex items-center gap-3">
-          <span class="text-4xl">🎒</span>
-          <div>
-            <h3 class="text-xl font-extrabold">一级乐园</h3>
-            <span class="inline-block mt-1 text-xs font-bold text-teal-700 bg-teal-50 border border-teal-200 rounded-full px-3 py-0.5">新手村 · 打地基</span>
-          </div>
-        </div>
-        <ul class="mt-5 space-y-2 text-sm text-slate-600">
-          <li class="flex gap-2"><span class="text-teal-500 font-bold">✓</span>认识电脑、IDE 与程序框架</li>
-          <li class="flex gap-2"><span class="text-teal-500 font-bold">✓</span>变量、数据类型、输入输出</li>
-          <li class="flex gap-2"><span class="text-teal-500 font-bold">✓</span>算术 / 关系 / 逻辑运算</li>
-          <li class="flex gap-2"><span class="text-teal-500 font-bold">✓</span>顺序、分支、循环 + 捉虫游戏</li>
-        </ul>
-        <div class="mt-6">
-          <div class="flex justify-between text-xs font-semibold text-slate-500 mb-1"><span>学习进度</span><span id="pct1">0%</span></div>
-          <div class="h-2.5 rounded-full bg-slate-100 overflow-hidden"><div id="bar1" class="h-full w-0 rounded-full bg-gradient-to-r from-teal-400 to-emerald-500 transition-all duration-500"></div></div>
-        </div>
-        <a href="GESP1学习乐园.html" class="mt-6 block text-center bg-teal-500 hover:bg-teal-600 text-white font-bold py-3 rounded-xl transition">开始一级冒险 →</a>
-      </div>
-
-      <div class="bg-white rounded-3xl border border-slate-200 p-6 sm:p-8 shadow-sm hover:shadow-md transition">
-        <div class="flex items-center gap-3">
-          <span class="text-4xl">🚀</span>
-          <div>
-            <h3 class="text-xl font-extrabold">二级乐园</h3>
-            <span class="inline-block mt-1 text-xs font-bold text-violet-700 bg-violet-50 border border-violet-200 rounded-full px-3 py-0.5">进阶 · 盖大楼</span>
-          </div>
-        </div>
-        <ul class="mt-5 space-y-2 text-sm text-slate-600">
-          <li class="flex gap-2"><span class="text-violet-500 font-bold">✓</span>存储、网络、计算机语言、流程图</li>
-          <li class="flex gap-2"><span class="text-violet-500 font-bold">✓</span>ASCII 编码、类型转换</li>
-          <li class="flex gap-2"><span class="text-violet-500 font-bold">✓</span>分支穿透、循环动画、数学函数</li>
-          <li class="flex gap-2"><span class="text-violet-500 font-bold">✓</span>9 道 GESP 历年真题实战</li>
-        </ul>
-        <div class="mt-6">
-          <div class="flex justify-between text-xs font-semibold text-slate-500 mb-1"><span>学习进度</span><span id="pct2">0%</span></div>
-          <div class="h-2.5 rounded-full bg-slate-100 overflow-hidden"><div id="bar2" class="h-full w-0 rounded-full bg-gradient-to-r from-violet-400 to-fuchsia-500 transition-all duration-500"></div></div>
-        </div>
-        <a href="GESP2学习乐园.html" class="mt-6 block text-center bg-violet-600 hover:bg-violet-700 text-white font-bold py-3 rounded-xl transition">开始二级冒险 →</a>
-      </div>
-    </div>
-    <div class="mt-6 bg-gradient-to-r from-rose-500 to-orange-500 text-white rounded-3xl p-6 sm:p-8 shadow-md flex flex-wrap items-center justify-between gap-4">
-      <div>
-        <h3 class="text-xl font-extrabold">📋 官方考纲（1-8 级）</h3>
-        <p class="mt-1 text-sm text-rose-100">CCF 官方认证标准完整整理：每个级别考什么、怎么考（题型和时长）、知识目标一目了然。备考前先看看目标！</p>
-      </div>
-      <a href="GESP官方考纲.html" class="bg-white text-rose-600 font-bold px-5 py-2.5 rounded-xl hover:-translate-y-0.5 transition">查看官方考纲 →</a>
-    </div>
+  <!-- 今天学什么 -->
+  <section class="mt-8 bg-white rounded-3xl border border-slate-200 p-6 sm:p-8 shadow-sm">
+    <h2 class="text-xl sm:text-2xl font-extrabold">🎯 今天学什么</h2>
+    <p class="mt-1 text-sm text-slate-500">跟着系统推荐的路线走，一次只学一课，不迷路。</p>
+    <div id="nextCard" class="mt-5"></div>
   </section>
 
   <!-- 学习路线 -->
-  <section id="path" class="mt-14 scroll-mt-6">
-    <h2 class="text-2xl sm:text-3xl font-extrabold">三步学习路线</h2>
-    <p class="mt-2 text-slate-500">不用着急，一步一步来，就像搭积木。</p>
-    <div class="mt-6 grid md:grid-cols-2 lg:grid-cols-4 gap-5">
-      <div class="bg-white rounded-2xl border border-slate-200 p-6">
-        <div class="w-10 h-10 rounded-xl bg-sky-100 text-sky-600 grid place-items-center font-extrabold">0</div>
-        <h3 class="mt-4 font-bold">基础常识乐园打卡</h3>
-        <p class="mt-2 text-sm text-slate-500">先搞懂字节、二进制和存储单位，知道电脑"为什么只用 0 和 1"。</p>
-      </div>
-      <div class="bg-white rounded-2xl border border-slate-200 p-6">
-        <div class="w-10 h-10 rounded-xl bg-teal-100 text-teal-600 grid place-items-center font-extrabold">1</div>
-        <h3 class="mt-4 font-bold">一级乐园打地基</h3>
-        <p class="mt-2 text-sm text-slate-500">先认识电脑和 C++ 基础：变量、输入输出、三大结构。每个知识点都可以点、可以玩。</p>
-      </div>
-      <div class="bg-white rounded-2xl border border-slate-200 p-6">
-        <div class="w-10 h-10 rounded-xl bg-violet-100 text-violet-600 grid place-items-center font-extrabold">2</div>
-        <h3 class="mt-4 font-bold">二级乐园盖大楼</h3>
-        <p class="mt-2 text-sm text-slate-500">学存储、网络、类型转换、循环和数学函数，再用 9 道 GESP 真题检验自己。</p>
-      </div>
-      <div class="bg-white rounded-2xl border border-slate-200 p-6">
-        <div class="w-10 h-10 rounded-xl bg-amber-100 text-amber-600 grid place-items-center font-extrabold">3</div>
-        <h3 class="mt-4 font-bold">考前复习与闯关</h3>
-        <p class="mt-2 text-sm text-slate-500">翻翻《二级知识点精讲》笔记，再回两个乐园做「大闯关」，答对 7 题以上就有奖牌。</p>
-      </div>
-    </div>
+  <section class="mt-10">
+    <h2 class="text-2xl font-extrabold">🗺️ 学习路线（1-8 级）</h2>
+    <p class="mt-1 text-sm text-slate-500">学完一级再进下一级；每级内部按顺序学，全部打卡即可解锁下一级。</p>
+    <div class="mt-5 space-y-3" id="levelList"></div>
   </section>
 
-  <!-- 进度打卡 -->
-  <section id="progress" class="mt-14 scroll-mt-6">
-    <div class="bg-white rounded-3xl border border-slate-200 p-6 sm:p-8 shadow-sm">
-      <div class="flex flex-wrap items-center justify-between gap-3">
-        <div>
-          <h2 class="text-2xl font-extrabold">进度打卡</h2>
-          <p class="mt-1 text-sm text-slate-500">学完一个级别，就点一下按钮打个卡（保存在当前浏览器里）。</p>
-        </div>
-        <button onclick="resetProgress()" class="text-sm font-semibold text-slate-400 hover:text-slate-600 border border-slate-200 hover:border-slate-400 rounded-lg px-4 py-2 transition">重置</button>
-      </div>
-      <div class="mt-6 space-y-5">
-        <div>
-          <div class="flex items-center justify-between text-sm font-bold"><span>🎒 一级乐园</span><span id="pct1b">未通关</span></div>
-          <div class="mt-2 h-3 rounded-full bg-slate-100 overflow-hidden"><div id="bar1b" class="h-full w-0 rounded-full bg-teal-500 transition-all duration-500"></div></div>
-          <button id="btn1" onclick="toggle1()" class="mt-3 text-sm font-bold text-teal-600 border border-teal-300 rounded-lg px-4 py-2 hover:bg-teal-50 transition">标记为已通关</button>
-        </div>
-        <div>
-          <div class="flex items-center justify-between text-sm font-bold"><span>🚀 二级乐园</span><span id="pct2b">未通关</span></div>
-          <div class="mt-2 h-3 rounded-full bg-slate-100 overflow-hidden"><div id="bar2b" class="h-full w-0 rounded-full bg-violet-500 transition-all duration-500"></div></div>
-          <button id="btn2" onclick="toggle2()" class="mt-3 text-sm font-bold text-violet-600 border border-violet-300 rounded-lg px-4 py-2 hover:bg-violet-50 transition">标记为已通关</button>
-        </div>
-      </div>
-      <p id="homeMsg" class="mt-6 text-sm font-semibold text-slate-500">💪 加油！每天前进一小步，考试前进一大步。</p>
-    </div>
+  <!-- 成就墙 -->
+  <section class="mt-10 bg-white rounded-3xl border border-slate-200 p-6 sm:p-8 shadow-sm">
+    <h2 class="text-xl sm:text-2xl font-extrabold">🏅 成就墙</h2>
+    <p class="mt-1 text-sm text-slate-500">每毕业一个级别点亮一枚徽章！</p>
+    <div class="mt-5 grid grid-cols-3 sm:grid-cols-5 gap-3 text-center" id="badgeWall"></div>
   </section>
 
-  <footer class="mt-14 pt-6 border-t border-slate-200 text-sm text-slate-400 flex flex-wrap items-center justify-between gap-2">
-    <span>GESP C++ 备考学习网站</span>
+  <!-- 工具书 -->
+  <section class="mt-10 grid sm:grid-cols-3 gap-4">
+    <a href="GESP官方考纲.html" class="bg-white rounded-3xl border border-slate-200 p-6 shadow-sm hover:shadow-md transition">
+      <div class="text-3xl">📋</div>
+      <h3 class="mt-2 font-extrabold">官方考纲</h3>
+      <p class="mt-1 text-sm text-slate-500">1-8 级考点总览，备考前先看清要求。</p>
+    </a>
+    <a href="GESP二级知识点精讲.html" class="bg-white rounded-3xl border border-slate-200 p-6 shadow-sm hover:shadow-md transition">
+      <div class="text-3xl">📖</div>
+      <h3 class="mt-2 font-extrabold">知识笔记</h3>
+      <p class="mt-1 text-sm text-slate-500">客观题速记卡 + 编程套路总结。</p>
+    </a>
+    <a href="GESP2学习乐园.html#editor" class="bg-white rounded-3xl border border-slate-200 p-6 shadow-sm hover:shadow-md transition">
+      <div class="text-3xl">🛠️</div>
+      <h3 class="mt-2 font-extrabold">编程练习场</h3>
+      <p class="mt-1 text-sm text-slate-500">在线编译 C++，真题随便跑（需联网）。</p>
+    </a>
+  </section>
+
+  <footer class="mt-12 pt-6 border-t border-slate-200 text-sm text-slate-400 flex flex-wrap items-center justify-between gap-2">
+    <span>GESP C++ 学习中心</span>
     <span class="flex gap-4">
-      <a class="hover:text-indigo-600 transition" href="基础常识乐园.html">基础常识</a>
+      <a class="hover:text-indigo-600 transition" href="复习站.html">复习站</a>
+      <a class="hover:text-indigo-600 transition" href="家长中心.html">家长中心</a>
       <a class="hover:text-indigo-600 transition" href="GESP官方考纲.html">官方考纲</a>
-      <a class="hover:text-indigo-600 transition" href="GESP1学习乐园.html">一级乐园</a>
-      <a class="hover:text-indigo-600 transition" href="GESP2学习乐园.html">二级乐园</a>
-      <a class="hover:text-indigo-600 transition" href="GESP二级知识点精讲.html">知识笔记</a>
     </span>
   </footer>
 </div>
 
 <script>
-function loadOk(key) {
-  try { return localStorage.getItem(key) === '1'; } catch (e) { return false; }
+const MODULES = [
+  { name: '基础常识', emoji: '🧠', key: 'gesp_lv0_prog', total: 3, page: '基础常识乐园.html', anchors: ['#s1', '#s2', '#s5'], color: 'from-sky-500 to-cyan-500' },
+  { name: '一级', emoji: '🎒', key: 'gesp_lv1_prog', total: 9, page: 'GESP1学习乐园.html', anchors: ['#s1', '#s2', '#s3', '#s4', '#s5', '#s6', '#s7', '#s7b', '#s8'], color: 'from-teal-500 to-emerald-500' },
+  { name: '二级', emoji: '🚀', key: 'gesp_lv2_prog', total: 9, page: 'GESP2学习乐园.html', anchors: ['#s1', '#s2', '#s3', '#s4', '#s5', '#s6', '#s7', '#s8', '#s9'], color: 'from-violet-600 to-fuchsia-500' },
+  { name: '三级', emoji: '📘', key: 'gesp_lv3_prog', total: 6, page: 'GESP3课程.html', anchors: ['#lv3l1', '#lv3l2', '#lv3l3', '#lv3l4', '#lv3l5', '#lv3l6'], color: 'from-sky-600 to-cyan-500' },
+  { name: '四级', emoji: '📗', key: 'gesp_lv4_prog', total: 8, page: 'GESP4课程.html', anchors: ['#lv4l1', '#lv4l2', '#lv4l3', '#lv4l4', '#lv4l5', '#lv4l6', '#lv4l7', '#lv4l8'], color: 'from-amber-500 to-yellow-500' },
+  { name: '五级', emoji: '📙', key: 'gesp_lv5_prog', total: 8, page: 'GESP5课程.html', anchors: ['#lv5l1', '#lv5l2', '#lv5l3', '#lv5l4', '#lv5l5', '#lv5l6', '#lv5l7', '#lv5l8'], color: 'from-rose-500 to-pink-500' },
+  { name: '六级', emoji: '📕', key: 'gesp_lv6_prog', total: 6, page: 'GESP6课程.html', anchors: ['#lv6l1', '#lv6l2', '#lv6l3', '#lv6l4', '#lv6l5', '#lv6l6'], color: 'from-emerald-600 to-teal-500' },
+  { name: '七级', emoji: '📓', key: 'gesp_lv7_prog', total: 5, page: 'GESP7课程.html', anchors: ['#lv7l1', '#lv7l2', '#lv7l3', '#lv7l4', '#lv7l5'], color: 'from-violet-500 to-purple-500' },
+  { name: '八级', emoji: '📔', key: 'gesp_lv8_prog', total: 8, page: 'GESP8课程.html', anchors: ['#lv8l1', '#lv8l2', '#lv8l3', '#lv8l4', '#lv8l5', '#lv8l6', '#lv8l7', '#lv8l8'], color: 'from-indigo-500 to-blue-500' }
+];
+const HOUR = 3600000;
+const DAY = 86400000;
+function getArr(key, n) {
+  try {
+    const v = JSON.parse(localStorage.getItem(key));
+    if (Array.isArray(v) && v.length === n) return v.map(Boolean);
+  } catch (e) {}
+  return new Array(n).fill(false);
 }
-function saveOk(key, v) {
-  try { localStorage.setItem(key, v ? '1' : '0'); } catch (e) {}
+function state() {
+  return MODULES.map(m => {
+    let arr = getArr(m.key, m.total);
+    try {
+      if (m.key === 'gesp_lv1_prog' && localStorage.getItem('gesp_home_l1_ok') === '1') arr = arr.map(() => true);
+      if (m.key === 'gesp_lv2_prog' && localStorage.getItem('gesp_home_l2_ok') === '1') arr = arr.map(() => true);
+    } catch (e) {}
+    return { m, arr, done: arr.filter(Boolean).length };
+  });
 }
-let ok1 = loadOk('gesp_home_l1_ok');
-let ok2 = loadOk('gesp_home_l2_ok');
+function firstIncomplete() {
+  const st = state();
+  for (let i = 0; i < st.length; i++) {
+    const j = st[i].arr.indexOf(false);
+    if (j >= 0) return { m: st[i].m, lesson: j + 1, total: st[i].m.total };
+  }
+  return null;
+}
+function hourWord() {
+  const h = new Date().getHours();
+  if (h < 6) return '夜深了，注意休息';
+  if (h < 12) return '早上好！';
+  if (h < 18) return '下午好！';
+  return '晚上好！';
+}
+function render() {
+  const st = state();
+  const totalAll = st.reduce((s, x) => s + x.m.total, 0);
+  const totalDone = st.reduce((s, x) => s + x.done, 0);
+  document.getElementById('helloMsg').textContent = hourWord() + ' 嗨，小勇士！';
+  document.getElementById('totalPct').textContent = Math.round(totalDone / totalAll * 100) + '%';
+  document.getElementById('totalBar').style.width = (totalDone / totalAll * 100) + '%';
+  document.getElementById('totalMsg').textContent = '已完成 ' + totalDone + ' / ' + totalAll + ' 课' + (totalDone === totalAll ? ' 🎉 全部通关！' : '');
 
-function paint() {
-  const w1 = ok1 ? 100 : 0, w2 = ok2 ? 100 : 0;
-  document.getElementById('bar1').style.width = w1 + '%';
-  document.getElementById('bar2').style.width = w2 + '%';
-  document.getElementById('bar1b').style.width = w1 + '%';
-  document.getElementById('bar2b').style.width = w2 + '%';
-  document.getElementById('pct1').textContent = w1 + '%';
-  document.getElementById('pct2').textContent = w2 + '%';
-  document.getElementById('pct1b').textContent = ok1 ? '已通关 🎓' : '未通关';
-  document.getElementById('pct2b').textContent = ok2 ? '已通关 🎓' : '未通关';
-  document.getElementById('btn1').textContent = ok1 ? '取消标记' : '标记为已通关';
-  document.getElementById('btn2').textContent = ok2 ? '取消标记' : '标记为已通关';
-  const msg = document.getElementById('homeMsg');
-  if (ok1 && ok2) msg.textContent = '🎉 两个乐园都通关啦！你就是 C++ 小高手，考前记得复习真题哦！';
-  else if (ok2 && !ok1) msg.textContent = '👀 二级都通关啦？别忘了先打一级的地基哦～';
-  else if (ok1) msg.textContent = '🏆 一级通关！准备好去二级乐园挑战了吗？';
-  else msg.textContent = '💪 加油！每天前进一小步，考试前进一大步。';
+  const next = firstIncomplete();
+  const nc = document.getElementById('nextCard');
+  if (!next) {
+    nc.innerHTML = '<div class="bg-emerald-50 border-2 border-emerald-300 rounded-2xl p-6 text-center"><div class="text-4xl">🎉</div><p class="mt-2 font-bold text-emerald-800">8 级课程全部完成！你已经是 C++ 小高手了！</p><p class="mt-1 text-sm text-emerald-700">去 <a class="underline font-bold" href="复习站.html">复习站</a> 巩固错题，或看看 <a class="underline font-bold" href="GESP官方考纲.html">官方考纲</a> 查漏补缺。</p></div>';
+  } else {
+    nc.innerHTML = '<div class="flex flex-wrap items-center justify-between gap-4 bg-gradient-to-r ' + next.m.color + ' text-white rounded-2xl p-6"><div><div class="text-sm opacity-90">' + next.m.emoji + ' ' + next.m.name + ' 级 · 第 ' + next.lesson + ' / ' + next.total + ' 课</div><div class="text-xl sm:text-2xl font-extrabold mt-1">继续你的闯关之旅</div></div><a href="' + next.m.page + next.m.anchors[next.lesson - 1] + '" class="bg-white text-slate-800 font-bold px-6 py-3 rounded-xl shadow hover:-translate-y-0.5 transition">开始学习 →</a></div>';
+  }
+
+  const ll = document.getElementById('levelList');
+  ll.innerHTML = '';
+  st.forEach(({ m, arr, done }, i) => {
+    const doneAll = done === m.total;
+    const locked = i > 0 && st[i - 1].done < st[i - 1].m.total;
+    const row = document.createElement('div');
+    row.className = 'bg-white rounded-2xl border border-slate-200 p-4 sm:p-5 shadow-sm flex flex-wrap items-center gap-4';
+    row.innerHTML = '<div class="w-11 h-11 rounded-xl bg-gradient-to-br ' + m.color + ' text-white grid place-items-center text-xl">' + m.emoji + '</div>'
+      + '<div class="min-w-[120px] flex-1"><div class="font-extrabold">' + m.name + '级</div><div class="text-xs text-slate-400">共 ' + m.total + ' 课</div>'
+      + '<div class="mt-1.5 h-2.5 rounded-full bg-slate-100 overflow-hidden max-w-md"><div class="h-full rounded-full bg-gradient-to-r ' + m.color + '" style="width:' + (done / m.total * 100) + '%"></div></div></div>'
+      + '<div class="text-sm font-bold text-slate-500">' + done + '/' + m.total + '</div>'
+      + (doneAll ? '<span class="text-sm font-bold text-emerald-600 bg-emerald-50 border border-emerald-200 rounded-full px-3 py-1">✅ 已毕业</span>'
+        : '<a href="' + m.page + (done > 0 ? m.anchors[arr.indexOf(false)] : '') + '" class="text-sm font-bold text-white bg-gradient-to-r ' + m.color + ' rounded-full px-5 py-2 hover:opacity-90 transition">' + (done > 0 ? '继续' : '开始') + '</a>');
+    ll.appendChild(row);
+  });
+
+  const bw = document.getElementById('badgeWall');
+  bw.innerHTML = '';
+  st.forEach(({ m, done }) => {
+    const d = document.createElement('div');
+    d.className = 'bg-slate-50 border border-slate-200 rounded-2xl py-3 px-2';
+    d.innerHTML = '<div class="text-3xl">' + (done === m.total ? '🥇' : '🔒') + '</div><div class="mt-1 text-sm font-bold ' + (done === m.total ? 'text-amber-600' : 'text-slate-400') + '">' + m.name + '</div>';
+    bw.appendChild(d);
+  });
 }
-function toggle1() { ok1 = !ok1; saveOk('gesp_home_l1_ok', ok1); paint(); }
-function toggle2() { ok2 = !ok2; saveOk('gesp_home_l2_ok', ok2); paint(); }
-function resetProgress() {
-  ok1 = false; ok2 = false;
-  saveOk('gesp_home_l1_ok', false);
-  saveOk('gesp_home_l2_ok', false);
-  paint();
-}
-paint();
+render();
 </script>
 </body>
 </html>

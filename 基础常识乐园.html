@@ -102,6 +102,72 @@
   .fb { border-radius: 14px; padding: 10px 14px; font-size: 14.5px; margin: 10px 0; min-height: 20px; }
   .fb.ok { background: #eafaf1; border: 2px solid #3ecf8e; }
   .fb.no { background: #ffeef1; border: 2px solid #ef476f; }
+  .goal {
+    background: #eef4ff;
+    border: 2px solid #bcd0ff;
+    border-radius: 14px;
+    padding: 10px 14px;
+    font-size: 14.5px;
+    margin: 10px 0;
+  }
+  .lquiz { margin: 12px 0 6px; }
+  .lqi { background: #f7f9ff; border-radius: 14px; padding: 12px 14px; margin: 10px 0; }
+  .lqq { font-weight: 700; font-size: 14.5px; margin-bottom: 6px; }
+  .lqb {
+    display: block;
+    width: 100%;
+    text-align: left;
+    margin: 5px 0;
+    border: 2px solid #dce3f5;
+    background: #fff;
+    border-radius: 12px;
+    padding: 7px 12px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: inherit;
+  }
+  .lqb:hover { border-color: var(--tc); }
+  .lqb.right { background: #d1fae5 !important; border-color: #10b981 !important; color: #065f46 !important; }
+  .lqb.wrong { background: #ffe4e6 !important; border-color: #f43f5e !important; color: #881337 !important; }
+  .lqf { font-size: 13px; margin-top: 6px; font-weight: 600; }
+  .lqf.ok { color: #047857; }
+  .lqf.no { color: #be123c; }
+  .map { margin: 16px 0 4px; }
+  .stations { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin: 12px 0; }
+  .station {
+    text-decoration: none;
+    background: #f7f9ff;
+    border: 2px solid #e2e8f8;
+    border-radius: 14px;
+    padding: 10px 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #2b2d42;
+    font-size: 13.5px;
+    font-weight: 600;
+  }
+  .station b { background: #0ea5e9; color: #fff; border-radius: 999px; width: 24px; height: 24px; display: grid; place-items: center; font-size: 12px; flex: none; }
+  .station i { margin-left: auto; font-style: normal; }
+  .station.done { background: #eafaf1; border-color: #3ecf8e; }
+  .station.done b { background: #10b981; }
+  .station.cur { border-color: #0ea5e9; box-shadow: 0 0 0 2px rgba(14,165,233,.18); }
+  .chkbtn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #eafaf1;
+    border: 2px solid #3ecf8e;
+    color: #047857;
+    font-weight: 700;
+    font-size: 14px;
+    border-radius: 999px;
+    padding: 8px 16px;
+    margin-top: 12px;
+    cursor: pointer;
+  }
+  .chkbtn input { width: 16px; height: 16px; accent-color: #10b981; }
   .msg { border-radius: 14px; padding: 10px 14px; font-size: 14.5px; margin: 10px 0; min-height: 20px; }
   .tip { background: #fff8e6; border: 2px dashed #ffd166; border-radius: 14px; padding: 10px 14px; font-size: 13.5px; margin-top: 12px; }
 
@@ -192,24 +258,33 @@
   </header>
 
   <nav class="chips" aria-label="知识点导航">
-    <a class="chip" style="--chip:#0ea5e9" href="#s1">🔢 二进制</a>
-    <a class="chip" style="--chip:#8b5cf6" href="#s2">⚡ 比特与字节</a>
-    <a class="chip" style="--chip:#f59e0b" href="#s3">🤔 为什么是二进制</a>
-    <a class="chip" style="--chip:#10b981" href="#s4">🔄 进制转换</a>
-    <a class="chip" style="--chip:#ef476f" href="#s5">📦 存储单位</a>
-    <a class="chip" style="--chip:#06d6a0" href="#s6">🎨 文字图片声音</a>
+    <a class="chip" style="--chip:#0ea5e9" href="#s1">第 1 课｜二进制</a>
+    <a class="chip" style="--chip:#8b5cf6" href="#s2">第 2 课｜比特字节</a>
+    <a class="chip" style="--chip:#ef476f" href="#s5">第 3 课｜存储单位</a>
     <a class="chip" style="--chip:#118ab2" href="#s7">🏆 大闯关</a>
     <a class="chip" style="--chip:#118ab2" href="index.html">🏠 主页</a>
     <a class="chip" style="--chip:#f43f5e" href="GESP官方考纲.html">📋 考纲</a>
     <a class="chip" style="--chip:#2ec4b6" href="GESP1学习乐园.html">🎒 一级乐园</a>
     <a class="chip" style="--chip:#5e60ce" href="GESP2学习乐园.html">🚀 二级乐园</a>
+    <a class="chip" style="--chip:#a855f7" href="复习站.html">📒 复习站</a>
+    <a class="chip" style="--chip:#0284c7" href="家长中心.html">👨‍👩‍👧 家长中心</a>
   </nav>
+
+  <section class="topic" id="lvmap" style="--tc:#0ea5e9">
+    <div class="big-emoji">🗺️</div>
+    <h2>学习地图（第 0 阶）</h2>
+    <p class="sub">先把"0 和 1 的世界"搞懂，再进一级乐园！</p>
+    <div class="stations" id="lvStations"></div>
+    <div class="bar"><i id="mapBar"></i></div>
+    <div class="goal" id="mapMsg" style="margin:6px 0 0">学完一课点一下"打卡"，地图就会点亮！</div>
+  </section>
 
   <!-- ========== 1 二进制 ========== -->
   <section class="topic" id="s1" style="--tc:#0ea5e9">
     <div class="big-emoji">🔢</div>
-    <h2>1. 电脑的数字只有 0 和 1</h2>
+    <h2>第 1 课：为什么电脑只用 0 和 1</h2>
     <p class="sub">我们平时用 0~9 十个数字（十进制），是因为我们有十根手指。电脑呢？它只有两种状态，所以它用 <b>0 和 1</b> 两个数字，这叫<strong>二进制</strong>。</p>
+    <div class="goal">🎯 本节目标：1. 知道二进制只有 0 和 1；2. 会看 1~15 的二进制表；3. 能说出电脑用二进制的 4 个理由。</div>
 
     <div class="cards">
       <div class="box" style="--tc:#0ea5e9">
@@ -239,13 +314,38 @@
       <tr><td>7</td><td>0111</td><td>15</td><td>1111</td></tr>
     </table>
     <div class="tip">💡 发现了吗？二进制每一位都只有 0 或 1，从右往左每位的"份量"是 1、2、4、8、16……（每次翻一倍）！</div>
+
+    <h3>🤔 为什么电脑不用 0~9，偏要用 0 和 1？</h3>
+    <div class="cards">
+      <div class="box" style="--tc:#f59e0b">
+        <div class="name">🔌 电路只有"开/关"</div>
+        <div class="desc">电脑里千千万万个晶体管，只有两种状态：通电（1）和断电（0）。天生就是二进制的料！</div>
+      </div>
+      <div class="box" style="--tc:#f59e0b">
+        <div class="name">🛡️ 两种状态最可靠</div>
+        <div class="desc">"有电/没电"很容易分辨。要是用十进制，得分辨 10 种不同的电压，一点点干扰就读错了。</div>
+      </div>
+      <div class="box" style="--tc:#f59e0b">
+        <div class="name">🏗️ 电路简单又便宜</div>
+        <div class="desc">只需要做"开/关"的电路，又简单又快，还能做得特别小、特别省电。</div>
+      </div>
+      <div class="box" style="--tc:#f59e0b">
+        <div class="name">✅ 正好表示"真/假"</div>
+        <div class="desc">程序里的判断（是/否、对/错）也只要两种值：1 = 真，0 = 假，完全对得上！</div>
+      </div>
+    </div>
+    <div class="tip">🎯 <b>考点</b>：选择题常问"为什么计算机用二进制"，记住四句话：<b>电路只有开和关、两种状态更可靠、电路简单、1/0 正好表示真/假</b>。</div>
+    <div class="tip">📌 本节小结：电脑只有"有电/没电"两种状态，所以用 0 和 1；0 和 1 还正好表示"假/真"。记住 4 个理由就能答对选择题！</div>
+    <div class="lquiz" id="qz-l1"></div>
+    <label class="chkbtn"><input type="checkbox" onchange="toggleLesson(0, this)"> 学完了，打卡！</label>
   </section>
 
   <!-- ========== 2 比特与字节 ========== -->
   <section class="topic" id="s2" style="--tc:#8b5cf6">
     <div class="big-emoji">⚡</div>
-    <h2>2. 比特（bit）和字节（byte）</h2>
+    <h2>第 2 课：比特、字节与进制转换</h2>
     <p class="sub">电脑里最最小的单位是一个 <b>bit（比特）</b>——它就是一个"开关"：开 = 1，关 = 0。<b>8 个 bit 凑成 1 个 byte（字节）</b>。</p>
+    <div class="goal">🎯 本节目标：1. 知道 1 字节 = 8 位；2. 会拼 8 盏"灯"表示 0~255；3. 会把十进制和二进制互转。</div>
 
     <div class="cards">
       <div class="box" style="--tc:#8b5cf6">
@@ -280,39 +380,6 @@
       <button class="btn" onclick="resetByte()">🧹 全部熄灭</button>
     </div>
     <div class="tip">💡 8 个开关一共能拼出 256 种组合（0~255）！电脑里的文件大小，就是数它有多少个字节。</div>
-  </section>
-
-  <!-- ========== 3 为什么是二进制 ========== -->
-  <section class="topic" id="s3" style="--tc:#f59e0b">
-    <div class="big-emoji">🤔</div>
-    <h2>3. 为什么电脑要用二进制？</h2>
-    <p class="sub">为什么电脑不直接用 0~9，非要"麻烦"地用 0 和 1？因为有四大好处：</p>
-    <div class="cards">
-      <div class="box" style="--tc:#f59e0b">
-        <div class="name">🔌 电路只有"开/关"</div>
-        <div class="desc">电脑里千千万万个晶体管，只有两种状态：通电（1）和断电（0）。天生就是二进制的料！</div>
-      </div>
-      <div class="box" style="--tc:#f59e0b">
-        <div class="name">🛡️ 两种状态最可靠</div>
-        <div class="desc">"有电/没电"很容易分辨。要是用十进制，得分辨 10 种不同的电压，一点点干扰就读错了。</div>
-      </div>
-      <div class="box" style="--tc:#f59e0b">
-        <div class="name">🏗️ 电路简单又便宜</div>
-        <div class="desc">只需要做"开/关"的电路，又简单又快，还能做得特别小、特别省电。</div>
-      </div>
-      <div class="box" style="--tc:#f59e0b">
-        <div class="name">✅ 正好表示"真/假"</div>
-        <div class="desc">程序里的判断（是/否、对/错）也只要两种值：1 = 真，0 = 假，完全对得上！</div>
-      </div>
-    </div>
-    <div class="tip">🎯 <b>考点</b>：选择题常问"为什么计算机用二进制"，记住四句话：<b>电路只有开和关、两种状态更可靠、电路简单、1/0 正好表示真/假</b>。</div>
-  </section>
-
-  <!-- ========== 4 进制转换 ========== -->
-  <section class="topic" id="s4" style="--tc:#10b981">
-    <div class="big-emoji">🔄</div>
-    <h2>4. 进制转换实验室</h2>
-    <p class="sub">把十进制"翻译"成二进制：每一位的份量是 128、64、32、16、8、4、2、1，凑出来就行！</p>
 
     <h3>🧮 十进制 → 二进制</h3>
     <div class="btnrow">
@@ -327,13 +394,17 @@
     </div>
     <div class="bitout" id="decOut">1101 ＝ 8+4+1 ＝ 13</div>
     <div class="tip">📐 口算技巧：从右往左是 1、2、4、8、16……把"1"的位置的份量加起来就行。比如 <code>1010</code> ＝ 8+2 ＝ 10。<br>🎁 顺便认识 <b>十六进制</b>：电脑还常用 16 进制（0~9 和 A~F），因为 4 个 bit 正好能表示 0~15 ！</div>
+    <div class="tip">📌 本节小结：1 字节 = 8 位，能装 0~255；二进制每一位的份量是 1、2、4、8……把"1"的份量加起来就是十进制。</div>
+    <div class="lquiz" id="qz-l2"></div>
+    <label class="chkbtn"><input type="checkbox" onchange="toggleLesson(1, this)"> 学完了，打卡！</label>
   </section>
 
   <!-- ========== 5 存储单位 ========== -->
   <section class="topic" id="s5" style="--tc:#ef476f">
     <div class="big-emoji">📦</div>
-    <h2>5. 存储单位：B、KB、MB、GB、TB</h2>
+    <h2>第 3 课：存储单位与"万物皆 0 和 1"</h2>
     <p class="sub">文件占多大地方？用存储单位来量。记住：<b>每往上走一级都是 ×1024</b>（不是 1000！）</p>
+    <div class="goal">🎯 本节目标：1. 会背 B/KB/MB/GB/TB 的换算（×1024）；2. 知道文字、图片、声音怎么变成 0 和 1。</div>
 
     <table>
       <tr><th>单位</th><th>中文</th><th>等于</th><th>像什么</th></tr>
@@ -352,12 +423,8 @@
     </div>
     <div class="bitout" id="unitOut">1 KB = 1024 B，大概能装半页文字。</div>
     <div class="tip">🎯 <b>考点</b>：1 KB = 1024 B；1 MB = 1024 KB；换算率是 <b>1024</b>，不是 1000！</div>
-  </section>
 
-  <!-- ========== 6 文字图片声音 ========== -->
-  <section class="topic" id="s6" style="--tc:#06d6a0">
-    <div class="big-emoji">🎨</div>
-    <h2>6. 文字、图片、声音在电脑里怎么存？</h2>
+    <h3>🎨 文字、图片、声音怎么变成 0 和 1？</h3>
     <p class="sub">电脑只认 0 和 1，那照片和音乐是怎么变成 0/1 的？它们都有各自的"翻译法"：</p>
     <div class="cards">
       <div class="box" style="--tc:#06d6a0">
@@ -374,12 +441,15 @@
       </div>
     </div>
     <div class="tip">🎯 一句话总结：<b>电脑里所有东西（文字、图片、声音、程序）最终都是 0 和 1</b>，只是"翻译"的方法不同。</div>
+    <div class="tip">📌 本节小结：文件大小从 B 到 TB 一路 ×1024；文字用编码表（ASCII）、图片用像素、声音用采样——它们最后都变成 0 和 1。</div>
+    <div class="lquiz" id="qz-l3"></div>
+    <label class="chkbtn"><input type="checkbox" onchange="toggleLesson(2, this)"> 学完了，打卡！</label>
   </section>
 
   <!-- ========== 7 大闯关 ========== -->
   <section class="topic" id="s7" style="--tc:#118ab2">
     <div class="big-emoji">🏆</div>
-    <h2>7. 大闯关：考考自己！</h2>
+    <h2>🏆 期末大闯关：考考自己！</h2>
     <p class="sub">一共 8 题，答对越多，勋章越大！</p>
 
     <div id="quizWrap">
@@ -396,7 +466,7 @@
   </section>
 
   <footer>
-    基础常识乐园 🧠 ｜ <a href="index.html">🏠 主页</a> ｜ <a href="GESP官方考纲.html">📋 考纲</a> ｜ <a href="GESP1学习乐园.html">🎒 一级乐园</a> ｜ <a href="GESP2学习乐园.html">🚀 二级乐园</a> ｜ <a href="GESP二级知识点精讲.html">📖 知识笔记</a>
+    基础常识乐园 🧠 ｜ <a href="index.html">🏠 学习中心</a> ｜ <a href="复习站.html">📒 复习站</a> ｜ <a href="家长中心.html">👨‍👩‍👧 家长中心</a> ｜ <a href="GESP官方考纲.html">📋 考纲</a> ｜ <a href="GESP1学习乐园.html">🎒 一级乐园</a>
   </footer>
 </div>
 
@@ -472,6 +542,54 @@ function unitExp() {
 }
 
 /* ---- 大闯关 ---- */
+/* ---- 每课小测 ---- */
+const LQ = {
+  l1: [
+    { q: '二进制里只有哪两个数字？', o: ['0 和 1', '0~9', '1 和 2', 'A 和 B'], a: 0, e: '二进制只有 0 和 1，满 2 就进位。' },
+    { q: '二进制数到 1 之后是几？', o: ['10', '2', '01', '11'], a: 0, e: '二进制满 2 进 1：0、1、10、11、100……' },
+    { q: '为什么电脑用二进制？', o: ['电路只有"开/关"两种状态，简单可靠', '人只认识 0 和 1', '二进制数字好看', '用十进制会卡'], a: 0, e: '电路只有开/关、两种状态可靠、电路简单、1/0 正好表示真/假。' }
+  ],
+  l2: [
+    { q: '1 个字节（byte）等于多少位（bit）？', o: ['8', '2', '16', '1024'], a: 0, e: '1 字节 = 8 位，最常考的换算！' },
+    { q: '1 个字节最多能表示 0~几？', o: ['255', '99', '8', '1024'], a: 0, e: '8 位二进制能表示 2⁸ = 256 种，也就是 0~255。' },
+    { q: '二进制 1101 等于十进制的几？', o: ['13', '11', '15', '1101'], a: 0, e: '1101 = 8+4+0+1 = 13。' }
+  ],
+  l3: [
+    { q: '1 KB 等于多少 B？', o: ['1024 B', '1000 B', '8 B', '100 B'], a: 0, e: '换算率是 1024，不是 1000！' },
+    { q: '文件大小从大到小排是？', o: ['TB &gt; GB &gt; MB &gt; KB &gt; B', 'B &gt; KB &gt; MB &gt; GB &gt; TB', '都一样大', 'KB &gt; TB &gt; MB &gt; GB &gt; B'], a: 0, e: '从 B 到 TB 一路 ×1024，所以 TB 最大。' },
+    { q: '图片放大后的一格一格小色块叫什么？', o: ['像素', '字节', '比特', '采样'], a: 0, e: '图片=像素点阵，每个像素存一个颜色编号。' }
+  ]
+};
+function buildLessonQuizzes() {
+  for (const k in LQ) {
+    const box = document.getElementById('qz-' + k);
+    if (!box) continue;
+    box.innerHTML = '<div class="msg" style="background:#eef4ff">📝 考一考：点一点，立刻知道对错！答错的题会进复习站。</div>';
+    LQ[k].forEach((q, idx) => {
+      const w = document.createElement('div');
+      w.className = 'lqi';
+      w.innerHTML = '<div class="lqq">' + (idx + 1) + '. ' + q.q + '</div>';
+      q.o.forEach((t, j) => {
+        const b = document.createElement('button');
+        b.className = 'lqb';
+        b.textContent = 'ABCD'[j] + '. ' + t;
+        b.onclick = () => {
+          if (w.dataset.done) return;
+          w.dataset.done = '1';
+          b.classList.add(j === q.a ? 'right' : 'wrong');
+          if (j !== q.a) recordWrong({ lv: '基础常识', lesson: '第 ' + Number(k.slice(1)) + ' 课', q: q.q, o: q.o, a: q.a, chosen: j });
+          [...w.querySelectorAll('.lqb')].forEach((x) => { x.disabled = true; });
+          const f = document.createElement('div');
+          f.className = 'lqf ' + (j === q.a ? 'ok' : 'no');
+          f.textContent = (j === q.a ? '✅ 答对啦！' : '❌ 已记入复习站～') + q.e;
+          w.appendChild(f);
+        };
+        w.appendChild(b);
+      });
+      box.appendChild(w);
+    });
+  }
+}
 const questions = [
   { q: '电脑里最小的数据单位是什么？', opts: ['字节（Byte）', '比特（bit）', 'KB', '文件'], ans: 1, exp: '比特（bit）是最小单位，一个 bit 就是 0 或 1。8 个 bit 才是 1 个字节。' },
   { q: '1 个字节（Byte）等于多少位（bit）？', opts: ['2', '4', '8', '1024'], ans: 2, exp: '1 字节 = 8 位！这是最常考的换算。' },
@@ -509,6 +627,7 @@ function answerQ(i, btn) {
   const q = questions[qi];
   const ok = i === q.ans;
   if (ok) score++;
+  if (!ok) recordWrong({ lv: '基础常识', lesson: '期末闯关', q: q.q, o: q.opts, a: q.ans, chosen: i });
   document.querySelectorAll('#quizOpts .qopt').forEach((b, k) => {
     b.disabled = true;
     if (k === q.ans) b.classList.add('right');
@@ -518,6 +637,53 @@ function answerQ(i, btn) {
   fb.className = 'fb ' + (ok ? 'ok' : 'no');
   fb.textContent = (ok ? '✅ 答对啦！' : '❌ 不对哦。') + q.exp;
   document.getElementById('quizNext').style.display = 'inline-block';
+}
+function recordWrong(item) {
+  try {
+    const list = JSON.parse(localStorage.getItem('gesp_wrong') || '[]');
+    list.push(Object.assign({ time: Date.now() }, item));
+    localStorage.setItem('gesp_wrong', JSON.stringify(list));
+  } catch (e) {}
+}
+const LV0_NAMES = ['为什么用 0 和 1', '比特和字节', '存储单位'];
+function loadLv0() {
+  try {
+    const v = JSON.parse(localStorage.getItem('gesp_lv0_prog'));
+    if (Array.isArray(v) && v.length === 3) return v.map(Boolean);
+  } catch (e) {}
+  return [false, false, false];
+}
+let lv0 = loadLv0();
+function saveLv0() { try { localStorage.setItem('gesp_lv0_prog', JSON.stringify(lv0)); } catch (e) {} }
+function toggleLesson(i, el) {
+  lv0[i] = el.checked;
+  saveLv0();
+  renderStations();
+  paintChk();
+}
+function paintChk() {
+  document.querySelectorAll('.chkbtn input').forEach((el, i) => {
+    el.checked = !!lv0[i];
+  });
+}
+function renderStations() {
+  const box = document.getElementById('lvStations');
+  if (!box) return;
+  box.innerHTML = '';
+  const first = lv0.indexOf(false);
+  const anchors = ['#s1', '#s2', '#s5'];
+  LV0_NAMES.forEach((n, i) => {
+    const a = document.createElement('a');
+    a.className = 'station' + (lv0[i] ? ' done' : '') + (i === first ? ' cur' : '');
+    a.href = anchors[i];
+    a.innerHTML = '<b>' + (i + 1) + '</b><span>' + n + '</span><i>' + (lv0[i] ? '✅' : (i === first ? '▶️' : '🔒')) + '</i>';
+    box.appendChild(a);
+  });
+  const n = lv0.filter(Boolean).length;
+  const bar = document.getElementById('mapBar');
+  if (bar) bar.style.width = (n / 3 * 100) + '%';
+  const msg = document.getElementById('mapMsg');
+  if (msg) msg.textContent = '进度 ' + n + ' / 3 课' + (n === 3 ? ' 🎓 基础常识完成！可以进一级乐园啦！' : '');
 }
 function quizNext() {
   qi++;
@@ -557,6 +723,9 @@ updateByte();
 decToBin();
 binToDec();
 unitExp();
+buildLessonQuizzes();
+renderStations();
+paintChk();
 renderQ();
 </script>
 </body>

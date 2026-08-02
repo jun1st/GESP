@@ -1,0 +1,570 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="GESP C++ 八级课程：计数原理、排列组合、杨辉三角、倍增法、代数几何、图论综合、复杂度分析、算法优化。">
+<title>GESP C++ 八级课程 📔</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans SC", sans-serif;
+    background: linear-gradient(170deg, #eef2ff 0%, #ffffff 50%, #f0fdfa 100%);
+    color: #2b2d42;
+    line-height: 1.8;
+    min-height: 100vh;
+  }
+  .wrap { max-width: 920px; margin: 0 auto; padding: 14px 18px 50px; }
+  header { text-align: center; padding: 26px 12px 8px; }
+  header .mascot { font-size: 50px; display: block; animation: float 3s ease-in-out infinite; }
+  @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+  h1 {
+    font-size: clamp(25px, 5vw, 38px);
+    background: linear-gradient(90deg, #6366f1, #818cf8, #06b6d4);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    margin: 8px 0 4px;
+  }
+  .slogan { color: #6c6f93; font-size: 15px; }
+  nav.chips { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin: 18px 0 10px; }
+  .chip {
+    text-decoration: none;
+    background: #fff;
+    border: 2px solid #dce3f5;
+    color: #2b2d42;
+    padding: 7px 13px;
+    border-radius: 999px;
+    font-size: 14px;
+    font-weight: 600;
+    transition: transform .15s, border-color .15s, box-shadow .15s;
+  }
+  .chip:hover { transform: translateY(-2px); border-color: #6366f1; box-shadow: 0 4px 12px rgba(43,45,66,.12); }
+  .panel {
+    background: #fff;
+    border-radius: 22px;
+    padding: 20px 20px 24px;
+    margin: 20px 0;
+    box-shadow: 0 6px 24px rgba(43,45,66,.07);
+    border-top: 7px solid #6366f1;
+  }
+  .panel h2 { font-size: clamp(20px, 4vw, 26px); color: #4338ca; margin-bottom: 8px; }
+  .callout { border-radius: 14px; padding: 12px 15px; font-size: 14.5px; margin: 12px 0; }
+  .callout.info { background: #eef4ff; border: 2px solid #bcd0ff; }
+  .callout.key { background: #ffeef1; border: 2px solid #fda4af; }
+  .goal {
+    background: #eef4ff;
+    border: 2px solid #bcd0ff;
+    border-radius: 14px;
+    padding: 10px 14px;
+    font-size: 14.5px;
+    margin: 10px 0;
+  }
+  .map { margin: 16px 0 4px; }
+  .stations { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin: 12px 0; }
+  .station {
+    text-decoration: none;
+    background: #f7f9ff;
+    border: 2px solid #e2e8f8;
+    border-radius: 14px;
+    padding: 10px 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #2b2d42;
+    font-size: 13.5px;
+    font-weight: 600;
+  }
+  .station b { background: #6366f1; color: #fff; border-radius: 999px; width: 24px; height: 24px; display: grid; place-items: center; font-size: 12px; flex: none; }
+  .station i { margin-left: auto; font-style: normal; }
+  .station.done { background: #eafaf1; border-color: #3ecf8e; }
+  .station.done b { background: #10b981; }
+  .station.cur { border-color: #6366f1; box-shadow: 0 0 0 2px rgba(99,102,241,.18); }
+  .bar { background: #e7ebf8; border-radius: 999px; height: 13px; overflow: hidden; margin: 8px 0; }
+  .bar i { display: block; height: 100%; width: 0; background: linear-gradient(90deg, #6366f1, #06b6d4); transition: width .4s; }
+  details.lesson {
+    background: #fff;
+    border-radius: 18px;
+    border: 2px solid #e2e8f8;
+    margin: 14px 0;
+    overflow: hidden;
+  }
+  details.lesson[open] { box-shadow: 0 8px 24px rgba(43,45,66,.1); }
+  details.lesson summary {
+    list-style: none;
+    cursor: pointer;
+    padding: 13px 18px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: linear-gradient(90deg, #6366f1, #818cf8);
+    color: #fff;
+    font-weight: 800;
+  }
+  details.lesson summary::-webkit-details-marker { display: none; }
+  .lnum {
+    background: rgba(255,255,255,.22);
+    border: 2px solid rgba(255,255,255,.55);
+    border-radius: 999px;
+    padding: 2px 11px;
+    font-size: 13px;
+    white-space: nowrap;
+  }
+  .lgoal { font-size: 13px; font-weight: 600; opacity: .95; }
+  .ltoggle { margin-left: auto; font-size: 18px; }
+  details.lesson[open] .ltoggle { transform: rotate(180deg); }
+  .lbody { padding: 16px 18px 18px; }
+  .lbody h4 { font-size: 15.5px; color: #4338ca; margin: 14px 0 6px; }
+  .lbody h4:first-child { margin-top: 0; }
+  .lbody p, .lbody ul, .lbody ol { font-size: 14.5px; margin: 6px 0; }
+  .lbody ul, .lbody ol { padding-left: 22px; }
+  code {
+    font-family: "SF Mono", Consolas, monospace;
+    background: #eef1fa;
+    color: #4338ca;
+    padding: 1px 7px;
+    border-radius: 7px;
+    font-size: 13.5px;
+  }
+  .codebox { position: relative; margin: 10px 0; }
+  .codebox pre {
+    background: #20232e;
+    color: #d6f5e3;
+    border-radius: 14px;
+    padding: 14px 16px;
+    overflow-x: auto;
+    font-size: 13.5px;
+    line-height: 1.65;
+    font-family: "SF Mono", Consolas, "Courier New", monospace;
+  }
+  .cpy {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    border: none;
+    background: rgba(255,255,255,.14);
+    color: #fff;
+    border-radius: 8px;
+    padding: 4px 10px;
+    font-size: 12px;
+    cursor: pointer;
+    font-family: inherit;
+  }
+  .pnav { display: flex; justify-content: space-between; gap: 10px; margin-top: 14px; }
+  .pnav a {
+    text-decoration: none;
+    background: #f7f9ff;
+    border: 2px solid #e2e8f8;
+    color: #4338ca;
+    font-weight: 700;
+    font-size: 14px;
+    border-radius: 999px;
+    padding: 7px 16px;
+  }
+  .pnav a:hover { border-color: #6366f1; }
+  .chkbtn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #eafaf1;
+    border: 2px solid #3ecf8e;
+    color: #047857;
+    font-weight: 700;
+    font-size: 14px;
+    border-radius: 999px;
+    padding: 8px 16px;
+    margin-top: 12px;
+    cursor: pointer;
+  }
+  .chkbtn input { width: 16px; height: 16px; accent-color: #10b981; }
+  .lquiz { margin: 12px 0 6px; }
+  .lqi { background: #f7f9ff; border-radius: 14px; padding: 12px 14px; margin: 10px 0; }
+  .lqq { font-weight: 700; font-size: 14.5px; margin-bottom: 6px; }
+  .lqb {
+    display: block;
+    width: 100%;
+    text-align: left;
+    margin: 5px 0;
+    border: 2px solid #dce3f5;
+    background: #fff;
+    border-radius: 12px;
+    padding: 7px 12px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: inherit;
+  }
+  .lqb.right { background: #d1fae5 !important; border-color: #10b981 !important; color: #065f46 !important; }
+  .lqb.wrong { background: #ffe4e6 !important; border-color: #f43f5e !important; color: #881337 !important; }
+  .lqf { font-size: 13px; margin-top: 6px; font-weight: 600; }
+  .lqf.ok { color: #047857; }
+  .lqf.no { color: #be123c; }
+  footer { text-align: center; color: #6c6f93; font-size: 14px; padding: 18px 0 6px; }
+  footer a { color: #4338ca; font-weight: 700; text-decoration: none; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <span class="mascot">📔</span>
+    <h1>GESP C++ 八级课程</h1>
+    <p class="slogan">八级通关 = 组合数学 + 图论 + 算法优化，C++ 高手毕业！</p>
+  </header>
+
+  <nav class="chips" aria-label="快捷入口">
+    <a class="chip" href="index.html">🏠 学习中心</a>
+    <a class="chip" href="复习站.html">📒 复习站</a>
+    <a class="chip" href="GESP官方考纲.html">📋 考纲</a>
+    <a class="chip" href="GESP7课程.html">📓 七级</a>
+  </nav>
+
+  <div class="panel">
+    <h2>📌 八级学什么？</h2>
+    <div class="callout info">考纲知识内容：计数原理（加法/乘法）、排列与组合、杨辉三角、倍增法、代数与平面几何（初中数学）、图论算法及综合应用（最小生成树、单源最短路径）、较复杂算法的空间和时间效率分析、算法优化。</div>
+    <div class="callout key">🎯 知识目标：掌握组合数学中基本知识，通过算法的时间和空间效率分析，可以完成相对应的算法优化。题型：单选 15×2 + 判断 10×2 + 编程 2×25 ｜ 考试时间：180 分钟。</div>
+    <div class="goal">💡 学习建议：八级 = 组合数学 + 图论 + 复杂度分析。把"为什么这个算法更快"想明白，比背代码更重要——这是从"会写"到"会选"的升级。</div>
+
+    <h2>🗺️ 学习地图</h2>
+    <div class="stations" id="lvStations"></div>
+    <div class="bar"><i id="mapBar"></i></div>
+    <p class="goal" id="mapMsg" style="margin:6px 0 0">学完一课点一下"打卡"，地图就会点亮！</p>
+  </div>
+
+  <details class="lesson" id="lv8l1" open>
+    <summary><span class="lnum">第 1 课</span><span class="lgoal">计数原理：加法与乘法</span><span class="ltoggle">▾</span></summary>
+    <div class="lbody">
+      <div class="goal">🎯 本节目标：1. 分清"分类相加、分步相乘"；2. 会数方案总数。</div>
+      <h4>📖 讲解</h4>
+      <ul>
+        <li><b>加法原理</b>：做一件事有 n 类办法（选一类就行），总数 = 每类数量<b>相加</b>。</li>
+        <li><b>乘法原理</b>：做一件事要分 n 个步骤（每步都要做），总数 = 每步数量<b>相乘</b>。</li>
+        <li>记法：<b>分类用加、分步用乘</b>。</li>
+      </ul>
+      <div class="codebox"><pre>#include &lt;iostream&gt;
+using namespace std;
+int main() {
+    // 例：3 件上衣 × 4 条裤子，搭配 = 12 种（乘法原理）
+    int shirts = 3, pants = 4;
+    cout &lt;&lt; shirts * pants &lt;&lt; endl;   // 12
+    return 0;
+}</pre><button class="cpy" onclick="copyCode(this)">📋 复制</button></div>
+      <div class="lquiz" id="qz-l1"></div>
+      <div class="callout info">📌 本节小结：分类 → 加法；分步 → 乘法。先想清楚是"选一类"还是"走完所有步骤"。</div>
+      <label class="chkbtn"><input type="checkbox" onchange="toggleLesson(0, this)"> 学完了，打卡！</label>
+      <div class="pnav"><a href="#lv8l2">下一课：排列与组合 →</a></div>
+    </div>
+  </details>
+
+  <details class="lesson" id="lv8l2">
+    <summary><span class="lnum">第 2 课</span><span class="lgoal">排列与组合</span><span class="ltoggle">▾</span></summary>
+    <div class="lbody">
+      <div class="goal">🎯 本节目标：1. 分清排列（有序）和组合（无序）；2. 会写组合数 C(n,k)。</div>
+      <h4>📖 讲解</h4>
+      <ul>
+        <li><b>排列</b>讲究顺序：第一名、第二名不一样，A(n,k) = n×(n-1)×…×(n-k+1)。</li>
+        <li><b>组合</b>不讲究顺序：选出哪几个人就行，C(n,k) = A(n,k) ÷ k!。</li>
+        <li>计算组合数要小心溢出，用"边乘边除"。</li>
+      </ul>
+      <div class="codebox"><pre>#include &lt;iostream&gt;
+using namespace std;
+long long C(int n, int k) {
+    if (k &gt; n) return 0;
+    long long res = 1;
+    for (int i = 1; i &lt;= k; i++)
+        res = res * (n - i + 1) / i;   // 边乘边除，防溢出
+    return res;
+}
+int main() {
+    int n, k;
+    cin &gt;&gt; n &gt;&gt; k;
+    cout &lt;&lt; C(n, k) &lt;&lt; endl;           // C(n,k)
+    return 0;
+}</pre><button class="cpy" onclick="copyCode(this)">📋 复制</button></div>
+      <div class="lquiz" id="qz-l2"></div>
+      <div class="callout info">📌 本节小结：排列分顺序、组合不分；C(n,k) 边乘边除防溢出。</div>
+      <label class="chkbtn"><input type="checkbox" onchange="toggleLesson(1, this)"> 学完了，打卡！</label>
+      <div class="pnav"><a href="#lv8l1">← 上一课</a><a href="#lv8l3">下一课：杨辉三角 →</a></div>
+    </div>
+  </details>
+
+  <details class="lesson" id="lv8l3">
+    <summary><span class="lnum">第 3 课</span><span class="lgoal">杨辉三角</span><span class="ltoggle">▾</span></summary>
+    <div class="lbody">
+      <div class="goal">🎯 本节目标：1. 会按规则构造杨辉三角；2. 知道它藏着组合数。</div>
+      <h4>📖 讲解</h4>
+      <ul>
+        <li>杨辉三角：每行<b>首尾是 1</b>，中间每个数 = <b>上面两个数之和</b>。</li>
+        <li>妙用：第 n 行第 k 个数正好等于 <b>C(n,k)</b>（组合数）！</li>
+        <li>和 (a+b)ⁿ 展开的系数一模一样（二项式定理）。</li>
+      </ul>
+      <div class="codebox"><pre>#include &lt;iostream&gt;
+using namespace std;
+int a[20][20];
+int main() {
+    int n;
+    cin &gt;&gt; n;
+    for (int i = 0; i &lt; n; i++) {
+        a[i][0] = a[i][i] = 1;                    // 首尾是 1
+        for (int j = 1; j &lt; i; j++)
+            a[i][j] = a[i-1][j-1] + a[i-1][j];    // 上面两个相加
+    }
+    for (int i = 0; i &lt; n; i++) {
+        for (int j = 0; j &lt;= i; j++) cout &lt;&lt; a[i][j] &lt;&lt; " ";
+        cout &lt;&lt; endl;
+    }
+    return 0;
+}</pre><button class="cpy" onclick="copyCode(this)">📋 复制</button></div>
+      <div class="lquiz" id="qz-l3"></div>
+      <div class="callout info">📌 本节小结：首尾 1、中间 = 上两个之和；第 n 行第 k 个就是 C(n,k)。</div>
+      <label class="chkbtn"><input type="checkbox" onchange="toggleLesson(2, this)"> 学完了，打卡！</label>
+      <div class="pnav"><a href="#lv8l2">← 上一课</a><a href="#lv8l4">下一课：倍增法 →</a></div>
+    </div>
+  </details>
+
+  <details class="lesson" id="lv8l4">
+    <summary><span class="lnum">第 4 课</span><span class="lgoal">倍增法：步子翻倍的智慧</span><span class="ltoggle">▾</span></summary>
+    <div class="lbody">
+      <div class="goal">🎯 本节目标：1. 知道倍增"每次翻倍"的思想；2. 会写快速幂（倍增的经典应用）。</div>
+      <h4>📖 讲解</h4>
+      <ul>
+        <li><b>倍增</b>：步子按 1、2、4、8…翻倍，几步就能跳到很远（用在快速幂、跳表、LCA）。</li>
+        <li><b>快速幂</b>：求 aᵇ，把 b 看成二进制，底数不断平方，只用 O(log b) 次乘法。</li>
+        <li>题目常要求"对 m 取模"，防止溢出。</li>
+      </ul>
+      <div class="codebox"><pre>#include &lt;iostream&gt;
+using namespace std;
+long long powmod(long long a, long long b, long long m) {
+    long long res = 1;
+    while (b &gt; 0) {
+        if (b &amp; 1) res = res * a % m;   // 这一位是 1 就乘上去
+        a = a * a % m;                  // 底数平方（翻倍）
+        b &gt;&gt;= 1;                        // 指数右移一位
+    }
+    return res;
+}
+int main() {
+    long long a, b, m;
+    cin &gt;&gt; a &gt;&gt; b &gt;&gt; m;
+    cout &lt;&lt; powmod(a, b, m) &lt;&lt; endl;   // a^b mod m
+    return 0;
+}</pre><button class="cpy" onclick="copyCode(this)">📋 复制</button></div>
+      <div class="lquiz" id="qz-l4"></div>
+      <div class="callout info">📌 本节小结：倍增 = 每次翻倍跳；快速幂 O(log b) 求 aᵇ，记得取模防溢出。</div>
+      <label class="chkbtn"><input type="checkbox" onchange="toggleLesson(3, this)"> 学完了，打卡！</label>
+      <div class="pnav"><a href="#lv8l3">← 上一课</a><a href="#lv8l5">下一课：代数与平面几何 →</a></div>
+    </div>
+  </details>
+
+  <details class="lesson" id="lv8l5">
+    <summary><span class="lnum">第 5 课</span><span class="lgoal">代数与平面几何（初中数学）</span><span class="ltoggle">▾</span></summary>
+    <div class="lbody">
+      <div class="goal">🎯 本节目标：1. 会解一元、二元一次方程；2. 会算常见图形面积。</div>
+      <h4>📖 讲解</h4>
+      <ul>
+        <li><b>一元一次</b>：ax + b = 0 → x = -b/a。</li>
+        <li><b>二元一次</b>：两个未知数两个方程，用<b>代入消元</b>或<b>加减消元</b>。</li>
+        <li><b>面积公式</b>：长方形 长×宽；三角形 底×高÷2；圆 πr²。</li>
+        <li>编程题里常常"解出公式再写代码"，比暴力循环快得多。</li>
+      </ul>
+      <div class="lquiz" id="qz-l5"></div>
+      <div class="callout info">📌 本节小结：方程用消元解；面积公式要背熟；能用数学公式就不硬循环。</div>
+      <label class="chkbtn"><input type="checkbox" onchange="toggleLesson(4, this)"> 学完了，打卡！</label>
+      <div class="pnav"><a href="#lv8l4">← 上一课</a><a href="#lv8l6">下一课：图论综合 →</a></div>
+    </div>
+  </details>
+
+  <details class="lesson" id="lv8l6">
+    <summary><span class="lnum">第 6 课</span><span class="lgoal">图论算法及综合应用：MST 与最短路</span><span class="ltoggle">▾</span></summary>
+    <div class="lbody">
+      <div class="goal">🎯 本节目标：1. 知道最小生成树（Kruskal/Prim）；2. 知道最短路径（Dijkstra/Floyd）；3. 会选合适的算法。</div>
+      <h4>📖 讲解</h4>
+      <ul>
+        <li><b>最小生成树</b>：用最少的边把<b>所有点连通</b>且不形成环。Kruskal 按边权从小到大加边，Prim 从一个点慢慢往外长。</li>
+        <li><b>最短路径</b>：Dijkstra 求<b>单源</b>（一个起点到所有点，边权非负）；Floyd 求<b>多源</b>（任意两点，三重循环，O(n³)）。</li>
+        <li>会做选择题（概念 + 复杂度），模板代码能看懂、能改。</li>
+      </ul>
+      <div class="codebox"><pre>// Floyd：任意两点最短路径（三重循环）
+// g[i][j] 先初始化为很大（INF），有边就填边权
+for (int k = 1; k &lt;= n; k++)
+    for (int i = 1; i &lt;= n; i++)
+        for (int j = 1; j &lt;= n; j++)
+            if (g[i][k] + g[k][j] &lt; g[i][j])
+                g[i][j] = g[i][k] + g[k][j];</pre><button class="cpy" onclick="copyCode(this)">📋 复制</button></div>
+      <div class="lquiz" id="qz-l6"></div>
+      <div class="callout info">📌 本节小结：MST 用最少的边连通所有点；Dijkstra 单源、Floyd 多源；Kruskal 加最小边、Prim 往外长。</div>
+      <label class="chkbtn"><input type="checkbox" onchange="toggleLesson(5, this)"> 学完了，打卡！</label>
+      <div class="pnav"><a href="#lv8l5">← 上一课</a><a href="#lv8l7">下一课：复杂度分析 →</a></div>
+    </div>
+  </details>
+
+  <details class="lesson" id="lv8l7">
+    <summary><span class="lnum">第 7 课</span><span class="lgoal">算法的时间和空间效率分析</span><span class="ltoggle">▾</span></summary>
+    <div class="lbody">
+      <div class="goal">🎯 本节目标：1. 会估算常见复杂度；2. 会按数据范围选算法。</div>
+      <h4>📖 讲解</h4>
+      <ul>
+        <li>大 O 表示"数据变大时，运行时间怎么涨"。常见排序：O(1) &lt; O(log n) &lt; O(n) &lt; O(n log n) &lt; O(n²) &lt; O(2ⁿ)。</li>
+        <li>数循环：一层循环 O(n)、两层嵌套 O(n²)、二分 O(log n)、归并排序 O(n log n)。</li>
+        <li>空间复杂度同理：数组开多大就说多大。</li>
+      </ul>
+      <div class="lquiz" id="qz-l7"></div>
+      <div class="callout info">📌 本节小结：数循环层数估时间；n 到 10⁵ 就别用 O(n²) 了，想想二分、前缀和、哈希。</div>
+      <label class="chkbtn"><input type="checkbox" onchange="toggleLesson(6, this)"> 学完了，打卡！</label>
+      <div class="pnav"><a href="#lv8l6">← 上一课</a><a href="#lv8l8">下一课：算法优化 →</a></div>
+    </div>
+  </details>
+
+  <details class="lesson" id="lv8l8">
+    <summary><span class="lnum">第 8 课</span><span class="lgoal">算法优化：用数学打败暴力</span><span class="ltoggle">▾</span></summary>
+    <div class="lbody">
+      <div class="goal">🎯 本节目标：1. 会用数学公式代替循环；2. 会用前缀和把区间和变成 O(1)。</div>
+      <h4>📖 讲解</h4>
+      <ul>
+        <li>等差数列求和：循环加要 O(n)，用公式 (首项+末项)×项数÷2 直接 O(1)。</li>
+        <li><b>前缀和</b>：预处理 s[i] = a₁+…+aᵢ，之后任意区间和 = s[r] - s[l-1]，O(1)。</li>
+        <li>还有记忆化（算过的存起来）、剪枝（不可能的提前排除）等优化技巧。</li>
+      </ul>
+      <div class="codebox"><pre>#include &lt;iostream&gt;
+using namespace std;
+int a[100005], s[100005];
+int main() {
+    int n, q;
+    cin &gt;&gt; n &gt;&gt; q;
+    for (int i = 1; i &lt;= n; i++) {
+        cin &gt;&gt; a[i];
+        s[i] = s[i-1] + a[i];        // 前缀和
+    }
+    while (q--) {
+        int l, r;
+        cin &gt;&gt; l &gt;&gt; r;
+        cout &lt;&lt; s[r] - s[l-1] &lt;&lt; endl;  // 区间和 O(1)
+    }
+    return 0;
+}</pre><button class="cpy" onclick="copyCode(this)">📋 复制</button></div>
+      <div class="lquiz" id="qz-l8"></div>
+      <div class="callout info">📌 本节小结：数学公式 > 硬循环；前缀和让区间和变 O(1)；记忆化和剪枝都是"少干活"。</div>
+      <label class="chkbtn"><input type="checkbox" onchange="toggleLesson(7, this)"> 学完了，打卡！</label>
+      <div class="pnav"><a href="#lv8l7">← 上一课</a><a href="index.html">🎓 八级毕业！回学习中心 →</a></div>
+    </div>
+  </details>
+
+  <footer>
+    GESP C++ 八级课程 📔 ｜ 内容依据 CCF《C++&amp;Python 认证标准》八级<br>
+    <a href="index.html">🏠 学习中心</a> ｜ <a href="复习站.html">📒 复习站</a> ｜ <a href="家长中心.html">👨‍👩‍👧 家长中心</a> ｜ <a href="GESP官方考纲.html">📋 考纲</a>
+  </footer>
+</div>
+
+<script>
+const LQ = {
+  l1: [
+    { q: '分"步骤"完成一件事，总数怎么算？', o: ['每步数量相乘（乘法原理）', '每步数量相加', '相减', '相除'], a: 0, e: '分步相乘！分类才是相加。' },
+    { q: '选一类办法就完成，用？', o: ['加法原理', '乘法原理', '除法原理', '减法原理'], a: 0, e: '分类选一种 → 数量相加。' }
+  ],
+  l2: [
+    { q: '排列和组合的区别是？', o: ['排列讲究顺序，组合不讲究', '一样', '组合讲究顺序', '排列不讲究顺序'], a: 0, e: '谁先谁后重要就是排列；选出来就行是组合。' },
+    { q: 'C(5, 2) 等于多少？', o: ['10', '20', '5', '25'], a: 0, e: 'C(5,2) = 5×4÷2 = 10。' }
+  ],
+  l3: [
+    { q: '杨辉三角中间每个数等于？', o: ['上面两个数之和', '左边加右边', '随机', '固定是 1'], a: 0, e: '每个数 = 上一行相邻两数之和。' },
+    { q: '杨辉三角第 n 行的数对应什么？', o: ['组合数 C(n,k)', '阶乘', '平方数', '素数'], a: 0, e: '第 n 行第 k 个 = C(n,k)。' }
+  ],
+  l4: [
+    { q: '倍增法的"步子"怎么走？', o: ['每次翻倍（1、2、4、8…）', '每次加 1', '每次减半', '随机'], a: 0, e: '步子翻倍，几步到终点。' },
+    { q: '快速幂的时间复杂度是？', o: ['O(log b)', 'O(b)', 'O(1)', 'O(b²)'], a: 0, e: '把指数看成二进制，只用 log 次乘法。' }
+  ],
+  l5: [
+    { q: '长方形面积公式是？', o: ['长 × 宽', '长 + 宽', '(长+宽)×2', '长 ÷ 宽'], a: 0, e: '长方形面积 = 长×宽。' },
+    { q: '三角形面积公式是？', o: ['底 × 高 ÷ 2', '底 × 高', '底 + 高', '底 ÷ 高'], a: 0, e: '三角形面积 = 底×高÷2。' }
+  ],
+  l6: [
+    { q: '最小生成树的目标是？', o: ['用最少的边把所有点连通', '找最长路', '找最大边', '排序'], a: 0, e: '连通所有点且边权和最小，且不形成环。' },
+    { q: 'Dijkstra 算法求的是？', o: ['单源最短路径', '最大生成树', '最长公共子序列', '素数表'], a: 0, e: '一个起点到所有点的最短路径。' }
+  ],
+  l7: [
+    { q: '两层嵌套循环的复杂度通常是？', o: ['O(n²)', 'O(n)', 'O(log n)', 'O(1)'], a: 0, e: '内层 n 次 × 外层 n 次 = n²。' },
+    { q: '下面哪个复杂度最快？', o: ['O(1)', 'O(n)', 'O(n²)', 'O(2ⁿ)'], a: 0, e: 'O(1) 不管数据多大都是常数时间。' }
+  ],
+  l8: [
+    { q: '前缀和能 O(1) 求出？', o: ['任意区间和', '最大值', '素数', '排序结果'], a: 0, e: '区间和 = s[r] - s[l-1]，预处理一次就能 O(1) 查询。' },
+    { q: '等差数列求和，除了循环还可以用？', o: ['数学公式', '排序', '二分查找', '哈希表'], a: 0, e: '公式 (首+末)×项数÷2，一步算完。' }
+  ]
+};
+function recordWrong(item) {
+  try {
+    const list = JSON.parse(localStorage.getItem('gesp_wrong') || '[]');
+    list.push(Object.assign({ time: Date.now() }, item));
+    localStorage.setItem('gesp_wrong', JSON.stringify(list));
+  } catch (e) {}
+}
+function buildLessonQuizzes() {
+  for (const k in LQ) {
+    const box = document.getElementById('qz-' + k);
+    if (!box) continue;
+    box.innerHTML = '<div class="goal">📝 考一考：点一点，立刻知道对错！答错的题会进复习站。</div>';
+    LQ[k].forEach((q, idx) => {
+      const w = document.createElement('div');
+      w.className = 'lqi';
+      w.innerHTML = '<div class="lqq">' + (idx + 1) + '. ' + q.q + '</div>';
+      q.o.forEach((t, j) => {
+        const b = document.createElement('button');
+        b.className = 'lqb';
+        b.textContent = 'ABCD'[j] + '. ' + t;
+        b.onclick = () => {
+          if (w.dataset.done) return;
+          w.dataset.done = '1';
+          b.classList.add(j === q.a ? 'right' : 'wrong');
+          if (j !== q.a) recordWrong({ lv: '八级', lesson: '第 ' + Number(k.slice(1)) + ' 课', q: q.q, o: q.o, a: q.a, chosen: j });
+          [...w.querySelectorAll('.lqb')].forEach((x) => { x.disabled = true; });
+          const f = document.createElement('div');
+          f.className = 'lqf ' + (j === q.a ? 'ok' : 'no');
+          f.textContent = (j === q.a ? '✅ 答对啦！' : '❌ 已记入复习站～') + q.e;
+          w.appendChild(f);
+        };
+        w.appendChild(b);
+      });
+      box.appendChild(w);
+    });
+  }
+}
+function copyCode(btn) {
+  const t = btn.closest('.codebox').querySelector('pre').textContent;
+  const done = () => { btn.textContent = '✅ 已复制'; setTimeout(() => { btn.textContent = '📋 复制'; }, 1200); };
+  if (navigator.clipboard) navigator.clipboard.writeText(t).then(done);
+  else { btn.textContent = '😅 请手动复制'; }
+}
+const LESSON_NAMES = ['计数原理', '排列组合', '杨辉三角', '倍增法', '代数与几何', '图论综合', '复杂度分析', '算法优化'];
+function loadProg() {
+  try {
+    const v = JSON.parse(localStorage.getItem('gesp_lv8_prog'));
+    if (Array.isArray(v) && v.length === LESSON_NAMES.length) return v.map(Boolean);
+  } catch (e) {}
+  return new Array(LESSON_NAMES.length).fill(false);
+}
+let prog = loadProg();
+function saveProg() { try { localStorage.setItem('gesp_lv8_prog', JSON.stringify(prog)); } catch (e) {} }
+function toggleLesson(i, el) {
+  prog[i] = el.checked;
+  saveProg();
+  renderStations();
+}
+function renderStations() {
+  const box = document.getElementById('lvStations');
+  box.innerHTML = '';
+  const first = prog.indexOf(false);
+  LESSON_NAMES.forEach((n, i) => {
+    const a = document.createElement('a');
+    a.className = 'station' + (prog[i] ? ' done' : '') + (i === first ? ' cur' : '');
+    a.href = '#lv8l' + (i + 1);
+    a.innerHTML = '<b>' + (i + 1) + '</b><span>' + n + '</span><i>' + (prog[i] ? '✅' : (i === first ? '▶️' : '🔒')) + '</i>';
+    box.appendChild(a);
+  });
+  const n = prog.filter(Boolean).length;
+  document.getElementById('mapBar').style.width = (n / LESSON_NAMES.length * 100) + '%';
+  document.getElementById('mapMsg').textContent = '进度 ' + n + ' / ' + LESSON_NAMES.length + ' 课' + (n === LESSON_NAMES.length ? ' 🎓🎓 八级完成！C++ 全 8 级通关，太厉害了！' : '');
+}
+buildLessonQuizzes();
+renderStations();
+</script>
+</body>
+</html>

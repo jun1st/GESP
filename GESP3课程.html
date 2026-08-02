@@ -1,0 +1,512 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="GESP C++ 三级课程：数据编码、进制转换、位运算、一维数组、字符串、枚举与模拟法。">
+<title>GESP C++ 三级课程 📘</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans SC", sans-serif;
+    background: linear-gradient(170deg, #f0f9ff 0%, #ffffff 50%, #f0fdfa 100%);
+    color: #2b2d42;
+    line-height: 1.8;
+    min-height: 100vh;
+  }
+  .wrap { max-width: 920px; margin: 0 auto; padding: 14px 18px 50px; }
+  header { text-align: center; padding: 26px 12px 8px; }
+  header .mascot { font-size: 50px; display: block; animation: float 3s ease-in-out infinite; }
+  @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+  h1 {
+    font-size: clamp(25px, 5vw, 38px);
+    background: linear-gradient(90deg, #0ea5e9, #22d3ee, #10b981);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    margin: 8px 0 4px;
+  }
+  .slogan { color: #6c6f93; font-size: 15px; }
+  nav.chips { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin: 18px 0 10px; }
+  .chip {
+    text-decoration: none;
+    background: #fff;
+    border: 2px solid #dce3f5;
+    color: #2b2d42;
+    padding: 7px 13px;
+    border-radius: 999px;
+    font-size: 14px;
+    font-weight: 600;
+    transition: transform .15s, border-color .15s, box-shadow .15s;
+  }
+  .chip:hover { transform: translateY(-2px); border-color: #0ea5e9; box-shadow: 0 4px 12px rgba(43,45,66,.12); }
+  .panel {
+    background: #fff;
+    border-radius: 22px;
+    padding: 20px 20px 24px;
+    margin: 20px 0;
+    box-shadow: 0 6px 24px rgba(43,45,66,.07);
+    border-top: 7px solid #0ea5e9;
+  }
+  .panel h2 { font-size: clamp(20px, 4vw, 26px); color: #0ea5e9; margin-bottom: 8px; }
+  .callout { border-radius: 14px; padding: 12px 15px; font-size: 14.5px; margin: 12px 0; }
+  .callout.info { background: #eef4ff; border: 2px solid #bcd0ff; }
+  .callout.key { background: #ffeef1; border: 2px solid #fda4af; }
+  .goal {
+    background: #eef4ff;
+    border: 2px solid #bcd0ff;
+    border-radius: 14px;
+    padding: 10px 14px;
+    font-size: 14.5px;
+    margin: 10px 0;
+  }
+  details.lesson {
+    background: #fff;
+    border-radius: 18px;
+    border: 2px solid #e2e8f8;
+    margin: 14px 0;
+    overflow: hidden;
+  }
+  details.lesson[open] { box-shadow: 0 8px 24px rgba(43,45,66,.1); }
+  details.lesson summary {
+    list-style: none;
+    cursor: pointer;
+    padding: 13px 18px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: linear-gradient(90deg, #0ea5e9, #22d3ee);
+    color: #fff;
+    font-weight: 800;
+  }
+  details.lesson summary::-webkit-details-marker { display: none; }
+  .lnum {
+    background: rgba(255,255,255,.22);
+    border: 2px solid rgba(255,255,255,.55);
+    border-radius: 999px;
+    padding: 2px 11px;
+    font-size: 13px;
+    white-space: nowrap;
+  }
+  .lgoal { font-size: 13px; font-weight: 600; opacity: .95; }
+  .ltoggle { margin-left: auto; font-size: 18px; }
+  details.lesson[open] .ltoggle { transform: rotate(180deg); }
+  .lbody { padding: 16px 18px 18px; }
+  .lbody h4 { font-size: 15.5px; color: #0ea5e9; margin: 14px 0 6px; }
+  .lbody h4:first-child { margin-top: 0; }
+  .lbody p, .lbody ul, .lbody ol { font-size: 14.5px; margin: 6px 0; }
+  .lbody ul, .lbody ol { padding-left: 22px; }
+  code {
+    font-family: "SF Mono", Consolas, monospace;
+    background: #eef1fa;
+    color: #0e7490;
+    padding: 1px 7px;
+    border-radius: 7px;
+    font-size: 13.5px;
+  }
+  .codebox { position: relative; margin: 10px 0; }
+  .codebox pre {
+    background: #20232e;
+    color: #d6f5e3;
+    border-radius: 14px;
+    padding: 14px 16px;
+    overflow-x: auto;
+    font-size: 13.5px;
+    line-height: 1.65;
+    font-family: "SF Mono", Consolas, "Courier New", monospace;
+  }
+  .cpy {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    border: none;
+    background: rgba(255,255,255,.14);
+    color: #fff;
+    border-radius: 8px;
+    padding: 4px 10px;
+    font-size: 12px;
+    cursor: pointer;
+    font-family: inherit;
+  }
+  .lquiz { margin: 12px 0 6px; }
+  .lqi { background: #f7f9ff; border-radius: 14px; padding: 12px 14px; margin: 10px 0; }
+  .lqq { font-weight: 700; font-size: 14.5px; margin-bottom: 6px; }
+  .lqb {
+    display: block;
+    width: 100%;
+    text-align: left;
+    margin: 5px 0;
+    border: 2px solid #dce3f5;
+    background: #fff;
+    border-radius: 12px;
+    padding: 7px 12px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: inherit;
+  }
+  .lqb.right { background: #d1fae5 !important; border-color: #10b981 !important; color: #065f46 !important; }
+  .lqb.wrong { background: #ffe4e6 !important; border-color: #f43f5e !important; color: #881337 !important; }
+  .lqf { font-size: 13px; margin-top: 6px; font-weight: 600; }
+  .lqf.ok { color: #047857; }
+  .lqf.no { color: #be123c; }
+  .checks { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 8px; margin: 12px 0; }
+  .checks label {
+    background: #f7f9ff;
+    border: 2px solid #e2e8f8;
+    border-radius: 14px;
+    padding: 9px 12px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .checks input { width: 17px; height: 17px; accent-color: #0ea5e9; flex: none; }
+  .checks label.done { background: #eafaf1; border-color: #3ecf8e; }
+  .bar { background: #e7ebf8; border-radius: 999px; height: 13px; overflow: hidden; margin: 8px 0; }
+  .bar i { display: block; height: 100%; width: 0; background: linear-gradient(90deg, #0ea5e9, #34d399); transition: width .4s; }
+  .stations { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin: 12px 0; }
+  .station {
+    text-decoration: none;
+    background: #f7f9ff;
+    border: 2px solid #e2e8f8;
+    border-radius: 14px;
+    padding: 10px 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #2b2d42;
+    font-size: 13.5px;
+    font-weight: 600;
+  }
+  .station b { background: #0ea5e9; color: #fff; border-radius: 999px; width: 24px; height: 24px; display: grid; place-items: center; font-size: 12px; flex: none; }
+  .station i { margin-left: auto; font-style: normal; }
+  .station.done { background: #eafaf1; border-color: #3ecf8e; }
+  .station.done b { background: #10b981; }
+  .station.cur { border-color: #0ea5e9; box-shadow: 0 0 0 2px rgba(14,165,233,.18); }
+  footer { text-align: center; color: #6c6f93; font-size: 14px; padding: 18px 0 6px; }
+  footer a { color: #0ea5e9; font-weight: 700; text-decoration: none; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <span class="mascot">📘</span>
+    <h1>GESP C++ 三级课程</h1>
+    <p class="slogan">从"看得懂代码"到"想得出算法"！</p>
+  </header>
+
+  <nav class="chips" aria-label="快捷入口">
+    <a class="chip" href="index.html">🏠 主页</a>
+    <a class="chip" href="GESP官方考纲.html">📋 官方考纲</a>
+    <a class="chip" href="基础常识乐园.html">🧠 基础常识</a>
+    <a class="chip" href="GESP1学习乐园.html">🎒 一级</a>
+    <a class="chip" href="GESP2学习乐园.html">🚀 二级</a>
+    <a class="chip" href="GESP二级知识点精讲.html">📖 笔记</a>
+    <a class="chip" href="复习站.html">📒 复习站</a>
+    <a class="chip" href="家长中心.html">👨‍👩‍👧 家长中心</a>
+  </nav>
+
+  <div class="panel">
+    <h2>📌 三级学什么？</h2>
+    <div class="callout info">考纲知识内容：数据编码（原码/反码/补码）、进制转换（二/八/十/十六）、位运算（&amp; | ~ ^ &lt;&lt; &gt;&gt;）、算法概念与描述、C++ 一维数组、字符串及其函数、枚举法、模拟法。</div>
+    <div class="callout key">🎯 知识目标：掌握数据编码、进制转换、位运算等知识，掌握一维数组、字符串及函数的使用，能够独立使用模拟法、枚举法解决对应的算法问题。题型：单选 15×2 + 判断 10×2 + 编程 2×25 ｜ 考试时间：120 分钟。</div>
+    <div class="goal">💡 学习建议：这一级开始"上难度"了！先打好位运算和进制的底子，再练数组和字符串，最后用枚举/模拟解决小问题。每课结尾有"考一考"，学完记得打勾打卡。</div>
+
+    <h2>🗺️ 学习地图</h2>
+    <div class="stations" id="lvStations"></div>
+    <h2>📝 课程打卡</h2>
+    <div class="checks" id="lvChecks"></div>
+    <div class="bar"><i id="progBar"></i></div>
+    <p class="goal" id="progMsg" style="margin:6px 0 0">进度 0 / 6 课</p>
+  </div>
+
+  <details class="lesson" id="lv3l1">
+    <summary><span class="lnum">第 1 课</span><span class="lgoal">数据编码：原码、反码、补码</span><span class="ltoggle">▾</span></summary>
+    <div class="lbody">
+      <div class="goal">🎯 本节目标：1. 知道负数在电脑里是怎么存的；2. 会写 8 位原码、反码、补码。</div>
+      <h4>📖 讲解</h4>
+      <p>电脑里存数字也有"正负"。三个概念要分清：</p>
+      <ul>
+        <li><b>原码</b>：最高位是符号位（0 正 1 负），其余位照抄数值。+5 = <code>0000 0101</code>，-5 = <code>1000 0101</code>。</li>
+        <li><b>反码</b>：正数不变；负数 = 符号位不变、其余位全部取反（0 变 1、1 变 0）。-5 的反码 = <code>1111 1010</code>。</li>
+        <li><b>补码</b>：正数不变；负数 = 反码再 +1。-5 的补码 = <code>1111 1011</code>。</li>
+      </ul>
+      <p>为什么电脑用补码？因为 <b>减法可以变成加法</b>（A - B = A + B 的补码），电路只要会加法就行；而且 0 只有一种表示，不会出现"+0/-0"打架。</p>
+      <div class="codebox"><pre>// 以 -5 为例（8 位）：
+// 原码：1000 0101
+// 反码：1111 1010   （符号位不变，其余取反）
+// 补码：1111 1011   （反码 + 1）
+// 电脑里存的都是补码！</pre><button class="cpy" onclick="copyCode(this)">📋 复制</button></div>
+      <div class="lquiz" id="qz-l1"></div>
+      <div class="callout info">📌 本节小结：原码 = 符号位 + 数值；反码 = 负数取反（符号位不动）；补码 = 反码 + 1。存负数用补码，减法变加法。</div>
+    </div>
+  </details>
+
+  <details class="lesson" id="lv3l2">
+    <summary><span class="lnum">第 2 课</span><span class="lgoal">进制转换：二、八、十、十六</span><span class="ltoggle">▾</span></summary>
+    <div class="lbody">
+      <div class="goal">🎯 本节目标：1. 会在二进制、八进制、十进制、十六进制之间转换；2. 记住十六进制用 A~F 表示 10~15。</div>
+      <h4>📖 讲解</h4>
+      <ul>
+        <li>十六进制有 16 个符号：0~9、A(10)、B(11)、C(12)、D(13)、E(14)、F(15)。</li>
+        <li><b>4 位二进制 = 1 位十六进制</b>，所以十六进制是二进制的"缩写"，超好用。</li>
+        <li>二进制转十进制：把"1"所在的份量加起来（1、2、4、8、16……）。</li>
+        <li>十进制转二进制：不断"除 2 取余"，余数倒着写。</li>
+      </ul>
+      <div class="codebox"><pre>#include &lt;iostream&gt;
+using namespace std;
+int main() {
+    int x = 26;
+    cout &lt;&lt; dec &lt;&lt; x &lt;&lt; endl;  // 26（十进制）
+    cout &lt;&lt; hex &lt;&lt; x &lt;&lt; endl;  // 1a（十六进制）
+    cout &lt;&lt; oct &lt;&lt; x &lt;&lt; endl;  // 32（八进制）
+    return 0;
+}</pre><button class="cpy" onclick="copyCode(this)">📋 复制</button></div>
+      <div class="lquiz" id="qz-l2"></div>
+      <div class="callout info">📌 本节小结：十六进制 A~F 对应 10~15；4 位二进制 = 1 位十六进制；转十进制用"份量相加"，转二进制用"除 2 取余倒着写"。</div>
+    </div>
+  </details>
+
+  <details class="lesson" id="lv3l3">
+    <summary><span class="lnum">第 3 课</span><span class="lgoal">位运算：&amp; | ~ ^ &lt;&lt; &gt;&gt;</span><span class="ltoggle">▾</span></summary>
+    <div class="lbody">
+      <div class="goal">🎯 本节目标：1. 会用 6 种位运算；2. 记住"左移 = ×2ⁿ、右移 = ÷2ⁿ"；3. 会判断奇偶（x&amp;1）。</div>
+      <h4>📖 讲解</h4>
+      <ul>
+        <li><code>&amp;</code> 按位与：两位都是 1 结果才是 1。</li>
+        <li><code>|</code> 按位或：有一个 1 就是 1。</li>
+        <li><code>^</code> 按位异或：不同为 1，相同为 0。</li>
+        <li><code>~</code> 按位取反：0 变 1，1 变 0。</li>
+        <li><code>&lt;&lt;</code> 左移 n 位 = 乘 2ⁿ；<code>&gt;&gt;</code> 右移 n 位 = 除 2ⁿ（向下取整）。</li>
+        <li>妙用：判断奇数用 <code>x &amp; 1</code>（奇数最后一位是 1）；取第 k 位用 <code>(x &gt;&gt; k) &amp; 1</code>。</li>
+      </ul>
+      <div class="codebox"><pre>#include &lt;iostream&gt;
+using namespace std;
+int main() {
+    int a = 5, b = 3;          // 0101 和 0011
+    cout &lt;&lt; (a &amp; b) &lt;&lt; endl;   // 1
+    cout &lt;&lt; (a | b) &lt;&lt; endl;   // 7
+    cout &lt;&lt; (a ^ b) &lt;&lt; endl;   // 6
+    cout &lt;&lt; (1 &lt;&lt; 4) &lt;&lt; endl;  // 16：1 左移 4 位 = ×16
+    return 0;
+}</pre><button class="cpy" onclick="copyCode(this)">📋 复制</button></div>
+      <div class="lquiz" id="qz-l3"></div>
+      <div class="callout info">📌 本节小结：位运算直接对二进制位操作；左移 = ×2ⁿ，右移 = ÷2ⁿ；x&amp;1 判断奇偶，异或"相同为 0、不同为 1"。</div>
+    </div>
+  </details>
+
+  <details class="lesson" id="lv3l4">
+    <summary><span class="lnum">第 4 课</span><span class="lgoal">一维数组：一排有编号的格子</span><span class="ltoggle">▾</span></summary>
+    <div class="lbody">
+      <div class="goal">🎯 本节目标：1. 会定义数组并理解下标从 0 开始；2. 会用循环遍历数组（求和、找最大）。</div>
+      <h4>📖 讲解</h4>
+      <ul>
+        <li>数组 = 一排格子，每个格子有编号（<b>下标从 0 开始</b>）。</li>
+        <li>定义：<code>int a[105];</code> 表示最多放 105 个整数。用 <code>a[0]、a[1]…</code> 访问。</li>
+        <li>遍历套路：<code>for (int i = 0; i &lt; n; i++)</code> 把每个格子读一遍/算一遍。</li>
+        <li>注意：下标越界（比如访问 a[n]）是未定义行为，千万别写！</li>
+      </ul>
+      <div class="codebox"><pre>#include &lt;iostream&gt;
+using namespace std;
+int main() {
+    int n, a[105], mx = -1000000000;
+    cin &gt;&gt; n;
+    for (int i = 0; i &lt; n; i++) cin &gt;&gt; a[i];
+    for (int i = 0; i &lt; n; i++)
+        if (a[i] &gt; mx) mx = a[i];
+    cout &lt;&lt; mx &lt;&lt; endl;   // 输出最大值
+    return 0;
+}</pre><button class="cpy" onclick="copyCode(this)">📋 复制</button></div>
+      <div class="lquiz" id="qz-l4"></div>
+      <div class="callout info">📌 本节小结：下标从 0 开始；循环 i 从 0 到 n-1 遍历；找最大就"比一比，留下大的"。</div>
+    </div>
+  </details>
+
+  <details class="lesson" id="lv3l5">
+    <summary><span class="lnum">第 5 课</span><span class="lgoal">字符串及其函数</span><span class="ltoggle">▾</span></summary>
+    <div class="lbody">
+      <div class="goal">🎯 本节目标：1. 会用 string 存文字；2. 会用 size/find/substr/toupper 等常用函数。</div>
+      <h4>📖 讲解</h4>
+      <ul>
+        <li><code>string s = "Hello";</code> 字符串就像一个"字符数组"，但更好用。</li>
+        <li><code>s.size()</code> 长度；<code>s[i]</code> 取第 i 个字符（还是从 0 开始）。</li>
+        <li><code>s.find("llo")</code> 找子串位置（找不到返回很大的数）；<code>s.substr(起点, 长度)</code> 截取。</li>
+        <li>大小写转换用 <code>&lt;cctype&gt;</code> 的 <code>tolower/toupper</code>。</li>
+      </ul>
+      <div class="codebox"><pre>#include &lt;iostream&gt;
+#include &lt;string&gt;
+#include &lt;cctype&gt;
+using namespace std;
+int main() {
+    string s = "Hello";
+    cout &lt;&lt; s.size() &lt;&lt; endl;          // 5
+    cout &lt;&lt; s[0] &lt;&lt; endl;              // H
+    cout &lt;&lt; s.find("llo") &lt;&lt; endl;     // 2
+    cout &lt;&lt; s.substr(1, 3) &lt;&lt; endl;    // ell
+    cout &lt;&lt; (char)toupper('a') &lt;&lt; endl; // A
+    return 0;
+}</pre><button class="cpy" onclick="copyCode(this)">📋 复制</button></div>
+      <div class="lquiz" id="qz-l5"></div>
+      <div class="callout info">📌 本节小结：string 常用四件套——size 长度、[] 取字符、find 找位置、substr 截取；大小写用 tolower/toupper。</div>
+    </div>
+  </details>
+
+  <details class="lesson" id="lv3l6">
+    <summary><span class="lnum">第 6 课</span><span class="lgoal">枚举法与模拟法</span><span class="ltoggle">▾</span></summary>
+    <div class="lbody">
+      <div class="goal">🎯 本节目标：1. 会用枚举（穷举）解决小数据问题；2. 会"模拟"：照着规则一步步演。</div>
+      <h4>📖 讲解</h4>
+      <ul>
+        <li><b>枚举法</b>：把所有可能的情况都试一遍，再用 if 筛选符合条件的。数据范围小的时候最管用。</li>
+        <li><b>模拟法</b>：题目说怎么做，程序就照着一步步做（比如模拟游戏回合、模拟时间流逝）。</li>
+        <li>这两招是三级编程题的核心武器，一定要练熟！</li>
+      </ul>
+      <div class="codebox"><pre>#include &lt;iostream&gt;
+using namespace std;
+int main() {
+    int n;
+    cin &gt;&gt; n;
+    for (int x = 1; x &lt;= n; x++) {      // 枚举每一个数
+        if (x % 3 == 0) cout &lt;&lt; x &lt;&lt; " ";  // 条件筛选
+    }
+    cout &lt;&lt; endl;
+    return 0;
+}</pre><button class="cpy" onclick="copyCode(this)">📋 复制</button></div>
+      <div class="lquiz" id="qz-l6"></div>
+      <div class="callout info">📌 本节小结：枚举 = 全部试一遍 + if 筛选；模拟 = 照着规则一步步演。看到"数据不大 + 情况不多"就想到枚举！</div>
+    </div>
+  </details>
+
+  <footer>
+    GESP C++ 三级课程 📘 ｜ 内容依据 CCF《C++&amp;Python 认证标准》三级<br>
+    <a href="index.html">🏠 学习中心</a> ｜ <a href="复习站.html">📒 复习站</a> ｜ <a href="家长中心.html">👨‍👩‍👧 家长中心</a> ｜ <a href="GESP官方考纲.html">📋 考纲</a> ｜ <a href="GESP4课程.html">📗 四级课程 →</a>
+  </footer>
+</div>
+
+<script>
+/* ---- 每课小测 ---- */
+const LQ = {
+  l1: [
+    { q: '原码里最高的那一位是？', o: ['符号位（0 正 1 负）', '数字位', '空位', '校验位'], a: 0, e: '最高位是符号位，其余位才是数值。' },
+    { q: '负数的补码 = 反码再？', o: ['+1', '+0', '-1', '+2'], a: 0, e: '补码 = 反码 + 1，电脑里存的是补码。' }
+  ],
+  l2: [
+    { q: '十六进制里字母 A 表示数字几？', o: ['10', '15', '11', '16'], a: 0, e: 'A=10、B=11、C=12……F=15。' },
+    { q: '二进制 1011 等于十进制的？', o: ['11', '13', '9', '15'], a: 0, e: '1011 = 8+0+2+1 = 11。' }
+  ],
+  l3: [
+    { q: '5 &amp; 3 等于多少？', o: ['1', '7', '6', '8'], a: 0, e: '0101 &amp; 0011 = 0001 = 1。' },
+    { q: '1 &lt;&lt; 3 等于多少？', o: ['8', '3', '4', '16'], a: 0, e: '左移 3 位 = ×2³ = 8。' }
+  ],
+  l4: [
+    { q: '数组的下标从几开始？', o: ['0', '1', '-1', '随便'], a: 0, e: 'a[0] 是第一个格子，下标从 0 开始！' },
+    { q: 'int a[10] 最多能存几个整数？', o: ['10', '9', '11', '20'], a: 0, e: '下标 0~9，一共 10 个。' }
+  ],
+  l5: [
+    { q: 's.size() 返回的是？', o: ['字符个数', '内存大小', '下标', '随机数'], a: 0, e: 'size() 返回字符串里有多少个字符。' },
+    { q: '"abc".substr(1, 2) 结果是？', o: ['"bc"', '"ab"', '"c"', '"a"'], a: 0, e: '从下标 1 开始取 2 个：b、c。' }
+  ],
+  l6: [
+    { q: '枚举法的思路是？', o: ['全部试一遍 + if 筛选', '只试一种可能', '让电脑猜', '背答案'], a: 0, e: '枚举 = 穷举所有情况，再用条件筛选。' },
+    { q: '模拟法就是？', o: ['照着题目规则一步步演', '随机生成答案', '跳过题目', '猜一个答案'], a: 0, e: '题目怎么说，程序就怎么做，叫模拟。' }
+  ]
+};
+function buildLessonQuizzes() {
+  for (const k in LQ) {
+    const box = document.getElementById('qz-' + k);
+    if (!box) continue;
+    box.innerHTML = '<div class="goal">📝 考一考：点一点，立刻知道对错！答错的题会进复习站。</div>';
+    LQ[k].forEach((q, idx) => {
+      const w = document.createElement('div');
+      w.className = 'lqi';
+      w.innerHTML = '<div class="lqq">' + (idx + 1) + '. ' + q.q + '</div>';
+      q.o.forEach((t, j) => {
+        const b = document.createElement('button');
+        b.className = 'lqb';
+        b.textContent = 'ABCD'[j] + '. ' + t;
+        b.onclick = () => {
+          if (w.dataset.done) return;
+          w.dataset.done = '1';
+          b.classList.add(j === q.a ? 'right' : 'wrong');
+          if (j !== q.a) recordWrong({ lv: '三级', lesson: '第 ' + Number(k.slice(1)) + ' 课', q: q.q, o: q.o, a: q.a, chosen: j });
+          [...w.querySelectorAll('.lqb')].forEach((x) => { x.disabled = true; });
+          const f = document.createElement('div');
+          f.className = 'lqf ' + (j === q.a ? 'ok' : 'no');
+          f.textContent = (j === q.a ? '✅ 答对啦！' : '❌ 已记入复习站～') + q.e;
+          w.appendChild(f);
+        };
+        w.appendChild(b);
+      });
+      box.appendChild(w);
+    });
+  }
+}
+function copyCode(btn) {
+  const t = btn.closest('.codebox').querySelector('pre').textContent;
+  const done = () => { btn.textContent = '✅ 已复制'; setTimeout(() => { btn.textContent = '📋 复制'; }, 1200); };
+  if (navigator.clipboard) navigator.clipboard.writeText(t).then(done);
+  else { btn.textContent = '😅 请手动复制'; }
+}
+function recordWrong(item) {
+  try {
+    const list = JSON.parse(localStorage.getItem('gesp_wrong') || '[]');
+    list.push(Object.assign({ time: Date.now() }, item));
+    localStorage.setItem('gesp_wrong', JSON.stringify(list));
+  } catch (e) {}
+}
+/* ---- 打卡 ---- */
+const LESSON_NAMES = ['数据编码', '进制转换', '位运算', '一维数组', '字符串函数', '枚举与模拟'];
+function loadProg() {
+  try {
+    const v = JSON.parse(localStorage.getItem('gesp_lv3_prog'));
+    if (Array.isArray(v) && v.length === LESSON_NAMES.length) return v.map(Boolean);
+  } catch (e) {}
+  return new Array(LESSON_NAMES.length).fill(false);
+}
+let prog = loadProg();
+function saveProg() { try { localStorage.setItem('gesp_lv3_prog', JSON.stringify(prog)); } catch (e) {} }
+function renderChecks() {
+  const box = document.getElementById('lvChecks');
+  box.innerHTML = '';
+  LESSON_NAMES.forEach((n, i) => {
+    const lab = document.createElement('label');
+    lab.className = prog[i] ? 'done' : '';
+    lab.innerHTML = '<input type="checkbox" ' + (prog[i] ? 'checked' : '') + '>' + (i + 1) + '. ' + n;
+    lab.querySelector('input').addEventListener('change', () => {
+      prog[i] = lab.querySelector('input').checked;
+      lab.className = prog[i] ? 'done' : '';
+      saveProg();
+      paintProg();
+    });
+    box.appendChild(lab);
+  });
+}
+function paintProg() {
+  const n = prog.filter(Boolean).length;
+  document.getElementById('progBar').style.width = (n / LESSON_NAMES.length * 100) + '%';
+  document.getElementById('progMsg').textContent = '进度 ' + n + ' / ' + LESSON_NAMES.length + ' 课' + (n === LESSON_NAMES.length ? ' 🎓 三级毕业！' : '');
+}
+function renderStations() {
+  const box = document.getElementById('lvStations');
+  if (!box) return;
+  box.innerHTML = '';
+  const first = prog.indexOf(false);
+  LESSON_NAMES.forEach((n, i) => {
+    const a = document.createElement('a');
+    a.className = 'station' + (prog[i] ? ' done' : '') + (i === first ? ' cur' : '');
+    a.href = '#lv3l' + (i + 1);
+    a.innerHTML = '<b>' + (i + 1) + '</b><span>' + n + '</span><i>' + (prog[i] ? '✅' : (i === first ? '▶️' : '🔒')) + '</i>';
+    box.appendChild(a);
+  });
+}
+buildLessonQuizzes();
+renderChecks();
+paintProg();
+renderStations();
+</script>
+</body>
+</html>

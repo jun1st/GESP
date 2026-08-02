@@ -410,6 +410,72 @@
   .fb { border-radius: 14px; padding: 10px 14px; font-size: 14.5px; margin: 10px 0; min-height: 20px; }
   .fb.ok { background: #eafaf1; border: 2px solid #3ecf8e; }
   .fb.no { background: #ffeef1; border: 2px solid #ef476f; }
+  .goal {
+    background: #eef4ff;
+    border: 2px solid #bcd0ff;
+    border-radius: 14px;
+    padding: 10px 14px;
+    font-size: 14.5px;
+    margin: 10px 0;
+  }
+  .lquiz { margin: 12px 0 6px; }
+  .lqi { background: #f7f9ff; border-radius: 14px; padding: 12px 14px; margin: 10px 0; }
+  .lqq { font-weight: 700; font-size: 14.5px; margin-bottom: 6px; }
+  .lqb {
+    display: block;
+    width: 100%;
+    text-align: left;
+    margin: 5px 0;
+    border: 2px solid #dce3f5;
+    background: #fff;
+    border-radius: 12px;
+    padding: 7px 12px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: inherit;
+  }
+  .lqb:hover { border-color: var(--tc); }
+  .lqb.right { background: #d1fae5 !important; border-color: #10b981 !important; color: #065f46 !important; }
+  .lqb.wrong { background: #ffe4e6 !important; border-color: #f43f5e !important; color: #881337 !important; }
+  .lqf { font-size: 13px; margin-top: 6px; font-weight: 600; }
+  .lqf.ok { color: #047857; }
+  .lqf.no { color: #be123c; }
+  .map { margin: 16px 0 4px; }
+  .stations { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; margin: 12px 0; }
+  .station {
+    text-decoration: none;
+    background: #f7f9ff;
+    border: 2px solid #e2e8f8;
+    border-radius: 14px;
+    padding: 10px 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #2b2d42;
+    font-size: 13.5px;
+    font-weight: 600;
+  }
+  .station b { background: #5e60ce; color: #fff; border-radius: 999px; width: 24px; height: 24px; display: grid; place-items: center; font-size: 12px; flex: none; }
+  .station i { margin-left: auto; font-style: normal; }
+  .station.done { background: #eafaf1; border-color: #3ecf8e; }
+  .station.done b { background: #10b981; }
+  .station.cur { border-color: #5e60ce; box-shadow: 0 0 0 2px rgba(94,96,206,.18); }
+  .chkbtn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #eafaf1;
+    border: 2px solid #3ecf8e;
+    color: #047857;
+    font-weight: 700;
+    font-size: 14px;
+    border-radius: 999px;
+    padding: 8px 16px;
+    margin-top: 12px;
+    cursor: pointer;
+  }
+  .chkbtn input { width: 16px; height: 16px; accent-color: #10b981; }
   .finish { text-align: center; padding: 16px 0; }
   .finish .medal { font-size: 70px; }
   #confetti { position: fixed; inset: 0; pointer-events: none; overflow: hidden; z-index: 99; }
@@ -457,15 +523,27 @@
     <a class="chip" style="--chip:#06d6a0" href="#s10">🏆 大闯关</a>
     <a class="chip" style="--chip:#0ea5e9" href="基础常识乐园.html">🧠 基础常识</a>
     <a class="chip" style="--chip:#f43f5e" href="GESP官方考纲.html">📋 考纲</a>
+    <a class="chip" style="--chip:#a855f7" href="复习站.html">📒 复习站</a>
+    <a class="chip" style="--chip:#0284c7" href="家长中心.html">👨‍👩‍👧 家长中心</a>
     <a class="chip" style="--chip:#118ab2" href="index.html">🏠 主页</a>
     <a class="chip" style="--chip:#ff9f43" href="GESP1学习乐园.html">🎒 一级乐园</a>
   </nav>
 
+  <section class="topic" id="lvmap" style="--tc:#5e60ce">
+    <div class="big-emoji">🗺️</div>
+    <h2>学习地图（二级）</h2>
+    <p class="sub">模块一：1~5 课（客观题常识）；模块二：6~9 课（编程核心）！</p>
+    <div class="stations" id="lvStations"></div>
+    <div class="bar"><i id="mapBar"></i></div>
+    <div class="goal" id="mapMsg" style="margin:6px 0 0">学完一课点一下"打卡"，地图就会点亮！</div>
+  </section>
+
   <!-- ========== 1 存储 ========== -->
   <section class="topic" id="s1" style="--tc:#4f8ef7">
     <div class="big-emoji">🗄️</div>
-    <h2>1. 电脑的记忆：RAM、ROM、Cache</h2>
+    <h2>第 1 课：电脑的记忆（RAM/ROM/Cache 与存储单位）</h2>
     <p class="sub">电脑有三种"记忆"，一个会忘、一个不忘、一个超快。点一下"断电"看看会发生什么！</p>
+    <div class="goal">🎯 本节目标：1. 分清 RAM（会忘）、ROM（不忘）、Cache（最快）；2. 会背存储单位换算（×1024）。</div>
 
     <div class="memlab">
       <div class="mem ram">
@@ -513,13 +591,17 @@
       </div>
     </div>
     <div class="tip">🧠 口诀：Cache 最快最贵，RAM 会忘，ROM 不忘；往上换算都是 ×1024！</div>
+    <div class="tip">📌 本节小结：内存 RAM 断电丢、ROM 断电不丢、Cache 最快最贵；1 KB = 1024 B，单位从 bit 到 TB 一路 ×1024。</div>
+    <div class="lquiz" id="qz-l1"></div>
+    <label class="chkbtn"><input type="checkbox" onchange="toggleLesson(0, this)"> 学完了，打卡！</label>
   </section>
 
   <!-- ========== 2 网络 ========== -->
   <section class="topic" id="s2" style="--tc:#3ecf8e">
     <div class="big-emoji">📡</div>
-    <h2>2. 电脑怎么"手拉手"：网络</h2>
+    <h2>第 2 课：网络（分类、分层、协议、IP）</h2>
     <p class="sub">点一点三个圈，看看"局域网、城域网、广域网"有多大！</p>
+    <div class="goal">🎯 本节目标：1. 会排 LAN/MAN/WAN；2. 认识 OSI 七层和 TCP/IP 四层；3. 背下常见协议和端口；4. 知道 IP 与子网掩码。</div>
 
     <div class="rings">
       <div class="ring r1" style="--tc:#3ecf8e" onclick="pickRing(0)"><span>🏠 家</span></div>
@@ -588,13 +670,17 @@
       </div>
     </div>
     <div class="tip">🏷️ IP 地址就像门牌号：192.168.1.1 是家里的"私有地址"，127.0.0.1 是"我自己的地址"。</div>
+    <div class="tip">📌 本节小结：LAN&lt;MAN&lt;WAN；分层像寄快递（OSI 口诀"应表会传网链物"）；HTTP 80、HTTPS 443、DNS 53；子网掩码 255.255.255.0 前 24 位是网络号。</div>
+    <div class="lquiz" id="qz-l2"></div>
+    <label class="chkbtn"><input type="checkbox" onchange="toggleLesson(1, this)"> 学完了，打卡！</label>
   </section>
 
   <!-- ========== 3 语言 ========== -->
   <section class="topic" id="s3" style="--tc:#9b6ef3">
     <div class="big-emoji">💬</div>
-    <h2>3. 给电脑说"人话"：程序语言</h2>
+    <h2>第 3 课：程序设计语言</h2>
     <p class="sub">同样说"让 a 等于 5"，三种语言说法不一样。点一点，听听它们怎么自我介绍！</p>
+    <div class="goal">🎯 本节目标：1. 分清机器语言、汇编语言、高级语言；2. 知道编译型和解释型的区别；3. 记住 C++ 是编译型高级语言。</div>
 
     <div class="cards">
       <div class="box langcard" style="--tc:#ef476f" onclick="pickLang(0)">
@@ -617,13 +703,17 @@
       </div>
     </div>
     <div class="tip">🧠 记住：C++ 是<b>编译型</b>的<b>高级语言</b>；Python 是解释型（边翻译边运行）。</div>
+    <div class="tip">📌 本节小结：机器语言=0/1 直接执行；汇编=助记符要翻译；高级语言最好懂。C++ 先整体编译再运行。</div>
+    <div class="lquiz" id="qz-l3"></div>
+    <label class="chkbtn"><input type="checkbox" onchange="toggleLesson(2, this)"> 学完了，打卡！</label>
   </section>
 
   <!-- ========== 4 流程图 ========== -->
   <section class="topic" id="s4" style="--tc:#ff9f43">
     <div class="big-emoji">🧭</div>
-    <h2>4. 流程图：给程序画地图</h2>
+    <h2>第 4 课：流程图</h2>
     <p class="sub">小明要出门！点下面的天气按钮，跟着流程走走看；点每个框，认识它的名字。</p>
+    <div class="goal">🎯 本节目标：1. 认识 5 种流程图形状；2. 会读、会画简单流程图；3. 知道三种基本结构长什么样。</div>
 
     <div class="flow">
       <div class="fnode" onclick="flowName(this,'开始 / 结束（圆角框）')">🏁 开始</div>
@@ -645,13 +735,17 @@
     </div>
     <div class="msg" id="flowMsg">点天气按钮试试～</div>
     <div class="tip">🧠 菱形 = 判断，两条路；矩形 = 做事；平行四边形 = 输入输出；圆角框 = 开始结束。</div>
+    <div class="tip">📌 本节小结：起止=圆角、输入输出=平行四边形、处理=矩形、判断=菱形、方向=箭头；箭头折回去就是循环。</div>
+    <div class="lquiz" id="qz-l4"></div>
+    <label class="chkbtn"><input type="checkbox" onchange="toggleLesson(3, this)"> 学完了，打卡！</label>
   </section>
 
   <!-- ========== 5 ASCII ========== -->
   <section class="topic" id="s5" style="--tc:#ff6b9d">
     <div class="big-emoji">🔤</div>
-    <h2>5. ASCII 密码机：每个字符都有编号</h2>
+    <h2>第 5 课：ASCII 编码</h2>
     <p class="sub">在下面的框里打字，看看每个字母的"秘密编号"！</p>
+    <div class="goal">🎯 本节目标：1. 知道字符在电脑里存的是编号；2. 背下四个必背值（空格 32、'0' 48、'A' 65、'a' 97）；3. 会做字符和编码互转。</div>
 
     <label for="asciiIn">打几个字母试试：</label>
     <input type="text" id="asciiIn" value="ABa0" maxlength="20" oninput="encodeAscii()" style="margin:8px 0">
@@ -665,6 +759,9 @@
       <div class="box"><div class="v">97</div>'a'</div>
     </div>
     <div class="tip">🧠 大小写正好差 32：'A' + 32 = 'a'！'B' = 66，'9' = 57，你能推出来吗？</div>
+    <div class="tip">📌 本节小结：存字符=存数字；空格 32、'0' 48、'A' 65、'a' 97；大写转小写 +32。</div>
+    <div class="lquiz" id="qz-l5"></div>
+    <label class="chkbtn"><input type="checkbox" onchange="toggleLesson(4, this)"> 学完了，打卡！</label>
 
     <h3>🎯 小挑战</h3>
     <div class="msg" id="asciiQMsg">点"出题"开始！</div>
@@ -677,8 +774,9 @@
   <!-- ========== 6 类型转换 ========== -->
   <section class="topic" id="s6" style="--tc:#2ec4b6">
     <div class="big-emoji">🔢</div>
-    <h2>6. 类型转换：整数和小数的"变身"</h2>
+    <h2>第 6 课：数据类型转换</h2>
     <p class="sub">最著名的陷阱：5 ÷ 2 到底等于几？试试看！</p>
+    <div class="goal">🎯 本节目标：1. 知道隐式转换"小的自动变大的"；2. 会写强制转换 (double)a；3. 躲开整数除法和 int 溢出两个坑。</div>
 
     <div class="btnrow">
       <label>被除数 a：<input type="number" id="cvA" value="5" min="1" max="99" oninput="computeCv()"></label>
@@ -701,13 +799,17 @@
 double x = a / b;          <span class="dim">// 2.0，不是 2.5！先整数除法</span>
 double y = (double)a / b;  <span class="dim">// 2.5 ✅</span></code></div>
     <div class="warn">⚠️ 两个坑：① int 太小会溢出，数大用 long long；② 浮点数比较用 fabs(a-b) &lt; 0.000001，别用 ==。</div>
+    <div class="tip">📌 本节小结：两个整数相除结果还是整数；想得小数先转 double；int 会溢出、double 不能直接比相等。</div>
+    <div class="lquiz" id="qz-l6"></div>
+    <label class="chkbtn"><input type="checkbox" onchange="toggleLesson(5, this)"> 学完了，打卡！</label>
   </section>
 
   <!-- ========== 7 分支 ========== -->
   <section class="topic" id="s7" style="--tc:#ef476f">
     <div class="big-emoji">🌿</div>
-    <h2>7. 分支：程序自己会"选择"</h2>
+    <h2>第 7 课：多层分支与 switch</h2>
     <p class="sub">拖动分数条，看看 if-else 会走哪条路！</p>
+    <div class="goal">🎯 本节目标：1. 会写 if-else if-else 多级判断；2. 知道 switch 的 case 必须是常量；3. 明白 break"穿透"和悬空 else。</div>
 
     <div class="btnrow">
       <label>分数：<input type="range" id="scoreIn" min="0" max="100" value="85" oninput="showGrade()"></label>
@@ -735,13 +837,17 @@ double y = (double)a / b;  <span class="dim">// 2.5 ✅</span></code></div>
 }</code></div>
     <div class="msg" id="switchOut">输出：B</div>
     <div class="tip">🧠 没有 break，程序会"掉下去"继续执行，这就是<b>穿透</b>——选择题最爱考！</div>
+    <div class="tip">📌 本节小结：多层分支从上往下试；switch 漏 break 会穿透；else 跟最近的未配对 if；先判特殊情况再判一般情况。</div>
+    <div class="lquiz" id="qz-l7"></div>
+    <label class="chkbtn"><input type="checkbox" onchange="toggleLesson(6, this)"> 学完了，打卡！</label>
   </section>
 
   <!-- ========== 8 循环 ========== -->
   <section class="topic" id="s8" style="--tc:#5e60ce">
     <div class="big-emoji">🔁</div>
-    <h2>8. 循环：让程序"一遍遍"做事</h2>
+    <h2>第 8 课：多层循环与数位套路</h2>
     <p class="sub">选一个图形，按"一步"慢慢看电脑怎么用两层循环把它打出来！</p>
+    <div class="goal">🎯 本节目标：1. 会用嵌套循环打印图形（外层管行、内层管列）；2. 掌握"剥洋葱"数位分解套路（n%10、n/10）；3. 会用枚举穷举。</div>
 
     <div class="btnrow">
       <label>图形：
@@ -778,13 +884,17 @@ double y = (double)a / b;  <span class="dim">// 2.5 ✅</span></code></div>
     <input type="number" id="peelIn" value="123" min="0" max="999999" oninput="peel()" style="margin:6px 0">
     <div class="steps" id="peelOut"></div>
     <div class="tip">🧠 真题套路：数位之和、数字黑洞、自幂数……全靠"剥洋葱"！</div>
+    <div class="tip">📌 本节小结：外层管行、内层管列；n%10 取个位、n/10 去掉个位；枚举=把所有可能试一遍再用 if 筛选。</div>
+    <div class="lquiz" id="qz-l8"></div>
+    <label class="chkbtn"><input type="checkbox" onchange="toggleLesson(7, this)"> 学完了，打卡！</label>
   </section>
 
   <!-- ========== 9 数学函数 ========== -->
   <section class="topic" id="s9" style="--tc:#f4a261">
     <div class="big-emoji">🎲</div>
-    <h2>9. 数学函数小工具</h2>
+    <h2>第 9 课：数学函数与随机数</h2>
     <p class="sub">输入两个数，点按钮调用 C++ 的数学函数！</p>
+    <div class="goal">🎯 本节目标：1. 会背 abs/fabs/sqrt/max/min/pow/round；2. 会用 rand() 和 srand(time(0))；3. 知道浮点数不能直接比相等。</div>
 
     <div class="btnrow">
       <label>a：<input type="number" id="ma" value="-9" oninput="clearMath()"></label>
@@ -812,12 +922,15 @@ double y = (double)a / b;  <span class="dim">// 2.5 ✅</span></code></div>
 srand(time(0));        <span class="dim">// 播种，让每次都不一样</span>
 int x = rand() % 100;  <span class="dim">// 0~99 的随机数</span></code></div>
     <div class="tip">🧠 小提醒：<code>sqrt</code> 里不能是负数；<code>pow</code> 返回的是 double；浮点数比较别用 ==，要用 <code>fabs(a - b) &lt; 1e-9</code>。</div>
+    <div class="tip">📌 本节小结：数学函数都在 &lt;cmath&gt;；rand()%n 得 0~n-1，想 1~6 写 rand()%6+1；记得 srand(time(0)) 播种。</div>
+    <div class="lquiz" id="qz-l9"></div>
+    <label class="chkbtn"><input type="checkbox" onchange="toggleLesson(8, this)"> 学完了，打卡！</label>
   </section>
 
   <!-- ========== 10 编程练习场 ========== -->
   <section class="topic" id="editor" style="--tc:#118ab2">
     <div class="big-emoji">🛠️</div>
-    <h2>10. 编程练习场：在线编译 C++</h2>
+    <h2>🧪 编程练习场（课后实验室）</h2>
     <p class="sub">选一个真题示例，或者自己写代码，点"运行"！云端编译器马上帮你编译执行。</p>
 
     <div class="btnrow">
@@ -862,7 +975,7 @@ int x = rand() % 100;  <span class="dim">// 0~99 的随机数</span></code></div
   <!-- ========== 11 大闯关 ========== -->
   <section class="topic" id="s10" style="--tc:#06d6a0">
     <div class="big-emoji">🏆</div>
-    <h2>11. 大闯关：考考自己！</h2>
+    <h2>🏆 期末大闯关：考考自己！</h2>
     <p class="sub">一共 12 题，答对越多，勋章越大！</p>
 
     <div id="quizWrap">
@@ -883,7 +996,7 @@ int x = rand() % 100;  <span class="dim">// 0~99 的随机数</span></code></div
     <p>这个网页严格对照 CCF《C++ 编程二级标准》制作，覆盖官方考纲二级的全部 8 个知识块：计算机存储与网络（含网络分层、协议端口、IP 与子网划分）、程序设计语言、流程图、ASCII 编码、数据类型转换、多层分支、多层循环、数学函数（abs/fabs/sqrt/max/min/pow/round/rand），外加 12 题闯关。建议顺序：先带孩子玩 1~5 关（客观题），再做 6~9 关（编程题核心），最后做第 10 关闯关。「编程练习场」需要联网使用免费的在线编译器（Compiler Explorer），家长可先陪孩子试运行一次确认网络可用。配合<a href="基础常识乐园.html">《基础常识乐园》</a>、<a href="GESP官方考纲.html">《官方考纲》</a>和<a href="GESP二级知识点精讲.html">《GESP二级知识点精讲》</a>复习效果更好。</p>
   </details>
 
-  <footer>每天学一点，考试没问题！加油，小勇士！🚀 <a href="index.html">🏠 主页</a> ｜ <a href="基础常识乐园.html">🧠 基础常识</a> ｜ <a href="GESP官方考纲.html">📋 考纲</a> ｜ <a href="GESP1学习乐园.html">🎒 一级乐园</a></footer>
+  <footer>每天学一点，考试没问题！加油，小勇士！🚀 <a href="index.html">🏠 学习中心</a> ｜ <a href="复习站.html">📒 复习站</a> ｜ <a href="家长中心.html">👨‍👩‍👧 家长中心</a> ｜ <a href="基础常识乐园.html">🧠 基础常识</a> ｜ <a href="GESP官方考纲.html">📋 考纲</a> ｜ <a href="GESP1学习乐园.html">🎒 一级乐园</a></footer>
 </div>
 
 <div id="confetti" aria-hidden="true"></div>
@@ -1355,6 +1468,84 @@ async function runCode() {
 }
 
 /* ================= 10 闯关 ================= */
+/* ---- 每课小测 ---- */
+const LQ = {
+  l1: [
+    { q: '断电之后，哪个会"忘光光"？', o: ['RAM（内存）', 'ROM', '硬盘', 'U 盘'], a: 0, e: 'RAM 是工作记忆，断电就忘；ROM 和硬盘断电不丢。' },
+    { q: '三种存储器里速度最快的是？', o: ['Cache', 'RAM', '硬盘', '光盘'], a: 0, e: 'Cache 紧挨 CPU，最快最贵但容量小。' },
+    { q: '1 KB 等于多少？', o: ['1024 B', '1000 B', '8 B', '10 B'], a: 0, e: '存储单位换算率是 1024，不是 1000！' }
+  ],
+  l2: [
+    { q: '网络覆盖范围从小到大排是？', o: ['LAN &lt; MAN &lt; WAN', 'WAN &lt; LAN &lt; MAN', 'MAN &lt; WAN &lt; LAN', 'LAN &lt; WAN &lt; MAN'], a: 0, e: '局域网&lt;城域网&lt;广域网：家 → 城市 → 全球。' },
+    { q: '把域名翻译成 IP 地址的协议是？', o: ['DNS', 'HTTP', 'FTP', 'SMTP'], a: 0, e: 'DNS 像电话本，把名字翻译成 IP。' },
+    { q: '子网掩码 255.255.255.0 表示什么？', o: ['前 24 位是网络号，后 8 位是主机号', '前 8 位是网络号', '没有意思', '后 24 位是网络号'], a: 0, e: '前 24 位网络号 + 后 8 位主机号，一个网最多 254 台设备。' }
+  ],
+  l3: [
+    { q: 'C++ 属于哪种语言？', o: ['编译型高级语言', '解释型高级语言', '机器语言', '汇编语言'], a: 0, e: 'C++ 先整体编译成机器码再运行，是编译型高级语言。' },
+    { q: '机器语言由什么组成？', o: ['0 和 1', '英文单词', '中文', '数学符号'], a: 0, e: '机器语言就是 0 和 1，电脑直接执行。' },
+    { q: '哪种语言电脑"直接听懂"不用翻译？', o: ['机器语言', 'C++', 'Python', '汇编语言'], a: 0, e: '机器语言是电脑的"母语"，不用翻译。' }
+  ],
+  l4: [
+    { q: '流程图的判断框是什么形状？', o: ['菱形', '矩形', '平行四边形', '圆角矩形'], a: 0, e: '菱形=判断，有"是/否"两条出口。' },
+    { q: '输入输出框是什么形状？', o: ['平行四边形', '矩形', '菱形', '圆角矩形'], a: 0, e: '平行四边形管"读入/输出"，矩形管"处理"。' },
+    { q: '流程图里箭头"折回去"表示什么？', o: ['循环', '顺序', '分支', '结束'], a: 0, e: '箭头折回起点说明要重复做，是循环结构。' }
+  ],
+  l5: [
+    { q: '空格的 ASCII 码是多少？', o: ['32', '48', '65', '97'], a: 0, e: '空格 32、\'0\' 48、\'A\' 65、\'a\' 97，四个必背值。' },
+    { q: '大写 \'A\' 的 ASCII 码是？', o: ['65', '97', '48', '32'], a: 0, e: '\'A\'=65，\'a\'=97，小写比大写大 32。' },
+    { q: '从 \'A\' 变到 \'a\' 要加多少？', o: ['32', '1', '65', '26'], a: 0, e: '\'A\' + 32 = \'a\'，大小写相差 32。' }
+  ],
+  l6: [
+    { q: 'C++ 里 5 / 2 等于几？', o: ['2', '2.5', '3', '报错'], a: 0, e: '两个整数相除结果还是整数：5/2 = 2。' },
+    { q: '想得到 2.5，应该写哪个？', o: ['(double)5 / 2', '5 / 2', 'int(5) / 2', '5 / 2.0 都不行'], a: 0, e: '除法前先转 double，小数部分才不会丢。' },
+    { q: 'int x = int(3.9); 之后 x 等于？', o: ['3', '4', '3.9', '报错'], a: 0, e: '强制转换直接砍掉小数部分：3.9 变 3。' }
+  ],
+  l7: [
+    { q: 'switch 里漏写 break 会怎样？', o: ['穿透：继续往下执行', '编译错误', '死循环', '什么都不发生'], a: 0, e: '漏 break 会一路"掉下去"，直到遇到 break 或结束。' },
+    { q: 'else 永远和谁配对？', o: ['最近的、还没配对的 if', '第一个 if', '最后一个 if', '随便哪个'], a: 0, e: '悬空 else 配最近的未配对 if，拿不准就加 {}。' },
+    { q: 'switch 的 case 后面必须是？', o: ['常量', '变量', '任意表达式', '字符串'], a: 0, e: 'case 只能是整数或字符常量，不能是变量。' }
+  ],
+  l8: [
+    { q: '嵌套循环里，外层循环管什么？', o: ['行', '列', '换行符', '什么都没有'], a: 0, e: '外层管行、内层管列，先想清楚 i 和 j 的关系。' },
+    { q: 'n % 10 得到的是？', o: ['个位', '十位', '百位', '去掉个位'], a: 0, e: 'n % 10 取个位；n / 10 去掉个位。' },
+    { q: '枚举（穷举）法是什么？', o: ['把所有可能都试一遍，用 if 筛选', '只试一种可能', '让电脑猜', '背答案'], a: 0, e: '枚举=全部试一遍+条件筛选，百鸡问题就是这样。' }
+  ],
+  l9: [
+    { q: 'sqrt(16) 等于多少？', o: ['4', '8', '256', '16'], a: 0, e: 'sqrt 是平方根：√16 = 4。' },
+    { q: 'rand() % 6 + 1 能得到？', o: ['1~6', '0~6', '1~5', '0~5'], a: 0, e: 'rand()%6 得 0~5，再加 1 就是 1~6，正好是骰子！' },
+    { q: '比较两个浮点数是否相等，应该用？', o: ['fabs(a-b) &lt; 1e-9', 'a == b', 'a &gt; b', 'a / b'], a: 0, e: '浮点数有误差，不能直接 ==，要判断"差得很小"。' }
+  ]
+};
+function buildLessonQuizzes() {
+  for (const k in LQ) {
+    const box = document.getElementById('qz-' + k);
+    if (!box) continue;
+    box.innerHTML = '<div class="msg" style="background:#eef4ff">📝 考一考：点一点，立刻知道对错！答错的题会进复习站。</div>';
+    LQ[k].forEach((q, idx) => {
+      const w = document.createElement('div');
+      w.className = 'lqi';
+      w.innerHTML = '<div class="lqq">' + (idx + 1) + '. ' + q.q + '</div>';
+      q.o.forEach((t, j) => {
+        const b = document.createElement('button');
+        b.className = 'lqb';
+        b.textContent = 'ABCD'[j] + '. ' + t;
+        b.onclick = () => {
+          if (w.dataset.done) return;
+          w.dataset.done = '1';
+          b.classList.add(j === q.a ? 'right' : 'wrong');
+          if (j !== q.a) recordWrong({ lv: '二级', lesson: '第 ' + Number(k.slice(1)) + ' 课', q: q.q, o: q.o, a: q.a, chosen: j });
+          [...w.querySelectorAll('.lqb')].forEach((x) => { x.disabled = true; });
+          const f = document.createElement('div');
+          f.className = 'lqf ' + (j === q.a ? 'ok' : 'no');
+          f.textContent = (j === q.a ? '✅ 答对啦！' : '❌ 已记入复习站～') + q.e;
+          w.appendChild(f);
+        };
+        w.appendChild(b);
+      });
+      box.appendChild(w);
+    });
+  }
+}
 const questions = [
   { q: '断电之后，哪种存储器里的数据会消失？', opts: ['ROM', 'RAM', '硬盘', '光盘'], ans: 1, exp: 'RAM 是"工作记忆"，断电就忘；ROM 和硬盘断电不丢。' },
   { q: '1 MB 等于多少 KB？', opts: ['100', '1000', '1024', '2048'], ans: 2, exp: '存储单位之间都是 ×1024：1 MB = 1024 KB。' },
@@ -1396,6 +1587,7 @@ function answerQ(i, btn) {
   const q = questions[qi];
   const ok = i === q.ans;
   if (ok) score++;
+  if (!ok) recordWrong({ lv: '二级', lesson: '期末闯关', q: q.q, o: q.opts, a: q.ans, chosen: i });
   const box = document.getElementById('quizOpts');
   [...box.children].forEach((b, k) => {
     b.disabled = true;
@@ -1406,6 +1598,53 @@ function answerQ(i, btn) {
   fb.className = 'fb ' + (ok ? 'ok' : 'no');
   fb.textContent = (ok ? '✅ 答对啦！' : '❌ 不对哦。') + q.exp;
   document.getElementById('quizNext').style.display = 'inline-block';
+}
+function recordWrong(item) {
+  try {
+    const list = JSON.parse(localStorage.getItem('gesp_wrong') || '[]');
+    list.push(Object.assign({ time: Date.now() }, item));
+    localStorage.setItem('gesp_wrong', JSON.stringify(list));
+  } catch (e) {}
+}
+const LV2_NAMES = ['存储', '网络', '程序语言', '流程图', 'ASCII', '类型转换', '多层分支', '多层循环', '数学函数'];
+const LV2_ANCHORS = ['#s1', '#s2', '#s3', '#s4', '#s5', '#s6', '#s7', '#s8', '#s9'];
+function loadLv2() {
+  try {
+    const v = JSON.parse(localStorage.getItem('gesp_lv2_prog'));
+    if (Array.isArray(v) && v.length === 9) return v.map(Boolean);
+  } catch (e) {}
+  return new Array(9).fill(false);
+}
+let lv2 = loadLv2();
+function saveLv2() { try { localStorage.setItem('gesp_lv2_prog', JSON.stringify(lv2)); } catch (e) {} }
+function toggleLesson(i, el) {
+  lv2[i] = el.checked;
+  saveLv2();
+  renderStations();
+  paintChk();
+}
+function paintChk() {
+  document.querySelectorAll('.chkbtn input').forEach((el, i) => {
+    el.checked = !!lv2[i];
+  });
+}
+function renderStations() {
+  const box = document.getElementById('lvStations');
+  if (!box) return;
+  box.innerHTML = '';
+  const first = lv2.indexOf(false);
+  LV2_NAMES.forEach((n, i) => {
+    const a = document.createElement('a');
+    a.className = 'station' + (lv2[i] ? ' done' : '') + (i === first ? ' cur' : '');
+    a.href = LV2_ANCHORS[i];
+    a.innerHTML = '<b>' + (i + 1) + '</b><span>' + n + '</span><i>' + (lv2[i] ? '✅' : (i === first ? '▶️' : '🔒')) + '</i>';
+    box.appendChild(a);
+  });
+  const n = lv2.filter(Boolean).length;
+  const bar = document.getElementById('mapBar');
+  if (bar) bar.style.width = (n / 9 * 100) + '%';
+  const msg = document.getElementById('mapMsg');
+  if (msg) msg.textContent = '进度 ' + n + ' / 9 课' + (n === 9 ? ' 🎓 二级毕业！可以挑战官方考纲里的三级啦！' : '');
 }
 function quizNext() {
   qi++;
@@ -1454,6 +1693,9 @@ buildLoop();
 peel();
 if (!loadState()) loadSample();
 updateCodeGutter();
+buildLessonQuizzes();
+renderStations();
+paintChk();
 renderQ();
 </script>
 </body>

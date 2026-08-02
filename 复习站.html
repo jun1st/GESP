@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="GESP 复习站：自动收集各课程答错的题，考前复习更高效。">
+<title>GESP 复习站 📒</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans SC", sans-serif;
+    background: linear-gradient(170deg, #fdf4ff 0%, #ffffff 50%, #f0fdfa 100%);
+    color: #2b2d42;
+    line-height: 1.8;
+    min-height: 100vh;
+  }
+  .wrap { max-width: 860px; margin: 0 auto; padding: 14px 18px 50px; }
+  header { text-align: center; padding: 26px 12px 8px; }
+  header .mascot { font-size: 50px; display: block; animation: float 3s ease-in-out infinite; }
+  @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+  h1 {
+    font-size: clamp(25px, 5vw, 38px);
+    background: linear-gradient(90deg, #a855f7, #ec4899, #f59e0b);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    margin: 8px 0 4px;
+  }
+  .slogan { color: #6c6f93; font-size: 15px; }
+  nav.chips { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin: 18px 0 10px; }
+  .chip {
+    text-decoration: none;
+    background: #fff;
+    border: 2px solid #dce3f5;
+    color: #2b2d42;
+    padding: 7px 13px;
+    border-radius: 999px;
+    font-size: 14px;
+    font-weight: 600;
+    transition: transform .15s, border-color .15s, box-shadow .15s;
+  }
+  .chip:hover { transform: translateY(-2px); border-color: #a855f7; box-shadow: 0 4px 12px rgba(43,45,66,.12); }
+  .panel {
+    background: #fff;
+    border-radius: 22px;
+    padding: 20px 20px 24px;
+    margin: 20px 0;
+    box-shadow: 0 6px 24px rgba(43,45,66,.07);
+    border-top: 7px solid #a855f7;
+  }
+  .panel h2 { font-size: clamp(20px, 4vw, 26px); color: #9333ea; margin-bottom: 8px; }
+  .callout { border-radius: 14px; padding: 12px 15px; font-size: 14.5px; margin: 12px 0; }
+  .callout.info { background: #eef4ff; border: 2px solid #bcd0ff; }
+  .bar { background: #e7ebf8; border-radius: 999px; height: 14px; overflow: hidden; margin: 10px 0; }
+  .bar i { display: block; height: 100%; width: 0; background: linear-gradient(90deg, #a855f7, #f59e0b); transition: width .4s; }
+  .lvgroup { margin: 18px 0 6px; font-size: 16px; color: #9333ea; font-weight: 800; border-left: 5px solid #a855f7; padding-left: 10px; }
+  .qi { background: #f7f9ff; border-radius: 14px; padding: 13px 15px; margin: 10px 0; }
+  .qhead { font-size: 13px; color: #8b8fa8; font-weight: 600; margin-bottom: 4px; }
+  .qq { font-weight: 700; font-size: 15px; margin-bottom: 6px; }
+  .qo { display: block; width: 100%; text-align: left; margin: 5px 0; border: 2px solid #dce3f5; background: #fff; border-radius: 12px; padding: 7px 12px; font-size: 14px; font-weight: 600; cursor: pointer; font-family: inherit; }
+  .qo.right { background: #d1fae5 !important; border-color: #10b981 !important; color: #065f46 !important; }
+  .qo.wrong { background: #ffe4e6 !important; border-color: #f43f5e !important; color: #881337 !important; }
+  .qf { font-size: 13px; margin-top: 6px; font-weight: 600; }
+  .qf.ok { color: #047857; }
+  .qf.no { color: #be123c; }
+  .btn {
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 700;
+    border-radius: 999px;
+    padding: 9px 18px;
+    background: #fff;
+    color: #2b2d42;
+    border: 2px solid #dce3f5;
+  }
+  .btn:hover { border-color: #a855f7; }
+  .btn.go { background: #a855f7; border-color: #a855f7; color: #fff; }
+  .btnrow { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0; align-items: center; }
+  .empty { text-align: center; padding: 26px 0; color: #6c6f93; }
+  .empty .big { font-size: 52px; }
+  footer { text-align: center; color: #6c6f93; font-size: 14px; padding: 18px 0 6px; }
+  footer a { color: #9333ea; font-weight: 700; text-decoration: none; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <span class="mascot">📒</span>
+    <h1>GESP 复习站</h1>
+    <p class="slogan">答错的题自动收进这里——考前翻一翻，错过的不会再错！</p>
+  </header>
+
+  <nav class="chips" aria-label="快捷入口">
+    <a class="chip" href="index.html">🏠 学习中心</a>
+    <a class="chip" href="GESP官方考纲.html">📋 官方考纲</a>
+    <a class="chip" href="GESP二级知识点精讲.html">📖 知识笔记</a>
+    <a class="chip" href="家长中心.html">👨‍👩‍👧 家长中心</a>
+  </nav>
+
+  <div class="panel">
+    <h2>📊 错题总览</h2>
+    <div class="callout info" id="ovMsg">加载中……</div>
+    <div class="bar"><i id="ovBar"></i></div>
+    <div class="btnrow">
+      <button class="btn go" onclick="redoAll()">🔄 全部重做一遍</button>
+      <button class="btn" onclick="clearAll()">🗑️ 清空错题本</button>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h2>✏️ 错题练习</h2>
+    <div id="wrongBox"></div>
+  </div>
+
+  <footer>
+    GESP 复习站 📒 ｜ <a href="index.html">🏠 学习中心</a> ｜ <a href="家长中心.html">👨‍👩‍👧 家长中心</a> ｜ <a href="GESP官方考纲.html">📋 考纲</a><br>
+    错题存在当前浏览器里（localStorage），换浏览器或清除数据会清空。
+  </footer>
+</div>
+
+<script>
+let wrong = [];
+function loadWrong() {
+  try {
+    const v = JSON.parse(localStorage.getItem('gesp_wrong') || '[]');
+    if (Array.isArray(v)) return v;
+  } catch (e) {}
+  return [];
+}
+function saveWrong() {
+  try { localStorage.setItem('gesp_wrong', JSON.stringify(wrong)); } catch (e) {}
+}
+function daysAgo(t) {
+  const d = Math.floor((Date.now() - t) / 86400000);
+  return d <= 0 ? '今天' : d + ' 天前';
+}
+function paintOverview() {
+  const total = wrong.length;
+  const due = wrong.filter(w => Date.now() - w.time >= 86400000).length;
+  const msg = document.getElementById('ovMsg');
+  if (total === 0) {
+    msg.textContent = '🎉 错题本是空的！继续保持，答对的题不会出现在这里。';
+    document.getElementById('ovBar').style.width = '0%';
+  } else {
+    msg.innerHTML = '📚 共 <b>' + total + '</b> 道错题（其中 <b>' + due + '</b> 道是昨天之前的，建议今天复习）。<br>💡 错题是宝贝：把它做对一次，考试就少一个坑。';
+    document.getElementById('ovBar').style.width = Math.min(100, 40 + total * 3) + '%';
+  }
+}
+function render() {
+  paintOverview();
+  const box = document.getElementById('wrongBox');
+  box.innerHTML = '';
+  if (wrong.length === 0) {
+    box.innerHTML = '<div class="empty"><div class="big">🌟</div>暂时没有错题。<br>去课程里做"考一考"，答错的题会自动收集到这里。</div>';
+    return;
+  }
+  const groups = {};
+  wrong.forEach((w, i) => { (groups[w.lv] = groups[w.lv] || []).push(i); });
+  for (const lv of Object.keys(groups)) {
+    const h = document.createElement('div');
+    h.className = 'lvgroup';
+    h.textContent = lv + '（' + groups[lv].length + ' 题）';
+    box.appendChild(h);
+    groups[lv].forEach(idx => box.appendChild(renderItem(wrong[idx], idx)));
+  }
+}
+function renderItem(w, idx) {
+  const d = document.createElement('div');
+  d.className = 'qi';
+  d.innerHTML = '<div class="qhead">' + w.lesson + ' ｜ 记于 ' + daysAgo(w.time) + '</div><div class="qq">' + w.q + '</div>';
+  w.o.forEach((t, j) => {
+    const b = document.createElement('button');
+    b.className = 'qo';
+    b.textContent = 'ABCD'[j] + '. ' + t;
+    b.onclick = () => {
+      if (d.dataset.done) return;
+      d.dataset.done = '1';
+      b.classList.add(j === w.a ? 'right' : 'wrong');
+      if (j === w.a) {
+        wrong.splice(idx, 1);
+        saveWrong();
+      }
+      [...d.querySelectorAll('.qo')].forEach(x => { x.disabled = true; });
+      const f = document.createElement('div');
+      f.className = 'qf ' + (j === w.a ? 'ok' : 'no');
+      f.textContent = j === w.a ? '✅ 做对了！这道题已从错题本划掉。' : '❌ 还没掌握，它留在错题本里等你再来！';
+      d.appendChild(f);
+      if (j === w.a) setTimeout(render, 900);
+    };
+    d.appendChild(b);
+  });
+  return d;
+}
+function redoAll() {
+  wrong = wrong.map(w => ({ lv: w.lv, lesson: w.lesson, q: w.q, o: w.o, a: w.a, time: Date.now() }));
+  saveWrong();
+  render();
+}
+function clearAll() {
+  if (!confirm('确定要清空错题本吗？')) return;
+  wrong = [];
+  saveWrong();
+  render();
+}
+wrong = loadWrong();
+render();
+</script>
+</body>
+</html>
