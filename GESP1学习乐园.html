@@ -136,6 +136,19 @@
     color: #2b2d42;
     max-width: 100%;
   }
+  textarea#stdinIn {
+    font-family: inherit;
+    font-size: 15px;
+    border: 2px solid #dce3f5;
+    border-radius: 12px;
+    padding: 8px 12px;
+    background: #fff;
+    color: #2b2d42;
+    resize: vertical;
+    vertical-align: middle;
+    min-height: 42px;
+    width: 190px;
+  }
   input[type=range] { width: min(260px, 100%); }
   label { font-weight: 600; font-size: 14px; }
 
@@ -306,6 +319,51 @@
   .fb.ok { background: #eafaf1; border: 2px solid #3ecf8e; }
   .fb.no { background: #ffeef1; border: 2px solid #ef476f; }
 
+  /* ---------- 编程练习场 ---------- */
+  .edwrap { display: flex; margin-top: 8px; align-items: stretch; }
+  .edgutter {
+    font-family: "SF Mono", Consolas, "Courier New", monospace;
+    font-size: 14px;
+    line-height: 1.55;
+    padding: 12px 8px 12px 12px;
+    background: #171a22;
+    color: #6b7280;
+    border-radius: 14px 0 0 14px;
+    text-align: right;
+    overflow: hidden;
+    user-select: none;
+    white-space: pre;
+    min-width: 38px;
+  }
+  .ed-in {
+    flex: 1;
+    min-height: 190px;
+    font-family: "SF Mono", Consolas, "Courier New", monospace;
+    font-size: 14px;
+    border: 2px solid #20232e;
+    border-left: 1px solid #2d3242;
+    border-radius: 0 14px 14px 0;
+    padding: 12px;
+    background: #20232e;
+    color: #d6f5e3;
+    resize: vertical;
+    line-height: 1.55;
+  }
+  .ed-out {
+    background: #20232e;
+    color: #ffd166;
+    font-family: "SF Mono", Consolas, "Courier New", monospace;
+    font-size: 14px;
+    border-radius: 14px;
+    padding: 12px 14px;
+    margin-top: 8px;
+    white-space: pre-wrap;
+    word-break: break-word;
+    min-height: 60px;
+    max-height: 320px;
+    overflow: auto;
+  }
+
   /* ---------- 9 闯关 ---------- */
   .quizbar { height: 14px; background: #e9edf8; border-radius: 999px; overflow: hidden; margin: 10px 0; }
   .quizbar i { display: block; height: 100%; width: 0; background: var(--tc); border-radius: 999px; transition: width .4s; }
@@ -347,7 +405,9 @@
     <a class="chip" style="--chip:#06d6a0" href="#s6">🕵️ 关系逻辑</a>
     <a class="chip" style="--chip:#5e60ce" href="#s7">🧱 三大结构</a>
     <a class="chip" style="--chip:#e76f51" href="#s8">🐛 注释找虫</a>
+    <a class="chip" style="--chip:#118ab2" href="#editor">🛠️ 编程场</a>
     <a class="chip" style="--chip:#06d6a0" href="#s9">🏆 大闯关</a>
+    <a class="chip" style="--chip:#118ab2" href="index.html">🏠 主页</a>
     <a class="chip" style="--chip:#5e60ce" href="GESP2学习乐园.html">🚀 去二级乐园</a>
   </nav>
 
@@ -627,10 +687,43 @@ cout &lt;&lt; age &lt;&lt; endl;</code></div>
     <div class="msg" id="bugMsg">一共 4 只虫子，找出每一只！</div>
   </section>
 
-  <!-- ========== 9 大闯关 ========== -->
+  <!-- ========== 9 编程练习场 ========== -->
+  <section class="topic" id="editor" style="--tc:#118ab2">
+    <div class="big-emoji">🛠️</div>
+    <h2>9. 编程练习场：在线编译 C++</h2>
+    <p class="sub">选一个示例，或者自己写代码，点"运行"！云端编译器马上帮你编译执行。</p>
+
+    <div class="btnrow">
+      <label>示例：
+        <select id="sampleSel" onchange="loadSample()">
+          <option value="hello">👋 你好，世界</option>
+          <option value="sum">➕ 两数之和</option>
+          <option value="score">🌿 及格判断</option>
+          <option value="count">⭐ 数到 n</option>
+          <option value="leap">📅 判断闰年</option>
+        </select>
+      </label>
+    </div>
+    <div class="edwrap">
+      <pre id="codeGutter" class="edgutter" aria-hidden="true"></pre>
+      <textarea id="codeIn" class="ed-in" spellcheck="false" aria-label="C++ 代码编辑器" oninput="updateCodeUI()" onscroll="syncGutterScroll()"></textarea>
+    </div>
+    <div class="btnrow">
+      <label>程序输入（给 cin）：<textarea id="stdinIn" rows="2" placeholder="例如：3 5"></textarea></label>
+      <button class="btn" id="saveBtn" onclick="saveCode()">💾 保存代码</button>
+      <button class="btn" onclick="downloadCode()">⬇️ 下载 .cpp</button>
+      <button class="btn go" id="runBtn" onclick="runCode()">▶️ 运行</button>
+      <button class="btn" onclick="clearCode()">🧹 清空</button>
+    </div>
+    <div class="msg" id="edStatus">选个示例，或自己写代码，点"运行"试试！</div>
+    <pre class="ed-out" id="codeOut">// 程序输出会显示在这里</pre>
+    <div class="tip">🌐 运行需要联网：代码会发送到免费的在线编译器（Compiler Explorer）。</div>
+  </section>
+
+  <!-- ========== 10 大闯关 ========== -->
   <section class="topic" id="s9" style="--tc:#06d6a0">
     <div class="big-emoji">🏆</div>
-    <h2>9. 大闯关：考考自己！</h2>
+    <h2>10. 大闯关：考考自己！</h2>
     <p class="sub">一共 10 题，答对越多，勋章越大！</p>
 
     <div id="quizWrap">
@@ -648,10 +741,10 @@ cout &lt;&lt; age &lt;&lt; endl;</code></div>
 
   <details class="help">
     <summary>📖 给爸爸妈妈的话</summary>
-    <p>这个网页严格对照 CCF《C++ 编程一级标准》制作：计算机基础知识、开发环境与程序框架、变量与数据类型、输入输出、算术/关系/逻辑运算、三大结构、注释与调试，最后是 10 题闯关。一级是"打地基"，建议按顺序玩：先认识电脑和框架（1、2 关），再玩变量和输入输出（3、4 关），接着是运算和三大结构（5~7 关），最后找虫子和闯关（8、9 关）。配合文件夹里的《GESP二级知识点精讲.md》和二级乐园网页，可以一路学到二级。</p>
+    <p>这个网页严格对照 CCF《C++ 编程一级标准》制作：计算机基础知识、开发环境与程序框架、变量与数据类型、输入输出、算术/关系/逻辑运算、三大结构、注释与调试，最后是 10 题闯关。一级是"打地基"，建议按顺序玩：先认识电脑和框架（1、2 关），再玩变量和输入输出（3、4 关），接着是运算和三大结构（5~7 关），最后找虫子和闯关（8、9 关）。配合文件夹里的《GESP二级知识点精讲.md》和二级乐园网页，可以一路学到二级。「编程练习场」需要联网使用免费的在线编译器（Compiler Explorer），家长可先陪孩子试运行一次确认网络可用。</p>
   </details>
 
-  <footer>每天学一点，考试没问题！🎒 <a href="GESP2学习乐园.html">学完一级，去二级乐园玩 →</a></footer>
+  <footer>每天学一点，考试没问题！🎒 <a href="index.html">🏠 主页</a> ｜ <a href="GESP2学习乐园.html">学完一级，去二级乐园玩 →</a></footer>
 </div>
 
 <div id="confetti" aria-hidden="true"></div>
@@ -1082,6 +1175,146 @@ function bugNext() {
 }
 
 /* ================= 9 闯关 ================= */
+/* ================= 编程练习场 ================= */
+const samples = {
+  hello: ['👋 你好，世界', '#include <iostream>\nusing namespace std;\nint main() {\n    cout << "你好，世界！" << endl;\n    return 0;\n}', ''],
+  sum: ['➕ 两数之和', '#include <iostream>\nusing namespace std;\nint main() {\n    int a, b;\n    cin >> a >> b;\n    cout << "和是：" << a + b << endl;\n    return 0;\n}', '3 5'],
+  score: ['🌿 及格判断', '#include <iostream>\nusing namespace std;\nint main() {\n    int score;\n    cin >> score;\n    if (score >= 60) cout << "及格" << endl;\n    else cout << "不及格" << endl;\n    return 0;\n}', '85'],
+  count: ['⭐ 数到 n', '#include <iostream>\nusing namespace std;\nint main() {\n    int n;\n    cin >> n;\n    for (int i = 1; i <= n; i++) {\n        cout << i << " ";\n    }\n    cout << endl;\n    return 0;\n}', '5'],
+  leap: ['📅 判断闰年', '#include <iostream>\nusing namespace std;\nint main() {\n    int y;\n    cin >> y;\n    bool leap = (y % 4 == 0 && y % 100 != 0) || y % 400 == 0;\n    if (leap) cout << y << " 是闰年" << endl;\n    else cout << y << " 不是闰年" << endl;\n    return 0;\n}', '2008']
+};
+function loadSample() {
+  const s = samples[document.getElementById('sampleSel').value];
+  if (!s) return;
+  document.getElementById('codeIn').value = s[1];
+  document.getElementById('stdinIn').value = s[2];
+  document.getElementById('codeOut').textContent = '// 程序输出会显示在这里';
+  document.getElementById('edStatus').textContent = '写好的代码，点"运行"试试！';
+  updateCodeUI();
+}
+function clearCode() {
+  document.getElementById('codeIn').value = '';
+  document.getElementById('stdinIn').value = '';
+  document.getElementById('codeOut').textContent = '// 清空啦，自己写代码吧～';
+  document.getElementById('edStatus').textContent = '写好的代码，点"运行"试试！';
+  updateCodeUI();
+}
+/* ---- 行号、自动保存、下载 ---- */
+const LS1 = { code: 'gesp1_code', stdin: 'gesp1_stdin', sample: 'gesp1_sample' };
+function updateCodeGutter() {
+  const el = document.getElementById('codeIn');
+  const g = document.getElementById('codeGutter');
+  const lines = el.value.split('\n').length;
+  let nums = '';
+  for (let i = 1; i <= lines; i++) nums += i + '\n';
+  g.textContent = nums;
+}
+function syncGutterScroll() {
+  const el = document.getElementById('codeIn');
+  document.getElementById('codeGutter').scrollTop = el.scrollTop;
+}
+function saveState() {
+  try {
+    localStorage.setItem(LS1.code, document.getElementById('codeIn').value);
+    localStorage.setItem(LS1.stdin, document.getElementById('stdinIn').value);
+    localStorage.setItem(LS1.sample, document.getElementById('sampleSel').value);
+  } catch (e) {}
+}
+function updateCodeUI() {
+  updateCodeGutter();
+  saveState();
+}
+function saveCode() {
+  saveState();
+  const btn = document.getElementById('saveBtn');
+  btn.textContent = '✅ 已保存';
+  document.getElementById('edStatus').textContent = '💾 已保存！下次打开网页还会在。';
+  setTimeout(() => { btn.textContent = '💾 保存代码'; }, 1500);
+}
+function loadState() {
+  try {
+    const code = localStorage.getItem(LS1.code);
+    if (code === null) return false;
+    document.getElementById('codeIn').value = code;
+    document.getElementById('stdinIn').value = localStorage.getItem(LS1.stdin) || '';
+    const s = localStorage.getItem(LS1.sample);
+    if (s && samples[s]) document.getElementById('sampleSel').value = s;
+    document.getElementById('edStatus').textContent = '💾 已恢复上次保存的代码';
+    updateCodeGutter();
+    return true;
+  } catch (e) { return false; }
+}
+function downloadCode() {
+  const code = document.getElementById('codeIn').value;
+  if (!code.trim()) {
+    document.getElementById('edStatus').textContent = '✏️ 先写点代码再下载哦～';
+    return;
+  }
+  const blob = new Blob([code], { type: 'text/plain;charset=utf-8' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'mycode.cpp';
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  URL.revokeObjectURL(a.href);
+  document.getElementById('edStatus').textContent = '⬇️ 代码已下载成 mycode.cpp';
+}
+function txtOf(arr) {
+  return (arr || []).map(o => o.text || '').join('');
+}
+function stripAnsi(s) {
+  return s.replace(/\x1b\[[0-9;]*m/g, '');
+}
+async function runCode() {
+  const code = document.getElementById('codeIn').value.trim();
+  const out = document.getElementById('codeOut');
+  const status = document.getElementById('edStatus');
+  const btn = document.getElementById('runBtn');
+  if (!code) { status.textContent = '✏️ 先写代码再运行哦～'; return; }
+  btn.disabled = true;
+  status.textContent = '⏳ 正在编译运行……';
+  out.textContent = '// 等一等，云端编译器正在工作…';
+  const body = {
+    source: code,
+    options: {
+      userArguments: '',
+      executeParameters: { args: '', stdin: document.getElementById('stdinIn').value },
+      compilerOptions: { executorRequest: true },
+      filters: { execute: true, binary: false, labels: false, directives: false, commentOnly: false, trim: false, intel: true, demangle: true, libraryCode: true }
+    }
+  };
+  try {
+    const res = await fetch('https://godbolt.org/api/compiler/g122/compile', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify(body)
+    });
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const d = await res.json();
+    const build = d.buildResult || {};
+    if (build.code !== 0 && build.code !== undefined) {
+      out.textContent = stripAnsi(txtOf(build.stderr)) || '编译出错（没有更多信息）';
+      status.textContent = '❌ 编译失败，看看下面的提示～';
+    } else {
+      const std = txtOf(d.stdout);
+      const err = txtOf(d.stderr);
+      let text = std;
+      if (err) text = text ? text + '\n' + err : err;
+      if (d.timedOut) text = (text ? text + '\n' : '') + '⚠️ 运行超时（是不是死循环了？）';
+      out.textContent = text || '（程序没有输出）';
+      status.textContent = d.code === 0 ? '✅ 运行完成！' : '⚠️ 程序出错了（运行时错误）';
+      if (d.execTime !== undefined) status.textContent += '（用时 ' + d.execTime + ' ms）';
+    }
+  } catch (e) {
+    status.textContent = '😅 连不上在线编译器…检查一下网络，再试一次！';
+    out.textContent = '// 网络出错：' + e.message;
+  } finally {
+    btn.disabled = false;
+  }
+}
+
+/* ================= 10 闯关 ================= */
 const questions = [
   { q: '下面哪个是合法的变量名？', opts: ['2x', 'int', 'myName', 'my name'], ans: 2, exp: '变量名不能数字开头、不能是关键字、不能有空格。myName 最棒！' },
   { q: 'char 类型用来存什么？', opts: ['很大的整数', '单个字符', '小数', '真或假'], ans: 1, exp: 'char 存一个字符，比如 \'A\'、\'5\'，要用单引号包起来。' },
@@ -1179,6 +1412,8 @@ showPass();
 showDay();
 buildStars();
 renderBug();
+if (!loadState()) loadSample();
+updateCodeGutter();
 renderQ();
 </script>
 </body>
