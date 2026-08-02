@@ -1,0 +1,490 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="CCF GESP C++ 编程能力等级认证官方标准（1-8 级）完整考点，来源：CCF 官网认证标准 PDF。">
+<title>GESP 官方考纲（1-8 级）📋</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans SC", sans-serif;
+    background: linear-gradient(170deg, #eef2ff 0%, #ffffff 50%, #f0fdfa 100%);
+    color: #2b2d42;
+    line-height: 1.8;
+    min-height: 100vh;
+  }
+  .wrap { max-width: 920px; margin: 0 auto; padding: 14px 18px 50px; }
+
+  header { text-align: center; padding: 26px 12px 8px; }
+  header .mascot { font-size: 50px; display: block; animation: float 3s ease-in-out infinite; }
+  @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+  h1 {
+    font-size: clamp(25px, 5vw, 38px);
+    background: linear-gradient(90deg, #4f46e5, #0891b2, #10b981);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    margin: 8px 0 4px;
+  }
+  .slogan { color: #6c6f93; font-size: 15px; }
+
+  nav.chips { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin: 18px 0 10px; }
+  .chip {
+    text-decoration: none;
+    background: #fff;
+    border: 2px solid #dce3f5;
+    color: #2b2d42;
+    padding: 7px 13px;
+    border-radius: 999px;
+    font-size: 14px;
+    font-weight: 600;
+    transition: transform .15s, border-color .15s, box-shadow .15s;
+  }
+  .chip:hover { transform: translateY(-2px); border-color: #4f46e5; box-shadow: 0 4px 12px rgba(43,45,66,.12); }
+
+  .panel {
+    background: #fff;
+    border-radius: 22px;
+    padding: 20px 20px 24px;
+    margin: 20px 0;
+    box-shadow: 0 6px 24px rgba(43,45,66,.07);
+    border-top: 7px solid #4f46e5;
+  }
+  .panel h2 { font-size: clamp(20px, 4vw, 26px); color: #4f46e5; margin-bottom: 8px; }
+
+  .callout { border-radius: 14px; padding: 12px 15px; font-size: 14.5px; margin: 12px 0; }
+  .callout.info { background: #eef4ff; border: 2px solid #bcd0ff; }
+  .callout.warn { background: #fff8e6; border: 2px solid #ffd166; }
+  .callout.key { background: #ffeef1; border: 2px solid #fda4af; }
+
+  table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 14px; }
+  th, td { border: 1.5px solid #dce3f5; padding: 8px 10px; text-align: left; vertical-align: top; }
+  th { background: #f1f4fb; }
+  tr:nth-child(even) td { background: #fafbff; }
+
+  .ovtable td:first-child { font-weight: 800; white-space: nowrap; }
+  .goalcell { font-size: 13.5px; color: #55586e; }
+
+  details.lvl {
+    background: #fff;
+    border-radius: 18px;
+    border: 2px solid #e2e8f8;
+    margin: 14px 0;
+    overflow: hidden;
+    transition: box-shadow .15s;
+  }
+  details.lvl[open] { box-shadow: 0 8px 24px rgba(43,45,66,.1); }
+  details.lvl summary {
+    list-style: none;
+    cursor: pointer;
+    padding: 14px 18px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    background: linear-gradient(90deg, var(--lc, #4f46e5), var(--lc2, #06d6a0));
+    color: #fff;
+  }
+  details.lvl summary::-webkit-details-marker { display: none; }
+  .lvbadge {
+    font-size: 13px;
+    font-weight: 800;
+    background: rgba(255,255,255,.22);
+    border: 2px solid rgba(255,255,255,.55);
+    border-radius: 999px;
+    padding: 3px 12px;
+    white-space: nowrap;
+  }
+  .lvhead b { font-size: 17px; display: block; }
+  .lvgoal { font-size: 13px; opacity: .92; }
+  .lvtoggle { margin-left: auto; font-size: 20px; transition: transform .2s; }
+  details.lvl[open] .lvtoggle { transform: rotate(180deg); }
+  .lvbody { padding: 16px 18px 18px; }
+  .lvbody h4 { font-size: 15.5px; color: var(--lc, #4f46e5); margin: 14px 0 6px; }
+  .lvbody h4:first-child { margin-top: 0; }
+  .lvbody ol, .lvbody ul { margin: 6px 0 6px 22px; font-size: 14.5px; }
+  .lvbody li { margin: 4px 0; }
+  .exambox {
+    background: #f7f9ff;
+    border: 2px dashed #c9d4f0;
+    border-radius: 14px;
+    padding: 10px 14px;
+    font-size: 13.5px;
+    margin: 12px 0;
+  }
+  .btn {
+    display: inline-block;
+    background: var(--lc, #4f46e5);
+    color: #fff;
+    font-weight: 700;
+    text-decoration: none;
+    border-radius: 999px;
+    padding: 8px 18px;
+    font-size: 14px;
+    margin-top: 10px;
+    transition: transform .15s, box-shadow .15s;
+  }
+  .btn:hover { transform: translateY(-2px); box-shadow: 0 5px 14px rgba(43,45,66,.2); }
+
+  footer { text-align: center; color: #6c6f93; font-size: 14px; padding: 18px 0 6px; }
+  footer a { color: #4f46e5; font-weight: 700; text-decoration: none; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <span class="mascot">📋</span>
+    <h1>GESP 官方考纲（1-8 级）</h1>
+    <p class="slogan">CCF 官方《C++&amp;Python 认证标准》整理 —— 看清考点，才能高效备考！</p>
+  </header>
+
+  <nav class="chips" aria-label="快捷入口">
+    <a class="chip" href="index.html">🏠 主页</a>
+    <a class="chip" href="基础常识乐园.html">🧠 基础常识</a>
+    <a class="chip" href="GESP1学习乐园.html">🎒 一级乐园</a>
+    <a class="chip" href="GESP2学习乐园.html">🚀 二级乐园</a>
+    <a class="chip" href="GESP二级知识点精讲.html">📖 知识笔记</a>
+  </nav>
+
+  <div class="panel">
+    <h2>📌 说明</h2>
+    <div class="callout warn">以下内容整理自 CCF 官网发布的《CCF 编程能力等级认证 C++&amp;Python 认证标准》。<b>1-2 级为 C++ 单独标准，3-8 级为 C++&amp;Python 合并标准</b>（下表保留 C++ 相关内容）。</div>
+    <div class="callout key">注：对于 C++ 语言的考题，如无特殊说明，均以 <b>C++11</b> 标准为准。考题不会涉及该标准下的未定义行为（undefined behavior）。</div>
+    <div class="callout info">📝 各级别题型分布：单选题 15 道（2 分/道）+ 判断题 10 道（2 分/道）+ 编程题 2 道（25 分/道）。考试时间：<b>1-4 级 120 分钟，5-8 级 180 分钟</b>。</div>
+  </div>
+
+  <div class="panel">
+    <h2>🗺️ 知识体系总览（C++）</h2>
+    <table class="ovtable">
+      <tr><th>级别</th><th>C++ 知识内容</th><th>知识目标</th></tr>
+      <tr><td>一级</td><td>计算机基础与编程环境、计算机历史、变量的定义与使用、基本数据类型（整型/浮点型/字符型/布尔型）、控制语句结构（顺序/循环/选择）、基本运算（算术/关系/逻辑）、输入输出语句</td><td class="goalcell">掌握顺序、循环、分支的简单程序结构，可以使用集成开发环境进行编程与调试，通过编程基础知识的学习，完成单一功能的程序设计。</td></tr>
+      <tr><td>二级</td><td>计算机的存储与网络、程序设计语言的特点、流程图的概念与描述、ASCII 编码、数据类型的转换、多层分支/循环结构、常用数学函数（绝对值/平方根/max/min）</td><td class="goalcell">掌握程序基本设计，能够使用简单数学函数。可以独立完成包含分支语句、循环语句等比较综合的案例，可以使用分支循环嵌套结构。</td></tr>
+      <tr><td>三级</td><td>数据编码（原码/反码/补码）、进制转换（二/八/十/十六进制）、位运算（与/或/非/异或/左移/右移）、算法的概念与描述、C++ 一维数组、字符串及其函数、枚举法、模拟法</td><td class="goalcell">掌握数据编码、进制转换、位运算等知识，掌握一维数组、字符串及函数的使用，能够独立使用模拟法、枚举法解决对应的算法问题。</td></tr>
+      <tr><td>四级</td><td>函数的定义与调用、形参与实参、作用域、C++ 指针、函数参数传递（值/引用/指针）、C++ 结构体、二维及多维数组、递推、排序概念与稳定性、排序算法（冒泡/插入/选择）、简单算法复杂度估算、文件重定向与读写、异常处理</td><td class="goalcell">掌握函数的定义、调用及函数参数传递的方法；掌握二维数组与多维数组的使用技巧；掌握常用排序算法、文件读写和异常处理的使用。能够解决递推相关问题。</td></tr>
+      <tr><td>五级</td><td>初等数论、（C++）数组模拟高精度加减乘除、单链表/双链表/循环链表、辗转相除法、素数表的埃氏筛法和线性筛法、唯一分解定理、二分查找/二分答案、贪心算法、分治算法（归并排序和快速排序）、递归、算法复杂度估算（含多项式/指数/对数）</td><td class="goalcell">掌握初等数论、线性表的知识，二分法、分治法、贪心法的思想，完成指定功能的程序。C++ 掌握数组模拟高精度的运算。</td></tr>
+      <tr><td>六级</td><td>树的定义构造与遍历、哈夫曼树、完全二叉树、二叉排序树、哈夫曼编码、格雷编码、深度优先搜索（DFS）、宽度优先搜索（BFS）、二叉树的搜索算法、简单动态规划（一维动态规划/简单背包）、面向对象的思想、类的创建、栈/队列/循环队列</td><td class="goalcell">掌握树的基础知识，能够分辨不同的树，并根据不同的搜索算法进行遍历，掌握简单线性动态规划和简单背包问题。</td></tr>
+      <tr><td>七级</td><td>数学库常用函数（三角/对数/指数）、复杂动态规划（二维动态规划/动态规划最值优化）、图的定义及遍历、图论基本算法（DFS/BFS/泛洪算法）、哈希表</td><td class="goalcell">掌握图的定义与遍历相关算法，掌握图论基本概念及基础算法，能使用二维动态规划、动态规划最值优化的知识完成复杂的动态规划算法。</td></tr>
+      <tr><td>八级</td><td>计数原理、排列与组合、杨辉三角、倍增法、代数与平面几何（初中数学部分）、图论算法及综合应用（最小生成树/单源最短路）、较复杂算法的空间和时间效率分析、算法优化</td><td class="goalcell">掌握组合数学中基本知识，通过算法的时间和空间效率分析，可以完成相对应的算法优化。</td></tr>
+    </table>
+  </div>
+
+  <!-- ============ 一级 ============ -->
+  <details class="lvl" id="lv1" style="--lc:#2ec4b6;--lc2:#06d6a0">
+    <summary>
+      <span class="lvbadge">一级</span>
+      <div class="lvhead">
+        <b>C++ 编程一级标准</b>
+        <span class="lvgoal">🎯 目标：完成单一功能的程序设计</span>
+      </div>
+      <span class="lvtoggle">▾</span>
+    </summary>
+    <div class="lvbody">
+      <h4>📋 知识点详述</h4>
+      <ol>
+        <li>了解计算机的基本构成（CPU，内存，I/O 设备等），了解 Windows、Linux 等操作系统基本概念和常见操作，了解计算机的历史及在现代社会中的常见应用。</li>
+        <li>熟悉集成开发环境使用（例如 Dev C++）：创建文件、编辑文件、保存文件、编译、解释、调试。</li>
+        <li>掌握基础的 cin 语句、scanf 语句、cout 语句、printf 语句，赋值语句等。</li>
+        <li>掌握标识符、关键字、常量、变量、表达式的概念。</li>
+        <li>掌握常量与变量的命名、定义、作用、初始化与赋值以及变量的自加与自减运算。</li>
+        <li>掌握基础算术表达式：加、减、乘、除、整除、求余。</li>
+        <li>掌握逻辑运算与（&amp;&amp;）、或（||）、非（！）。</li>
+        <li>掌握关系运算：大于、大于等于、小于、小于等于、等于、不等于。</li>
+        <li>掌握基础的数据类型的定义和使用（整型、实数型、字符型、布尔型）。</li>
+        <li>掌握顺序结构程序的编写。</li>
+        <li>掌握分支结构程序的编写，掌握 if 语句、if-else 语句、switch 语句，了解三目运算。</li>
+        <li>掌握循环结构程序的编写，掌握 for、while、do-while 循环语句的使用以及 continue 语句和 break 语句在循环中的应用。</li>
+        <li>理解程序的注释和调试的概念。</li>
+      </ol>
+      <div class="callout info">🎯 考核目标：学生通过计算机基础知识的学习，了解计算机的构成与操作，以及计算机的发展历程。通过编程基础知识以及语句的掌握，可以独立完成简单功能的顺序结构、分支结构、循环结构的程序。</div>
+      <h4>🗂️ 知识点描述</h4>
+      <table>
+        <tr><th>编号</th><th>知识块</th><th>知识点</th></tr>
+        <tr><td>1</td><td>计算机基础知识</td><td>计算机的软硬件组成、常见操作、发展历程。</td></tr>
+        <tr><td>2</td><td>集成开发环境</td><td>创建文件、编辑文件、保存文件、编译、解释、调试。</td></tr>
+        <tr><td>3</td><td>结构化程序设计</td><td>顺序结构、分支结构、循环结构。</td></tr>
+        <tr><td>4</td><td>程序的基本语句</td><td>cin 语句、scanf 语句、cout 语句、printf 语句、赋值语句、复合语句、if 语句、switch 语句、for 语句、while 语句、do-while 语句。</td></tr>
+        <tr><td>5</td><td>程序的基本概念</td><td>标识符、关键字、常量、变量、表达式的概念；常量与变量的命名、定义、作用；程序的注释。</td></tr>
+        <tr><td>6</td><td>基本运算</td><td>算术运算、逻辑运算、关系运算、变量自增与自减运算、三目运算。</td></tr>
+        <tr><td>7</td><td>基本数据类型</td><td>整数型：int、long long；实数型：float、double；字符型：char；布尔型：bool。</td></tr>
+      </table>
+      <div class="exambox">📝 题型：单选 15×2 分 + 判断 10×2 分 + 编程 2×25 分 ｜ 考试时间：120 分钟</div>
+      <a class="btn" href="GESP1学习乐园.html" style="--lc:#2ec4b6">去一级乐园边玩边学 →</a>
+    </div>
+  </details>
+
+  <!-- ============ 二级 ============ -->
+  <details class="lvl" id="lv2" style="--lc:#5e60ce;--lc2:#8b5cf6">
+    <summary>
+      <span class="lvbadge">二级</span>
+      <div class="lvhead">
+        <b>C++ 编程二级标准</b>
+        <span class="lvgoal">🎯 目标：独立完成分支、循环嵌套的综合案例</span>
+      </div>
+      <span class="lvtoggle">▾</span>
+    </summary>
+    <div class="lvbody">
+      <h4>📋 知识点详述</h4>
+      <ol>
+        <li>了解计算机存储的基本概念及分类，了解随机存储器（RAM）、只读存储器（ROM）和高速缓冲存储器（Cache）的功能及区别。</li>
+        <li>了解计算机网络的概念，了解计算机网络的分类（广域网（WAN）、城域网（MAN）、局域网（LAN）），了解计算机网络的层级结构及作用（TCP/IP 四层模型与 OSI 七层模型），了解不同层级的重要协议，了解 IP 地址及子网划分。</li>
+        <li>了解程序设计语言的几大分类及特点（机器语言、汇编语言、高级语言），了解常见的高级语言（C++、Python 等）。</li>
+        <li>了解流程图的概念及基本表示符号，掌握绘制流程图的方法，能正确使用流程图描述程序设计的三种基本结构。</li>
+        <li>了解编码的基本概念，了解 ASCII 编码原理，能识别常用字符的 ASCII 码（空格：32、"0"：48、"A"：65、"a"：97），并掌握 ASCII 码和字符之间相互转换的方法。</li>
+        <li>掌握数据类型的转换：强制类型转换和隐式类型转换。</li>
+        <li>掌握多层分支结构，掌握 if 语句、if...else 语句、switch 语句，及相互嵌套的方法。</li>
+        <li>掌握多层循环结构，掌握 for 语句、while 语句、do...while 语句，及相互嵌套的方法。</li>
+        <li>掌握常用的数学函数：绝对值函数、平方根函数、最大值函数、最小值函数、随机数函数，理解相应的算法原理。</li>
+      </ol>
+      <div class="callout info">🎯 考核目标：通过计算机基础知识的学习，了解计算机的存储与网络知识、程序设计语言分类及特点、常见的编程语言和绘制流程图的方法。通过 C++ 知识的学习，掌握数据类型的转换方法及数学库函数的使用，可以独立完成多分支结构与循环结构的程序。</div>
+      <h4>🗂️ 知识点描述</h4>
+      <table>
+        <tr><th>编号</th><th>知识块</th><th>知识点</th></tr>
+        <tr><td>1</td><td>计算机存储与网络</td><td>ROM、RAM、Cache；计算机网络分类；TCP/IP 四层模型与 OSI 七层模型；IP 地址及子网划分</td></tr>
+        <tr><td>2</td><td>程序设计语言</td><td>程序设计语言分类；常见的高级语言</td></tr>
+        <tr><td>3</td><td>流程图</td><td>流程图的概念、绘制流程图、描述流程图</td></tr>
+        <tr><td>4</td><td>ASCII 编码</td><td>常见字符的 ASCII 编码、字符编码之间的相互转换</td></tr>
+        <tr><td>5</td><td>数据类型转换</td><td>强制类型转换；隐式类型转换</td></tr>
+        <tr><td>6</td><td>多层分支结构</td><td>if 语句、if...else 语句、switch 语句的嵌套</td></tr>
+        <tr><td>7</td><td>多层循环语句</td><td>while 循环、do...while 循环、for 循环的嵌套</td></tr>
+        <tr><td>8</td><td>数学函数</td><td>绝对值函数：abs()；平方根函数：sqrt()；最大值函数：max()；最小值函数：min()；随机数函数：rand()/srand() 及相关</td></tr>
+      </table>
+      <div class="exambox">📝 题型：单选 15×2 分 + 判断 10×2 分 + 编程 2×25 分 ｜ 考试时间：120 分钟</div>
+      <a class="btn" href="GESP2学习乐园.html" style="--lc:#5e60ce">去二级乐园边玩边学 →</a>
+    </div>
+  </details>
+
+  <!-- ============ 三级 ============ -->
+  <details class="lvl" id="lv3" style="--lc:#0ea5e9;--lc2:#22d3ee">
+    <summary>
+      <span class="lvbadge">三级</span>
+      <div class="lvhead">
+        <b>C++&amp;Python 编程三级标准</b>
+        <span class="lvgoal">🎯 目标：模拟法、枚举法解决算法问题</span>
+      </div>
+      <span class="lvtoggle">▾</span>
+    </summary>
+    <div class="lvbody">
+      <h4>📋 知识点详述</h4>
+      <ol>
+        <li>了解二进制数据编码：原码、反码、补码。</li>
+        <li>掌握数据的进制转换：二进制、八进制、十进制、十六进制。</li>
+        <li>掌握位运算：与（&amp;）、或（|）、非（~）、异或（^）、左移（&lt;&lt;）、右移（&gt;&gt;）的基本使用方法及原理。</li>
+        <li>了解算法的概念与描述，熟练运用自然语言、流程图、伪代码方式来描述算法。</li>
+        <li>C++ 一维数组基本应用（不包括变长数组）；Python 列表、字典、元组、集合的基本应用、内置函数以及列表解析的使用。</li>
+        <li>掌握字符串及其函数的使用，包括但不限于大小写转换、字符串搜索、分割、替换。</li>
+        <li>理解枚举算法、模拟算法的原理及特点，可以解决实际问题。</li>
+        <li>理解模拟算法、模拟算法的原理及特点，可以解决实际问题。（原文如此）</li>
+      </ol>
+      <div class="callout info">🎯 考核目标：掌握计算机中常用进位制、位运算及数据编码的知识，掌握一维数组、字符串类型及其函数的使用，掌握枚举法、模拟法的原理和运用技巧，对于较简单的实际问题能构造算法、描述算法、实现算法并调试程序。</div>
+      <h4>🗂️ 知识点描述</h4>
+      <table>
+        <tr><th>编号</th><th>知识块</th><th>知识点</th></tr>
+        <tr><td>1</td><td>数据编码</td><td>原码、反码、补码</td></tr>
+        <tr><td>2</td><td>进制转换</td><td>二进制、八进制、十进制、十六进制</td></tr>
+        <tr><td>3</td><td>位运算</td><td>与（&amp;）、或（|）、非（~）、异或（^）、左移（&lt;&lt;）、右移（&gt;&gt;）</td></tr>
+        <tr><td>4</td><td>算法与描述</td><td>枚举法、模拟法；自然语言描述、流程图描述、伪代码描述</td></tr>
+        <tr><td>5</td><td>数据结构</td><td>C++ 一维数组（不包括变长数组）；Python 列表、字典、元组、集合、列表解析</td></tr>
+        <tr><td>6</td><td>字符串及其函数</td><td>大小写转换、字符串搜索、分割、替换等</td></tr>
+      </table>
+      <div class="exambox">📝 题型：单选 15×2 分 + 判断 10×2 分 + 编程 2×25 分 ｜ 考试时间：120 分钟</div>
+    </div>
+  </details>
+
+  <!-- ============ 四级 ============ -->
+  <details class="lvl" id="lv4" style="--lc:#f59e0b;--lc2:#fbbf24">
+    <summary>
+      <span class="lvbadge">四级</span>
+      <div class="lvhead">
+        <b>C++&amp;Python 编程四级标准</b>
+        <span class="lvgoal">🎯 目标：函数、二维数组、排序算法、递推</span>
+      </div>
+      <span class="lvtoggle">▾</span>
+    </summary>
+    <div class="lvbody">
+      <h4>📋 知识点详述</h4>
+      <ol>
+        <li>理解 C++ 指针类型的概念，掌握指针类型变量的定义、赋值、解引用。</li>
+        <li>掌握 C++ 结构体、二维及多维数组（不包括变长数组）的基本概念及使用；掌握 Python 复合数据类型的嵌套使用。</li>
+        <li>理解模块化编程思想，掌握函数（不包含匿名函数、类的括号运算符重载）的声明、定义及调用，掌握形参与实参的概念及区别。</li>
+        <li>掌握变量作用域的概念，理解全局变量与局部变量的区别。</li>
+        <li>掌握函数参数的传递方式：C++ 值传递、引用传递、指针传递；Python 值传递、引用传递。</li>
+        <li>掌握递推算法基本思想、递推关系式的推导以及递推问题求解。</li>
+        <li>掌握排序算法的概念，了解内排序和外排序的概念及差别，理解排序算法的时间复杂度、空间复杂度、使用场景以及稳定性。</li>
+        <li>掌握排序算法中的冒泡排序、插入排序、选择排序的算法思想、排序步骤及代码实现。</li>
+        <li>简单算法复杂度的估算，含多项式、指数复杂度。</li>
+        <li>掌握文件操作中的重定向，实现文件读写操作，了解文本文件的分类，掌握写操作、读操作、读写操作。</li>
+        <li>了解异常处理机制，掌握异常处理的常用方法。</li>
+      </ol>
+      <div class="callout info">🎯 考核目标：掌握 C++ 指针类型、二维及多维数组（不包括变长数组）的基本使用；掌握 Python 复合类型的嵌套使用。通过函数相关知识的学习，掌握模块化设计思想，具备编写自定义函数程序的能力。掌握文件读写操作，并通过对排序算法、递推法的学习，可以根据不同的使用场景，合理选择最优的算法。</div>
+      <h4>🗂️ 知识点描述</h4>
+      <table>
+        <tr><th>编号</th><th>知识块</th><th>知识点</th></tr>
+        <tr><td>1</td><td>指针</td><td>指针类型，指针类型定义变量，指针类型变量的赋值、解引用</td></tr>
+        <tr><td>2</td><td>二维及多维数组</td><td>C++ 二维及多维数组的定义、使用；Python 复合类型的嵌套使用</td></tr>
+        <tr><td>3</td><td>结构体</td><td>结构体定义和使用，结构体数组，结构体指针，结构体嵌套结构体，结构体做函数参数，结构体中 const 使用场景</td></tr>
+        <tr><td>4</td><td>函数</td><td>函数的定义、调用、声明（不包含匿名函数、类的括号运算符重载）；形参、实参；全局作用域、局部作用域；值传递、引用传递</td></tr>
+        <tr><td>5</td><td>递推算法</td><td>递推算法基本思想、递推关系式推导</td></tr>
+        <tr><td>6</td><td>排序算法</td><td>冒泡排序、插入排序、选择排序；时间复杂度、空间复杂度、算法稳定性</td></tr>
+        <tr><td>7</td><td>文件操作</td><td>文件重定向，读操作、写操作、读写操作；简单算法复杂度的估算，含多项式、指数复杂度</td></tr>
+        <tr><td>8</td><td>异常处理</td><td>异常处理机制和常用方法</td></tr>
+      </table>
+      <div class="exambox">📝 题型：单选 15×2 分 + 判断 10×2 分 + 编程 2×25 分 ｜ 考试时间：120 分钟</div>
+    </div>
+  </details>
+
+  <!-- ============ 五级 ============ -->
+  <details class="lvl" id="lv5" style="--lc:#ef476f;--lc2:#f472b6">
+    <summary>
+      <span class="lvbadge">五级</span>
+      <div class="lvhead">
+        <b>C++&amp;Python 编程五级标准</b>
+        <span class="lvgoal">🎯 目标：初等数论、二分、分治、贪心、递归</span>
+      </div>
+      <span class="lvtoggle">▾</span>
+    </summary>
+    <div class="lvbody">
+      <h4>📋 知识点详述</h4>
+      <ol>
+        <li>掌握初等数论相关知识的概念和应用，包括素数与合数、最大公约数与最小公倍数、同余与模运算、约数与倍数、质因数分解、奇偶性等。</li>
+        <li>掌握 C++ 数组模拟高精度加法、减法、乘法和除法的相关知识。</li>
+        <li>掌握链表的创建、插入、删除、遍历和反转操作，理解单链表、双链表、循环链表的区别。</li>
+        <li>掌握辗转相除法（也称欧几里得算法）、素数表的埃氏筛法和线性筛法、唯一分解定理的原理和应用。</li>
+        <li>掌握算法复杂度估算方法（含多项式、对数）。</li>
+        <li>掌握二分查找和二分答案算法（也称二分枚举法）的基本原理，能够在有序数组中快速定位目标值。</li>
+        <li>掌握递归算法的基本原理，能够应用递归解决问题，能够分析递归算法的时间复杂度和空间复杂度，了解递归的优化策略。</li>
+        <li>掌握贪心算法的基本原理，理解最优子结构，能够使用贪心算法解决相关问题。</li>
+        <li>掌握分治算法的基本原理，能够使用归并排序和快速排序对数组进行排序。</li>
+      </ol>
+      <div class="callout info">🎯 考核目标：掌握初等数论知识点，能够使用辗转相除法（也称欧几里得算法）、素数表的埃氏筛法和线性筛法、唯一分解定理等相关知识解决相应的问题。掌握单链表、双链表、循环链表的基本操作方法。掌握算法复杂度估算方法（含多项式、对数），熟悉二分法、分治法、贪心算法和递归算法的算法思想，能够根据实际情况选择合适的算法并完成解决相应的问题。C++ 掌握使用数组模拟高精度加法、减法、乘法和除法的知识。</div>
+      <h4>🗂️ 知识点描述</h4>
+      <table>
+        <tr><th>编号</th><th>知识块</th><th>知识点</th></tr>
+        <tr><td>1</td><td>初等数论</td><td>素数与合数、最大公约数与最小公倍数、同余与模运算、约数与倍数、质因数分解、奇偶性；欧几里得算法；唯一分解定理；素数表的埃氏筛法和线性筛法</td></tr>
+        <tr><td>2</td><td>算法复杂度估算方法</td><td>含多项式的算法复杂度；含对数的算法复杂度</td></tr>
+        <tr><td>3</td><td>C++ 高精度运算</td><td>C++ 数组模拟高精度加法、减法、乘法、除法</td></tr>
+        <tr><td>4</td><td>链表</td><td>单链表、双链表、循环链表的创建、插入、删除、遍历、查找的基本操作</td></tr>
+        <tr><td>5</td><td>二分算法</td><td>二分查找算法；二分答案算法（也称二分枚举法）</td></tr>
+        <tr><td>6</td><td>递归算法</td><td>递归算法的相关概念；递归算法的时间复杂度和空间复杂度；递归的优化策略</td></tr>
+        <tr><td>7</td><td>分治算法</td><td>归并排序算法；快速排序算法</td></tr>
+        <tr><td>8</td><td>贪心算法</td><td>贪心算法的相关概念；最优子结构</td></tr>
+      </table>
+      <div class="exambox">📝 题型：单选 15×2 分 + 判断 10×2 分 + 编程 2×25 分 ｜ 考试时间：180 分钟</div>
+    </div>
+  </details>
+
+  <!-- ============ 六级 ============ -->
+  <details class="lvl" id="lv6" style="--lc:#10b981;--lc2:#34d399">
+    <summary>
+      <span class="lvbadge">六级</span>
+      <div class="lvhead">
+        <b>C++&amp;Python 编程六级标准</b>
+        <span class="lvgoal">🎯 目标：树、搜索算法、简单动态规划、面向对象</span>
+      </div>
+      <span class="lvtoggle">▾</span>
+    </summary>
+    <div class="lvbody">
+      <h4>📋 知识点详述</h4>
+      <ol>
+        <li>掌握树的基本概念，掌握其构造与遍历的相关算法。</li>
+        <li>掌握哈夫曼树、完全二叉树、二叉排序树的相关概念和应用。</li>
+        <li>理解哈夫曼编码、格雷编码相关原理并能进行简单应用。</li>
+        <li>掌握深度优先搜索算法（DFS）、宽度优先搜索算法（也称广度优先搜索算法，BFS）、二叉树的搜索算法的概念及应用，能够根据现实问题，选择合适的搜索算法。</li>
+        <li>掌握简单动态规划的算法思想，能够使用代码解决相应的一维动态规划问题和简单背包问题。</li>
+        <li>掌握面向对象的思想，了解封装、继承、多态的基本概念，并掌握类的创建和基本的使用方法。</li>
+        <li>掌握栈、队列、循环队列的基本定义，应用场景和常见操作。</li>
+      </ol>
+      <div class="callout info">🎯 考核目标：掌握树的基础知识，并能够分辨和使用哈夫曼树、完全二叉树、二叉排序树。掌握搜索算法，可以根据不同的实际问题选择最优的搜索算法。掌握动态规划的思路和步骤，能够解决一维动态规划问题和简单背包问题。掌握面向对象的概念和特性，了解与面向过程思想的不同之处，并掌握类的创建及其基本使用方法。掌握栈、队列、循环队列的基本定义和常见操作，并可根据实际情况选择合适的数据结构。</div>
+      <h4>🗂️ 知识点描述</h4>
+      <table>
+        <tr><th>编号</th><th>知识块</th><th>知识点</th></tr>
+        <tr><td>1</td><td>树</td><td>树的基本概念；哈夫曼树；完全二叉树；二叉排序树</td></tr>
+        <tr><td>2</td><td>基于树的编码</td><td>格雷编码；哈夫曼编码</td></tr>
+        <tr><td>3</td><td>搜索算法</td><td>深度优先搜索算法（DFS）；宽度优先搜索算法（也称广度优先搜索算法，BFS）；二叉树的搜索算法</td></tr>
+        <tr><td>4</td><td>简单动态规划</td><td>一维动态规划；简单背包</td></tr>
+        <tr><td>5</td><td>面向对象</td><td>面向对象思想；类的创建和初始化；类的特性：继承、封装、多态</td></tr>
+        <tr><td>6</td><td>栈和队列</td><td>栈；队列；循环队列</td></tr>
+      </table>
+      <div class="exambox">📝 题型：单选 15×2 分 + 判断 10×2 分 + 编程 2×25 分 ｜ 考试时间：180 分钟</div>
+    </div>
+  </details>
+
+  <!-- ============ 七级 ============ -->
+  <details class="lvl" id="lv7" style="--lc:#8b5cf6;--lc2:#a78bfa">
+    <summary>
+      <span class="lvbadge">七级</span>
+      <div class="lvhead">
+        <b>C++&amp;Python 编程七级标准</b>
+        <span class="lvgoal">🎯 目标：图论、二维动态规划、哈希表</span>
+      </div>
+      <span class="lvtoggle">▾</span>
+    </summary>
+    <div class="lvbody">
+      <h4>📋 知识点详述</h4>
+      <ol>
+        <li>掌握数学库常用函数（三角、对数、指数），三角函数包括 sin(x)、cos(x) 等；对数函数包括 log10(x)：返回 x 以 10 为底的对数，log2(x)：返回 x 以 2 为底的对数；指数函数包括 exp(x)：计算指数函数，返回 x 的以 e 为底的指数函数。</li>
+        <li>掌握复杂动态规划（二维动态规划、动态规划最值优化）。包括区间动态规划、最长上升子序列（LIS）、最长公共子序列（LCS）等内容，理解基于滚动数组等降低动态规划空间复杂度的方法。</li>
+        <li>图的定义及基本图论算法。包括图的定义、图的种类（有向图、无向图），图节点的度的概念。掌握编程时图的数据结构表示，以及基于深度优先搜索（DFS）和广度优先搜索（BFS）的图搜索与遍历方法，图的泛洪（flood fill）算法。</li>
+        <li>掌握哈希表的概念与知识及其应用。</li>
+      </ol>
+      <div class="callout info">🎯 考核目标：掌握常用数学库函数，了解相关函数概念与定义。掌握复杂动态规划，包括二维动态规划、求 LIS、LCS 等内容，并掌握利用滚动数组等的优化方法。了解图的定义与广搜和深搜的算法，泛洪算法。了解哈希表的概念和知识。</div>
+      <h4>🗂️ 知识点描述</h4>
+      <table>
+        <tr><th>编号</th><th>知识块</th><th>知识点</th></tr>
+        <tr><td>1</td><td>数学库函数</td><td>三角函数；对数函数；指数函数</td></tr>
+        <tr><td>2</td><td>复杂动态规划</td><td>二维动态规划、动态规划最值优化；区间动态规划；求最长上升子序列（LIS）；求最长公共子序列（LCS）；基于滚动数组的动态规划空间复杂度优化</td></tr>
+        <tr><td>3</td><td>图的定义及遍历</td><td>图的概念；图的广度优先遍历；图的深度优先遍历</td></tr>
+        <tr><td>4</td><td>图论算法</td><td>图的泛洪算法（flood fill）</td></tr>
+        <tr><td>5</td><td>哈希表</td><td>哈希表的概念与知识及其应用</td></tr>
+      </table>
+      <div class="exambox">📝 题型：单选 15×2 分 + 判断 10×2 分 + 编程 2×25 分 ｜ 考试时间：180 分钟</div>
+    </div>
+  </details>
+
+  <!-- ============ 八级 ============ -->
+  <details class="lvl" id="lv8" style="--lc:#e11d48;--lc2:#fb7185">
+    <summary>
+      <span class="lvbadge">八级</span>
+      <div class="lvhead">
+        <b>C++&amp;Python 编程八级标准</b>
+        <span class="lvgoal">🎯 目标：组合数学、图论综合、算法优化</span>
+      </div>
+      <span class="lvtoggle">▾</span>
+    </summary>
+    <div class="lvbody">
+      <h4>📋 知识点详述</h4>
+      <ol>
+        <li>掌握计数原理。包括加法原理和乘法原理。</li>
+        <li>掌握排列与组合基础知识。包括排列、组合的基本概念，及能实现基础排列和组合编程问题的一般方法。</li>
+        <li>掌握杨辉三角形（又称帕斯卡三角形）的概念。</li>
+        <li>掌握倍增法概念。了解倍增法的时间复杂度。</li>
+        <li>掌握代数与平面几何基础知识（初中数学部分）。包括方程的概念及一元一次方程、二元一次方程的基本求解技巧，求基础平面几何概念、求基本图形（如长方形、三角形、圆形等）的面积等。</li>
+        <li>掌握图论算法及综合应用技巧。包括最小生成树的概念、kruskal 算法、prim 算法，掌握最短路径的概念、单源最短路径的 dijkstra 算法、Floyd 算法等。理解实现同一功能的不同算法的比较，并可以灵活解决相关问题。</li>
+        <li>算法的时间和空间效率分析。能够掌握较为复杂算法的时间和空间复杂度分析方法，能够分析各类算法（包括排序算法、查找算法、树和图的遍历算法、搜索算法、分治及动态规划算法等）的时间和空间复杂度。</li>
+        <li>算法优化。理解不同方法求解一个问题在时间复杂度和空间复杂度上的差异，理解使用数学知识辅助求解问题的技巧（如可以用循环求出等差数列的和，也可以用数学公式求出等差数列的和），掌握一般的算法优化技巧。</li>
+      </ol>
+      <div class="callout info">🎯 考核目标：掌握基本计数原理，理解加法原理和乘法原理的区别与使用。掌握排列组合概念，能够实现常见排列组合问题的编程求解方法。掌握杨辉三角形的概念和应用，了解杨辉三角形与组合之间的关系。掌握代数与平面几何的基本知识（限初中数学），能够求解一元一次方程、二元一次方程并掌握平面几何基本知识。掌握较为复杂算法的时间复杂度与空间复杂度分析方法，及其一般的算法优化技巧，能根据数学知识优化算法。</div>
+      <h4>🗂️ 知识点描述</h4>
+      <table>
+        <tr><th>编号</th><th>知识块</th><th>知识点</th></tr>
+        <tr><td>1</td><td>计数原理</td><td>加法原理；乘法原理</td></tr>
+        <tr><td>2</td><td>排列与组合</td><td>排列；组合</td></tr>
+        <tr><td>3</td><td>杨辉三角</td><td>杨辉三角的定义；杨辉三角形的实现</td></tr>
+        <tr><td>4</td><td>倍增法</td><td>倍增的概念</td></tr>
+        <tr><td>5</td><td>代数与平面几何</td><td>一元一次方程；二元一次方程；三角形、圆形、长方形面积</td></tr>
+        <tr><td>6</td><td>图论算法及综合应用</td><td>最小生成树的概念、kruskal 算法、prim 算法；最短路径的概念、dijkstra 算法、Floyd 算法；图论算法的综合应用与问题求解技巧</td></tr>
+        <tr><td>7</td><td>算法的时间和空间效率分析</td><td>算法时间和空间复杂度的一般分析方法；各类算法（包括排序算法、查找算法、树和图的遍历算法、搜索算法、分治及动态规划算法等）的时间和空间复杂度</td></tr>
+        <tr><td>8</td><td>算法优化</td><td>不同算法求解问题的差异分析；算法优化的一般方法；根据数学知识优化算法的一般方法（包括但不局限于等差、等比数列的求和公式等）</td></tr>
+      </table>
+      <div class="exambox">📝 题型：单选 15×2 分 + 判断 10×2 分 + 编程 2×25 分 ｜ 考试时间：180 分钟</div>
+    </div>
+  </details>
+
+  <footer>
+    GESP 官方考纲 📋 ｜ 内容来源：CCF 官网《CCF 编程能力等级认证 C++&amp;Python 认证标准》<br>
+    <a href="index.html">🏠 主页</a> ｜ <a href="基础常识乐园.html">🧠 基础常识</a> ｜ <a href="GESP1学习乐园.html">🎒 一级乐园</a> ｜ <a href="GESP2学习乐园.html">🚀 二级乐园</a> ｜ <a href="GESP二级知识点精讲.html">📖 知识笔记</a>
+  </footer>
+</div>
+</body>
+</html>
