@@ -85,6 +85,14 @@
   .btn.go { background: var(--tc); border-color: var(--tc); color: #fff; }
   .btnrow { display: flex; flex-wrap: wrap; gap: 8px; margin: 10px 0; align-items: center; }
   .btnrow .btn { margin: 0; }
+  code {
+    font-family: "SF Mono", Consolas, monospace;
+    background: #eef1fa;
+    color: #5e60ce;
+    padding: 1px 7px;
+    border-radius: 7px;
+    font-size: 13.5px;
+  }
 
   .code {
     background: #f1f4fb;
@@ -461,6 +469,7 @@
     </div>
     <div class="msg" id="eraMsg">电脑从"一间大房子"变成"掌上手机"，好神奇！</div>
     <div class="tip">🧠 一句话：CPU 负责想，内存负责放正在用的东西，硬盘负责存所有东西。</div>
+    <div class="tip">💡 电脑在现代社会到处都在：手机、游戏机、ATM 取款机、医院的仪器、火箭……全是程序在背后帮忙！</div>
   </section>
 
   <!-- ========== 2 编程第一课 ========== -->
@@ -527,6 +536,24 @@
     </div>
     <div class="msg" id="nqMsg">点"出题"开始！</div>
 
+    <h3>🔒 常量：定下来就不许改的"盒子"</h3>
+    <p class="sub">变量可以随时改，<b>常量</b>一旦定下来就不能改。用 <code>const</code> 声明，或者直接写出的数字/字符叫<b>字面常量</b>。</p>
+    <div class="cards">
+      <div class="box" style="--tc:#ef476f">
+        <div class="name">📦 变量（可以改）</div>
+        <div class="desc"><code>int age = 10;</code><br>以后还能写 <code>age = 11;</code> 改掉它。</div>
+      </div>
+      <div class="box" style="--tc:#ef476f">
+        <div class="name">🔒 常量（不能改）</div>
+        <div class="desc"><code>const int MAX = 100;</code><br>再写 <code>MAX = 200;</code> 会编译报错！</div>
+      </div>
+      <div class="box" style="--tc:#ef476f">
+        <div class="name">🔢 字面常量（直接写出来）</div>
+        <div class="desc"><code>100</code>、<code>3.14</code>、<code>'A'</code>、<code>"你好"</code> —— 写多少就是多少。</div>
+      </div>
+    </div>
+    <div class="tip">🧠 为什么要有常量？比如全班人数不会变，用 <code>const int CLASS_NUM = 45;</code>，以后不小心想改它，编译器会提醒你：不能改！</div>
+
     <h3>📏 类型量身高</h3>
     <div class="vtype" id="vtypeGrid"></div>
   </section>
@@ -550,6 +577,15 @@
 cin &gt;&gt; name;
 cout &lt;&lt; "你好，" &lt;&lt; name &lt;&lt; endl;
 cout &lt;&lt; a + b &lt;&lt; endl;   <span class="cm">// 输出 a+b 的结果</span></code></div>
+
+    <h3>📟 老式朋友：scanf 和 printf</h3>
+    <p class="sub">cin / cout 是新式输入输出，scanf / printf 是老式写法（用 <code>%d</code> 这类"占位符"）。考试里两种都要认识！</p>
+    <div class="code"><code><span class="cm">// scanf 读入，printf 输出（要 #include &lt;cstdio&gt;）</span>
+int age;
+scanf("%d", &amp;age);        <span class="cm">// 读入一个整数（注意变量前要加 &amp;）</span>
+printf("%d", age);         <span class="cm">// 输出整数</span>
+printf("我 %d 岁", age);    <span class="cm">// 在句子里塞数字</span></code></div>
+    <div class="tip">🎯 占位符对照：<code>%d</code> 整数、<code>%f</code> 小数、<code>%c</code> 字符、<code>%s</code> 字符串。scanf 的普通变量前要写 <code>&amp;</code>，printf 不用。</div>
   </section>
 
   <!-- ========== 5 算术 ========== -->
@@ -579,6 +615,7 @@ cout &lt;&lt; a + b &lt;&lt; endl;   <span class="cm">// 输出 a+b 的结果</s
     </div>
     <div class="msg" id="cntMsg">int i = 0; 点"i++"试试！</div>
     <div class="tip">🧠 记住：7 ÷ 3 整数除法得 2，剩下的 1 用 7 % 3 取出来。% 就是"求余数"！</div>
+    <div class="tip">🧮 <b>表达式</b>就是"用运算符把值连起来的算式"，比如 <code>a + b * 2</code>、<code>(a - b) % 3</code>。电脑和数学一样，先乘除后加减，括号最优先。</div>
   </section>
 
   <!-- ========== 6 关系逻辑 ========== -->
@@ -640,6 +677,19 @@ else
     </div>
     <div class="msg" id="dayMsg">今天是 星期三 🎉</div>
 
+    <h3>⚡ 三目运算：if-else 的"速写版"</h3>
+    <p class="sub">格式：<code>条件 ? 值1 : 值2</code> —— 条件成立选值 1，不成立选值 2。点按钮试试：</p>
+    <div class="btnrow">
+      <button class="btn go" onclick="ternDemo(85)">score = 85</button>
+      <button class="btn" onclick="ternDemo(40)">score = 40</button>
+    </div>
+    <div class="msg" id="ternMsg">点上面的分数看看结果～</div>
+    <div class="code"><code><span class="cm">// 一句话版：</span>
+int x = (score &gt;= 60) ? 1 : 0;
+<span class="cm">// 等于下面的 if-else：</span>
+if (score &gt;= 60) x = 1;
+else x = 0;</code></div>
+
     <h3>⭐ 循环结构：数星星（for 循环）</h3>
     <div class="btnrow">
       <label>数几颗星：
@@ -665,6 +715,37 @@ else
     </div>
     <div class="chips2" id="loopChips" style="display:flex;flex-wrap:wrap;gap:8px;margin:10px 0"></div>
     <div class="msg" id="loopMsg">break = 直接跳出循环；continue = 跳过这一次，继续下一次。</div>
+
+    <h3>🔁 循环三兄弟：for、while、do-while</h3>
+    <p class="sub">考纲一级要求三种循环都会！它们的区别就是"什么时候问问题"：</p>
+    <div class="cards">
+      <div class="box" style="--tc:#5e60ce">
+        <div class="name">for（知道数几次）</div>
+        <div class="desc">"数 5 颗星星！" 次数是事先知道的，就用 for。</div>
+      </div>
+      <div class="box" style="--tc:#5e60ce">
+        <div class="name">while（先问再做）</div>
+        <div class="desc">"袋子里还有糖吗？有就吃一颗。" 先检查条件，满足才做。</div>
+      </div>
+      <div class="box" style="--tc:#5e60ce">
+        <div class="name">do-while（先做再问）</div>
+        <div class="desc">"先吃一颗糖，再问还有没有。" <b>至少做一次</b>！</div>
+      </div>
+    </div>
+    <div class="code"><code><span class="cm">// while：先检查，再执行</span>
+int i = 1;
+while (i &lt;= 5) {
+    cout &lt;&lt; i &lt;&lt; " ";
+    i++;
+}
+
+<span class="cm">// do-while：先执行一次，再检查</span>
+int j = 1;
+do {
+    cout &lt;&lt; j &lt;&lt; " ";
+    j++;
+} while (j &lt;= 5);   <span class="cm">// 注意结尾有分号</span></code></div>
+    <div class="tip">🧠 三种循环都能"重复做事"，选哪种都行；但 do-while 一定先做一次。还有，花括号 <code>{ }</code> 把好几句话包成一块，叫<b>复合语句</b>，循环和 if 里经常用到。</div>
   </section>
 
   <!-- ========== 8 注释与找虫 ========== -->
@@ -726,11 +807,11 @@ cout &lt;&lt; age &lt;&lt; endl;</code></div>
   <section class="topic" id="s9" style="--tc:#06d6a0">
     <div class="big-emoji">🏆</div>
     <h2>10. 大闯关：考考自己！</h2>
-    <p class="sub">一共 10 题，答对越多，勋章越大！</p>
+    <p class="sub">一共 12 题，答对越多，勋章越大！</p>
 
     <div id="quizWrap">
       <div class="quizbar"><i id="quizBar"></i></div>
-      <div class="msg" id="quizCount" style="background:transparent">第 1 / 10 题</div>
+      <div class="msg" id="quizCount" style="background:transparent">第 1 / 12 题</div>
       <div class="qtext" id="quizQ"></div>
       <div id="quizOpts"></div>
       <div class="fb" id="quizFb"></div>
@@ -743,7 +824,7 @@ cout &lt;&lt; age &lt;&lt; endl;</code></div>
 
   <details class="help">
     <summary>📖 给爸爸妈妈的话</summary>
-    <p>这个网页严格对照 CCF《C++ 编程一级标准》制作：计算机基础知识、开发环境与程序框架、变量与数据类型、输入输出、算术/关系/逻辑运算、三大结构、注释与调试，最后是 10 题闯关。一级是"打地基"，建议按顺序玩：先认识电脑和框架（1、2 关），再玩变量和输入输出（3、4 关），接着是运算和三大结构（5~7 关），最后找虫子和闯关（8、9 关）。配合<a href="基础常识乐园.html">《基础常识乐园》</a>、<a href="GESP二级知识点精讲.html">《GESP二级知识点精讲》</a>和二级乐园网页，可以一路学到二级。「编程练习场」需要联网使用免费的在线编译器（Compiler Explorer），家长可先陪孩子试运行一次确认网络可用。</p>
+    <p>这个网页严格对照 CCF《C++ 编程一级标准》制作，覆盖官方考纲一级的全部 7 个知识块：计算机基础知识、集成开发环境、结构化程序设计、程序的基本语句（cin/scanf/cout/printf）、程序的基本概念（标识符/关键字/常量/变量/表达式）、基本运算（含三目运算）、基本数据类型，外加循环三兄弟（for/while/do-while）和 12 题闯关。一级是"打地基"，建议按顺序玩：先认识电脑和框架（1、2 关），再玩变量和输入输出（3、4 关），接着是运算和三大结构（5~7 关），最后找虫子和闯关（8、9 关）。配合<a href="基础常识乐园.html">《基础常识乐园》</a>、<a href="GESP官方考纲.html">《官方考纲》</a>、<a href="GESP二级知识点精讲.html">《GESP二级知识点精讲》</a>和二级乐园网页，可以一路学到二级。「编程练习场」需要联网使用免费的在线编译器（Compiler Explorer），家长可先陪孩子试运行一次确认网络可用。</p>
   </details>
 
   <footer>每天学一点，考试没问题！🎒 <a href="index.html">🏠 主页</a> ｜ <a href="基础常识乐园.html">🧠 基础常识</a> ｜ <a href="GESP官方考纲.html">📋 考纲</a> ｜ <a href="GESP2学习乐园.html">学完一级，去二级乐园玩 →</a></footer>
@@ -1317,6 +1398,10 @@ async function runCode() {
 }
 
 /* ================= 10 闯关 ================= */
+function ternDemo(score) {
+  const x = score >= 60 ? 1 : 0;
+  document.getElementById('ternMsg').textContent = 'score = ' + score + '，条件成立？' + (score >= 60 ? '成立' : '不成立') + ' → x = ' + x;
+}
 const questions = [
   { q: '下面哪个是合法的变量名？', opts: ['2x', 'int', 'myName', 'my name'], ans: 2, exp: '变量名不能数字开头、不能是关键字、不能有空格。myName 最棒！' },
   { q: 'char 类型用来存什么？', opts: ['很大的整数', '单个字符', '小数', '真或假'], ans: 1, exp: 'char 存一个字符，比如 \'A\'、\'5\'，要用单引号包起来。' },
@@ -1327,15 +1412,17 @@ const questions = [
   { q: 'switch 语句里忘写 break 会发生什么？', opts: ['报错', '穿透：继续往下执行', '死循环', '什么都不发生'], ans: 1, exp: '没有 break 会"穿透"到下面的 case 继续执行，这是经典考点！' },
   { q: 'for (int i = 1; i <= 3; i++) 会循环几次？', opts: ['2 次', '3 次', '4 次', '无限次'], ans: 1, exp: 'i = 1、2、3 都满足 i <= 3，所以一共 3 次。' },
   { q: '循环里 continue 的作用是？', opts: ['退出整个循环', '跳过这一次，继续下一次', '让程序暂停', '多循环一次'], ans: 1, exp: 'continue = 跳过本次；break = 退出整个循环。' },
-  { q: '电脑的"大脑"是哪个？', opts: ['硬盘', '显示器', 'CPU', '鼠标'], ans: 2, exp: 'CPU 负责所有计算和指挥，是电脑的大脑！' }
+  { q: '电脑的"大脑"是哪个？', opts: ['硬盘', '显示器', 'CPU', '鼠标'], ans: 2, exp: 'CPU 负责所有计算和指挥，是电脑的大脑！' },
+  { q: '老式输入输出里，printf("%d", x) 的 %d 表示什么？', opts: ['字符串', '整数', '小数', '字符'], ans: 1, exp: '%d 是整数占位符；还有 %f 小数、%c 字符、%s 字符串。' },
+  { q: 'int x = (a > b) ? 10 : 20; 当 a=3、b=5 时，x 等于几？', opts: ['10', '20', '报错', '3'], ans: 1, exp: '三目运算：条件成立取 10，不成立取 20。3 > 5 不成立，所以 x = 20。' }
 ];
 let qi = 0, score = 0, locked = false;
 function renderQ() {
   locked = false;
   const q = questions[qi];
   document.getElementById('quizQ').textContent = (qi + 1) + '. ' + q.q;
-  document.getElementById('quizCount').textContent = '第 ' + (qi + 1) + ' / 10 题';
-  document.getElementById('quizBar').style.width = ((qi) / 10 * 100) + '%';
+  document.getElementById('quizCount').textContent = '第 ' + (qi + 1) + ' / ' + questions.length + ' 题';
+  document.getElementById('quizBar').style.width = ((qi) / questions.length * 100) + '%';
   const box = document.getElementById('quizOpts');
   box.innerHTML = '';
   q.opts.forEach((t, i) => {
@@ -1377,7 +1464,7 @@ function finishQuiz() {
   end.style.display = 'block';
   const medal = score >= 9 ? '🥇' : score >= 7 ? '🥈' : score >= 5 ? '🥉' : '💪';
   const words = score >= 9 ? '太厉害啦！一级新手村毕业！' : score >= 7 ? '很棒！再复习一下错题就满分了！' : score >= 5 ? '不错！把错题对应的关卡再玩一遍～' : '别灰心！从头再玩一遍，一定能进步！';
-  end.innerHTML = '<div class="medal">' + medal + '</div><h3>你答对了 ' + score + ' / 10 题</h3><p>' + words + '</p><div class="btnrow" style="justify-content:center"><button class="btn go" onclick="restartQuiz()">🔄 再来一次</button></div>';
+  end.innerHTML = '<div class="medal">' + medal + '</div><h3>你答对了 ' + score + ' / ' + questions.length + ' 题</h3><p>' + words + '</p><div class="btnrow" style="justify-content:center"><button class="btn go" onclick="restartQuiz()">🔄 再来一次</button></div>';
   if (score >= 7) confettiBurst();
 }
 function restartQuiz() {

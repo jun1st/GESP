@@ -89,6 +89,14 @@
   .btn.ghost { background: transparent; }
   .btnrow { display: flex; flex-wrap: wrap; gap: 8px; margin: 10px 0; align-items: center; }
   .btnrow .btn { margin: 0; }
+  code {
+    font-family: "SF Mono", Consolas, monospace;
+    background: #eef1fa;
+    color: #5e60ce;
+    padding: 1px 7px;
+    border-radius: 7px;
+    font-size: 13.5px;
+  }
 
   .code {
     background: #f1f4fb;
@@ -539,6 +547,46 @@
         <div class="face back">飞毛腿快递：超快，但可能丢件</div>
       </div>
     </div>
+
+    <h3>🧅 网络"分层"：快递是怎么一步步送到的？</h3>
+    <p class="sub">数据出门就像寄快递，要一层层"打包"，收到再一层层"拆包"。OSI 有 7 层，TCP/IP 简化成 4 层。</p>
+    <div class="cards">
+      <div class="box" style="--tc:#3ecf8e">
+        <div class="name">🌐 OSI 七层（从上到下）</div>
+        <div class="desc">应用层 → 表示层 → 会话层 → 传输层 → 网络层 → 数据链路层 → 物理层。<br>口诀：<b>应表会传网链物</b>（倒着背：物数网传会表应）。</div>
+      </div>
+      <div class="box" style="--tc:#3ecf8e">
+        <div class="name">📦 TCP/IP 四层</div>
+        <div class="desc">应用层 → 传输层 → 网际层 → 网络接口层。<br>我们常说的 TCP（可靠）和 UDP（快速）就住在"传输层"。</div>
+      </div>
+    </div>
+
+    <h3>📋 协议速查表（选择题常考）</h3>
+    <div class="cards">
+      <div class="box" style="--tc:#4f8ef7"><div class="name">🌐 HTTP / HTTPS</div><div class="desc">看网页，端口 <b>80 / 443</b></div></div>
+      <div class="box" style="--tc:#9b6ef3"><div class="name">📂 FTP</div><div class="desc">传文件，端口 <b>21</b></div></div>
+      <div class="box" style="--tc:#3ecf8e"><div class="name">🔍 DNS</div><div class="desc">域名 → IP，像电话本，端口 <b>53</b></div></div>
+      <div class="box" style="--tc:#ff9f43"><div class="name">✉️ SMTP</div><div class="desc">发邮件，端口 <b>25</b></div></div>
+      <div class="box" style="--tc:#2ec4b6"><div class="name">📥 POP3</div><div class="desc">收邮件，端口 <b>110</b></div></div>
+      <div class="box" style="--tc:#ef476f"><div class="name">📮 TCP vs UDP</div><div class="desc">TCP 可靠但慢，UDP 快但可能丢</div></div>
+    </div>
+
+    <h3>🏷️ IP 地址与子网</h3>
+    <p class="sub">IP 地址就像门牌号；子网掩码负责告诉你"哪些是邻居（同一网段）"。</p>
+    <div class="cards">
+      <div class="box" style="--tc:#3ecf8e">
+        <div class="name">📍 IPv4 地址</div>
+        <div class="desc">4 段数字，每段 0~255，比如 192.168.1.1。<code>127.0.0.1</code> 是"自己"（localhost）。</div>
+      </div>
+      <div class="box" style="--tc:#3ecf8e">
+        <div class="name">🏠 私有地址</div>
+        <div class="desc">家里/公司内网用的：10.x.x.x、172.16~31.x.x、192.168.x.x，不上公网。</div>
+      </div>
+      <div class="box" style="--tc:#3ecf8e">
+        <div class="name">🔀 子网掩码</div>
+        <div class="desc"><code>255.255.255.0</code> 表示前 24 位是网络号，后 8 位是主机号 → 一个网里最多 254 台设备。子网划分就是"借主机位"切出更小的网。</div>
+      </div>
+    </div>
     <div class="tip">🏷️ IP 地址就像门牌号：192.168.1.1 是家里的"私有地址"，127.0.0.1 是"我自己的地址"。</div>
   </section>
 
@@ -745,9 +793,11 @@ double y = (double)a / b;  <span class="dim">// 2.5 ✅</span></code></div>
     <div class="btnrow">
       <button class="btn" onclick="mathFn('abs')">|a| 绝对值</button>
       <button class="btn" onclick="mathFn('sqrt')">√a 平方根</button>
+      <button class="btn" onclick="mathFn('fabs')">|a| 小数绝对值</button>
       <button class="btn" onclick="mathFn('max')">max(a,b)</button>
       <button class="btn" onclick="mathFn('min')">min(a,b)</button>
       <button class="btn" onclick="mathFn('pow')">a 的 b 次方</button>
+      <button class="btn" onclick="mathFn('round')">round(a) 四舍五入</button>
     </div>
     <div class="msg" id="mathOut">点一个按钮试试～</div>
 
@@ -761,6 +811,7 @@ double y = (double)a / b;  <span class="dim">// 2.5 ✅</span></code></div>
 <span class="dim">#include &lt;ctime&gt;     // time</span>
 srand(time(0));        <span class="dim">// 播种，让每次都不一样</span>
 int x = rand() % 100;  <span class="dim">// 0~99 的随机数</span></code></div>
+    <div class="tip">🧠 小提醒：<code>sqrt</code> 里不能是负数；<code>pow</code> 返回的是 double；浮点数比较别用 ==，要用 <code>fabs(a - b) &lt; 1e-9</code>。</div>
   </section>
 
   <!-- ========== 10 编程练习场 ========== -->
@@ -812,11 +863,11 @@ int x = rand() % 100;  <span class="dim">// 0~99 的随机数</span></code></div
   <section class="topic" id="s10" style="--tc:#06d6a0">
     <div class="big-emoji">🏆</div>
     <h2>11. 大闯关：考考自己！</h2>
-    <p class="sub">一共 10 题，答对越多，勋章越大！</p>
+    <p class="sub">一共 12 题，答对越多，勋章越大！</p>
 
     <div id="quizWrap">
       <div class="quizbar"><i id="quizBar"></i></div>
-      <div class="msg" id="quizCount" style="background:transparent">第 1 / 10 题</div>
+      <div class="msg" id="quizCount" style="background:transparent">第 1 / 12 题</div>
       <div class="qtext" id="quizQ"></div>
       <div id="quizOpts"></div>
       <div class="fb" id="quizFb"></div>
@@ -829,7 +880,7 @@ int x = rand() % 100;  <span class="dim">// 0~99 的随机数</span></code></div
 
   <details class="help">
     <summary>📖 给爸爸妈妈的话</summary>
-    <p>这个网页对应 CCF《C++ 编程二级标准》的 9 个知识点，把"电脑基础知识"做成了可以点、可以玩的小实验，把 C++ 的重点（类型转换、分支、循环、数学函数）做成了可视化演示。建议顺序：先带孩子玩 1~5 关（客观题），再做 6~9 关（编程题核心），最后做第 10 关闯关。「编程练习场」需要联网使用免费的在线编译器（Compiler Explorer），家长可先陪孩子试运行一次确认网络可用。配合<a href="基础常识乐园.html">《基础常识乐园》</a>和<a href="GESP二级知识点精讲.html">《GESP二级知识点精讲》</a>复习效果更好。</p>
+    <p>这个网页严格对照 CCF《C++ 编程二级标准》制作，覆盖官方考纲二级的全部 8 个知识块：计算机存储与网络（含网络分层、协议端口、IP 与子网划分）、程序设计语言、流程图、ASCII 编码、数据类型转换、多层分支、多层循环、数学函数（abs/fabs/sqrt/max/min/pow/round/rand），外加 12 题闯关。建议顺序：先带孩子玩 1~5 关（客观题），再做 6~9 关（编程题核心），最后做第 10 关闯关。「编程练习场」需要联网使用免费的在线编译器（Compiler Explorer），家长可先陪孩子试运行一次确认网络可用。配合<a href="基础常识乐园.html">《基础常识乐园》</a>、<a href="GESP官方考纲.html">《官方考纲》</a>和<a href="GESP二级知识点精讲.html">《GESP二级知识点精讲》</a>复习效果更好。</p>
   </details>
 
   <footer>每天学一点，考试没问题！加油，小勇士！🚀 <a href="index.html">🏠 主页</a> ｜ <a href="基础常识乐园.html">🧠 基础常识</a> ｜ <a href="GESP官方考纲.html">📋 考纲</a> ｜ <a href="GESP1学习乐园.html">🎒 一级乐园</a></footer>
@@ -1135,12 +1186,14 @@ function mathFn(fn) {
   if (isNaN(a) || isNaN(b)) { out.textContent = '先把 a、b 填好哦～'; return; }
   let r, tip = '';
   if (fn === 'abs') { r = Math.abs(a); tip = 'abs(-' + Math.abs(a) + ') = ' + r; }
+  else if (fn === 'fabs') { r = Math.abs(a); tip = 'fabs(-' + Math.abs(a) + ') = ' + r + '（小数也能用）'; }
   else if (fn === 'sqrt') {
     if (a < 0) { out.textContent = '😅 负数没有平方根！试试 a = 9 吧。'; return; }
     r = Math.sqrt(a); tip = 'sqrt(' + a + ') ≈ ' + r.toFixed(4);
   }
   else if (fn === 'max') { r = Math.max(a, b); tip = 'max(' + a + ', ' + b + ') = ' + r; }
   else if (fn === 'min') { r = Math.min(a, b); tip = 'min(' + a + ', ' + b + ') = ' + r; }
+  else if (fn === 'round') { r = Math.round(a); tip = 'round(' + a + ') = ' + r + '（四舍五入）'; }
   else { r = Math.pow(a, b); tip = 'pow(' + a + ', ' + b + ') = ' + r; }
   out.textContent = '✅ ' + tip;
 }
@@ -1312,15 +1365,17 @@ const questions = [
   { q: '流程图里"判断框"是什么形状？', opts: ['矩形', '平行四边形', '菱形', '圆角矩形'], ans: 2, exp: '菱形=判断（两条路），矩形=处理，平行四边形=输入输出，圆角框=开始结束。' },
   { q: 'C++ 属于哪种语言？', opts: ['机器语言', '汇编语言', '解释型高级语言', '编译型高级语言'], ans: 3, exp: 'C++ 是编译型高级语言：先编译成机器语言再运行。' },
   { q: '循环里 continue 的作用是？', opts: ['退出整个循环', '跳过本次循环后面的部分', '让程序暂停', '多循环一次'], ans: 1, exp: 'continue=跳过本次，break=退出整个循环。' },
-  { q: '想得到 0~99 的随机数，应该写？', opts: ['rand()%100', 'rand()/100', 'rand()*100', 'rand()%10'], ans: 0, exp: 'rand()%100 得到 0~99。想要 1~6 就写 rand()%6+1。' }
+  { q: '想得到 0~99 的随机数，应该写？', opts: ['rand()%100', 'rand()/100', 'rand()*100', 'rand()%10'], ans: 0, exp: 'rand()%100 得到 0~99。想要 1~6 就写 rand()%6+1。' },
+  { q: 'OSI 七层模型从上到下的口诀是？', opts: ['物数网传会表应', '应表会传网链物', '物传网会表应链', '网传会表应物数'], ans: 1, exp: 'OSI 从上到下：应用、表示、会话、传输、网络、数据链路、物理 → 口诀"应表会传网链物"（倒着背是"物数网传会表应"）。' },
+  { q: '浏览网页用的 HTTP 协议，默认端口是多少？', opts: ['21', '25', '80', '110'], ans: 2, exp: 'HTTP 是 80，HTTPS 加密版是 443；FTP 是 21，DNS 是 53。' }
 ];
 let qi = 0, score = 0, locked = false;
 function renderQ() {
   locked = false;
   const q = questions[qi];
   document.getElementById('quizQ').textContent = (qi + 1) + '. ' + q.q;
-  document.getElementById('quizCount').textContent = '第 ' + (qi + 1) + ' / 10 题';
-  document.getElementById('quizBar').style.width = ((qi) / 10 * 100) + '%';
+  document.getElementById('quizCount').textContent = '第 ' + (qi + 1) + ' / ' + questions.length + ' 题';
+  document.getElementById('quizBar').style.width = ((qi) / questions.length * 100) + '%';
   const box = document.getElementById('quizOpts');
   box.innerHTML = '';
   q.opts.forEach((t, i) => {
@@ -1366,7 +1421,7 @@ function finishQuiz() {
   end.style.display = 'block';
   const medal = score >= 9 ? '🥇' : score >= 7 ? '🥈' : score >= 5 ? '🥉' : '💪';
   const words = score >= 9 ? '太厉害啦！你是二级小高手！' : score >= 7 ? '很棒！再复习一下错题就满分了！' : score >= 5 ? '不错！把错题对应的知识点再玩一遍～' : '别灰心！从头再玩一遍，一定能进步！';
-  end.innerHTML = '<div class="medal">' + medal + '</div><h3>你答对了 ' + score + ' / 10 题</h3><p>' + words + '</p><div class="btnrow" style="justify-content:center"><button class="btn go" onclick="restartQuiz()">🔄 再来一次</button></div>';
+  end.innerHTML = '<div class="medal">' + medal + '</div><h3>你答对了 ' + score + ' / ' + questions.length + ' 题</h3><p>' + words + '</p><div class="btnrow" style="justify-content:center"><button class="btn go" onclick="restartQuiz()">🔄 再来一次</button></div>';
   if (score >= 7) confettiBurst();
 }
 function restartQuiz() {
