@@ -1,0 +1,562 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="GESP C++ 基础常识乐园：比特、字节、二进制、为什么电脑用二进制、存储单位。">
+<title>GESP C++ 基础常识乐园 🧠</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans SC", sans-serif;
+    background: linear-gradient(160deg, #eaf7ff 0%, #ffffff 45%, #fff3e0 100%);
+    color: #2b2d42;
+    line-height: 1.75;
+    min-height: 100vh;
+  }
+  .wrap { max-width: 960px; margin: 0 auto; padding: 14px 16px 40px; }
+
+  header { text-align: center; padding: 28px 12px 10px; }
+  header .mascot { font-size: 56px; display: block; animation: float 3s ease-in-out infinite; }
+  @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+  h1 {
+    font-size: clamp(26px, 5vw, 40px);
+    background: linear-gradient(90deg, #0ea5e9, #8b5cf6, #f59e0b);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    margin: 8px 0 4px;
+  }
+  .slogan { color: #6c6f93; font-size: 15px; }
+
+  nav.chips { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin: 18px 0 8px; }
+  .chip {
+    text-decoration: none;
+    background: #fff;
+    border: 2px solid #dce3f5;
+    color: #2b2d42;
+    padding: 7px 13px;
+    border-radius: 999px;
+    font-size: 14px;
+    font-weight: 600;
+    transition: transform .15s, border-color .15s, box-shadow .15s;
+  }
+  .chip:hover { transform: translateY(-2px); border-color: var(--chip, #0ea5e9); box-shadow: 0 4px 12px rgba(43,45,66,.12); }
+
+  section.topic {
+    background: #fff;
+    border-radius: 24px;
+    padding: 22px 20px 24px;
+    margin: 22px 0;
+    box-shadow: 0 8px 28px rgba(43,45,66,.08);
+    border-top: 8px solid var(--tc);
+    scroll-margin-top: 14px;
+  }
+  h2 { font-size: clamp(21px, 4vw, 28px); color: var(--tc); margin-bottom: 4px; }
+  .sub { color: #6c6f93; font-size: 14px; margin-bottom: 14px; }
+  h3 { font-size: 17px; color: #2b2d42; margin: 16px 0 8px; }
+  .big-emoji { font-size: 42px; }
+
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 12px; margin: 12px 0; }
+  .box {
+    background: #f7f9ff;
+    border: 2px dashed var(--tc);
+    border-radius: 16px;
+    padding: 13px;
+  }
+  .box .name { font-weight: 700; font-size: 15px; }
+  .box .desc { font-size: 13.5px; color: #55586e; }
+
+  .btn {
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 15px;
+    font-weight: 700;
+    border-radius: 999px;
+    padding: 9px 18px;
+    background: #fff;
+    color: #2b2d42;
+    border: 2px solid #dce3f5;
+    transition: transform .15s, box-shadow .15s;
+  }
+  .btn:hover { transform: translateY(-2px); box-shadow: 0 5px 14px rgba(43,45,66,.15); }
+  .btn.go { background: var(--tc); border-color: var(--tc); color: #fff; }
+  .btnrow { display: flex; flex-wrap: wrap; gap: 8px; margin: 10px 0; align-items: center; }
+  .btnrow .btn { margin: 0; }
+
+  input[type=text], input[type=number], select {
+    font-family: inherit;
+    font-size: 16px;
+    border: 2px solid #dce3f5;
+    border-radius: 12px;
+    padding: 8px 12px;
+    background: #fff;
+    color: #2b2d42;
+    max-width: 100%;
+  }
+  input[type=range] { width: min(280px, 100%); }
+  label { font-weight: 600; font-size: 14px; }
+
+  .fb { border-radius: 14px; padding: 10px 14px; font-size: 14.5px; margin: 10px 0; min-height: 20px; }
+  .fb.ok { background: #eafaf1; border: 2px solid #3ecf8e; }
+  .fb.no { background: #ffeef1; border: 2px solid #ef476f; }
+  .msg { border-radius: 14px; padding: 10px 14px; font-size: 14.5px; margin: 10px 0; min-height: 20px; }
+  .tip { background: #fff8e6; border: 2px dashed #ffd166; border-radius: 14px; padding: 10px 14px; font-size: 13.5px; margin-top: 12px; }
+
+  table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 14px; background: #fff; }
+  th, td { border: 1.5px solid #dce3f5; padding: 8px 10px; text-align: center; }
+  th { background: #f1f4fb; }
+  code {
+    font-family: "SF Mono", Consolas, monospace;
+    background: #20232e;
+    color: #ffd166;
+    padding: 2px 7px;
+    border-radius: 7px;
+    font-size: 14px;
+  }
+
+  .bits { display: flex; gap: 8px; flex-wrap: wrap; margin: 14px 0; justify-content: center; }
+  .bit {
+    width: 52px;
+    text-align: center;
+    border-radius: 14px;
+    border: 2px solid #cbd5e1;
+    background: #334155;
+    color: #94a3b8;
+    cursor: pointer;
+    padding: 6px 0 8px;
+    transition: transform .12s, background .15s, color .15s;
+    user-select: none;
+  }
+  .bit.on { background: #fbbf24; border-color: #f59e0b; color: #78350f; transform: translateY(-3px); }
+  .bit .bv { font-size: 20px; font-weight: 800; display: block; }
+  .bit .bw { font-size: 10.5px; font-weight: 700; opacity: .75; }
+  .bitout {
+    text-align: center;
+    font-size: 17px;
+    font-weight: 700;
+    background: #f7f9ff;
+    border: 2px dashed var(--tc);
+    border-radius: 16px;
+    padding: 12px;
+    margin: 10px 0;
+  }
+
+  .chips2 { display: flex; gap: 6px; flex-wrap: wrap; justify-content: center; margin: 12px 0; }
+  .chip1 {
+    font-family: "SF Mono", Consolas, monospace;
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    display: grid;
+    place-items: center;
+    font-weight: 800;
+    font-size: 18px;
+    background: #eef2ff;
+    border: 2px solid #c7d2fe;
+    color: #3730a3;
+  }
+  .chip1.on { background: #fbbf24; border-color: #f59e0b; color: #78350f; }
+
+  .qopt { display: block; width: 100%; margin: 6px 0; text-align: left; }
+  .qopt.right { background: #d1fae5 !important; border-color: #10b981 !important; color: #065f46 !important; }
+  .qopt.wrong { background: #ffe4e6 !important; border-color: #f43f5e !important; color: #881337 !important; }
+  .qtext { font-size: 16.5px; font-weight: 700; margin: 8px 0; }
+  .quizbar { background: #e7ebf8; border-radius: 999px; height: 12px; overflow: hidden; }
+  .quizbar i { display: block; height: 100%; width: 0; background: linear-gradient(90deg, var(--tc), #ffd166); transition: width .3s; }
+  .medal { font-size: 64px; text-align: center; }
+  .finish { text-align: center; }
+  .finish h3 { font-size: 22px; }
+
+  .cf { position: fixed; top: -20px; width: 9px; height: 16px; border-radius: 4px; animation: fall linear forwards; z-index: 99; }
+  @keyframes fall { to { transform: translateY(110vh) rotate(540deg); } }
+
+  footer { text-align: center; color: #6c6f93; font-size: 14px; padding: 18px 0 6px; }
+  footer a { color: #0ea5e9; font-weight: 700; text-decoration: none; }
+
+  @media (max-width: 560px) {
+    .bit { width: 44px; }
+    .bits { gap: 6px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <span class="mascot">🧠</span>
+    <h1>GESP C++ 基础常识乐园</h1>
+    <p class="slogan">先搞懂"0 和 1"的世界，再进乐园打怪！</p>
+  </header>
+
+  <nav class="chips" aria-label="知识点导航">
+    <a class="chip" style="--chip:#0ea5e9" href="#s1">🔢 二进制</a>
+    <a class="chip" style="--chip:#8b5cf6" href="#s2">⚡ 比特与字节</a>
+    <a class="chip" style="--chip:#f59e0b" href="#s3">🤔 为什么是二进制</a>
+    <a class="chip" style="--chip:#10b981" href="#s4">🔄 进制转换</a>
+    <a class="chip" style="--chip:#ef476f" href="#s5">📦 存储单位</a>
+    <a class="chip" style="--chip:#06d6a0" href="#s6">🎨 文字图片声音</a>
+    <a class="chip" style="--chip:#118ab2" href="#s7">🏆 大闯关</a>
+    <a class="chip" style="--chip:#118ab2" href="index.html">🏠 主页</a>
+    <a class="chip" style="--chip:#2ec4b6" href="GESP1学习乐园.html">🎒 一级乐园</a>
+    <a class="chip" style="--chip:#5e60ce" href="GESP2学习乐园.html">🚀 二级乐园</a>
+  </nav>
+
+  <!-- ========== 1 二进制 ========== -->
+  <section class="topic" id="s1" style="--tc:#0ea5e9">
+    <div class="big-emoji">🔢</div>
+    <h2>1. 电脑的数字只有 0 和 1</h2>
+    <p class="sub">我们平时用 0~9 十个数字（十进制），是因为我们有十根手指。电脑呢？它只有两种状态，所以它用 <b>0 和 1</b> 两个数字，这叫<strong>二进制</strong>。</p>
+
+    <div class="cards">
+      <div class="box" style="--tc:#0ea5e9">
+        <div class="name">👆 十进制（我们用的）</div>
+        <div class="desc">有 0、1、2、3、4、5、6、7、8、9 共 10 个数字。数到 9 就进位成 10、11、12……</div>
+      </div>
+      <div class="box" style="--tc:#8b5cf6">
+        <div class="name">⚡ 二进制（电脑用的）</div>
+        <div class="desc">只有 0 和 1 两个数字。数到 1 就进位：0 → 1 → 10 → 11 → 100……</div>
+      </div>
+      <div class="box" style="--tc:#f59e0b">
+        <div class="name">🪧 规则一样！</div>
+        <div class="desc">两种进制都是"满一位就进位"，只是"满几"不一样：十进制满 10 进 1，二进制满 2 进 1。</div>
+      </div>
+    </div>
+
+    <h3>🔍 观察：二进制数数（1~15）</h3>
+    <table>
+      <tr><th>十进制</th><th>二进制（4 位）</th><th>十进制</th><th>二进制（4 位）</th></tr>
+      <tr><td>0</td><td>0000</td><td>8</td><td>1000</td></tr>
+      <tr><td>1</td><td>0001</td><td>9</td><td>1001</td></tr>
+      <tr><td>2</td><td>0010</td><td>10</td><td>1010</td></tr>
+      <tr><td>3</td><td>0011</td><td>11</td><td>1011</td></tr>
+      <tr><td>4</td><td>0100</td><td>12</td><td>1100</td></tr>
+      <tr><td>5</td><td>0101</td><td>13</td><td>1101</td></tr>
+      <tr><td>6</td><td>0110</td><td>14</td><td>1110</td></tr>
+      <tr><td>7</td><td>0111</td><td>15</td><td>1111</td></tr>
+    </table>
+    <div class="tip">💡 发现了吗？二进制每一位都只有 0 或 1，从右往左每位的"份量"是 1、2、4、8、16……（每次翻一倍）！</div>
+  </section>
+
+  <!-- ========== 2 比特与字节 ========== -->
+  <section class="topic" id="s2" style="--tc:#8b5cf6">
+    <div class="big-emoji">⚡</div>
+    <h2>2. 比特（bit）和字节（byte）</h2>
+    <p class="sub">电脑里最最小的单位是一个 <b>bit（比特）</b>——它就是一个"开关"：开 = 1，关 = 0。<b>8 个 bit 凑成 1 个 byte（字节）</b>。</p>
+
+    <div class="cards">
+      <div class="box" style="--tc:#8b5cf6">
+        <div class="name">💡 1 bit（比特）</div>
+        <div class="desc">只能表示 0 或 1，就像一盏灯：亮 = 1，灭 = 0。</div>
+      </div>
+      <div class="box" style="--tc:#8b5cf6">
+        <div class="name">📦 1 byte（字节）= 8 bit</div>
+        <div class="desc">8 个开关排成一排。1 个字节能表示 0~255，一共 256 种可能（2⁸ = 256）。</div>
+      </div>
+      <div class="box" style="--tc:#8b5cf6">
+        <div class="name">🔤 一个字母 = 1 字节</div>
+        <div class="desc">一个英文字母（比如 A）刚好用 1 个字节存；一个汉字大约要 3 个字节（UTF-8）。</div>
+      </div>
+    </div>
+
+    <h3>🕹️ 试试看：点开关，拼出一个字节！</h3>
+    <p class="sub">点亮/熄灭下面的 8 盏灯，看看它表示的二进制和十进制是多少：</p>
+    <div class="bits" id="byteBits">
+      <div class="bit" onclick="toggleBit(7)"><span class="bv">0</span><span class="bw">128</span></div>
+      <div class="bit" onclick="toggleBit(6)"><span class="bv">0</span><span class="bw">64</span></div>
+      <div class="bit" onclick="toggleBit(5)"><span class="bv">0</span><span class="bw">32</span></div>
+      <div class="bit" onclick="toggleBit(4)"><span class="bv">0</span><span class="bw">16</span></div>
+      <div class="bit" onclick="toggleBit(3)"><span class="bv">0</span><span class="bw">8</span></div>
+      <div class="bit" onclick="toggleBit(2)"><span class="bv">0</span><span class="bw">4</span></div>
+      <div class="bit" onclick="toggleBit(1)"><span class="bv">0</span><span class="bw">2</span></div>
+      <div class="bit" onclick="toggleBit(0)"><span class="bv">0</span><span class="bw">1</span></div>
+    </div>
+    <div class="bitout" id="byteOut">二进制：00000000 ＝ 十进制的 0</div>
+    <div class="btnrow">
+      <button class="btn" onclick="randomByte()">🎲 随机来一个</button>
+      <button class="btn" onclick="resetByte()">🧹 全部熄灭</button>
+    </div>
+    <div class="tip">💡 8 个开关一共能拼出 256 种组合（0~255）！电脑里的文件大小，就是数它有多少个字节。</div>
+  </section>
+
+  <!-- ========== 3 为什么是二进制 ========== -->
+  <section class="topic" id="s3" style="--tc:#f59e0b">
+    <div class="big-emoji">🤔</div>
+    <h2>3. 为什么电脑要用二进制？</h2>
+    <p class="sub">为什么电脑不直接用 0~9，非要"麻烦"地用 0 和 1？因为有四大好处：</p>
+    <div class="cards">
+      <div class="box" style="--tc:#f59e0b">
+        <div class="name">🔌 电路只有"开/关"</div>
+        <div class="desc">电脑里千千万万个晶体管，只有两种状态：通电（1）和断电（0）。天生就是二进制的料！</div>
+      </div>
+      <div class="box" style="--tc:#f59e0b">
+        <div class="name">🛡️ 两种状态最可靠</div>
+        <div class="desc">"有电/没电"很容易分辨。要是用十进制，得分辨 10 种不同的电压，一点点干扰就读错了。</div>
+      </div>
+      <div class="box" style="--tc:#f59e0b">
+        <div class="name">🏗️ 电路简单又便宜</div>
+        <div class="desc">只需要做"开/关"的电路，又简单又快，还能做得特别小、特别省电。</div>
+      </div>
+      <div class="box" style="--tc:#f59e0b">
+        <div class="name">✅ 正好表示"真/假"</div>
+        <div class="desc">程序里的判断（是/否、对/错）也只要两种值：1 = 真，0 = 假，完全对得上！</div>
+      </div>
+    </div>
+    <div class="tip">🎯 <b>考点</b>：选择题常问"为什么计算机用二进制"，记住四句话：<b>电路只有开和关、两种状态更可靠、电路简单、1/0 正好表示真/假</b>。</div>
+  </section>
+
+  <!-- ========== 4 进制转换 ========== -->
+  <section class="topic" id="s4" style="--tc:#10b981">
+    <div class="big-emoji">🔄</div>
+    <h2>4. 进制转换实验室</h2>
+    <p class="sub">把十进制"翻译"成二进制：每一位的份量是 128、64、32、16、8、4、2、1，凑出来就行！</p>
+
+    <h3>🧮 十进制 → 二进制</h3>
+    <div class="btnrow">
+      <label>输入 0~255：<input type="number" id="decIn" min="0" max="255" value="13" style="width:90px" oninput="decToBin()"></label>
+    </div>
+    <div class="chips2" id="binChips"></div>
+    <div class="bitout" id="binOut">二进制：00001101</div>
+
+    <h3>🧮 二进制 → 十进制</h3>
+    <div class="btnrow">
+      <label>输入二进制（最多 8 位，只填 0/1）：<input type="text" id="binIn" value="1101" maxlength="8" style="width:110px" oninput="binToDec()"></label>
+    </div>
+    <div class="bitout" id="decOut">1101 ＝ 8+4+1 ＝ 13</div>
+    <div class="tip">📐 口算技巧：从右往左是 1、2、4、8、16……把"1"的位置的份量加起来就行。比如 <code>1010</code> ＝ 8+2 ＝ 10。<br>🎁 顺便认识 <b>十六进制</b>：电脑还常用 16 进制（0~9 和 A~F），因为 4 个 bit 正好能表示 0~15 ！</div>
+  </section>
+
+  <!-- ========== 5 存储单位 ========== -->
+  <section class="topic" id="s5" style="--tc:#ef476f">
+    <div class="big-emoji">📦</div>
+    <h2>5. 存储单位：B、KB、MB、GB、TB</h2>
+    <p class="sub">文件占多大地方？用存储单位来量。记住：<b>每往上走一级都是 ×1024</b>（不是 1000！）</p>
+
+    <table>
+      <tr><th>单位</th><th>中文</th><th>等于</th><th>像什么</th></tr>
+      <tr><td>bit</td><td>位</td><td>0 或 1</td><td>一盏灯</td></tr>
+      <tr><td>B</td><td>字节</td><td>8 bit</td><td>一个英文字母</td></tr>
+      <tr><td>KB</td><td>千字节</td><td>1024 B</td><td>半页文字</td></tr>
+      <tr><td>MB</td><td>兆字节</td><td>1024 KB</td><td>一张照片</td></tr>
+      <tr><td>GB</td><td>吉字节</td><td>1024 MB</td><td>一部电影</td></tr>
+      <tr><td>TB</td><td>太字节</td><td>1024 GB</td><td>几百部电影</td></tr>
+    </table>
+
+    <h3>🖱️ 感受一下：拉一拉滑块，看看文件有多大</h3>
+    <div class="btnrow">
+      <label>文件大小：<input type="range" id="unitRange" min="0" max="4" value="1" step="1" oninput="unitExp()"></label>
+      <b id="unitName">1 KB</b>
+    </div>
+    <div class="bitout" id="unitOut">1 KB = 1024 B，大概能装半页文字。</div>
+    <div class="tip">🎯 <b>考点</b>：1 KB = 1024 B；1 MB = 1024 KB；换算率是 <b>1024</b>，不是 1000！</div>
+  </section>
+
+  <!-- ========== 6 文字图片声音 ========== -->
+  <section class="topic" id="s6" style="--tc:#06d6a0">
+    <div class="big-emoji">🎨</div>
+    <h2>6. 文字、图片、声音在电脑里怎么存？</h2>
+    <p class="sub">电脑只认 0 和 1，那照片和音乐是怎么变成 0/1 的？它们都有各自的"翻译法"：</p>
+    <div class="cards">
+      <div class="box" style="--tc:#06d6a0">
+        <div class="name">🔤 文字 → 编码表</div>
+        <div class="desc">每个字符对应一个数字：A 是 65、a 是 97、0 是 48（ASCII 码）。存文字 = 存数字。</div>
+      </div>
+      <div class="box" style="--tc:#06d6a0">
+        <div class="name">🖼️ 图片 → 像素点</div>
+        <div class="desc">图片放大是一格一格的"像素"，每个像素存一个颜色编号。像素越多越清楚（分辨率越高）。</div>
+      </div>
+      <div class="box" style="--tc:#06d6a0">
+        <div class="name">🎵 声音 → 采样</div>
+        <div class="desc">声音是波浪，电脑每隔一小段拍一个"高度"（采样），拍得越密越像原声。</div>
+      </div>
+    </div>
+    <div class="tip">🎯 一句话总结：<b>电脑里所有东西（文字、图片、声音、程序）最终都是 0 和 1</b>，只是"翻译"的方法不同。</div>
+  </section>
+
+  <!-- ========== 7 大闯关 ========== -->
+  <section class="topic" id="s7" style="--tc:#118ab2">
+    <div class="big-emoji">🏆</div>
+    <h2>7. 大闯关：考考自己！</h2>
+    <p class="sub">一共 8 题，答对越多，勋章越大！</p>
+
+    <div id="quizWrap">
+      <div class="quizbar"><i id="quizBar"></i></div>
+      <div class="msg" id="quizCount" style="background:transparent">第 1 / 8 题</div>
+      <div class="qtext" id="quizQ"></div>
+      <div id="quizOpts"></div>
+      <div class="fb" id="quizFb"></div>
+      <div class="btnrow">
+        <button class="btn go" id="quizNext" onclick="quizNext()" style="display:none">下一步 ➡️</button>
+      </div>
+    </div>
+    <div id="quizEnd" class="finish" style="display:none"></div>
+  </section>
+
+  <footer>
+    基础常识乐园 🧠 ｜ <a href="index.html">🏠 主页</a> ｜ <a href="GESP1学习乐园.html">🎒 一级乐园</a> ｜ <a href="GESP2学习乐园.html">🚀 二级乐园</a> ｜ <a href="GESP二级知识点精讲.html">📖 知识笔记</a>
+  </footer>
+</div>
+
+<script>
+/* ---- 字节开关 ---- */
+let bits = [0, 0, 0, 0, 0, 0, 0, 0];
+function updateByte() {
+  const boxes = document.querySelectorAll('#byteBits .bit');
+  bits.forEach((v, i) => {
+    boxes[i].querySelector('.bv').textContent = v;
+    boxes[i].classList.toggle('on', v === 1);
+  });
+  const bin = bits.slice().reverse().join('');
+  const dec = parseInt(bin, 2);
+  document.getElementById('byteOut').textContent = '二进制：' + bin + ' ＝ 十进制的 ' + dec;
+}
+function toggleBit(i) {
+  bits[i] = bits[i] ? 0 : 1;
+  updateByte();
+}
+function randomByte() {
+  bits = bits.map(() => Math.random() < 0.5 ? 0 : 1);
+  updateByte();
+}
+function resetByte() {
+  bits = [0, 0, 0, 0, 0, 0, 0, 0];
+  updateByte();
+}
+
+/* ---- 进制转换 ---- */
+const WEIGHTS = [128, 64, 32, 16, 8, 4, 2, 1];
+function decToBin() {
+  const v = Math.max(0, Math.min(255, Math.floor(Number(document.getElementById('decIn').value) || 0)));
+  const chipBox = document.getElementById('binChips');
+  chipBox.innerHTML = '';
+  WEIGHTS.forEach((w) => {
+    const d = document.createElement('div');
+    d.className = 'chip1' + (v >= w ? ' on' : '');
+    d.textContent = v >= w ? 1 : 0;
+    chipBox.appendChild(d);
+  });
+  const bin = v.toString(2).padStart(8, '0');
+  document.getElementById('binOut').textContent = '二进制：' + bin;
+}
+function binToDec() {
+  let s = document.getElementById('binIn').value.trim();
+  if (!/^[01]+$/.test(s)) {
+    document.getElementById('decOut').textContent = '😅 只填 0 和 1 哦，比如 1101';
+    return;
+  }
+  s = s.slice(-8);
+  let sum = 0, exp = 1, parts = [];
+  for (let i = s.length - 1; i >= 0; i--) {
+    if (s[i] === '1') { sum += exp; parts.push(exp); }
+    exp *= 2;
+  }
+  document.getElementById('decOut').textContent = s + ' ＝ ' + (parts.join('+') || 0) + ' ＝ ' + sum;
+}
+
+/* ---- 存储单位 ---- */
+const UNITS = [
+  ['1 KB', '1024', '大概能装半页文字（约 500 个汉字）。'],
+  ['1 MB', '1024 × 1024', '大概是一张手机照片的大小！'],
+  ['1 GB', '1024 × 1024 × 1024', '大概是一部 1 小时的电影。'],
+  ['1 TB', '1024 × 1024 × 1024 × 1024', '大概能装几百部电影！'],
+  ['1 B', '8', '刚好能装一个英文字母（A）。']
+];
+function unitExp() {
+  const i = Number(document.getElementById('unitRange').value);
+  const u = UNITS[i];
+  document.getElementById('unitName').textContent = u[0];
+  document.getElementById('unitOut').textContent = u[0] + ' = ' + u[1] + ' B，' + u[2];
+}
+
+/* ---- 大闯关 ---- */
+const questions = [
+  { q: '电脑里最小的数据单位是什么？', opts: ['字节（Byte）', '比特（bit）', 'KB', '文件'], ans: 1, exp: '比特（bit）是最小单位，一个 bit 就是 0 或 1。8 个 bit 才是 1 个字节。' },
+  { q: '1 个字节（Byte）等于多少位（bit）？', opts: ['2', '4', '8', '1024'], ans: 2, exp: '1 字节 = 8 位！这是最常考的换算。' },
+  { q: '二进制里，数到 1 之后再数是什么？', opts: ['2', '10', '11', '01'], ans: 1, exp: '二进制满 2 进 1：0、1、10、11、100……所以 1 的下一个是 10。' },
+  { q: '为什么电脑用二进制？', opts: ['因为二进制更快', '因为电路只有开/关两种状态，简单可靠', '因为人类只认识 0 和 1', '因为二进制数字好看'], ans: 1, exp: '电路只有开/关两种状态，用二进制最可靠、最简单，还能表示真/假。' },
+  { q: '二进制 1101 等于十进制的几？', opts: ['11', '13', '15', '1101'], ans: 1, exp: '1101 = 8+4+0+1 = 13。' },
+  { q: '1 KB 等于多少 B？', opts: ['1000 B', '1024 B', '8 B', '100 B'], ans: 1, exp: '1 KB = 1024 B！换算率是 1024，不是 1000。' },
+  { q: '一个英文字母 A 在电脑里占多大？', opts: ['1 个字节', '1 个比特', '1 KB', '1 MB'], ans: 0, exp: '一个英文字母大约占 1 个字节（8 bit）。' },
+  { q: 'ASCII 码里，大写 A 是几号？', opts: ['48', '65', '97', '32'], ans: 1, exp: '记住四个：空格 32、0 是 48、A 是 65、a 是 97。' }
+];
+let qi = 0, score = 0, locked = false;
+function renderQ() {
+  locked = false;
+  const q = questions[qi];
+  document.getElementById('quizQ').textContent = (qi + 1) + '. ' + q.q;
+  document.getElementById('quizCount').textContent = '第 ' + (qi + 1) + ' / 8 题';
+  document.getElementById('quizBar').style.width = (qi / 8 * 100) + '%';
+  const box = document.getElementById('quizOpts');
+  box.innerHTML = '';
+  q.opts.forEach((t, i) => {
+    const b = document.createElement('button');
+    b.className = 'btn qopt';
+    b.textContent = 'ABCD'[i] + '. ' + t;
+    b.onclick = () => answerQ(i, b);
+    box.appendChild(b);
+  });
+  const fb = document.getElementById('quizFb');
+  fb.className = 'fb';
+  fb.textContent = '';
+  document.getElementById('quizNext').style.display = 'none';
+}
+function answerQ(i, btn) {
+  if (locked) return;
+  locked = true;
+  const q = questions[qi];
+  const ok = i === q.ans;
+  if (ok) score++;
+  document.querySelectorAll('#quizOpts .qopt').forEach((b, k) => {
+    b.disabled = true;
+    if (k === q.ans) b.classList.add('right');
+    if (k === i && !ok) b.classList.add('wrong');
+  });
+  const fb = document.getElementById('quizFb');
+  fb.className = 'fb ' + (ok ? 'ok' : 'no');
+  fb.textContent = (ok ? '✅ 答对啦！' : '❌ 不对哦。') + q.exp;
+  document.getElementById('quizNext').style.display = 'inline-block';
+}
+function quizNext() {
+  qi++;
+  if (qi < questions.length) renderQ();
+  else finishQuiz();
+}
+function finishQuiz() {
+  document.getElementById('quizWrap').style.display = 'none';
+  const end = document.getElementById('quizEnd');
+  end.style.display = 'block';
+  const medal = score >= 7 ? '🥇' : score >= 5 ? '🥈' : score >= 3 ? '🥉' : '💪';
+  const words = score >= 7 ? '太厉害啦！基础常识满分小高手！' : score >= 5 ? '很棒！再复习一下错题就满分了！' : score >= 3 ? '不错！把错题对应的关卡再玩一遍～' : '别灰心！从头再玩一遍，一定能进步！';
+  end.innerHTML = '<div class="medal">' + medal + '</div><h3>你答对了 ' + score + ' / 8 题</h3><p>' + words + '</p><div class="btnrow" style="justify-content:center"><button class="btn go" onclick="restartQuiz()">🔄 再来一次</button></div>';
+  if (score >= 5) confettiBurst();
+}
+function restartQuiz() {
+  qi = 0; score = 0;
+  document.getElementById('quizEnd').style.display = 'none';
+  document.getElementById('quizWrap').style.display = 'block';
+  renderQ();
+}
+function confettiBurst() {
+  const colors = ['#ef476f', '#ffd166', '#06d6a0', '#118ab2', '#9b6ef3', '#ff9f43'];
+  for (let i = 0; i < 70; i++) {
+    const p = document.createElement('span');
+    p.className = 'cf';
+    p.style.left = Math.random() * 100 + 'vw';
+    p.style.background = colors[Math.floor(Math.random() * colors.length)];
+    p.style.animationDuration = (1.8 + Math.random() * 1.6) + 's';
+    p.style.animationDelay = Math.random() * 0.5 + 's';
+    document.body.appendChild(p);
+    setTimeout(() => p.remove(), 4200);
+  }
+}
+
+updateByte();
+decToBin();
+binToDec();
+unitExp();
+renderQ();
+</script>
+</body>
+</html>

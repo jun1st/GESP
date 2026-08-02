@@ -1,0 +1,474 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="GESP C++ 二级知识点精讲：计算机基础、类型转换、分支、循环、数学函数、速记卡与真题。">
+<title>GESP C++ 二级知识点精讲 📖</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans SC", sans-serif;
+    background: linear-gradient(170deg, #f5f3ff 0%, #ffffff 50%, #f0fdfa 100%);
+    color: #2b2d42;
+    line-height: 1.8;
+    min-height: 100vh;
+  }
+  .wrap { max-width: 900px; margin: 0 auto; padding: 14px 18px 50px; }
+
+  header { text-align: center; padding: 26px 12px 8px; }
+  header .mascot { font-size: 50px; display: block; animation: float 3s ease-in-out infinite; }
+  @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+  h1 {
+    font-size: clamp(25px, 5vw, 38px);
+    background: linear-gradient(90deg, #5e60ce, #ef476f, #06d6a0);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    margin: 8px 0 4px;
+  }
+  .slogan { color: #6c6f93; font-size: 15px; }
+
+  nav.chips { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin: 18px 0 10px; }
+  .chip {
+    text-decoration: none;
+    background: #fff;
+    border: 2px solid #dce3f5;
+    color: #2b2d42;
+    padding: 7px 13px;
+    border-radius: 999px;
+    font-size: 14px;
+    font-weight: 600;
+    transition: transform .15s, border-color .15s, box-shadow .15s;
+  }
+  .chip:hover { transform: translateY(-2px); border-color: #5e60ce; box-shadow: 0 4px 12px rgba(43,45,66,.12); }
+
+  .part {
+    background: #fff;
+    border-radius: 22px;
+    padding: 20px 20px 24px;
+    margin: 20px 0;
+    box-shadow: 0 6px 24px rgba(43,45,66,.07);
+    border-top: 7px solid var(--pc, #5e60ce);
+  }
+  .part h2 { font-size: clamp(20px, 4vw, 26px); color: var(--pc, #5e60ce); margin-bottom: 8px; }
+  .part h3 { font-size: 17px; color: #2b2d42; border-left: 5px solid var(--pc, #5e60ce); padding-left: 10px; margin: 22px 0 8px; }
+  .part p { font-size: 15px; margin: 8px 0; }
+  .part ul, .part ol { margin: 8px 0 8px 22px; font-size: 15px; }
+  .part li { margin: 4px 0; }
+  b { color: #34407a; }
+  strong { color: #ef476f; }
+
+  table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 14px; }
+  th, td { border: 1.5px solid #dce3f5; padding: 8px 10px; text-align: left; }
+  th { background: #f1f4fb; }
+  tr:nth-child(even) td { background: #fafbff; }
+
+  pre {
+    background: #20232e;
+    color: #d6f5e3;
+    border-radius: 14px;
+    padding: 14px 16px;
+    overflow-x: auto;
+    font-size: 14px;
+    line-height: 1.6;
+    margin: 12px 0;
+  }
+  pre code { font-family: "SF Mono", Consolas, "Courier New", monospace; }
+  code.inline {
+    font-family: "SF Mono", Consolas, monospace;
+    background: #eef1fa;
+    color: #5e60ce;
+    padding: 1px 7px;
+    border-radius: 7px;
+    font-size: 13.5px;
+  }
+
+  .callout { border-radius: 14px; padding: 12px 15px; font-size: 14.5px; margin: 12px 0; }
+  .callout.info { background: #eef4ff; border: 2px solid #bcd0ff; }
+  .callout.warn { background: #fff8e6; border: 2px solid #ffd166; }
+  .callout.key { background: #ffeef1; border: 2px solid #fda4af; }
+
+  .toc {
+    background: #f7f9ff;
+    border: 2px dashed #c9d4f0;
+    border-radius: 16px;
+    padding: 14px 18px;
+    margin: 16px 0 4px;
+    font-size: 14.5px;
+  }
+  .toc a { color: #5e60ce; text-decoration: none; }
+  .toc a:hover { text-decoration: underline; }
+  .toc div { margin: 3px 0; }
+  .toc .t2 { margin-left: 18px; }
+
+  footer { text-align: center; color: #6c6f93; font-size: 14px; padding: 18px 0 6px; }
+  footer a { color: #5e60ce; font-weight: 700; text-decoration: none; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <span class="mascot">📖</span>
+    <h1>GESP C++ 二级知识点精讲</h1>
+    <p class="slogan">客观题 + 编程题，一份笔记全覆盖！</p>
+  </header>
+
+  <nav class="chips" aria-label="快捷入口">
+    <a class="chip" href="index.html">🏠 主页</a>
+    <a class="chip" href="基础常识乐园.html">🧠 基础常识</a>
+    <a class="chip" href="GESP1学习乐园.html">🎒 一级乐园</a>
+    <a class="chip" href="GESP2学习乐园.html">🚀 二级乐园</a>
+  </nav>
+
+  <div class="callout info">
+    <b>考试形式：</b>机考 120 分钟，满分 100 分，60 分及格。<br>
+    题型：单选题 15 题 × 2 分（30 分）+ 判断题 10 题 × 2 分（20 分）+ 编程题 2 题 × 25 分（50 分）。<br>
+    依据：CCF 官方《C++ 编程二级标准》（2025 版）。
+  </div>
+  <p style="font-size:15px">二级 = 计算机基础知识（客观题）+ C++ 的"类型转换、多分支、多循环、数学函数"（编程题核心）。已经过一级的你，重点学这 9 个知识点，其中<strong>多层循环</strong>和<strong>多层分支</strong>是编程题的命根子。</p>
+
+  <div class="toc">
+    <b>📌 目录</b>
+    <div><a href="#p1">第一部分：计算机基础知识（考客观题）</a></div>
+    <div class="t2">1 存储 ｜ 2 网络 ｜ 3 语言 ｜ 4 流程图 ｜ 5 ASCII</div>
+    <div><a href="#p2">第二部分：C++ 知识点（编程题核心）</a></div>
+    <div class="t2">6 类型转换 ｜ 7 多层分支 ｜ 8 多层循环 ｜ 9 数学函数</div>
+    <div><a href="#p3">第三部分：客观题速记卡</a></div>
+    <div><a href="#p4">第四部分：历年真题</a></div>
+  </div>
+
+  <!-- ================= 第一部分 ================= -->
+  <div class="part" id="p1" style="--pc:#5e60ce">
+    <h2>第一部分：计算机基础知识（考客观题）</h2>
+
+    <h3>1. 计算机的存储</h3>
+    <p><b>存储单位（必背）</b></p>
+    <ul>
+      <li>1 Byte（字节）= 8 bit（位）</li>
+      <li>1 KB = 1024 B，1 MB = 1024 KB，1 GB = 1024 MB，1 TB = 1024 GB</li>
+    </ul>
+    <div class="callout warn">注意：换算率是 <b>1024</b>，不是 1000！</div>
+
+    <p><b>三类存储器的区别（二级重点）</b></p>
+    <table>
+      <tr><th>名称</th><th>全称</th><th>特点</th><th>断电后</th></tr>
+      <tr><td>RAM</td><td>随机存取存储器</td><td>可读可写，速度较快，内存（主存）</td><td><strong>数据丢失</strong></td></tr>
+      <tr><td>ROM</td><td>只读存储器</td><td>只能读，一般不能写，存放启动程序（固件）</td><td>数据保留</td></tr>
+      <tr><td>Cache</td><td>高速缓冲存储器</td><td>位于 CPU 和主存之间，速度最快、容量小、价格贵</td><td>数据丢失</td></tr>
+    </table>
+    <p>常见考点：</p>
+    <ul>
+      <li>断电后数据丢失的是 <b>RAM</b>（还有 Cache），不丢失的是 ROM 和硬盘（外存）。</li>
+      <li>速度排序：Cache &gt; RAM &gt; 硬盘（外存）。</li>
+      <li>计算机运行时，程序和正在处理的数据要放进 <b>内存（RAM）</b> 里。</li>
+    </ul>
+
+    <h3>2. 计算机网络</h3>
+    <p><b>网络分类（按覆盖范围）</b></p>
+    <table>
+      <tr><th>类型</th><th>中文</th><th>覆盖范围</th><th>例子</th></tr>
+      <tr><td>LAN</td><td>局域网</td><td>一栋楼、一个学校</td><td>家里 / 学校机房</td></tr>
+      <tr><td>MAN</td><td>城域网</td><td>一座城市</td><td>城市主干网</td></tr>
+      <tr><td>WAN</td><td>广域网</td><td>全国、全球</td><td>互联网</td></tr>
+    </table>
+    <p>从小到大：<b>LAN &lt; MAN &lt; WAN</b></p>
+
+    <p><b>网络分层模型</b></p>
+    <ul>
+      <li>OSI 七层模型：物理层 → 数据链路层 → 网络层 → 传输层 → 会话层 → 表示层 → 应用层（记忆口诀：<b>物数网传会表应</b>）</li>
+      <li>TCP/IP 四层模型：网络接口层 → 网际层 → 传输层 → 应用层</li>
+    </ul>
+
+    <p><b>常见协议（必背）</b></p>
+    <table>
+      <tr><th>协议</th><th>作用</th><th>默认端口</th></tr>
+      <tr><td>HTTP / HTTPS</td><td>网页传输（HTTPS 是加密版）</td><td>80 / 443</td></tr>
+      <tr><td>FTP</td><td>文件传输</td><td>21</td></tr>
+      <tr><td>DNS</td><td>把域名翻译成 IP 地址</td><td>53</td></tr>
+      <tr><td>SMTP / POP3</td><td>发送 / 接收邮件</td><td>25 / 110</td></tr>
+      <tr><td>TCP</td><td>传输层，可靠、面向连接（慢而稳）</td><td>—</td></tr>
+      <tr><td>UDP</td><td>传输层，不可靠、无连接（快）</td><td>—</td></tr>
+    </table>
+
+    <p><b>IP 地址与子网</b></p>
+    <ul>
+      <li>IPv4 地址是 4 段数字，每段 0~255，例如 <code class="inline">192.168.1.1</code>。</li>
+      <li>私有地址（内网用，不上公网）：<code class="inline">10.x.x.x</code>、<code class="inline">172.16~31.x.x</code>、<code class="inline">192.168.x.x</code>。</li>
+      <li><code class="inline">127.0.0.1</code> 是回环地址（本机），也叫 localhost。</li>
+      <li>子网掩码：如 <code class="inline">255.255.255.0</code> 表示前 24 位是网络号，后 8 位是主机号。</li>
+      <li>子网划分：把一个大的网络"借"主机位，切成多个更小的网络。</li>
+    </ul>
+
+    <h3>3. 程序设计语言</h3>
+    <p><b>三种语言（必背）</b></p>
+    <table>
+      <tr><th>语言</th><th>特点</th></tr>
+      <tr><td>机器语言</td><td>由 0 和 1 组成，计算机<b>直接执行</b>，效率最高但人很难写</td></tr>
+      <tr><td>汇编语言</td><td>用助记符（如 MOV、ADD），需要翻译成机器语言</td></tr>
+      <tr><td>高级语言</td><td>接近人类语言（C++、Python、Java 等），可读性好、易移植</td></tr>
+    </table>
+    <p><b>编译 vs 解释</b></p>
+    <ul>
+      <li><b>编译型</b>：把整个程序一次性翻译成机器码再运行，如 C、C++。要经过"编译 → 链接 → 运行"。</li>
+      <li><b>解释型</b>：一边翻译一边执行，如 Python。</li>
+    </ul>
+    <div class="callout key">考点：<strong>C++ 是编译型的高级语言</strong>。</div>
+
+    <h3>4. 流程图</h3>
+    <p><b>基本符号（必背）</b></p>
+    <table>
+      <tr><th>符号</th><th>形状</th><th>作用</th></tr>
+      <tr><td>起止框</td><td>圆角矩形（椭圆）</td><td>开始 / 结束</td></tr>
+      <tr><td>输入输出框</td><td>平行四边形</td><td>读入、输出数据</td></tr>
+      <tr><td>处理框</td><td>矩形</td><td>赋值、计算等操作</td></tr>
+      <tr><td>判断框</td><td>菱形</td><td>条件判断，有"是/否"两个出口</td></tr>
+      <tr><td>流程线</td><td>带箭头线段</td><td>表示执行方向</td></tr>
+    </table>
+    <p><b>三种基本结构</b></p>
+    <ol>
+      <li><b>顺序结构</b>：从上到下依次执行。</li>
+      <li><b>分支（选择）结构</b>：按条件走某一条路，用菱形判断框。</li>
+      <li><b>循环结构</b>：满足条件时重复执行，注意循环要有"出口"（条件不满足时结束）。</li>
+    </ol>
+    <div class="callout info">做题技巧：看到菱形判断框 → 分支；看到箭头折回去 → 循环。</div>
+
+    <h3>5. ASCII 编码</h3>
+    <p><b>原理</b>：计算机里只存 0 和 1，所以每个字符都对应一个数字编码，存字符就是存这个数字。</p>
+    <p><b>四个必背值</b></p>
+    <table>
+      <tr><th>字符</th><th>空格</th><th>'0'</th><th>'A'</th><th>'a'</th></tr>
+      <tr><td>ASCII 码</td><td>32</td><td>48</td><td>65</td><td>97</td></tr>
+    </table>
+    <p><b>推出来的常用值</b></p>
+    <ul>
+      <li>'0'~'9'：48~57，所以 '9' = 57</li>
+      <li>'A'~'Z'：65~90，所以 'Z' = 90</li>
+      <li>'a'~'z'：97~122，所以 'z' = 122</li>
+      <li><b>大写和小写相差 32</b>：'A' + 32 = 'a'，'a' - 32 = 'A'</li>
+    </ul>
+    <p><b>C++ 中的字符与编码互转</b></p>
+<pre><code>char c = 'A';
+cout &lt;&lt; int(c) &lt;&lt; endl;        // 输出 65（字符转编码）
+cout &lt;&lt; char(98) &lt;&lt; endl;      // 输出 b（编码转字符）
+
+cout &lt;&lt; char('A' + 32) &lt;&lt; endl; // 输出 a（大小写转换）
+int x = '7' - '0';              // 字符数字转数值：7
+cout &lt;&lt; char('0' + 5) &lt;&lt; endl;  // 数值转字符数字：5</code></pre>
+    <div class="callout warn">考点：'B' - 'A' = 1；'0' + 3 = '3'（字符形式）。</div>
+  </div>
+
+  <!-- ================= 第二部分 ================= -->
+  <div class="part" id="p2" style="--pc:#06d6a0">
+    <h2>第二部分：C++ 知识点（编程题核心）</h2>
+
+    <h3>6. 数据类型与类型转换</h3>
+    <p><b>常用类型</b></p>
+    <table>
+      <tr><th>类型</th><th>大小</th><th>范围（大约）</th></tr>
+      <tr><td>int</td><td>4 字节</td><td>-21 亿 ~ 21 亿</td></tr>
+      <tr><td>long long</td><td>8 字节</td><td>±9.2 × 10¹⁸</td></tr>
+      <tr><td>float</td><td>4 字节</td><td>约 7 位有效数字</td></tr>
+      <tr><td>double</td><td>8 字节</td><td>约 15 位有效数字</td></tr>
+      <tr><td>char</td><td>1 字节</td><td>存字符或 -128~127</td></tr>
+      <tr><td>bool</td><td>1 字节</td><td>true / false</td></tr>
+    </table>
+
+    <p><b>隐式类型转换（自动发生）</b></p>
+    <p>规则：小的自动变成大的（低 → 高）：</p>
+    <p><code class="inline">bool / char → int → long long → float → double</code></p>
+<pre><code>double d = 3;      // int 3 自动转成 double 3.0
+int x = true;      // bool true 转成 1
+char c = 'A';
+int y = c;         // 'A' 转成 65</code></pre>
+
+    <p><b>最容易错的：整数除法</b></p>
+<pre><code>int a = 5, b = 2;
+double c = a / b;         // 结果是 2.0！不是 2.5
+                          // 因为 a/b 先做整数除法得 2，再转 double
+double d = (double)a / b; // 2.5（先把 a 强转成 double）
+double e = 1.0 * a / b;   // 2.5</code></pre>
+    <div class="callout key">记住口诀：<strong>两个整数相除，结果还是整数（向零截断）</strong>。想得到小数，除法前先把其中一个转成 double。</div>
+
+    <p><b>强制类型转换</b></p>
+<pre><code>int x = int(3.9);      // 3（直接砍掉小数部分）
+int y = (int)3.9;      // 3（C 风格）
+double z = (double)5 / 2;  // 2.5</code></pre>
+
+    <p><b>两个易错坑</b></p>
+    <ul>
+      <li><b>int 溢出</b>：<code class="inline">int x = 2000000000 + 2000000000;</code> 会溢出出错。数据可能很大时，用 <code class="inline">long long</code>。</li>
+      <li><b>浮点数不能直接比相等</b>：<code class="inline">if (a == b)</code> 对 double 不可靠，要用 <code class="inline">if (fabs(a - b) &lt; 1e-9)</code>。</li>
+    </ul>
+
+    <h3>7. 多层分支结构</h3>
+    <p><b>基本写法</b></p>
+<pre><code>if (条件1) {
+    // 条件1成立
+} else if (条件2) {
+    // 条件1不成立但条件2成立
+} else {
+    // 都不成立
+}</code></pre>
+    <p>条件里常用：关系运算符 <code class="inline">&lt; &lt;= &gt; &gt;= == !=</code>，逻辑运算符 <code class="inline">&amp;&amp; || !</code>。在 C++ 里，<b>非 0 即为真</b>，0 为假。</p>
+
+    <p><b>switch 语句（二级必考）</b></p>
+<pre><code>switch (表达式) {
+    case 常量1: 语句; break;
+    case 常量2: 语句; break;
+    default: 语句;
+}</code></pre>
+    <p>三个要点：</p>
+    <ol>
+      <li>case 后面必须是<b>常量</b>（整数或字符），不能是变量或范围。</li>
+      <li><b>没有 break 会"穿透"</b>：匹配后一直往下执行到 break 才停。这是最容易出判断/选择题的点。</li>
+      <li>default 在都不匹配时执行，可以放在任意位置。</li>
+    </ol>
+    <p>例子（成绩等级）：</p>
+<pre><code>int score; cin &gt;&gt; score;
+int level = score / 10;        // 90~99 → 9，100 → 10
+switch (level) {
+    case 10:
+    case 9:  cout &lt;&lt; "A"; break;   // 10 和 9 一起处理（穿透技巧）
+    case 8:  cout &lt;&lt; "B"; break;
+    case 7:  cout &lt;&lt; "C"; break;
+    default: cout &lt;&lt; "D";
+}</code></pre>
+
+    <p><b>多层分支常见错误</b></p>
+    <ul>
+      <li>把 <code class="inline">==</code> 写成 <code class="inline">=</code>（一个是判断相等，一个是赋值）。</li>
+      <li><b>悬空 else</b>：else 永远和"最近的、还没配对的 if"配对。拿不准就加大括号。</li>
+      <li>判断顺序：先判特殊/窄的条件，再判一般条件。</li>
+    </ul>
+
+    <h3>8. 多层循环结构（编程题灵魂）</h3>
+    <p><b>三种循环</b></p>
+<pre><code>// for：知道循环次数时用
+for (int i = 1; i &lt;= n; i++) { ... }
+
+// while：先判断再执行
+while (条件) { ... }
+
+// do-while：至少执行一次
+do { ... } while (条件);</code></pre>
+    <p><b>break 和 continue</b></p>
+    <ul>
+      <li><code class="inline">break</code>：跳出<b>本层</b>循环。</li>
+      <li><code class="inline">continue</code>：跳过本次循环的后面部分，进入下一次。</li>
+    </ul>
+    <p><b>嵌套循环：外层管"行"，内层管"列"</b></p>
+    <p>打印直角三角形：</p>
+<pre><code>int n; cin &gt;&gt; n;
+for (int i = 1; i &lt;= n; i++) {        // 外层：n 行
+    for (int j = 1; j &lt;= i; j++) {    // 内层：第 i 行打 i 个 *
+        cout &lt;&lt; "*";
+    }
+    cout &lt;&lt; endl;                     // 每行结束换行
+}</code></pre>
+    <div class="callout info">画"日字矩阵""X 字矩阵""N 字矩阵"这类真题，方法都一样：<b>先看行列关系（i 和 j 满足什么条件才打字符），用 if 判断 + 内层循环打印。</b></div>
+
+    <p><b>数位分解（真题高频）</b></p>
+<pre><code>int n; cin &gt;&gt; n;
+int sum = 0;
+while (n &gt; 0) {
+    sum += n % 10;   // 取个位
+    n /= 10;         // 去掉个位
+}
+cout &lt;&lt; sum &lt;&lt; endl; // 输出各位数字之和</code></pre>
+    <p>套路：<code class="inline">n % 10</code> 取末位，<code class="inline">n / 10</code> 去掉末位。循环到 n 变成 0。（注意：如果 n 本来可能是 0，上面循环一次都不执行，结果正好是 0，没毛病。）</p>
+
+    <p><b>枚举（穷举）——百鸡问题</b></p>
+    <p>100 元买 100 只鸡：公鸡 5 元/只，母鸡 3 元/只，小鸡 1 元/3 只。</p>
+<pre><code>for (int g = 0; g &lt;= 20; g++)          // 公鸡最多 20 只
+    for (int m = 0; m &lt;= 33; m++) {    // 母鸡最多 33 只
+        int x = 100 - g - m;           // 小鸡数量由总数决定
+        if (x &gt;= 0 &amp;&amp; x % 3 == 0 &amp;&amp;
+            g * 5 + m * 3 + x / 3 == 100)
+            cout &lt;&lt; g &lt;&lt; " " &lt;&lt; m &lt;&lt; " " &lt;&lt; x &lt;&lt; endl;
+    }</code></pre>
+    <p>枚举套路：<b>把所有可能的情况都试一遍，用 if 筛选符合条件的</b>。</p>
+
+    <p><b>判断素数（真题高频）</b></p>
+<pre><code>bool isPrime = true;
+if (n &lt; 2) isPrime = false;
+for (int i = 2; i * i &lt;= n; i++) {   // 只需试到 sqrt(n)
+    if (n % i == 0) { isPrime = false; break; }
+}</code></pre>
+
+    <h3>9. 常用数学函数</h3>
+    <p>需要 <code class="inline">#include &lt;cmath&gt;</code>：</p>
+    <table>
+      <tr><th>函数</th><th>作用</th><th>例子</th></tr>
+      <tr><td><code class="inline">abs(x)</code></td><td>整数绝对值</td><td>abs(-5) = 5</td></tr>
+      <tr><td><code class="inline">fabs(x)</code></td><td>浮点绝对值</td><td>fabs(-3.5) = 3.5</td></tr>
+      <tr><td><code class="inline">sqrt(x)</code></td><td>平方根</td><td>sqrt(16) = 4</td></tr>
+      <tr><td><code class="inline">max(a,b)</code> / <code class="inline">min(a,b)</code></td><td>较大值 / 较小值</td><td>max(3,7) = 7</td></tr>
+      <tr><td><code class="inline">pow(a,b)</code></td><td>a 的 b 次方（返回 double）</td><td>pow(2,10) = 1024</td></tr>
+      <tr><td><code class="inline">round(x)</code></td><td>四舍五入</td><td>round(3.5) = 4</td></tr>
+    </table>
+
+    <p><b>随机数（大纲明确要求）</b></p>
+<pre><code>#include &lt;cstdlib&gt;
+#include &lt;ctime&gt;
+
+srand(time(0));        // 播种子（每次运行结果不同）
+int x = rand() % 100;  // 生成 0~99 的随机数</code></pre>
+    <div class="callout warn">注意：不播种子的话，每次运行 rand() 的结果都一样。</div>
+
+    <p><b>数学函数易错点</b></p>
+    <ul>
+      <li><code class="inline">sqrt</code> 里不能是负数。</li>
+      <li><code class="inline">pow</code> 返回的是 double，比较结果要注意类型。</li>
+      <li>浮点数比较用 <code class="inline">fabs(a - b) &lt; 1e-9</code>，不要直接用 <code class="inline">==</code>。</li>
+    </ul>
+  </div>
+
+  <!-- ================= 第三部分 ================= -->
+  <div class="part" id="p3" style="--pc:#ef476f">
+    <h2>第三部分：客观题速记卡（考前背这张表）</h2>
+    <table>
+      <tr><th>考点</th><th>答案</th></tr>
+      <tr><td>1 KB = ?</td><td>1024 B</td></tr>
+      <tr><td>断电丢失</td><td>RAM、Cache</td></tr>
+      <tr><td>断电保留</td><td>ROM、硬盘</td></tr>
+      <tr><td>速度最快</td><td>Cache</td></tr>
+      <tr><td>存储单位由小到大</td><td>bit → Byte → KB → MB → GB → TB</td></tr>
+      <tr><td>OSI 七层顺序</td><td>物数网传会表应</td></tr>
+      <tr><td>网页协议 / 端口</td><td>HTTP(80)、HTTPS(443)</td></tr>
+      <tr><td>域名解析</td><td>DNS</td></tr>
+      <tr><td>私有网段</td><td>10.x、172.16~31.x、192.168.x</td></tr>
+      <tr><td>回环地址</td><td>127.0.0.1</td></tr>
+      <tr><td>网络从小到大</td><td>LAN &lt; MAN &lt; WAN</td></tr>
+      <tr><td>C++ 属于</td><td>编译型高级语言</td></tr>
+      <tr><td>流程图判断框</td><td>菱形</td></tr>
+      <tr><td>空格 / '0' / 'A' / 'a'</td><td>32 / 48 / 65 / 97</td></tr>
+      <tr><td>大写转小写</td><td>+32</td></tr>
+      <tr><td>两个整数相除</td><td>结果是整数（截断）</td></tr>
+      <tr><td>switch 漏 break</td><td>会继续向下穿透执行</td></tr>
+      <tr><td>else 与谁配对</td><td>最近的未配对 if</td></tr>
+    </table>
+  </div>
+
+  <!-- ================= 第四部分 ================= -->
+  <div class="part" id="p4" style="--pc:#ff9f43">
+    <h2>第四部分：历年真题（2023.3 ~ 2025.12 二级）</h2>
+    <p>客观题之外，编程题真题主要有这些类型：</p>
+    <ul>
+      <li><b>图形输出</b>：画三角形、X 字矩阵、日字矩阵、N 字矩阵、菱形、黄金格</li>
+      <li><b>数位处理</b>：数位之和、数字黑洞、自幂数、幂和数、优美的数字</li>
+      <li><b>枚举/穷举</b>：百鸡问题、寻找数字、环保能量球</li>
+      <li><b>数学判断</b>：找素数、勾股数、平方之和、时间跨越、数三角形</li>
+    </ul>
+    <div class="callout key"><b>备考顺序建议：</b>先把"多层循环 + 数位分解 + 枚举"练熟（编程题 50 分靠它们），再背客观题速记卡（选择判断 50 分靠它）。</div>
+    <p>真题都可以在<a href="GESP2学习乐园.html" style="color:#5e60ce;font-weight:700">二级乐园「编程练习场」</a>里选出来编译运行，边做边看输出！</p>
+  </div>
+
+  <footer>
+    GESP C++ 二级知识点精讲 📖 ｜ <a href="index.html">🏠 主页</a> ｜ <a href="基础常识乐园.html">🧠 基础常识</a> ｜ <a href="GESP1学习乐园.html">🎒 一级乐园</a> ｜ <a href="GESP2学习乐园.html">🚀 二级乐园</a>
+  </footer>
+</div>
+</body>
+</html>
