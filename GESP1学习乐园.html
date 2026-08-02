@@ -1,0 +1,1185 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="GESP C++ 一级知识点互动学习网页，适合零基础小朋友。">
+<title>GESP C++ 一级学习乐园 🎒</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans SC", sans-serif;
+    background: linear-gradient(160deg, #fff3e0 0%, #ffffff 45%, #e8f7ee 100%);
+    color: #2b2d42;
+    line-height: 1.75;
+    min-height: 100vh;
+  }
+  .wrap { max-width: 960px; margin: 0 auto; padding: 14px 16px 40px; }
+
+  header { text-align: center; padding: 28px 12px 10px; }
+  header .mascot { font-size: 56px; display: block; animation: float 3s ease-in-out infinite; }
+  @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+  h1 {
+    font-size: clamp(26px, 5vw, 40px);
+    background: linear-gradient(90deg, #ff9f43, #ef476f, #06d6a0);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    margin: 8px 0 4px;
+  }
+  .slogan { color: #6c6f93; font-size: 15px; }
+
+  nav.chips { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin: 18px 0 8px; }
+  .chip {
+    text-decoration: none;
+    background: #fff;
+    border: 2px solid #dce3f5;
+    color: #2b2d42;
+    padding: 7px 13px;
+    border-radius: 999px;
+    font-size: 14px;
+    font-weight: 600;
+    transition: transform .15s, border-color .15s, box-shadow .15s;
+  }
+  .chip:hover { transform: translateY(-2px); border-color: var(--chip, #5e60ce); box-shadow: 0 4px 12px rgba(43,45,66,.12); }
+
+  section.topic {
+    background: #fff;
+    border-radius: 24px;
+    padding: 22px 20px 24px;
+    margin: 22px 0;
+    box-shadow: 0 8px 28px rgba(43,45,66,.08);
+    border-top: 8px solid var(--tc);
+    scroll-margin-top: 14px;
+  }
+  h2 { font-size: clamp(21px, 4vw, 28px); color: var(--tc); margin-bottom: 4px; }
+  .sub { color: #6c6f93; font-size: 14px; margin-bottom: 14px; }
+  h3 { font-size: 17px; color: #2b2d42; margin: 16px 0 8px; }
+  .big-emoji { font-size: 42px; }
+
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin: 12px 0; }
+  .box {
+    background: #f7f9ff;
+    border: 2px dashed var(--tc);
+    border-radius: 16px;
+    padding: 13px;
+  }
+  .box .name { font-weight: 700; font-size: 15px; }
+  .box .desc { font-size: 13.5px; color: #55586e; }
+
+  .btn {
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 15px;
+    font-weight: 700;
+    border-radius: 999px;
+    padding: 9px 18px;
+    background: #fff;
+    color: #2b2d42;
+    border: 2px solid #dce3f5;
+    transition: transform .12s, box-shadow .12s;
+  }
+  .btn:hover { transform: translateY(-2px); box-shadow: 0 5px 14px rgba(43,45,66,.15); }
+  .btn.go { background: var(--tc); border-color: var(--tc); color: #fff; }
+  .btnrow { display: flex; flex-wrap: wrap; gap: 8px; margin: 10px 0; align-items: center; }
+  .btnrow .btn { margin: 0; }
+
+  .code {
+    background: #f1f4fb;
+    border: 2px solid #e2e8f7;
+    border-radius: 14px;
+    padding: 12px 14px;
+    font-family: "SF Mono", Consolas, "Courier New", monospace;
+    font-size: 13.5px;
+    overflow-x: auto;
+    white-space: pre;
+    line-height: 1.6;
+  }
+  .code code { font-family: inherit; }
+  .code .hl { background: #fff3bf; border-radius: 4px; padding: 1px 3px; font-weight: 700; }
+  .code .dim { color: #9aa2bd; }
+  .code .cm { color: #2a9d8f; }
+  .tip {
+    background: #fff8e6;
+    border: 2px solid #ffd166;
+    border-radius: 14px;
+    padding: 10px 14px;
+    margin-top: 12px;
+    font-size: 14px;
+  }
+  .warn {
+    background: #ffeef1;
+    border: 2px solid #ef476f;
+    border-radius: 14px;
+    padding: 10px 14px;
+    margin-top: 12px;
+    font-size: 14px;
+  }
+  .msg {
+    border-radius: 14px;
+    padding: 10px 14px;
+    margin-top: 10px;
+    font-size: 15px;
+    font-weight: 600;
+    background: #f1f4fb;
+    min-height: 22px;
+  }
+  input[type=text], input[type=number], select {
+    font-family: inherit;
+    font-size: 16px;
+    border: 2px solid #dce3f5;
+    border-radius: 12px;
+    padding: 8px 12px;
+    background: #fff;
+    color: #2b2d42;
+    max-width: 100%;
+  }
+  input[type=range] { width: min(260px, 100%); }
+  label { font-weight: 600; font-size: 14px; }
+
+  /* ---------- 1 认识电脑 ---------- */
+  .part { cursor: pointer; text-align: center; }
+  .part .picon { font-size: 40px; display: block; }
+  .part.on { background: #fff8e6; border-color: var(--tc); border-style: solid; }
+  .timeline { display: flex; gap: 8px; flex-wrap: wrap; margin: 10px 0; }
+  .tlchip {
+    border: 2px solid #dce3f5;
+    background: #fff;
+    border-radius: 14px;
+    padding: 8px 12px;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 14px;
+    flex: 1;
+    min-width: 130px;
+    text-align: center;
+  }
+  .tlchip.on { background: var(--tc); color: #fff; border-color: var(--tc); }
+
+  /* ---------- 2 编程第一课 ---------- */
+  .pipe { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; margin: 12px 0; }
+  .pipe .step {
+    border: 2px solid #dce3f5;
+    background: #f7f9ff;
+    border-radius: 999px;
+    padding: 7px 13px;
+    font-weight: 700;
+    font-size: 14px;
+    transition: all .2s;
+  }
+  .pipe .step.on { background: var(--tc); color: #fff; border-color: var(--tc); transform: scale(1.06); }
+  .skel { display: flex; flex-direction: column; gap: 4px; margin: 10px 0; }
+  .skline {
+    font-family: "SF Mono", Consolas, monospace;
+    background: #f1f4fb;
+    border: 2px solid #e2e8f7;
+    border-radius: 10px;
+    padding: 6px 12px;
+    font-size: 14px;
+    animation: pop .25s;
+  }
+  @keyframes pop { from { transform: scale(.9); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+  .piece { font-family: "SF Mono", Consolas, monospace; font-size: 13px; }
+  .piece.shake { animation: shake .35s; border-color: #ef476f; }
+  @keyframes shake {
+    0%,100% { transform: translateX(0); }
+    25% { transform: translateX(-6px); }
+    75% { transform: translateX(6px); }
+  }
+
+  /* ---------- 3 变量 ---------- */
+  .vtag {
+    font-family: "SF Mono", Consolas, monospace;
+    background: #20232e;
+    color: #d6f5e3;
+    border-radius: 12px;
+    padding: 10px 14px;
+    font-size: 17px;
+    text-align: center;
+    margin: 8px 0;
+    word-break: break-all;
+  }
+  .bytes { display: flex; gap: 4px; justify-content: center; margin: 6px 0; flex-wrap: wrap; }
+  .byte {
+    width: 26px; height: 26px;
+    border: 2px solid var(--tc);
+    border-radius: 6px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px;
+    color: var(--tc);
+    background: #fff;
+    font-weight: 800;
+  }
+  .vtype { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 8px; margin-top: 10px; }
+  .vtype .box { text-align: center; cursor: pointer; }
+  .vtype .box .t { font-size: 22px; font-weight: 800; color: var(--tc); }
+  .vtype .box.on { background: #fff8e6; border-style: solid; }
+
+  /* ---------- 4 输入输出 ---------- */
+  .term {
+    background: #20232e;
+    color: #d6f5e3;
+    font-family: "SF Mono", Consolas, monospace;
+    border-radius: 14px;
+    padding: 14px 16px;
+    font-size: 14.5px;
+    margin-top: 10px;
+    min-height: 90px;
+    line-height: 1.7;
+  }
+  .term .tq { color: #9aa2bd; }
+  .term .out { color: #ffd166; font-weight: 700; }
+
+  /* ---------- 6 关系与逻辑 ---------- */
+  .relchips { display: flex; flex-wrap: wrap; gap: 8px; margin: 10px 0; }
+  .relchip {
+    border: 2px solid #dce3f5;
+    border-radius: 12px;
+    padding: 6px 12px;
+    font-weight: 800;
+    background: #fff;
+    font-size: 15px;
+  }
+  .relchip.yes { border-color: #3ecf8e; background: #eafaf1; color: #1f7a52; }
+  .relchip.no { border-color: #ef476f; background: #ffeef1; color: #b3224a; }
+  .truth { display: flex; flex-direction: column; gap: 8px; margin: 10px 0; }
+  .trow {
+    display: flex; align-items: center; gap: 10px;
+    border: 2px solid #e2e8f7;
+    border-radius: 12px;
+    padding: 8px 12px;
+    background: #f7f9ff;
+    font-weight: 700;
+  }
+  .tled { width: 16px; height: 16px; border-radius: 50%; background: #d9deea; transition: background .2s; }
+  .tled.g { background: #3ecf8e; box-shadow: 0 0 8px rgba(62,207,142,.7); }
+  .tled.r { background: #ef476f; box-shadow: 0 0 8px rgba(239,71,111,.7); }
+  .trow .formula { flex: 1; font-family: "SF Mono", Consolas, monospace; }
+  .lgbtn.on { background: var(--tc); border-color: var(--tc); color: #fff; }
+
+  /* ---------- 7 三大结构 ---------- */
+  .cake { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin: 10px 0; }
+  .cakestep {
+    border: 2px solid #dce3f5;
+    background: #f7f9ff;
+    border-radius: 16px;
+    padding: 14px 18px;
+    text-align: center;
+    font-weight: 800;
+    opacity: .45;
+    transition: all .3s;
+    flex: 1;
+    min-width: 130px;
+  }
+  .cakestep.on { opacity: 1; background: #fff8e6; border-color: var(--tc); transform: scale(1.05); }
+  .stars { display: flex; flex-wrap: wrap; gap: 6px; margin: 10px 0; }
+  .star {
+    width: 42px; height: 42px;
+    border: 2px dashed #dce3f5;
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 24px;
+    background: #fff;
+    opacity: .25;
+    transition: all .2s;
+  }
+  .star.on { opacity: 1; border-style: solid; border-color: #ffd166; background: #fff8e6; transform: scale(1.08); }
+  .numchip {
+    border: 2px solid var(--tc);
+    border-radius: 999px;
+    padding: 4px 12px;
+    font-weight: 800;
+    background: #fff;
+    font-size: 15px;
+  }
+  .numchip.skip { border-color: #ef476f; color: #b3224a; background: #ffeef1; text-decoration: line-through; }
+  .numchip.cut { border-color: #ef476f; color: #b3224a; background: #ffeef1; }
+
+  /* ---------- 8 注释与找虫 ---------- */
+  .bugline { margin: 8px 0; }
+  .qopt { display: block; width: 100%; text-align: left; margin: 6px 0; }
+  .opt.right { background: #d9f7e8; border-color: #3ecf8e; }
+  .opt.wrong { background: #ffe5ea; border-color: #ef476f; }
+  .fb { border-radius: 14px; padding: 10px 14px; font-size: 14.5px; margin: 10px 0; min-height: 20px; }
+  .fb.ok { background: #eafaf1; border: 2px solid #3ecf8e; }
+  .fb.no { background: #ffeef1; border: 2px solid #ef476f; }
+
+  /* ---------- 9 闯关 ---------- */
+  .quizbar { height: 14px; background: #e9edf8; border-radius: 999px; overflow: hidden; margin: 10px 0; }
+  .quizbar i { display: block; height: 100%; width: 0; background: var(--tc); border-radius: 999px; transition: width .4s; }
+  .qtext { font-size: 19px; font-weight: 700; margin: 12px 0; }
+  .finish { text-align: center; padding: 16px 0; }
+  .finish .medal { font-size: 70px; }
+  #confetti { position: fixed; inset: 0; pointer-events: none; overflow: hidden; z-index: 99; }
+  .cf { position: absolute; top: -12px; width: 10px; height: 14px; border-radius: 3px; animation: fall linear forwards; }
+  @keyframes fall { to { transform: translateY(110vh) rotate(720deg); } }
+
+  details.help { margin-top: 26px; background: #fff; border-radius: 18px; padding: 14px 16px; border: 2px dashed #b9c4dd; }
+  details.help summary { cursor: pointer; font-weight: 800; color: #5e60ce; }
+  details.help p { font-size: 14px; margin-top: 8px; color: #55586e; }
+
+  footer { text-align: center; color: #6c6f93; font-size: 14px; padding: 18px 0 6px; }
+  footer a { color: #5e60ce; font-weight: 700; text-decoration: none; }
+
+  @media (max-width: 560px) {
+    .code { font-size: 12px; }
+    .star { width: 34px; height: 34px; font-size: 19px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <span class="mascot">🎒</span>
+    <h1>GESP C++ 一级学习乐园</h1>
+    <p class="slogan">新手村大冒险 —— 从零开始，把 C++ 基础学得稳稳的！</p>
+  </header>
+
+  <nav class="chips" aria-label="知识点导航">
+    <a class="chip" style="--chip:#4f8ef7" href="#s1">🖥️ 认识电脑</a>
+    <a class="chip" style="--chip:#9b6ef3" href="#s2">🏗️ 编程第一课</a>
+    <a class="chip" style="--chip:#ef476f" href="#s3">📦 变量</a>
+    <a class="chip" style="--chip:#2ec4b6" href="#s4">📥 输入输出</a>
+    <a class="chip" style="--chip:#ff9f43" href="#s5">➗ 算术</a>
+    <a class="chip" style="--chip:#06d6a0" href="#s6">🕵️ 关系逻辑</a>
+    <a class="chip" style="--chip:#5e60ce" href="#s7">🧱 三大结构</a>
+    <a class="chip" style="--chip:#e76f51" href="#s8">🐛 注释找虫</a>
+    <a class="chip" style="--chip:#06d6a0" href="#s9">🏆 大闯关</a>
+    <a class="chip" style="--chip:#5e60ce" href="GESP2学习乐园.html">🚀 去二级乐园</a>
+  </nav>
+
+  <!-- ========== 1 认识电脑 ========== -->
+  <section class="topic" id="s1" style="--tc:#4f8ef7">
+    <div class="big-emoji">🖥️</div>
+    <h2>1. 认识电脑的"身体"</h2>
+    <p class="sub">点一点下面的零件，看看它们都是干什么的！</p>
+
+    <div class="cards">
+      <div class="box part" style="--tc:#4f8ef7" onclick="pickPart(0)">
+        <span class="picon">🧠</span>
+        <div class="name">CPU</div>
+        <div class="desc">电脑的大脑</div>
+      </div>
+      <div class="box part" style="--tc:#ef476f" onclick="pickPart(1)">
+        <span class="picon">🧮</span>
+        <div class="name">内存</div>
+        <div class="desc">临时工作台</div>
+      </div>
+      <div class="box part" style="--tc:#ff9f43" onclick="pickPart(2)">
+        <span class="picon">💾</span>
+        <div class="name">硬盘</div>
+        <div class="desc">大仓库</div>
+      </div>
+      <div class="box part" style="--tc:#2ec4b6" onclick="pickPart(3)">
+        <span class="picon">⌨️</span>
+        <div class="name">键盘鼠标</div>
+        <div class="desc">输入设备</div>
+      </div>
+      <div class="box part" style="--tc:#9b6ef3" onclick="pickPart(4)">
+        <span class="picon">🖥️</span>
+        <div class="name">显示器</div>
+        <div class="desc">输出设备</div>
+      </div>
+      <div class="box part" style="--tc:#06d6a0" onclick="pickPart(5)">
+        <span class="picon">🪟</span>
+        <div class="name">操作系统</div>
+        <div class="desc">Windows、Linux</div>
+      </div>
+    </div>
+    <div class="msg" id="partMsg">点一个零件看看吧～</div>
+
+    <h3>⏳ 电脑的历史（点一点）</h3>
+    <div class="timeline">
+      <div class="tlchip" onclick="pickEra(0)">1946 年<br>第一台电脑 ENIAC</div>
+      <div class="tlchip" onclick="pickEra(1)">晶体管时代<br>电脑变小变快</div>
+      <div class="tlchip" onclick="pickEra(2)">集成电路时代<br>今天的芯片</div>
+    </div>
+    <div class="msg" id="eraMsg">电脑从"一间大房子"变成"掌上手机"，好神奇！</div>
+    <div class="tip">🧠 一句话：CPU 负责想，内存负责放正在用的东西，硬盘负责存所有东西。</div>
+  </section>
+
+  <!-- ========== 2 编程第一课 ========== -->
+  <section class="topic" id="s2" style="--tc:#9b6ef3">
+    <div class="big-emoji">🏗️</div>
+    <h2>2. 编程第一课：写代码的流程</h2>
+    <p class="sub">写一个程序要经过 5 步，点"下一步"走一遍！</p>
+
+    <div class="pipe" id="idePipe">
+      <div class="step">📄 新建文件</div>
+      <div class="step">✏️ 写代码</div>
+      <div class="step">💾 保存</div>
+      <div class="step">🔨 编译</div>
+      <div class="step">▶️ 运行调试</div>
+    </div>
+    <div class="btnrow">
+      <button class="btn go" onclick="ideNext()">下一步 ▶️</button>
+      <button class="btn" onclick="ideReset()">🔄 重新开始</button>
+    </div>
+    <div class="msg" id="ideMsg">Dev C++ 就像一个"编程厨房"：新建文件 → 写代码 → 保存 → 编译 → 运行！</div>
+
+    <h3>🧩 拼积木：搭出 C++ 标准框架</h3>
+    <p class="sub">下面 5 块积木顺序被打乱了，按正确顺序点它们！（头文件在最上面哦）</p>
+    <div class="btnrow" id="skelPool"></div>
+    <div class="skel" id="skelOut"></div>
+    <div class="msg" id="skelMsg">把积木按顺序拼起来吧！</div>
+    <div class="btnrow">
+      <button class="btn" onclick="initSkel()">🔄 重新打乱</button>
+    </div>
+  </section>
+
+  <!-- ========== 3 变量 ========== -->
+  <section class="topic" id="s3" style="--tc:#ef476f">
+    <div class="big-emoji">📦</div>
+    <h2>3. 变量：给数据做一个"有名字的盒子"</h2>
+    <p class="sub">给盒子起个名字、选个类型、放进一个值，点"装盒"看看！</p>
+
+    <div class="btnrow">
+      <label>名字：<input type="text" id="vbName" value="age" maxlength="12" style="width:110px"></label>
+      <label>类型：
+        <select id="vbType">
+          <option value="int">int 整数</option>
+          <option value="long long">long long 大整数</option>
+          <option value="double">double 小数</option>
+          <option value="char">char 字符</option>
+          <option value="bool">bool 真假</option>
+        </select>
+      </label>
+      <label>值：<input type="text" id="vbVal" value="10" style="width:90px"></label>
+    </div>
+    <div class="btnrow">
+      <button class="btn go" onclick="makeBox()">📦 装盒！</button>
+    </div>
+    <div id="vbBox"></div>
+    <div class="msg" id="vbMsg">变量要先定义（做盒子），再使用（放东西）！</div>
+
+    <h3>🚦 命名规则小游戏</h3>
+    <p class="sub">变量名只能由字母、数字、下划线组成，不能数字开头、不能是关键字（比如 int）。</p>
+    <div class="vtag" id="nqName">?</div>
+    <div class="btnrow">
+      <button class="btn go" onclick="newNameQ()">🎲 出题</button>
+      <button class="btn" id="nqYes" onclick="nameAnswer(true)">✅ 合法</button>
+      <button class="btn" id="nqNo" onclick="nameAnswer(false)">❌ 不合法</button>
+    </div>
+    <div class="msg" id="nqMsg">点"出题"开始！</div>
+
+    <h3>📏 类型量身高</h3>
+    <div class="vtype" id="vtypeGrid"></div>
+  </section>
+
+  <!-- ========== 4 输入输出 ========== -->
+  <section class="topic" id="s4" style="--tc:#2ec4b6">
+    <div class="big-emoji">📥</div>
+    <h2>4. 输入输出：程序和你"对话"</h2>
+    <p class="sub">cin 负责"听"（输入），cout 负责"说"（输出）。填好下面的内容，点运行！</p>
+
+    <div class="btnrow">
+      <label>你的名字：<input type="text" id="echoName" value="小明" maxlength="8" style="width:120px"></label>
+      <label>数字 a：<input type="number" id="echoA" value="3" style="width:80px"></label>
+      <label>数字 b：<input type="number" id="echoB" value="4" style="width:80px"></label>
+    </div>
+    <div class="btnrow">
+      <button class="btn go" onclick="runEcho()">▶️ 运行程序</button>
+    </div>
+    <div class="term" id="echoOut"><span class="tq">// 点"运行"，看看程序怎么和你说话～</span></div>
+    <div class="code"><code><span class="cm">// cin 读入，cout 输出</span>
+cin &gt;&gt; name;
+cout &lt;&lt; "你好，" &lt;&lt; name &lt;&lt; endl;
+cout &lt;&lt; a + b &lt;&lt; endl;   <span class="cm">// 输出 a+b 的结果</span></code></div>
+  </section>
+
+  <!-- ========== 5 算术 ========== -->
+  <section class="topic" id="s5" style="--tc:#ff9f43">
+    <div class="big-emoji">➗</div>
+    <h2>5. 算术运算：加减乘除和求余</h2>
+    <p class="sub">改两个数字，五种运算立刻算给你看！</p>
+
+    <div class="btnrow">
+      <label>a：<input type="number" id="arA" value="7" style="width:80px"></label>
+      <label>b：<input type="number" id="arB" value="3" style="width:80px"></label>
+    </div>
+    <div class="cards">
+      <div class="box"><div class="name">＋ 加法</div><div class="desc" id="arAdd">7 + 3 = 10</div></div>
+      <div class="box"><div class="name">－ 减法</div><div class="desc" id="arSub">7 - 3 = 4</div></div>
+      <div class="box"><div class="name">× 乘法</div><div class="desc" id="arMul">7 × 3 = 21</div></div>
+      <div class="box"><div class="name">÷ 整除</div><div class="desc" id="arDiv">7 ÷ 3 = 2 … 余 1</div></div>
+      <div class="box"><div class="name">% 求余</div><div class="desc" id="arMod">7 % 3 = 1</div></div>
+    </div>
+    <div class="msg" id="arApple">🍎🍎🍎🍎🍎🍎🍎 分给 3 个小朋友：每人 2 个，还剩 1 个。</div>
+
+    <h3>➕ 自增自减：i++ 和 i--</h3>
+    <div class="btnrow">
+      <button class="btn go" onclick="cntUp()">i++（加 1）</button>
+      <button class="btn" onclick="cntDown()">i--（减 1）</button>
+      <button class="btn" onclick="cntReset()">🔄 归零</button>
+    </div>
+    <div class="msg" id="cntMsg">int i = 0; 点"i++"试试！</div>
+    <div class="tip">🧠 记住：7 ÷ 3 整数除法得 2，剩下的 1 用 7 % 3 取出来。% 就是"求余数"！</div>
+  </section>
+
+  <!-- ========== 6 关系逻辑 ========== -->
+  <section class="topic" id="s6" style="--tc:#06d6a0">
+    <div class="big-emoji">🕵️</div>
+    <h2>6. 关系与逻辑：判断"真假"的侦探</h2>
+    <p class="sub">改两个数字，看看每个"比较"是真还是假！</p>
+
+    <div class="btnrow">
+      <label>a：<input type="number" id="rlA" value="5" style="width:80px"></label>
+      <label>b：<input type="number" id="rlB" value="8" style="width:80px"></label>
+    </div>
+    <div class="relchips" id="relChips"></div>
+
+    <h3>💡 逻辑开关：与（&&）或（||）非（!）</h3>
+    <p class="sub">点按钮把 A、B 变成"真"或"假"，看下面三个灯亮不亮！</p>
+    <div class="btnrow">
+      <button class="btn" id="lgA" onclick="toggleLg(0, this)">A = 真</button>
+      <button class="btn" id="lgB" onclick="toggleLg(1, this)">B = 假</button>
+    </div>
+    <div class="truth">
+      <div class="trow"><span class="tled" id="ledAnd"></span><span class="formula">A &amp;&amp; B（两个都真才真）</span><span id="txtAnd">假</span></div>
+      <div class="trow"><span class="tled" id="ledOr"></span><span class="formula">A || B（一个真就真）</span><span id="txtOr">真</span></div>
+      <div class="trow"><span class="tled" id="ledNot"></span><span class="formula">!A（真变假，假变真）</span><span id="txtNot">假</span></div>
+    </div>
+  </section>
+
+  <!-- ========== 7 三大结构 ========== -->
+  <section class="topic" id="s7" style="--tc:#5e60ce">
+    <div class="big-emoji">🧱</div>
+    <h2>7. 三大结构：顺序、分支、循环</h2>
+
+    <h3>📜 顺序结构：一步一步做蛋糕</h3>
+    <div class="cake" id="cakeSteps">
+      <div class="cakestep">🥚 打鸡蛋</div>
+      <div class="cakestep">🌾 加面粉</div>
+      <div class="cakestep">🔥 烤蛋糕</div>
+    </div>
+    <div class="btnrow">
+      <button class="btn go" onclick="cakePlay()">▶️ 播放做蛋糕</button>
+      <button class="btn" onclick="cakeReset()">🔄 重来</button>
+    </div>
+    <div class="msg" id="cakeMsg">顺序结构：从上到下，一句一句执行！</div>
+
+    <h3>🌿 分支结构：及格了吗？</h3>
+    <div class="btnrow">
+      <label>分数：<input type="range" id="scoreIn" min="0" max="100" value="75" oninput="showPass()"></label>
+      <span id="scoreVal" style="font-weight:800">75</span> 分
+    </div>
+    <div class="gradeout" id="passOut" style="font-size:48px;font-weight:900;text-align:center;color:var(--tc);line-height:1.1">及格 ✅</div>
+    <div class="code"><code>if (score &gt;= 60)
+    cout &lt;&lt; "及格";
+else
+    cout &lt;&lt; "不及格";</code></div>
+
+    <h3>📅 switch：输入数字看星期</h3>
+    <div class="btnrow">
+      <label>输入 1~7：<input type="number" id="dayIn" value="3" min="1" max="7" style="width:80px" oninput="showDay()"></label>
+    </div>
+    <div class="msg" id="dayMsg">今天是 星期三 🎉</div>
+
+    <h3>⭐ 循环结构：数星星（for 循环）</h3>
+    <div class="btnrow">
+      <label>数几颗星：
+        <input type="range" id="starN" min="1" max="10" value="5" oninput="buildStars()">
+        <span id="starNVal">5</span>
+      </label>
+    </div>
+    <div class="code"><code><span id="lFor">for (int i = 1; i &lt;= n; i++) {</span>
+    <span id="lPrint">cout &lt;&lt; "⭐";</span>
+}</code></div>
+    <div class="msg" id="starMsg">点"数一颗"看电脑数星星～</div>
+    <div class="stars" id="starBox"></div>
+    <div class="btnrow">
+      <button class="btn go" id="starStepBtn" onclick="starStep()">⭐ 数一颗</button>
+      <button class="btn" id="starAutoBtn" onclick="starAuto()">▶️ 自动数</button>
+      <button class="btn" onclick="starReset()">🔄 重置</button>
+    </div>
+
+    <h3>✂️ break 和 continue 的小实验</h3>
+    <div class="btnrow">
+      <button class="btn go" onclick="showLoopDemo('break')">✂️ break：数到 5 就停</button>
+      <button class="btn" onclick="showLoopDemo('continue')">⏭️ continue：跳过 5</button>
+    </div>
+    <div class="chips2" id="loopChips" style="display:flex;flex-wrap:wrap;gap:8px;margin:10px 0"></div>
+    <div class="msg" id="loopMsg">break = 直接跳出循环；continue = 跳过这一次，继续下一次。</div>
+  </section>
+
+  <!-- ========== 8 注释与找虫 ========== -->
+  <section class="topic" id="s8" style="--tc:#e76f51">
+    <div class="big-emoji">🐛</div>
+    <h2>8. 注释和调试：给程序写"便签"、抓"虫子"</h2>
+    <p class="sub">注释是写给人的便签，电脑不会执行它。先看看，再当一回"捉虫小侦探"！</p>
+
+    <div class="code"><code><span class="cm">// 这一行是注释，电脑不执行</span>
+int age = 10;          <span class="cm">// 注释可以写在代码后面</span>
+<span class="cm">/* 多行注释：
+   可以写好多好多行 */</span>
+cout &lt;&lt; age &lt;&lt; endl;</code></div>
+
+    <h3>🔍 捉虫游戏：找出程序里的错误！</h3>
+    <div class="code" id="bugCode"></div>
+    <div id="bugOpts"></div>
+    <div class="fb" id="bugFb"></div>
+    <div class="btnrow">
+      <button class="btn go" id="bugNext" onclick="bugNext()" style="display:none">下一只虫子 ➡️</button>
+    </div>
+    <div class="msg" id="bugMsg">一共 4 只虫子，找出每一只！</div>
+  </section>
+
+  <!-- ========== 9 大闯关 ========== -->
+  <section class="topic" id="s9" style="--tc:#06d6a0">
+    <div class="big-emoji">🏆</div>
+    <h2>9. 大闯关：考考自己！</h2>
+    <p class="sub">一共 10 题，答对越多，勋章越大！</p>
+
+    <div id="quizWrap">
+      <div class="quizbar"><i id="quizBar"></i></div>
+      <div class="msg" id="quizCount" style="background:transparent">第 1 / 10 题</div>
+      <div class="qtext" id="quizQ"></div>
+      <div id="quizOpts"></div>
+      <div class="fb" id="quizFb"></div>
+      <div class="btnrow">
+        <button class="btn go" id="quizNext" onclick="quizNext()" style="display:none">下一步 ➡️</button>
+      </div>
+    </div>
+    <div id="quizEnd" class="finish" style="display:none"></div>
+  </section>
+
+  <details class="help">
+    <summary>📖 给爸爸妈妈的话</summary>
+    <p>这个网页严格对照 CCF《C++ 编程一级标准》制作：计算机基础知识、开发环境与程序框架、变量与数据类型、输入输出、算术/关系/逻辑运算、三大结构、注释与调试，最后是 10 题闯关。一级是"打地基"，建议按顺序玩：先认识电脑和框架（1、2 关），再玩变量和输入输出（3、4 关），接着是运算和三大结构（5~7 关），最后找虫子和闯关（8、9 关）。配合文件夹里的《GESP二级知识点精讲.md》和二级乐园网页，可以一路学到二级。</p>
+  </details>
+
+  <footer>每天学一点，考试没问题！🎒 <a href="GESP2学习乐园.html">学完一级，去二级乐园玩 →</a></footer>
+</div>
+
+<div id="confetti" aria-hidden="true"></div>
+
+<script>
+/* ================= 1 认识电脑 ================= */
+const partInfo = [
+  ['🧠 CPU', '电脑的大脑！所有"想一想、算一算"都是它负责。'],
+  ['🧮 内存', '临时工作台：正在用的程序和数据放在这里，速度快，但一断电就"忘光光"。'],
+  ['💾 硬盘', '大仓库：所有文件、游戏、照片都存这里，断电也不丢。'],
+  ['⌨️ 键盘鼠标', '输入设备：把我们的命令"送进"电脑。'],
+  ['🖥️ 显示器', '输出设备：把电脑的结果"展示"给我们看。'],
+  ['🪟 操作系统', '管理电脑的"大管家"，常见的有 Windows、Linux、macOS。']
+];
+function pickPart(i) {
+  document.querySelectorAll('.part').forEach((p, k) => p.classList.toggle('on', k === i));
+  document.getElementById('partMsg').textContent = partInfo[i][0] + '：' + partInfo[i][1];
+}
+const eraInfo = [
+  ['1946 年：第一台电脑 ENIAC 诞生！', '它有一间大房子那么大，重 30 吨，却能做很多计算。'],
+  ['晶体管时代', '电脑用上了晶体管，变得小一点、快一点、省电一点。'],
+  ['集成电路时代', '把上亿个零件做进一块小芯片，于是有了今天的手机和电脑！']
+];
+function pickEra(i) {
+  document.querySelectorAll('.tlchip').forEach((c, k) => c.classList.toggle('on', k === i));
+  document.getElementById('eraMsg').textContent = eraInfo[i][0] + '——' + eraInfo[i][1];
+}
+
+/* ================= 2 编程第一课 ================= */
+const ideSteps = [
+  ['📄 新建文件', '在 Dev C++ 里点"文件 → 新建 → 源代码"，打开一张空白纸。'],
+  ['✏️ 写代码', '在纸上写 C++ 代码，就像给电脑写"说明书"。'],
+  ['💾 保存', '记得保存！文件名最好用英文，比如 hello.cpp。'],
+  ['🔨 编译', '点"编译"按钮，电脑把 C++ 翻译成它能听懂的机器语言。'],
+  ['▶️ 运行调试', '点"运行"，看程序执行结果；有问题就"调试"找原因！']
+];
+let ideI = -1;
+function ideNext() {
+  ideI = (ideI + 1) % ideSteps.length;
+  document.querySelectorAll('#idePipe .step').forEach((s, k) => s.classList.toggle('on', k <= ideI));
+  document.getElementById('ideMsg').textContent = ideSteps[ideI][0] + '：' + ideSteps[ideI][1];
+}
+function ideReset() {
+  ideI = -1;
+  document.querySelectorAll('#idePipe .step').forEach(s => s.classList.remove('on'));
+  document.getElementById('ideMsg').textContent = 'Dev C++ 就像一个"编程厨房"：新建文件 → 写代码 → 保存 → 编译 → 运行！';
+}
+
+const skelLines = [
+  '#include <iostream>',
+  'using namespace std;',
+  'int main() {',
+  '    cout << "GESP 我来了!" << endl;',
+  '    return 0;'
+];
+let skelIdx = 0;
+function initSkel() {
+  skelIdx = 0;
+  const pool = document.getElementById('skelPool');
+  const shuffled = skelLines.slice().sort(() => Math.random() - .5);
+  pool.innerHTML = '';
+  shuffled.forEach(t => {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'btn piece';
+    b.textContent = t;
+    b.onclick = () => tryPiece(b, t);
+    pool.appendChild(b);
+  });
+  document.getElementById('skelOut').innerHTML = '';
+  document.getElementById('skelMsg').textContent = '把积木按正确顺序拼起来吧！';
+}
+function tryPiece(b, t) {
+  if (t === skelLines[skelIdx]) {
+    b.remove();
+    const d = document.createElement('div');
+    d.className = 'skline';
+    d.textContent = t;
+    document.getElementById('skelOut').appendChild(d);
+    skelIdx++;
+    document.getElementById('skelMsg').textContent = skelIdx === skelLines.length
+      ? '🎉 完美！这就是 C++ 的标准框架：头文件 → 命名空间 → main 函数！'
+      : '✅ 正确！下一行是？';
+  } else {
+    b.classList.add('shake');
+    setTimeout(() => b.classList.remove('shake'), 400);
+    document.getElementById('skelMsg').textContent = '❌ 顺序不对～ 提示：程序从 main() 函数开始执行！';
+  }
+}
+
+/* ================= 3 变量 ================= */
+const typeInfo = {
+  int: { size: 4, range: '-21亿 ~ 21亿', emoji: '🔢' },
+  'long long': { size: 8, range: '超大整数 ±9.2×10^18', emoji: '🔢' },
+  double: { size: 8, range: '小数，很精确', emoji: '🍰' },
+  char: { size: 1, range: '一个字符', emoji: '🔤' },
+  bool: { size: 1, range: 'true 或 false', emoji: '⚖️' }
+};
+function makeBox() {
+  const name = document.getElementById('vbName').value.trim();
+  const type = document.getElementById('vbType').value;
+  const raw = document.getElementById('vbVal').value.trim();
+  const msg = document.getElementById('vbMsg');
+  if (!/^[A-Za-z_][A-Za-z0-9_]*$/.test(name)) {
+    msg.textContent = '😅 变量名不合法：只能用字母、数字、下划线，且不能数字开头（也不能是关键字）。';
+    return;
+  }
+  let val = raw;
+  if (type === 'char' && val === '') val = 'A';
+  if (type === 'bool' && val === '') val = 'true';
+  if ((type === 'int' || type === 'long long') && val === '') val = '0';
+  if (type === 'double' && val === '') val = '0.0';
+  const box = document.getElementById('vbBox');
+  box.innerHTML = '';
+  const tag = document.createElement('div');
+  tag.className = 'vtag';
+  tag.textContent = type + ' ' + name + ' = ' + (type === 'char' ? "'" + val + "'" : val) + ';';
+  box.appendChild(tag);
+  const bytes = document.createElement('div');
+  bytes.className = 'bytes';
+  for (let i = 0; i < typeInfo[type].size; i++) {
+    const c = document.createElement('span');
+    c.className = 'byte';
+    c.textContent = i;
+    bytes.appendChild(c);
+  }
+  box.appendChild(bytes);
+  msg.textContent = '✅ 做好了！' + typeInfo[type].emoji + ' ' + type + ' 占 ' + typeInfo[type].size + ' 字节，能装：' + typeInfo[type].range + '。';
+}
+
+const nameQs = [
+  ['2apple', false, '不能以数字开头'],
+  ['myName', true, '字母开头，没问题'],
+  ['int', false, 'int 是关键字，不能当名字'],
+  ['_abc', true, '下划线开头可以'],
+  ['hello world', false, '名字里不能有空格'],
+  ['age1', true, '数字可以在后面'],
+  ['class', false, 'class 是关键字'],
+  ['score_2', true, '下划线和数字都能用']
+];
+let curNq = null;
+function newNameQ() {
+  curNq = nameQs[Math.floor(Math.random() * nameQs.length)];
+  document.getElementById('nqName').textContent = curNq[0];
+  document.getElementById('nqMsg').textContent = '这个变量名合法吗？';
+  document.getElementById('nqYes').disabled = false;
+  document.getElementById('nqNo').disabled = false;
+}
+function nameAnswer(ok) {
+  if (!curNq) return;
+  const good = ok === curNq[1];
+  document.getElementById('nqMsg').textContent = good
+    ? '✅ 答对啦！' + curNq[0] + '：' + curNq[2] + '。'
+    : '❌ 不对哦～' + curNq[0] + '：' + curNq[2] + '。';
+  document.getElementById('nqYes').disabled = true;
+  document.getElementById('nqNo').disabled = true;
+}
+
+function buildVtype() {
+  const g = document.getElementById('vtypeGrid');
+  Object.keys(typeInfo).forEach(t => {
+    const d = document.createElement('div');
+    d.className = 'box';
+    d.innerHTML = '<div class="t">' + typeInfo[t].emoji + '</div><div class="name">' + t + '</div><div class="desc">' + typeInfo[t].size + ' 字节 · ' + typeInfo[t].range + '</div>';
+    d.style.setProperty('--tc', '#ef476f');
+    g.appendChild(d);
+  });
+}
+
+/* ================= 4 输入输出 ================= */
+function runEcho() {
+  const name = document.getElementById('echoName').value.trim() || '小明';
+  const a = parseInt(document.getElementById('echoA').value, 10) || 0;
+  const b = parseInt(document.getElementById('echoB').value, 10) || 0;
+  const out = document.getElementById('echoOut');
+  out.innerHTML = '';
+  const lines = [
+    ['cin >> name;', '你输入了：' + name],
+    ['cin >> a >> b;', 'a = ' + a + '，b = ' + b],
+    ['cout << "你好，" << name << endl;', '你好，' + name + '！'],
+    ['cout << a + b << endl;', 'a + b = ' + (a + b)]
+  ];
+  lines.forEach((ln, i) => {
+    const q = document.createElement('div');
+    q.className = 'tq';
+    q.textContent = '> ' + ln[0];
+    out.appendChild(q);
+    const r = document.createElement('div');
+    r.className = 'out';
+    r.textContent = ln[1];
+    out.appendChild(r);
+    if (i < lines.length - 1) out.appendChild(document.createElement('br'));
+  });
+}
+
+/* ================= 5 算术 ================= */
+function arithAll() {
+  const a = parseInt(document.getElementById('arA').value, 10) || 0;
+  const b = parseInt(document.getElementById('arB').value, 10) || 0;
+  document.getElementById('arAdd').textContent = a + ' + ' + b + ' = ' + (a + b);
+  document.getElementById('arSub').textContent = a + ' - ' + b + ' = ' + (a - b);
+  document.getElementById('arMul').textContent = a + ' × ' + b + ' = ' + (a * b);
+  const q = Math.floor(a / b);
+  const r = a % b;
+  document.getElementById('arDiv').textContent = a + ' ÷ ' + b + ' = ' + q + ' … 余 ' + r;
+  document.getElementById('arMod').textContent = a + ' % ' + b + ' = ' + r;
+  const n = Math.min(a, 18);
+  const apples = '🍎'.repeat(n) + (a > 18 ? '……' : '');
+  document.getElementById('arApple').textContent = apples + ' 分给 ' + b + ' 个小朋友：每人 ' + q + ' 个，还剩 ' + r + ' 个。（' + a + ' % ' + b + ' = ' + r + '）';
+}
+let cnt = 0;
+function cntUp() { cnt++; cntMsg(); }
+function cntDown() { cnt--; cntMsg(); }
+function cntReset() { cnt = 0; cntMsg(); }
+function cntMsg() {
+  document.getElementById('cntMsg').textContent = 'int i = 0; 现在 i = ' + cnt + ' 啦！i++ 就是 i = i + 1。';
+}
+
+/* ================= 6 关系逻辑 ================= */
+function relAll() {
+  const a = parseInt(document.getElementById('rlA').value, 10) || 0;
+  const b = parseInt(document.getElementById('rlB').value, 10) || 0;
+  const rows = [
+    [a + ' < ' + b, a < b],
+    [a + ' <= ' + b, a <= b],
+    [a + ' > ' + b, a > b],
+    [a + ' >= ' + b, a >= b],
+    [a + ' == ' + b, a === b],
+    [a + ' != ' + b, a !== b]
+  ];
+  const box = document.getElementById('relChips');
+  box.innerHTML = '';
+  rows.forEach(r => {
+    const d = document.createElement('div');
+    d.className = 'relchip ' + (r[1] ? 'yes' : 'no');
+    d.textContent = r[0] + ' → ' + (r[1] ? '✅ 真' : '❌ 假');
+    box.appendChild(d);
+  });
+}
+let lgA = true, lgB = false;
+function toggleLg(which, btn) {
+  if (which === 0) { lgA = !lgA; btn.textContent = 'A = ' + (lgA ? '真' : '假'); }
+  else { lgB = !lgB; btn.textContent = 'B = ' + (lgB ? '真' : '假'); }
+  btn.classList.toggle('on', which === 0 ? lgA : lgB);
+  updateLg();
+}
+function updateLg() {
+  const and = lgA && lgB, or = lgA || lgB, not = !lgA;
+  const set = (led, txt, v) => {
+    led.className = 'tled ' + (v ? 'g' : 'r');
+    txt.textContent = v ? '真' : '假';
+  };
+  set(document.getElementById('ledAnd'), document.getElementById('txtAnd'), and);
+  set(document.getElementById('ledOr'), document.getElementById('txtOr'), or);
+  set(document.getElementById('ledNot'), document.getElementById('txtNot'), not);
+}
+
+/* ================= 7 三大结构 ================= */
+const cakeSteps = [
+  ['🥚 打鸡蛋', 'cout << "打鸡蛋";'],
+  ['🌾 加面粉', 'cout << "加面粉";'],
+  ['🔥 烤蛋糕', 'cout << "烤蛋糕";']
+];
+let cakeI = 0, cakeTimer = null;
+function cakePlay() {
+  if (cakeTimer) { clearInterval(cakeTimer); cakeTimer = null; }
+  cakeI = 0;
+  cakeStepShow();
+  cakeTimer = setInterval(() => {
+    if (cakeI >= cakeSteps.length) { clearInterval(cakeTimer); cakeTimer = null; return; }
+    cakeStepShow();
+  }, 900);
+}
+function cakeStepShow() {
+  document.querySelectorAll('.cakestep').forEach((c, k) => c.classList.toggle('on', k === cakeI));
+  document.getElementById('cakeMsg').textContent = '正在执行：' + cakeSteps[cakeI][0] + '（' + cakeSteps[cakeI][1] + '）';
+  cakeI++;
+  if (cakeI > cakeSteps.length) {
+    clearInterval(cakeTimer); cakeTimer = null;
+    document.getElementById('cakeMsg').textContent = '🍰 蛋糕做好啦！顺序结构：从上到下，一句一句执行！';
+  }
+}
+function cakeReset() {
+  if (cakeTimer) { clearInterval(cakeTimer); cakeTimer = null; }
+  cakeI = 0;
+  document.querySelectorAll('.cakestep').forEach(c => c.classList.remove('on'));
+  document.getElementById('cakeMsg').textContent = '顺序结构：从上到下，一句一句执行！';
+}
+
+function showPass() {
+  const v = parseInt(document.getElementById('scoreIn').value, 10);
+  document.getElementById('scoreVal').textContent = v;
+  document.getElementById('passOut').textContent = v >= 60 ? '及格 ✅' : '不及格 ❌';
+}
+
+function showDay() {
+  const days = ['', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六', '星期日'];
+  const n = parseInt(document.getElementById('dayIn').value, 10);
+  document.getElementById('dayMsg').textContent = (n >= 1 && n <= 7)
+    ? '今天是 ' + days[n] + ' 🎉'
+    : '😅 只能输入 1~7 哦！';
+}
+
+let stN = 5, stI = 0, stTimer = null;
+function buildStars() {
+  stN = parseInt(document.getElementById('starN').value, 10);
+  document.getElementById('starNVal').textContent = stN;
+  stI = 0;
+  const box = document.getElementById('starBox');
+  box.innerHTML = '';
+  for (let i = 0; i < stN; i++) {
+    const s = document.createElement('div');
+    s.className = 'star';
+    s.textContent = '⭐';
+    box.appendChild(s);
+  }
+  document.getElementById('starMsg').textContent = '点"数一颗"看电脑数星星～';
+  document.getElementById('starStepBtn').disabled = false;
+}
+function starStep() {
+  if (stI >= stN) return;
+  document.getElementById('starBox').children[stI].classList.add('on');
+  document.getElementById('lFor').classList.add('hl');
+  document.getElementById('lPrint').classList.add('hl');
+  stI++;
+  document.getElementById('starMsg').textContent = '循环第 ' + stI + ' 次：i = ' + stI + '，打印第 ' + stI + ' 颗星星 ⭐';
+  if (stI >= stN) {
+    document.getElementById('starMsg').textContent = '🎉 数完啦！一共数了 ' + stN + ' 颗星星。';
+    document.getElementById('starStepBtn').disabled = true;
+    starStop();
+  }
+}
+function starAuto() {
+  const btn = document.getElementById('starAutoBtn');
+  if (stTimer) { starStop(); btn.textContent = '▶️ 自动数'; return; }
+  if (stI >= stN) return;
+  btn.textContent = '⏸️ 暂停';
+  stTimer = setInterval(() => {
+    if (stI >= stN) { starStop(); btn.textContent = '▶️ 自动数'; return; }
+    starStep();
+  }, 450);
+}
+function starStop() {
+  if (stTimer) { clearInterval(stTimer); stTimer = null; }
+  const b = document.getElementById('starAutoBtn');
+  if (b) b.textContent = '▶️ 自动数';
+}
+function starReset() {
+  starStop();
+  stI = 0;
+  document.querySelectorAll('#starBox .star').forEach(s => s.classList.remove('on'));
+  document.querySelectorAll('#lFor, #lPrint').forEach(e => e.classList.remove('hl'));
+  document.getElementById('starMsg').textContent = '点"数一颗"看电脑数星星～';
+  document.getElementById('starStepBtn').disabled = false;
+}
+
+function showLoopDemo(kind) {
+  const box = document.getElementById('loopChips');
+  box.innerHTML = '';
+  for (let i = 1; i <= 10; i++) {
+    const d = document.createElement('span');
+    d.className = 'numchip';
+    if (kind === 'break') {
+      if (i > 5) break;
+      if (i === 5) { d.classList.add('cut'); d.textContent = '5 ✂️'; }
+      else d.textContent = i;
+    } else {
+      if (i === 5) { d.classList.add('skip'); d.textContent = '5 ⏭️'; }
+      else d.textContent = i;
+    }
+    box.appendChild(d);
+  }
+  document.getElementById('loopMsg').textContent = kind === 'break'
+    ? '✂️ break：i 到 5 就立刻跳出循环，后面的都不数了！'
+    : '⏭️ continue：i 到 5 时跳过这一次，其余照常输出！';
+}
+
+/* ================= 8 找虫 ================= */
+const bugs = [
+  { code: 'int a = 5\ncout << a\nreturn 0;', opts: ['缺少分号 ;', 'cout 写错了', 'int 写错了', '完全没有问题'], ans: 0, exp: 'C++ 里每条语句结束都要写分号 ;，cout << a 后面漏了！' },
+  { code: 'int score = 85;\nif (score = 90)  cout << "满分";', opts: ['应该用 == 判断相等', 'if 用错了', '缺少分号', '完全没有问题'], ans: 0, exp: '判断相等要用 ==；一个 = 是"赋值"，会把 90 存进 score！' },
+  { code: 'int a = 5;\ncout << b << endl;', opts: ['cout 写错了', '变量 b 没有定义', '缺少 return 0', '完全没有问题'], ans: 1, exp: '变量要"先定义，后使用"，b 从来没定义过！' },
+  { code: 'int a = 5;\ncout << a << endl;\nreturn 0;', opts: ['缺少分号', '变量没定义', '完全没有问题，程序是对的', '引号用错了'], ans: 2, exp: '🎉 这一行行都写对了！不是所有代码都有虫～' }
+];
+let bugI = 0, bugLocked = false, bugScore = 0;
+function renderBug() {
+  bugLocked = false;
+  document.getElementById('bugCode').innerHTML = bugs[bugI].code;
+  const box = document.getElementById('bugOpts');
+  box.innerHTML = '';
+  bugs[bugI].opts.forEach((t, i) => {
+    const b = document.createElement('button');
+    b.className = 'btn qopt';
+    b.textContent = 'ABCD'[i] + '. ' + t;
+    b.onclick = () => answerBug(i, b);
+    box.appendChild(b);
+  });
+  document.getElementById('bugFb').className = 'fb';
+  document.getElementById('bugFb').textContent = '';
+  document.getElementById('bugNext').style.display = 'none';
+  document.getElementById('bugMsg').textContent = '第 ' + (bugI + 1) + ' 只虫子，找出错误（共 4 只）！';
+}
+function answerBug(i, btn) {
+  if (bugLocked) return;
+  bugLocked = true;
+  const ok = i === bugs[bugI].ans;
+  if (ok) bugScore++;
+  document.querySelectorAll('#bugOpts .qopt').forEach((b, k) => {
+    b.disabled = true;
+    if (k === bugs[bugI].ans) b.classList.add('right');
+    if (k === i && !ok) b.classList.add('wrong');
+  });
+  const fb = document.getElementById('bugFb');
+  fb.className = 'fb ' + (ok ? 'ok' : 'no');
+  fb.textContent = (ok ? '✅ 抓到了！' : '❌ 再仔细看看～') + bugs[bugI].exp;
+  document.getElementById('bugNext').style.display = 'inline-block';
+}
+function bugNext() {
+  bugI++;
+  if (bugI < bugs.length) renderBug();
+  else {
+    document.getElementById('bugMsg').textContent = '🎉 捉虫完毕！你抓对了 ' + bugScore + ' / 4 只虫子，太棒了！';
+    document.getElementById('bugNext').style.display = 'none';
+    document.getElementById('bugOpts').innerHTML = '';
+    document.getElementById('bugFb').className = 'fb ok';
+    document.getElementById('bugFb').textContent = '以后写代码遇到报错别慌：先看分号、再看括号、最后检查变量有没有定义～';
+  }
+}
+
+/* ================= 9 闯关 ================= */
+const questions = [
+  { q: '下面哪个是合法的变量名？', opts: ['2x', 'int', 'myName', 'my name'], ans: 2, exp: '变量名不能数字开头、不能是关键字、不能有空格。myName 最棒！' },
+  { q: 'char 类型用来存什么？', opts: ['很大的整数', '单个字符', '小数', '真或假'], ans: 1, exp: 'char 存一个字符，比如 \'A\'、\'5\'，要用单引号包起来。' },
+  { q: '在 C++ 里，5 % 2 等于几？', opts: ['2.5', '2', '1', '0'], ans: 2, exp: '% 是求余数：5 除以 2 余 1，所以 5 % 2 = 1。' },
+  { q: '下面哪个是"输出"语句？', opts: ['cin >> x;', 'cout << x;', 'int x;', 'x = 5;'], ans: 1, exp: 'cout << 是把结果"说"到屏幕上；cin >> 是"听"键盘输入。' },
+  { q: 'C++ 程序从哪里开始运行？', opts: ['#include 那行', 'main 函数', '最后一行', 'return 0 后面'], ans: 1, exp: '程序一定从 main() 函数的第一句话开始执行！' },
+  { q: 'if (score >= 60) 输出"及格"，else 输出"不及格"。score = 59 时输出什么？', opts: ['及格', '不及格', '两个都输出', '报错'], ans: 1, exp: '59 < 60，条件不成立，走 else 输出"不及格"。' },
+  { q: 'switch 语句里忘写 break 会发生什么？', opts: ['报错', '穿透：继续往下执行', '死循环', '什么都不发生'], ans: 1, exp: '没有 break 会"穿透"到下面的 case 继续执行，这是经典考点！' },
+  { q: 'for (int i = 1; i <= 3; i++) 会循环几次？', opts: ['2 次', '3 次', '4 次', '无限次'], ans: 1, exp: 'i = 1、2、3 都满足 i <= 3，所以一共 3 次。' },
+  { q: '循环里 continue 的作用是？', opts: ['退出整个循环', '跳过这一次，继续下一次', '让程序暂停', '多循环一次'], ans: 1, exp: 'continue = 跳过本次；break = 退出整个循环。' },
+  { q: '电脑的"大脑"是哪个？', opts: ['硬盘', '显示器', 'CPU', '鼠标'], ans: 2, exp: 'CPU 负责所有计算和指挥，是电脑的大脑！' }
+];
+let qi = 0, score = 0, locked = false;
+function renderQ() {
+  locked = false;
+  const q = questions[qi];
+  document.getElementById('quizQ').textContent = (qi + 1) + '. ' + q.q;
+  document.getElementById('quizCount').textContent = '第 ' + (qi + 1) + ' / 10 题';
+  document.getElementById('quizBar').style.width = ((qi) / 10 * 100) + '%';
+  const box = document.getElementById('quizOpts');
+  box.innerHTML = '';
+  q.opts.forEach((t, i) => {
+    const b = document.createElement('button');
+    b.className = 'btn qopt';
+    b.textContent = 'ABCD'[i] + '. ' + t;
+    b.onclick = () => answerQ(i, b);
+    box.appendChild(b);
+  });
+  const fb = document.getElementById('quizFb');
+  fb.className = 'fb';
+  fb.textContent = '';
+  document.getElementById('quizNext').style.display = 'none';
+}
+function answerQ(i, btn) {
+  if (locked) return;
+  locked = true;
+  const q = questions[qi];
+  const ok = i === q.ans;
+  if (ok) score++;
+  document.querySelectorAll('#quizOpts .qopt').forEach((b, k) => {
+    b.disabled = true;
+    if (k === q.ans) b.classList.add('right');
+    if (k === i && !ok) b.classList.add('wrong');
+  });
+  const fb = document.getElementById('quizFb');
+  fb.className = 'fb ' + (ok ? 'ok' : 'no');
+  fb.textContent = (ok ? '✅ 答对啦！' : '❌ 不对哦。') + q.exp;
+  document.getElementById('quizNext').style.display = 'inline-block';
+}
+function quizNext() {
+  qi++;
+  if (qi < questions.length) renderQ();
+  else finishQuiz();
+}
+function finishQuiz() {
+  document.getElementById('quizWrap').style.display = 'none';
+  const end = document.getElementById('quizEnd');
+  end.style.display = 'block';
+  const medal = score >= 9 ? '🥇' : score >= 7 ? '🥈' : score >= 5 ? '🥉' : '💪';
+  const words = score >= 9 ? '太厉害啦！一级新手村毕业！' : score >= 7 ? '很棒！再复习一下错题就满分了！' : score >= 5 ? '不错！把错题对应的关卡再玩一遍～' : '别灰心！从头再玩一遍，一定能进步！';
+  end.innerHTML = '<div class="medal">' + medal + '</div><h3>你答对了 ' + score + ' / 10 题</h3><p>' + words + '</p><div class="btnrow" style="justify-content:center"><button class="btn go" onclick="restartQuiz()">🔄 再来一次</button></div>';
+  if (score >= 7) confettiBurst();
+}
+function restartQuiz() {
+  qi = 0; score = 0;
+  document.getElementById('quizEnd').style.display = 'none';
+  document.getElementById('quizWrap').style.display = 'block';
+  renderQ();
+}
+function confettiBurst() {
+  const c = document.getElementById('confetti');
+  c.innerHTML = '';
+  const colors = ['#ef476f', '#ffd166', '#06d6a0', '#118ab2', '#9b6ef3', '#ff9f43'];
+  for (let i = 0; i < 80; i++) {
+    const p = document.createElement('span');
+    p.className = 'cf';
+    p.style.left = Math.random() * 100 + 'vw';
+    p.style.background = colors[Math.floor(Math.random() * colors.length)];
+    p.style.animationDuration = (1.8 + Math.random() * 1.6) + 's';
+    p.style.animationDelay = Math.random() * 0.5 + 's';
+    c.appendChild(p);
+  }
+  setTimeout(() => { c.innerHTML = ''; }, 4200);
+}
+
+/* ================= 初始化 ================= */
+initSkel();
+makeBox();
+newNameQ();
+buildVtype();
+arithAll();
+relAll();
+updateLg();
+showPass();
+showDay();
+buildStars();
+renderBug();
+renderQ();
+</script>
+</body>
+</html>

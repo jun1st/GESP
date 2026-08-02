@@ -1,0 +1,1149 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="GESP C++ 二级知识点互动学习网页，适合小朋友。">
+<title>GESP C++ 二级学习乐园 🚀</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans SC", sans-serif;
+    background: linear-gradient(160deg, #dff1ff 0%, #ffffff 45%, #ffeef8 100%);
+    color: #2b2d42;
+    line-height: 1.75;
+    min-height: 100vh;
+  }
+  .wrap { max-width: 960px; margin: 0 auto; padding: 14px 16px 40px; }
+
+  header {
+    text-align: center;
+    padding: 28px 12px 10px;
+  }
+  header .rocket { font-size: 56px; display: block; animation: float 3s ease-in-out infinite; }
+  @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+  h1 {
+    font-size: clamp(26px, 5vw, 40px);
+    background: linear-gradient(90deg, #5e60ce, #ef476f, #ff9f43);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    margin: 8px 0 4px;
+  }
+  .slogan { color: #6c6f93; font-size: 15px; }
+
+  nav.chips { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin: 18px 0 8px; }
+  .chip {
+    text-decoration: none;
+    background: #fff;
+    border: 2px solid #dce3f5;
+    color: #2b2d42;
+    padding: 7px 13px;
+    border-radius: 999px;
+    font-size: 14px;
+    font-weight: 600;
+    transition: transform .15s, border-color .15s, box-shadow .15s;
+  }
+  .chip:hover { transform: translateY(-2px); border-color: var(--chip, #5e60ce); box-shadow: 0 4px 12px rgba(43,45,66,.12); }
+
+  section.topic {
+    background: #fff;
+    border-radius: 24px;
+    padding: 22px 20px 24px;
+    margin: 22px 0;
+    box-shadow: 0 8px 28px rgba(43,45,66,.08);
+    border-top: 8px solid var(--tc);
+    scroll-margin-top: 14px;
+  }
+  h2 { font-size: clamp(21px, 4vw, 28px); color: var(--tc); margin-bottom: 4px; }
+  .sub { color: #6c6f93; font-size: 14px; margin-bottom: 14px; }
+  h3 { font-size: 17px; color: #2b2d42; margin: 16px 0 8px; }
+  .big-emoji { font-size: 42px; }
+
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin: 12px 0; }
+  .box {
+    background: #f7f9ff;
+    border: 2px dashed var(--tc);
+    border-radius: 16px;
+    padding: 13px;
+  }
+  .box .name { font-weight: 700; font-size: 15px; }
+  .box .desc { font-size: 13.5px; color: #55586e; }
+
+  .btn {
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 15px;
+    font-weight: 700;
+    border-radius: 999px;
+    padding: 9px 18px;
+    background: #fff;
+    color: #2b2d42;
+    border: 2px solid #dce3f5;
+    transition: transform .12s, box-shadow .12s;
+  }
+  .btn:hover { transform: translateY(-2px); box-shadow: 0 5px 14px rgba(43,45,66,.15); }
+  .btn.go { background: var(--tc); border-color: var(--tc); color: #fff; }
+  .btn.ghost { background: transparent; }
+  .btnrow { display: flex; flex-wrap: wrap; gap: 8px; margin: 10px 0; align-items: center; }
+  .btnrow .btn { margin: 0; }
+
+  .code {
+    background: #f1f4fb;
+    border: 2px solid #e2e8f7;
+    border-radius: 14px;
+    padding: 12px 14px;
+    font-family: "SF Mono", Consolas, "Courier New", monospace;
+    font-size: 13.5px;
+    overflow-x: auto;
+    white-space: pre;
+    line-height: 1.6;
+  }
+  .code code { font-family: inherit; }
+  .code .hl { background: #fff3bf; border-radius: 4px; padding: 1px 3px; font-weight: 700; }
+  .code .dim { color: #9aa2bd; }
+  .tip {
+    background: #fff8e6;
+    border: 2px solid #ffd166;
+    border-radius: 14px;
+    padding: 10px 14px;
+    margin-top: 12px;
+    font-size: 14px;
+  }
+  .warn {
+    background: #ffeef1;
+    border: 2px solid #ef476f;
+    border-radius: 14px;
+    padding: 10px 14px;
+    margin-top: 12px;
+    font-size: 14px;
+  }
+  .msg {
+    border-radius: 14px;
+    padding: 10px 14px;
+    margin-top: 10px;
+    font-size: 15px;
+    font-weight: 600;
+    background: #f1f4fb;
+    min-height: 22px;
+  }
+  input[type=text], input[type=number], select {
+    font-family: inherit;
+    font-size: 16px;
+    border: 2px solid #dce3f5;
+    border-radius: 12px;
+    padding: 8px 12px;
+    background: #fff;
+    color: #2b2d42;
+    max-width: 100%;
+  }
+  input[type=range] { width: min(260px, 100%); }
+  label { font-weight: 600; font-size: 14px; }
+
+  /* ---------- 1 存储 ---------- */
+  .memlab { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin: 12px 0; }
+  .mem {
+    border-radius: 18px;
+    padding: 14px;
+    text-align: center;
+    border: 3px solid;
+    background: #f7f9ff;
+  }
+  .mem .memoji { font-size: 38px; }
+  .mem .mname { font-weight: 800; font-size: 16px; }
+  .dots { display: flex; justify-content: center; gap: 6px; margin-top: 10px; flex-wrap: wrap; }
+  .dot {
+    width: 18px; height: 18px; border-radius: 50%;
+    transition: opacity .5s, transform .5s;
+  }
+  .dot.lost { opacity: 0; transform: translateY(-24px) scale(.3); }
+  .dot.k { opacity: 1; }
+  .d1 { background: #4f8ef7; } .d2 { background: #ffd166; } .d3 { background: #3ecf8e; }
+  .d4 { background: #ef476f; } .d5 { background: #9b6ef3; } .d6 { background: #2ec4b6; }
+  .mem.ram { border-color: #4f8ef7; }
+  .mem.cache { border-color: #ff9f43; }
+  .mem.rom { border-color: #9b6ef3; }
+
+  .ladder {
+    text-align: center;
+    background: #f7f9ff;
+    border-radius: 18px;
+    padding: 16px;
+    margin-top: 10px;
+    border: 2px dashed var(--tc);
+  }
+  .ladder .big { font-size: 26px; font-weight: 800; color: var(--tc); min-height: 40px; }
+  .ladder .note { color: #6c6f93; font-size: 14px; min-height: 22px; }
+
+  /* ---------- 2 网络 ---------- */
+  .rings { display: flex; justify-content: center; align-items: center; position: relative; height: 300px; margin: 10px 0; }
+  .ring {
+    border-radius: 50%;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+    border: 3px dashed #b9c4dd;
+    transition: border-color .2s, transform .2s, background .2s;
+  }
+  .ring:hover { transform: translate(-50%, -50%) scale(1.03); }
+  .ring span { font-size: 15px; font-weight: 800; background: rgba(255,255,255,.85); padding: 3px 10px; border-radius: 999px; }
+  .ring.r1 { width: 110px; height: 110px; }
+  .ring.r2 { width: 210px; height: 210px; }
+  .ring.r3 { width: 300px; height: 300px; }
+  .ring.on { border-style: solid; border-color: var(--tc); background: rgba(62,207,142,.10); }
+
+  .flipwrap { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; margin: 12px 0; perspective: 800px; }
+  .flip { position: relative; height: 118px; cursor: pointer; transform-style: preserve-3d; transition: transform .5s; }
+  .flip.on { transform: rotateY(180deg); }
+  .face {
+    position: absolute; inset: 0;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    border-radius: 16px;
+    backface-visibility: hidden;
+    text-align: center; padding: 8px;
+  }
+  .face.front { background: #f7f9ff; border: 2px solid var(--tc); }
+  .face.back { background: var(--tc); color: #fff; transform: rotateY(180deg); font-size: 13.5px; }
+
+  /* ---------- 3 语言 ---------- */
+  .langcard { cursor: pointer; text-align: center; }
+  .langcard .code { text-align: left; }
+  .langcard .speech { font-size: 13.5px; color: #55586e; min-height: 60px; margin-top: 8px; }
+  .meter { height: 14px; background: #e9edf8; border-radius: 999px; overflow: hidden; margin-top: 6px; }
+  .meter i { display: block; height: 100%; width: 0; background: var(--tc); border-radius: 999px; transition: width .6s; }
+
+  /* ---------- 4 流程图 ---------- */
+  .flow { display: flex; flex-direction: column; align-items: center; gap: 4px; margin: 12px 0; }
+  .fnode {
+    background: #f7f9ff;
+    border: 3px solid #b9c4dd;
+    border-radius: 999px;
+    padding: 8px 22px;
+    font-weight: 700;
+    cursor: pointer;
+    text-align: center;
+    transition: transform .15s, border-color .15s, background .15s;
+  }
+  .fnode:hover { transform: scale(1.05); }
+  .fnode.on { border-color: var(--tc); background: #fff8e6; }
+  .fnode.process { border-radius: 12px; }
+  .fnode.io { border-radius: 8px; }
+  .fdiamond {
+    width: 120px; height: 120px;
+    background: #f7f9ff;
+    border: 3px solid #ff9f43;
+    transform: rotate(45deg);
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+    transition: background .2s;
+  }
+  .fdiamond:hover { background: #fff3cd; }
+  .fdiamond.on { background: #fff3cd; }
+  .fdiamond span { transform: rotate(-45deg); font-weight: 800; font-size: 14px; white-space: nowrap; }
+  .farrow { color: #9aa2bd; font-size: 20px; line-height: 1; }
+  .fbranches { display: flex; gap: 40px; justify-content: center; }
+  .fbtns { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+  .fpath { outline: 3px solid transparent; outline-offset: 3px; }
+  .fpath.walk { outline-color: #3ecf8e; background: #eafaf1; }
+
+  /* ---------- 5 ASCII ---------- */
+  .chips2 { display: flex; flex-wrap: wrap; gap: 8px; margin: 10px 0; }
+  .achip {
+    background: #f7f9ff;
+    border: 2px solid var(--tc);
+    border-radius: 14px;
+    padding: 6px 12px;
+    font-size: 18px;
+    font-weight: 800;
+  }
+  .achip small { display: block; font-size: 12px; color: #6c6f93; font-weight: 600; text-align: center; }
+  .key4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 10px; }
+  .key4 .box { text-align: center; }
+  .key4 .v { font-size: 26px; font-weight: 800; color: var(--tc); }
+  .qopt { display: block; width: 100%; text-align: left; margin: 6px 0; }
+
+  /* ---------- 6 转换 ---------- */
+  .bigresult { font-size: 30px; font-weight: 800; color: var(--tc); margin: 8px 0; }
+  .apples { font-size: 20px; letter-spacing: 2px; min-height: 30px; margin: 6px 0; word-break: break-all; }
+
+  /* ---------- 7 分支 ---------- */
+  .gradeout { font-size: 64px; font-weight: 900; text-align: center; color: var(--tc); line-height: 1.1; }
+  .brlist { list-style: none; }
+  .brlist li { border-radius: 10px; padding: 6px 10px; margin: 4px 0; font-family: "SF Mono", Consolas, monospace; font-size: 13.5px; }
+  .brlist li.on { background: #eafaf1; border: 2px solid #3ecf8e; font-weight: 700; }
+  .brlist li.off { color: #9aa2bd; }
+
+  /* ---------- 8 循环 ---------- */
+  .gridout {
+    display: inline-grid;
+    gap: 3px;
+    background: #f1f4fb;
+    border-radius: 14px;
+    padding: 10px;
+    margin: 8px 0;
+  }
+  .cell {
+    width: 38px; height: 38px;
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 8px;
+    background: #fff;
+    border: 2px solid #e2e8f7;
+    font-weight: 800;
+    font-size: 18px;
+    color: var(--tc);
+    opacity: 0;
+    transform: scale(.4);
+    transition: opacity .15s, transform .15s;
+  }
+  .cell.show { opacity: 1; transform: scale(1); }
+  .cell.space { color: #c4c9dd; }
+  .loopstatus { font-size: 15px; font-weight: 700; color: var(--tc); min-height: 24px; margin: 8px 0; }
+  .steps { display: flex; flex-wrap: wrap; gap: 8px; margin: 8px 0; }
+  .stepchip {
+    background: #f7f9ff;
+    border: 2px solid var(--tc);
+    border-radius: 12px;
+    padding: 5px 10px;
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  /* ---------- 9 数学 ---------- */
+  .dice {
+    width: 90px; height: 90px;
+    font-size: 60px;
+    display: flex; align-items: center; justify-content: center;
+    background: #fff;
+    border: 3px solid var(--tc);
+    border-radius: 20px;
+    margin: 10px auto;
+  }
+  .dice.shake { animation: shake .45s; }
+  @keyframes shake {
+    0%,100% { transform: rotate(0); }
+    25% { transform: rotate(-14deg) translateX(-4px); }
+    75% { transform: rotate(14deg) translateX(4px); }
+  }
+
+  /* ---------- 闯关 ---------- */
+  .quizbar { height: 14px; background: #e9edf8; border-radius: 999px; overflow: hidden; margin: 10px 0; }
+  .quizbar i { display: block; height: 100%; width: 0; background: var(--tc); border-radius: 999px; transition: width .4s; }
+  .qtext { font-size: 19px; font-weight: 700; margin: 12px 0; }
+  .opt {
+    display: block; width: 100%; text-align: left;
+    margin: 8px 0;
+    font-size: 15.5px;
+  }
+  .opt.right { background: #d9f7e8; border-color: #3ecf8e; }
+  .opt.wrong { background: #ffe5ea; border-color: #ef476f; }
+  .fb { border-radius: 14px; padding: 10px 14px; font-size: 14.5px; margin: 10px 0; min-height: 20px; }
+  .fb.ok { background: #eafaf1; border: 2px solid #3ecf8e; }
+  .fb.no { background: #ffeef1; border: 2px solid #ef476f; }
+  .finish { text-align: center; padding: 16px 0; }
+  .finish .medal { font-size: 70px; }
+  #confetti { position: fixed; inset: 0; pointer-events: none; overflow: hidden; z-index: 99; }
+  .cf { position: absolute; top: -12px; width: 10px; height: 14px; border-radius: 3px; animation: fall linear forwards; }
+  @keyframes fall { to { transform: translateY(110vh) rotate(720deg); } }
+
+  details.help { margin-top: 26px; background: #fff; border-radius: 18px; padding: 14px 16px; border: 2px dashed #b9c4dd; }
+  details.help summary { cursor: pointer; font-weight: 800; color: #5e60ce; }
+  details.help p { font-size: 14px; margin-top: 8px; color: #55586e; }
+
+  footer { text-align: center; color: #6c6f93; font-size: 14px; padding: 18px 0 6px; }
+
+  @media (max-width: 560px) {
+    .rings { height: 240px; }
+    .ring.r1 { width: 90px; height: 90px; }
+    .ring.r2 { width: 170px; height: 170px; }
+    .ring.r3 { width: 230px; height: 230px; }
+    .cell { width: 30px; height: 30px; font-size: 14px; }
+    .fnode { padding: 6px 14px; font-size: 14px; }
+    .gradeout { font-size: 48px; }
+    .code { font-size: 12px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <span class="rocket">🚀</span>
+    <h1>GESP C++ 二级学习乐园</h1>
+    <p class="slogan">点点、玩玩、学学 —— 9 个知识点一次搞定！</p>
+  </header>
+
+  <nav class="chips" aria-label="知识点导航">
+    <a class="chip" style="--chip:#4f8ef7" href="#s1">🗄️ 存储</a>
+    <a class="chip" style="--chip:#3ecf8e" href="#s2">📡 网络</a>
+    <a class="chip" style="--chip:#9b6ef3" href="#s3">💬 语言</a>
+    <a class="chip" style="--chip:#ff9f43" href="#s4">🧭 流程图</a>
+    <a class="chip" style="--chip:#ff6b9d" href="#s5">🔤 ASCII</a>
+    <a class="chip" style="--chip:#2ec4b6" href="#s6">🔢 类型转换</a>
+    <a class="chip" style="--chip:#ef476f" href="#s7">🌿 分支</a>
+    <a class="chip" style="--chip:#5e60ce" href="#s8">🔁 循环</a>
+    <a class="chip" style="--chip:#f4a261" href="#s9">🎲 数学函数</a>
+    <a class="chip" style="--chip:#06d6a0" href="#s10">🏆 大闯关</a>
+    <a class="chip" style="--chip:#ff9f43" href="GESP1学习乐园.html">🎒 一级乐园</a>
+  </nav>
+
+  <!-- ========== 1 存储 ========== -->
+  <section class="topic" id="s1" style="--tc:#4f8ef7">
+    <div class="big-emoji">🗄️</div>
+    <h2>1. 电脑的记忆：RAM、ROM、Cache</h2>
+    <p class="sub">电脑有三种"记忆"，一个会忘、一个不忘、一个超快。点一下"断电"看看会发生什么！</p>
+
+    <div class="memlab">
+      <div class="mem ram">
+        <div class="memoji">💾</div>
+        <div class="mname">RAM 内存条</div>
+        <div style="font-size:13px">工作记忆（正在用的程序）</div>
+        <div class="dots">
+          <span class="dot d1 ram-dot"></span><span class="dot d2 ram-dot"></span>
+          <span class="dot d3 ram-dot"></span><span class="dot d4 ram-dot"></span>
+          <span class="dot d5 ram-dot"></span><span class="dot d6 ram-dot"></span>
+        </div>
+      </div>
+      <div class="mem cache">
+        <div class="memoji">⚡</div>
+        <div class="mname">Cache 高速缓存</div>
+        <div style="font-size:13px">超级快的便签纸</div>
+        <div class="dots">
+          <span class="dot d2 cache-dot"></span><span class="dot d4 cache-dot"></span>
+          <span class="dot d6 cache-dot"></span>
+        </div>
+      </div>
+      <div class="mem rom">
+        <div class="memoji">📼</div>
+        <div class="mname">ROM 只读存储器</div>
+        <div style="font-size:13px">出生就写好的开机说明</div>
+        <div class="dots">
+          <span class="dot d1 rom-dot"></span><span class="dot d3 rom-dot"></span>
+          <span class="dot d5 rom-dot"></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="btnrow">
+      <button class="btn go" id="powerBtn" onclick="togglePower()">🔌 断电试试</button>
+    </div>
+    <div class="msg" id="powerMsg">👋 现在一切正常，点"断电"看看谁的记忆会飞走～</div>
+
+    <h3>📏 存储单位爬楼梯（×1024！）</h3>
+    <div class="ladder">
+      <div class="big" id="ladderBig">1 bit</div>
+      <div class="note" id="ladderNote">一个开关：只记 0 或 1</div>
+      <div class="btnrow" style="justify-content:center">
+        <button class="btn go" onclick="nextLadder()">⬆️ 往上爬一级</button>
+        <button class="btn" onclick="resetLadder()">🔄 回到底部</button>
+      </div>
+    </div>
+    <div class="tip">🧠 口诀：Cache 最快最贵，RAM 会忘，ROM 不忘；往上换算都是 ×1024！</div>
+  </section>
+
+  <!-- ========== 2 网络 ========== -->
+  <section class="topic" id="s2" style="--tc:#3ecf8e">
+    <div class="big-emoji">📡</div>
+    <h2>2. 电脑怎么"手拉手"：网络</h2>
+    <p class="sub">点一点三个圈，看看"局域网、城域网、广域网"有多大！</p>
+
+    <div class="rings">
+      <div class="ring r1" style="--tc:#3ecf8e" onclick="pickRing(0)"><span>🏠 家</span></div>
+      <div class="ring r2" style="--tc:#2ec4b6" onclick="pickRing(1)"><span>🏙️ 城市</span></div>
+      <div class="ring r3" style="--tc:#4f8ef7" onclick="pickRing(2)"><span>🌍 世界</span></div>
+    </div>
+    <div class="msg" id="ringMsg">点击圆圈，看看它是什么网络～</div>
+
+    <h3>📮 网络"快递员"协议（点击翻牌）</h3>
+    <div class="flipwrap">
+      <div class="flip" style="--tc:#4f8ef7" onclick="flipCard(this)">
+        <div class="face front">🌐<br><b>HTTP</b></div>
+        <div class="face back">看网页的协议！<br>（HTTPS 是加密版）</div>
+      </div>
+      <div class="flip" style="--tc:#9b6ef3" onclick="flipCard(this)">
+        <div class="face front">🔍<br><b>DNS</b></div>
+        <div class="face back">把名字翻译成 IP 地址，像"电话本"</div>
+      </div>
+      <div class="flip" style="--tc:#3ecf8e" onclick="flipCard(this)">
+        <div class="face front">📦<br><b>TCP</b></div>
+        <div class="face back">可靠快递：慢慢送，保证不丢</div>
+      </div>
+      <div class="flip" style="--tc:#ff9f43" onclick="flipCard(this)">
+        <div class="face front">✈️<br><b>UDP</b></div>
+        <div class="face back">飞毛腿快递：超快，但可能丢件</div>
+      </div>
+    </div>
+    <div class="tip">🏷️ IP 地址就像门牌号：192.168.1.1 是家里的"私有地址"，127.0.0.1 是"我自己的地址"。</div>
+  </section>
+
+  <!-- ========== 3 语言 ========== -->
+  <section class="topic" id="s3" style="--tc:#9b6ef3">
+    <div class="big-emoji">💬</div>
+    <h2>3. 给电脑说"人话"：程序语言</h2>
+    <p class="sub">同样说"让 a 等于 5"，三种语言说法不一样。点一点，听听它们怎么自我介绍！</p>
+
+    <div class="cards">
+      <div class="box langcard" style="--tc:#ef476f" onclick="pickLang(0)">
+        <div class="name">🤖 机器语言</div>
+        <div class="code">01100101<br>10110000 00000101</div>
+        <div class="speech">我是 0 和 1！电脑直接听懂我，但我太难读了……</div>
+        <div class="meter"><i></i></div>
+      </div>
+      <div class="box langcard" style="--tc:#ff9f43" onclick="pickLang(1)">
+        <div class="name">🔧 汇编语言</div>
+        <div class="code">MOV AL, 5</div>
+        <div class="speech">我用英文缩写说话，比 0 和 1 好读一点，但还是要翻译。</div>
+        <div class="meter"><i></i></div>
+      </div>
+      <div class="box langcard" style="--tc:#9b6ef3" onclick="pickLang(2)">
+        <div class="name">✏️ C++（高级语言）</div>
+        <div class="code">int a = 5;</div>
+        <div class="speech">我像英语一样好懂！C++ 会先"编译"成机器语言再运行。</div>
+        <div class="meter"><i></i></div>
+      </div>
+    </div>
+    <div class="tip">🧠 记住：C++ 是<b>编译型</b>的<b>高级语言</b>；Python 是解释型（边翻译边运行）。</div>
+  </section>
+
+  <!-- ========== 4 流程图 ========== -->
+  <section class="topic" id="s4" style="--tc:#ff9f43">
+    <div class="big-emoji">🧭</div>
+    <h2>4. 流程图：给程序画地图</h2>
+    <p class="sub">小明要出门！点下面的天气按钮，跟着流程走走看；点每个框，认识它的名字。</p>
+
+    <div class="flow">
+      <div class="fnode" onclick="flowName(this,'开始 / 结束（圆角框）')">🏁 开始</div>
+      <div class="farrow">↓</div>
+      <div class="fnode io" onclick="flowName(this,'输入 / 输出（平行四边形）')">📝 看天气</div>
+      <div class="farrow">↓</div>
+      <div class="fdiamond" onclick="flowName(this,'判断框（菱形）！有"是 / 否"两条路')"><span>☔ 下雨了吗?</span></div>
+      <div class="farrow">↓</div>
+      <div class="fbranches">
+        <div class="fnode process fpath" id="pYes" onclick="flowName(this,'处理框（矩形）：做事情')">🌂 带伞<br><small>（是）</small></div>
+        <div class="fnode process fpath" id="pNo" onclick="flowName(this,'处理框（矩形）：做事情')">☀️ 不带伞<br><small>（否）</small></div>
+      </div>
+      <div class="farrow">↓</div>
+      <div class="fnode" onclick="flowName(this,'开始 / 结束（圆角框）')">🎉 结束</div>
+    </div>
+    <div class="fbtns">
+      <button class="btn go" onclick="walkFlow(true)">🌧️ 下雨了！</button>
+      <button class="btn" onclick="walkFlow(false)">☀️ 没下雨</button>
+    </div>
+    <div class="msg" id="flowMsg">点天气按钮试试～</div>
+    <div class="tip">🧠 菱形 = 判断，两条路；矩形 = 做事；平行四边形 = 输入输出；圆角框 = 开始结束。</div>
+  </section>
+
+  <!-- ========== 5 ASCII ========== -->
+  <section class="topic" id="s5" style="--tc:#ff6b9d">
+    <div class="big-emoji">🔤</div>
+    <h2>5. ASCII 密码机：每个字符都有编号</h2>
+    <p class="sub">在下面的框里打字，看看每个字母的"秘密编号"！</p>
+
+    <label for="asciiIn">打几个字母试试：</label>
+    <input type="text" id="asciiIn" value="ABa0" maxlength="20" oninput="encodeAscii()" style="margin:8px 0">
+    <div class="chips2" id="asciiOut"></div>
+
+    <h3>🌟 四个必须背的编号</h3>
+    <div class="key4">
+      <div class="box"><div class="v">32</div>空格</div>
+      <div class="box"><div class="v">48</div>'0'</div>
+      <div class="box"><div class="v">65</div>'A'</div>
+      <div class="box"><div class="v">97</div>'a'</div>
+    </div>
+    <div class="tip">🧠 大小写正好差 32：'A' + 32 = 'a'！'B' = 66，'9' = 57，你能推出来吗？</div>
+
+    <h3>🎯 小挑战</h3>
+    <div class="msg" id="asciiQMsg">点"出题"开始！</div>
+    <div class="btnrow">
+      <button class="btn go" onclick="newAsciiQ()">🎲 出题</button>
+    </div>
+    <div id="asciiQBox"></div>
+  </section>
+
+  <!-- ========== 6 类型转换 ========== -->
+  <section class="topic" id="s6" style="--tc:#2ec4b6">
+    <div class="big-emoji">🔢</div>
+    <h2>6. 类型转换：整数和小数的"变身"</h2>
+    <p class="sub">最著名的陷阱：5 ÷ 2 到底等于几？试试看！</p>
+
+    <div class="btnrow">
+      <label>被除数 a：<input type="number" id="cvA" value="5" min="1" max="99" oninput="computeCv()"></label>
+      <label>除数 b：<input type="number" id="cvB" value="2" min="1" max="99" oninput="computeCv()"></label>
+    </div>
+    <div class="cards">
+      <div class="box">
+        <div class="name">✂️ 整数除法 int a/b</div>
+        <div class="bigresult" id="cvInt"></div>
+        <div class="desc" id="cvRemain"></div>
+      </div>
+      <div class="box">
+        <div class="name">🍰 小数除法 (double)a/b</div>
+        <div class="bigresult" id="cvDbl"></div>
+        <div class="desc">想得到小数，必须先变身成 double！</div>
+      </div>
+    </div>
+    <div class="apples" id="cvApples"></div>
+    <div class="code"><code>int a = 5, b = 2;
+double x = a / b;          <span class="dim">// 2.0，不是 2.5！先整数除法</span>
+double y = (double)a / b;  <span class="dim">// 2.5 ✅</span></code></div>
+    <div class="warn">⚠️ 两个坑：① int 太小会溢出，数大用 long long；② 浮点数比较用 fabs(a-b) &lt; 0.000001，别用 ==。</div>
+  </section>
+
+  <!-- ========== 7 分支 ========== -->
+  <section class="topic" id="s7" style="--tc:#ef476f">
+    <div class="big-emoji">🌿</div>
+    <h2>7. 分支：程序自己会"选择"</h2>
+    <p class="sub">拖动分数条，看看 if-else 会走哪条路！</p>
+
+    <div class="btnrow">
+      <label>分数：<input type="range" id="scoreIn" min="0" max="100" value="85" oninput="showGrade()"></label>
+      <span id="scoreVal" style="font-weight:800">85</span> 分
+    </div>
+    <div class="gradeout" id="gradeOut">B</div>
+    <ul class="brlist">
+      <li class="off" data-g="A">if (score &gt;= 90)  等级 = A;</li>
+      <li class="off" data-g="B">else if (score &gt;= 80) 等级 = B;</li>
+      <li class="off" data-g="C">else if (score &gt;= 70) 等级 = C;</li>
+      <li class="off" data-g="D">else if (score &gt;= 60) 等级 = D;</li>
+      <li class="off" data-g="E">else 等级 = E;</li>
+    </ul>
+
+    <h3>🎮 switch 大冒险：忘写 break 会怎样？</h3>
+    <p class="sub">x = 8，只匹配 case 8。勾上"去掉所有 break"，看输出怎么"穿"下去！</p>
+    <label class="btnrow" style="gap:8px">
+      <input type="checkbox" id="breakOff" onchange="toggleBreak()"> 去掉所有 break
+    </label>
+    <div class="code" id="switchCode"><code>switch (x) {
+    case 9: cout &lt;&lt; "A"; <span id="bk9">break;</span>
+    case 8: cout &lt;&lt; "B"; <span id="bk8">break;</span>
+    case 7: cout &lt;&lt; "C"; <span id="bk7">break;</span>
+    default: cout &lt;&lt; "D";
+}</code></div>
+    <div class="msg" id="switchOut">输出：B</div>
+    <div class="tip">🧠 没有 break，程序会"掉下去"继续执行，这就是<b>穿透</b>——选择题最爱考！</div>
+  </section>
+
+  <!-- ========== 8 循环 ========== -->
+  <section class="topic" id="s8" style="--tc:#5e60ce">
+    <div class="big-emoji">🔁</div>
+    <h2>8. 循环：让程序"一遍遍"做事</h2>
+    <p class="sub">选一个图形，按"一步"慢慢看电脑怎么用两层循环把它打出来！</p>
+
+    <div class="btnrow">
+      <label>图形：
+        <select id="patSel" onchange="buildLoop()">
+          <option value="square">正方形</option>
+          <option value="triangle" selected>三角形</option>
+          <option value="x">X 字矩阵</option>
+        </select>
+      </label>
+      <label>大小：
+        <input type="range" id="sizeIn" min="3" max="7" value="5" oninput="buildLoop()">
+        <span id="sizeVal">5</span>
+      </label>
+    </div>
+
+    <div class="code"><code><span id="lOut">for (int i = 1; i &lt;= n; i++) {</span>   <span class="dim">// 外层：第 i 行</span>
+    <span id="lIn">for (int j = 1; j &lt;= n; j++) {</span> <span class="dim">// 内层：第 j 列</span>
+        <span id="lIf">if (满足条件) cout &lt;&lt; "*";</span>
+        <span id="lElse">else cout &lt;&lt; " ";</span>
+    }
+    cout &lt;&lt; endl;   <span class="dim">// 一行打完，换行</span>
+}</code></div>
+
+    <div class="loopstatus" id="loopStatus">按"一步"开始吧！</div>
+    <div class="gridout" id="gridOut"></div>
+    <div class="btnrow">
+      <button class="btn go" id="stepBtn" onclick="loopStep()">👣 一步</button>
+      <button class="btn" id="autoBtn" onclick="autoLoop()">▶️ 自动播放</button>
+      <button class="btn" onclick="resetLoop()">🔄 重置</button>
+    </div>
+
+    <h3>🧅 数字剥洋葱：拆出每一位</h3>
+    <p class="sub">输入一个数，看它怎么一位一位被"剥"出来（n%10 取个位，n/10 去掉个位）。</p>
+    <input type="number" id="peelIn" value="123" min="0" max="999999" oninput="peel()" style="margin:6px 0">
+    <div class="steps" id="peelOut"></div>
+    <div class="tip">🧠 真题套路：数位之和、数字黑洞、自幂数……全靠"剥洋葱"！</div>
+  </section>
+
+  <!-- ========== 9 数学函数 ========== -->
+  <section class="topic" id="s9" style="--tc:#f4a261">
+    <div class="big-emoji">🎲</div>
+    <h2>9. 数学函数小工具</h2>
+    <p class="sub">输入两个数，点按钮调用 C++ 的数学函数！</p>
+
+    <div class="btnrow">
+      <label>a：<input type="number" id="ma" value="-9" oninput="clearMath()"></label>
+      <label>b：<input type="number" id="mb" value="3" oninput="clearMath()"></label>
+    </div>
+    <div class="btnrow">
+      <button class="btn" onclick="mathFn('abs')">|a| 绝对值</button>
+      <button class="btn" onclick="mathFn('sqrt')">√a 平方根</button>
+      <button class="btn" onclick="mathFn('max')">max(a,b)</button>
+      <button class="btn" onclick="mathFn('min')">min(a,b)</button>
+      <button class="btn" onclick="mathFn('pow')">a 的 b 次方</button>
+    </div>
+    <div class="msg" id="mathOut">点一个按钮试试～</div>
+
+    <h3>🎲 掷骰子 = rand()</h3>
+    <div class="btnrow">
+      <button class="btn go" onclick="rollDice()">🎲 掷骰子！</button>
+      <span id="diceNote" class="desc">rand()%6+1 就能得到 1~6</span>
+    </div>
+    <div class="dice" id="dice">🎲</div>
+    <div class="code"><code><span class="dim">#include &lt;cstdlib&gt;  // rand、srand</span>
+<span class="dim">#include &lt;ctime&gt;     // time</span>
+srand(time(0));        <span class="dim">// 播种，让每次都不一样</span>
+int x = rand() % 100;  <span class="dim">// 0~99 的随机数</span></code></div>
+  </section>
+
+  <!-- ========== 10 大闯关 ========== -->
+  <section class="topic" id="s10" style="--tc:#06d6a0">
+    <div class="big-emoji">🏆</div>
+    <h2>10. 大闯关：考考自己！</h2>
+    <p class="sub">一共 10 题，答对越多，勋章越大！</p>
+
+    <div id="quizWrap">
+      <div class="quizbar"><i id="quizBar"></i></div>
+      <div class="msg" id="quizCount" style="background:transparent">第 1 / 10 题</div>
+      <div class="qtext" id="quizQ"></div>
+      <div id="quizOpts"></div>
+      <div class="fb" id="quizFb"></div>
+      <div class="btnrow">
+        <button class="btn go" id="quizNext" onclick="quizNext()" style="display:none">下一步 ➡️</button>
+      </div>
+    </div>
+    <div id="quizEnd" class="finish" style="display:none"></div>
+  </section>
+
+  <details class="help">
+    <summary>📖 给爸爸妈妈的话</summary>
+    <p>这个网页对应 CCF《C++ 编程二级标准》的 9 个知识点，把"电脑基础知识"做成了可以点、可以玩的小实验，把 C++ 的重点（类型转换、分支、循环、数学函数）做成了可视化演示。建议顺序：先带孩子玩 1~5 关（客观题），再做 6~9 关（编程题核心），最后做第 10 关闯关。配合文件夹里的《GESP二级知识点精讲.md》复习效果更好。</p>
+  </details>
+
+  <footer>每天学一点，考试没问题！加油，小勇士！🚀</footer>
+</div>
+
+<div id="confetti" aria-hidden="true"></div>
+
+<script>
+/* ================= 1 存储 ================= */
+let powerOn = true;
+function togglePower() {
+  powerOn = !powerOn;
+  document.querySelectorAll('.ram-dot, .cache-dot').forEach(d => d.classList.toggle('lost', !powerOn));
+  const msg = document.getElementById('powerMsg');
+  const btn = document.getElementById('powerBtn');
+  if (powerOn) {
+    msg.textContent = '🔋 来电啦！RAM 和 Cache 又开始工作了。ROM 一直记得自己的内容。';
+    btn.textContent = '🔌 断电试试';
+  } else {
+    msg.textContent = '🔌 断电！RAM 和 Cache 的数据飞走了💨，只有 ROM 还记得自己该做什么。';
+    btn.textContent = '🔋 来电';
+  }
+}
+
+const ladderSteps = [
+  ['1 bit', '一个开关：只记 0 或 1'],
+  ['8 bit = 1 Byte', '1 个字节 = 8 个开关，能存一个英文字母'],
+  ['1024 B = 1 KB', '一篇短短的文章'],
+  ['1024 KB = 1 MB', '一张照片'],
+  ['1024 MB = 1 GB', '一部电影'],
+  ['1024 GB = 1 TB', '一个大大的移动硬盘']
+];
+let ladderI = 0;
+function nextLadder() {
+  ladderI = (ladderI + 1) % ladderSteps.length;
+  document.getElementById('ladderBig').textContent = ladderSteps[ladderI][0];
+  document.getElementById('ladderNote').textContent = ladderSteps[ladderI][1];
+}
+function resetLadder() {
+  ladderI = 0;
+  document.getElementById('ladderBig').textContent = ladderSteps[0][0];
+  document.getElementById('ladderNote').textContent = ladderSteps[0][1];
+}
+
+/* ================= 2 网络 ================= */
+const ringInfo = [
+  ['🏠 局域网 LAN', '覆盖一个家、一栋楼、一所学校。速度很快，比如家里的 Wi-Fi。'],
+  ['🏙️ 城域网 MAN', '覆盖一座城市，像城市的"马路网络"，把很多局域网连起来。'],
+  ['🌍 广域网 WAN', '覆盖全国甚至全世界，最大的广域网就是互联网！']
+];
+function pickRing(i) {
+  document.querySelectorAll('.ring').forEach((r, k) => r.classList.toggle('on', k === i));
+  const m = document.getElementById('ringMsg');
+  m.textContent = ringInfo[i][0] + '：' + ringInfo[i][1];
+  m.style.color = '#1f7a52';
+}
+function flipCard(el) { el.classList.toggle('on'); }
+
+/* ================= 3 语言 ================= */
+const langInfo = [
+  ['电脑离它最近！🚀🚀🚀 机器直接执行 0 和 1。', '92%'],
+  ['还要翻译成机器语言，比较麻烦。', '52%'],
+  ['人最好读，但 C++ 要先编译成机器语言才能运行。', '18%']
+];
+function pickLang(i) {
+  document.querySelectorAll('.langcard').forEach((c, k) => {
+    const sp = c.querySelector('.speech');
+    if (!sp.dataset.orig) sp.dataset.orig = sp.textContent;
+    const bar = c.querySelector('.meter i');
+    bar.style.width = k === i ? langInfo[i][1] : '0%';
+    sp.textContent = k === i ? langInfo[i][0] : sp.dataset.orig;
+  });
+}
+
+/* ================= 4 流程图 ================= */
+function flowName(el, name) {
+  el.classList.add('on');
+  setTimeout(() => el.classList.remove('on'), 1200);
+  document.getElementById('flowMsg').textContent = '这是「' + name + '」';
+}
+function walkFlow(rain) {
+  document.querySelectorAll('.fpath').forEach(p => p.classList.remove('walk'));
+  const target = rain ? document.getElementById('pYes') : document.getElementById('pNo');
+  target.classList.add('walk');
+  document.getElementById('flowMsg').textContent = rain
+    ? '🌧️ 判断框问"下雨了吗？"→ 是 → 小明带伞出门！'
+    : '☀️ 判断框问"下雨了吗？"→ 否 → 小明不带伞出门！';
+}
+
+/* ================= 5 ASCII ================= */
+function encodeAscii() {
+  const s = document.getElementById('asciiIn').value;
+  const out = document.getElementById('asciiOut');
+  out.innerHTML = '';
+  for (const ch of s) {
+    const d = document.createElement('div');
+    d.className = 'achip';
+    d.innerHTML = (ch === ' ' ? '空格' : ch) + '<small>' + ch.codePointAt(0) + '</small>';
+    out.appendChild(d);
+  }
+}
+const asciiQ = [
+  { ch: "'A'", ans: 65, opts: [63, 65, 97, 48] },
+  { ch: "'B'", ans: 66, opts: [65, 66, 98, 34] },
+  { ch: "'a'", ans: 97, opts: [65, 97, 122, 32] },
+  { ch: "'0'", ans: 48, opts: [48, 57, 0, 65] },
+  { ch: "'9'", ans: 57, opts: [49, 57, 48, 90] },
+  { ch: "空格", ans: 32, opts: [32, 0, 64, 97] }
+];
+let curQ = null;
+function newAsciiQ() {
+  curQ = asciiQ[Math.floor(Math.random() * asciiQ.length)];
+  const box = document.getElementById('asciiQBox');
+  box.innerHTML = '';
+  const p = document.createElement('div');
+  p.className = 'qtext';
+  p.textContent = '字符 ' + curQ.ch + ' 的 ASCII 码是多少？';
+  box.appendChild(p);
+  curQ.opts.slice().sort(() => Math.random() - .5).forEach(v => {
+    const b = document.createElement('button');
+    b.className = 'btn opt';
+    b.textContent = v;
+    b.onclick = () => answerAscii(b, v);
+    box.appendChild(b);
+  });
+  document.getElementById('asciiQMsg').textContent = '🎯 出题啦，点一个答案！';
+}
+function answerAscii(btn, v) {
+  if (!curQ) return;
+  const ok = v === curQ.ans;
+  document.getElementById('asciiQMsg').textContent = ok
+    ? '✅ 答对啦！' + curQ.ch + ' 的 ASCII 码是 ' + curQ.ans + '。'
+    : '❌ 再想想～ 记住：\'A\'=65，\'a\'=97，\'0\'=48，空格=32。';
+  btn.classList.add(ok ? 'right' : 'wrong');
+  document.querySelectorAll('#asciiQBox .opt').forEach(b => { b.disabled = true; });
+  if (!ok) {
+    document.querySelectorAll('#asciiQBox .opt').forEach(b => {
+      if (parseInt(b.textContent, 10) === curQ.ans) b.classList.add('right');
+    });
+  }
+}
+
+/* ================= 6 类型转换 ================= */
+function computeCv() {
+  const a = Math.max(1, parseInt(document.getElementById('cvA').value, 10) || 1);
+  const b = Math.max(1, parseInt(document.getElementById('cvB').value, 10) || 1);
+  const intR = Math.floor(a / b);
+  const rem = a % b;
+  const dblR = a / b;
+  document.getElementById('cvInt').textContent = a + ' / ' + b + ' = ' + intR;
+  document.getElementById('cvRemain').textContent = '余数 ' + rem + ' 被扔掉啦（整数除法）';
+  document.getElementById('cvDbl').textContent = a + ' / ' + b + ' = ' + dblR;
+  const n = Math.min(a, 18);
+  const apples = '🍎'.repeat(n) + (a > 18 ? '……' : '');
+  document.getElementById('cvApples').textContent = apples + ' → 分给 ' + b + ' 个小朋友，每人 ' + intR + ' 个🍬，还剩 ' + rem + ' 个。';
+}
+
+/* ================= 7 分支 ================= */
+function showGrade() {
+  const v = parseInt(document.getElementById('scoreIn').value, 10);
+  document.getElementById('scoreVal').textContent = v;
+  const g = v >= 90 ? 'A' : v >= 80 ? 'B' : v >= 70 ? 'C' : v >= 60 ? 'D' : 'E';
+  document.getElementById('gradeOut').textContent = g;
+  document.querySelectorAll('.brlist li').forEach(li => {
+    const on = li.dataset.g === g;
+    li.classList.toggle('on', on);
+    li.classList.toggle('off', !on);
+  });
+}
+function toggleBreak() {
+  const off = document.getElementById('breakOff').checked;
+  ['bk9', 'bk8', 'bk7'].forEach(id => {
+    const s = document.getElementById(id);
+    s.textContent = off ? '（没有 break，穿下去！）' : 'break;';
+    s.classList.toggle('dim', off);
+  });
+  document.getElementById('switchOut').textContent = off
+    ? '输出：BCD（从 case 8 一路穿到 default！）'
+    : '输出：B（case 8 打印完遇到 break，停住！）';
+}
+
+/* ================= 8 循环 ================= */
+let grid = [], size = 5, step = 0, total = 0, timer = null;
+function buildGrid(name, n) {
+  const g = [];
+  for (let i = 0; i < n; i++) {
+    const row = [];
+    for (let j = 0; j < n; j++) {
+      if (name === 'square') row.push('*');
+      else if (name === 'triangle') row.push(j <= i ? '*' : ' ');
+      else row.push(i === j || i + j === n - 1 ? 'X' : ' ');
+    }
+    g.push(row);
+  }
+  return g;
+}
+function renderGrid() {
+  const out = document.getElementById('gridOut');
+  out.style.gridTemplateColumns = 'repeat(' + size + ', 38px)';
+  out.innerHTML = '';
+  for (let i = 0; i < size; i++) {
+    for (let j = 0; j < size; j++) {
+      const c = document.createElement('div');
+      c.className = 'cell' + (grid[i][j] === ' ' ? ' space' : '');
+      c.textContent = grid[i][j];
+      out.appendChild(c);
+    }
+  }
+  if (size > 5) out.style.gridTemplateColumns = 'repeat(' + size + ', 30px)';
+}
+function buildLoop() {
+  stopAuto();
+  const name = document.getElementById('patSel').value;
+  size = parseInt(document.getElementById('sizeIn').value, 10);
+  document.getElementById('sizeVal').textContent = size;
+  grid = buildGrid(name, size);
+  total = size * size;
+  step = 0;
+  renderGrid();
+  document.getElementById('loopStatus').textContent = '按"一步"开始吧！';
+  document.getElementById('stepBtn').disabled = false;
+}
+function loopStep() {
+  if (step >= total) return;
+  const i = Math.floor(step / size), j = step % size;
+  const ch = grid[i][j];
+  document.getElementById('gridOut').children[step].classList.add('show');
+  document.getElementById('lOut').classList.add('hl');
+  document.getElementById('lIn').classList.add('hl');
+  document.getElementById('lIf').classList.toggle('hl', ch !== ' ');
+  document.getElementById('lElse').classList.toggle('hl', ch === ' ');
+  document.getElementById('loopStatus').textContent =
+    '外层 i=' + (i + 1) + '，内层 j=' + (j + 1) + ' → 打印「' + (ch === ' ' ? '空格' : ch) + '」';
+  step++;
+  if (step >= total) {
+    document.getElementById('loopStatus').textContent = '🎉 打印完成！看看这个图形～';
+    document.getElementById('stepBtn').disabled = true;
+    stopAuto();
+  }
+}
+function autoLoop() {
+  const btn = document.getElementById('autoBtn');
+  if (timer) { stopAuto(); btn.textContent = '▶️ 自动播放'; return; }
+  if (step >= total) return;
+  btn.textContent = '⏸️ 暂停';
+  timer = setInterval(() => {
+    if (step >= total) { stopAuto(); btn.textContent = '▶️ 自动播放'; return; }
+    loopStep();
+  }, 140);
+}
+function stopAuto() {
+  if (timer) { clearInterval(timer); timer = null; }
+  const btn = document.getElementById('autoBtn');
+  if (btn) btn.textContent = '▶️ 自动播放';
+}
+function resetLoop() {
+  stopAuto();
+  step = 0;
+  document.getElementById('gridOut').querySelectorAll('.cell').forEach(c => c.classList.remove('show'));
+  document.querySelectorAll('#lOut, #lIn, #lIf, #lElse').forEach(e => e.classList.remove('hl'));
+  document.getElementById('loopStatus').textContent = '按"一步"开始吧！';
+  document.getElementById('stepBtn').disabled = false;
+}
+
+/* 剥洋葱 */
+function peel() {
+  const n = parseInt(document.getElementById('peelIn').value, 10);
+  const out = document.getElementById('peelOut');
+  out.innerHTML = '';
+  if (isNaN(n) || n < 0) { out.textContent = '输入一个 0~999999 的数吧～'; return; }
+  if (n === 0) {
+    const d = document.createElement('div');
+    d.className = 'stepchip';
+    d.textContent = '0 没有位数可拆，直接就是 0';
+    out.appendChild(d);
+    return;
+  }
+  let x = n, sum = 0;
+  while (x > 0) {
+    const d = document.createElement('div');
+    d.className = 'stepchip';
+    d.textContent = x + ' % 10 = ' + (x % 10) + '，剩下 ' + Math.floor(x / 10);
+    sum += x % 10;
+    out.appendChild(d);
+    x = Math.floor(x / 10);
+  }
+  const s = document.createElement('div');
+  s.className = 'stepchip';
+  s.textContent = '🧮 所有数字加起来 = ' + sum;
+  s.style.background = '#d9f7e8';
+  s.style.borderColor = '#3ecf8e';
+  out.appendChild(s);
+}
+
+/* ================= 9 数学 ================= */
+function clearMath() {
+  document.getElementById('mathOut').textContent = '点一个按钮试试～';
+}
+function mathFn(fn) {
+  const a = parseFloat(document.getElementById('ma').value);
+  const b = parseFloat(document.getElementById('mb').value);
+  const out = document.getElementById('mathOut');
+  if (isNaN(a) || isNaN(b)) { out.textContent = '先把 a、b 填好哦～'; return; }
+  let r, tip = '';
+  if (fn === 'abs') { r = Math.abs(a); tip = 'abs(-' + Math.abs(a) + ') = ' + r; }
+  else if (fn === 'sqrt') {
+    if (a < 0) { out.textContent = '😅 负数没有平方根！试试 a = 9 吧。'; return; }
+    r = Math.sqrt(a); tip = 'sqrt(' + a + ') ≈ ' + r.toFixed(4);
+  }
+  else if (fn === 'max') { r = Math.max(a, b); tip = 'max(' + a + ', ' + b + ') = ' + r; }
+  else if (fn === 'min') { r = Math.min(a, b); tip = 'min(' + a + ', ' + b + ') = ' + r; }
+  else { r = Math.pow(a, b); tip = 'pow(' + a + ', ' + b + ') = ' + r; }
+  out.textContent = '✅ ' + tip;
+}
+function rollDice() {
+  const d = document.getElementById('dice');
+  const n = Math.floor(Math.random() * 6) + 1;
+  d.classList.remove('shake');
+  void d.offsetWidth;
+  d.classList.add('shake');
+  d.textContent = '🎲' + n;
+  document.getElementById('diceNote').textContent = '这次 rand()%6+1 = ' + n;
+}
+
+/* ================= 10 闯关 ================= */
+const questions = [
+  { q: '断电之后，哪种存储器里的数据会消失？', opts: ['ROM', 'RAM', '硬盘', '光盘'], ans: 1, exp: 'RAM 是"工作记忆"，断电就忘；ROM 和硬盘断电不丢。' },
+  { q: '1 MB 等于多少 KB？', opts: ['100', '1000', '1024', '2048'], ans: 2, exp: '存储单位之间都是 ×1024：1 MB = 1024 KB。' },
+  { q: '字符 a 的 ASCII 码是多少？', opts: ['65', '97', '48', '122'], ans: 1, exp: '记住四个：空格32、\'0\'=48、\'A\'=65、\'a\'=97。小写比大写大32。' },
+  { q: '在 C++ 里，5 / 2 的结果是？', opts: ['2.5', '2', '3', '2.0'], ans: 1, exp: '两个整数相除结果是整数！想得2.5要写 (double)5/2。' },
+  { q: '浏览网页时用到的协议是？', opts: ['FTP', 'SMTP', 'HTTP', 'DNS'], ans: 2, exp: 'HTTP/HTTPS 是网页协议（80/443端口），DNS 负责翻译域名。' },
+  { q: 'switch 语句里忘写 break 会发生什么？', opts: ['编译错误', '死循环', '穿透：继续往下执行', '什么都不发生'], ans: 2, exp: '没有 break 就会"穿透"继续执行下面的 case，直到遇到 break 或结束。' },
+  { q: '流程图里"判断框"是什么形状？', opts: ['矩形', '平行四边形', '菱形', '圆角矩形'], ans: 2, exp: '菱形=判断（两条路），矩形=处理，平行四边形=输入输出，圆角框=开始结束。' },
+  { q: 'C++ 属于哪种语言？', opts: ['机器语言', '汇编语言', '解释型高级语言', '编译型高级语言'], ans: 3, exp: 'C++ 是编译型高级语言：先编译成机器语言再运行。' },
+  { q: '循环里 continue 的作用是？', opts: ['退出整个循环', '跳过本次循环后面的部分', '让程序暂停', '多循环一次'], ans: 1, exp: 'continue=跳过本次，break=退出整个循环。' },
+  { q: '想得到 0~99 的随机数，应该写？', opts: ['rand()%100', 'rand()/100', 'rand()*100', 'rand()%10'], ans: 0, exp: 'rand()%100 得到 0~99。想要 1~6 就写 rand()%6+1。' }
+];
+let qi = 0, score = 0, locked = false;
+function renderQ() {
+  locked = false;
+  const q = questions[qi];
+  document.getElementById('quizQ').textContent = (qi + 1) + '. ' + q.q;
+  document.getElementById('quizCount').textContent = '第 ' + (qi + 1) + ' / 10 题';
+  document.getElementById('quizBar').style.width = ((qi) / 10 * 100) + '%';
+  const box = document.getElementById('quizOpts');
+  box.innerHTML = '';
+  q.opts.forEach((t, i) => {
+    const b = document.createElement('button');
+    b.className = 'btn opt';
+    b.textContent = 'ABCD'[i] + '. ' + t;
+    b.onclick = () => answerQ(i, b);
+    box.appendChild(b);
+  });
+  const fb = document.getElementById('quizFb');
+  fb.className = 'fb';
+  fb.textContent = '';
+  document.getElementById('quizNext').style.display = 'none';
+}
+function answerQ(i, btn) {
+  if (locked) return;
+  locked = true;
+  const q = questions[qi];
+  const ok = i === q.ans;
+  if (ok) score++;
+  const box = document.getElementById('quizOpts');
+  [...box.children].forEach((b, k) => {
+    b.disabled = true;
+    if (k === q.ans) b.classList.add('right');
+    if (k === i && !ok) b.classList.add('wrong');
+  });
+  const fb = document.getElementById('quizFb');
+  fb.className = 'fb ' + (ok ? 'ok' : 'no');
+  fb.textContent = (ok ? '✅ 答对啦！' : '❌ 不对哦。') + q.exp;
+  document.getElementById('quizNext').style.display = 'inline-block';
+}
+function quizNext() {
+  qi++;
+  if (qi < questions.length) {
+    renderQ();
+  } else {
+    finishQuiz();
+  }
+}
+function finishQuiz() {
+  document.getElementById('quizWrap').style.display = 'none';
+  const end = document.getElementById('quizEnd');
+  end.style.display = 'block';
+  const medal = score >= 9 ? '🥇' : score >= 7 ? '🥈' : score >= 5 ? '🥉' : '💪';
+  const words = score >= 9 ? '太厉害啦！你是二级小高手！' : score >= 7 ? '很棒！再复习一下错题就满分了！' : score >= 5 ? '不错！把错题对应的知识点再玩一遍～' : '别灰心！从头再玩一遍，一定能进步！';
+  end.innerHTML = '<div class="medal">' + medal + '</div><h3>你答对了 ' + score + ' / 10 题</h3><p>' + words + '</p><div class="btnrow" style="justify-content:center"><button class="btn go" onclick="restartQuiz()">🔄 再来一次</button></div>';
+  if (score >= 7) confettiBurst();
+}
+function restartQuiz() {
+  qi = 0; score = 0;
+  document.getElementById('quizEnd').style.display = 'none';
+  document.getElementById('quizWrap').style.display = 'block';
+  renderQ();
+}
+function confettiBurst() {
+  const c = document.getElementById('confetti');
+  c.innerHTML = '';
+  const colors = ['#ef476f', '#ffd166', '#06d6a0', '#118ab2', '#9b6ef3', '#ff9f43'];
+  for (let i = 0; i < 80; i++) {
+    const p = document.createElement('span');
+    p.className = 'cf';
+    p.style.left = Math.random() * 100 + 'vw';
+    p.style.background = colors[Math.floor(Math.random() * colors.length)];
+    p.style.animationDuration = (1.8 + Math.random() * 1.6) + 's';
+    p.style.animationDelay = Math.random() * 0.5 + 's';
+    c.appendChild(p);
+  }
+  setTimeout(() => { c.innerHTML = ''; }, 4200);
+}
+
+/* ================= 初始化 ================= */
+encodeAscii();
+computeCv();
+showGrade();
+buildLoop();
+peel();
+renderQ();
+</script>
+</body>
+</html>
