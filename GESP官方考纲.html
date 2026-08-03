@@ -127,6 +127,30 @@
   }
   .btn:hover { transform: translateY(-2px); box-shadow: 0 5px 14px rgba(43,45,66,.2); }
 
+  .paper-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 10px;
+    margin-top: 12px;
+  }
+  .paper-card {
+    display: block;
+    text-decoration: none;
+    background: #f7f9ff;
+    border: 1.5px solid #dce3f5;
+    border-radius: 14px;
+    padding: 12px 14px;
+    color: #2b2d42;
+    transition: transform .15s, border-color .15s, box-shadow .15s;
+  }
+  .paper-card:hover {
+    transform: translateY(-2px);
+    border-color: #4f46e5;
+    box-shadow: 0 5px 14px rgba(43,45,66,.12);
+  }
+  .paper-card b { display: block; color: #4f46e5; font-size: 15px; }
+  .paper-card span { display: block; color: #6c6f93; font-size: 13px; margin-top: 2px; }
+
   footer { text-align: center; color: #6c6f93; font-size: 14px; padding: 18px 0 6px; }
   footer a { color: #4f46e5; font-weight: 700; text-decoration: none; }
 </style>
@@ -147,6 +171,7 @@
     <a class="chip" href="GESP1学习乐园.html">🎒 一级乐园</a>
     <a class="chip" href="GESP2学习乐园.html">🚀 二级乐园</a>
     <a class="chip" href="GESP二级知识点精讲.html">📖 知识笔记</a>
+    <a class="chip" href="#pastPapers">🧾 历年真题</a>
     <a class="chip" href="复习站.html">📒 复习站</a>
     <a class="chip" href="家长中心.html">👨‍👩‍👧 家长中心</a>
   </nav>
@@ -156,6 +181,59 @@
     <div class="callout warn">以下内容整理自 CCF 官网发布的《CCF 编程能力等级认证 C++&amp;Python 认证标准》。<b>1-2 级为 C++ 单独标准，3-8 级为 C++&amp;Python 合并标准</b>（下表保留 C++ 相关内容）。</div>
     <div class="callout key">注：对于 C++ 语言的考题，如无特殊说明，均以 <b>C++11</b> 标准为准。考题不会涉及该标准下的未定义行为（undefined behavior）。</div>
     <div class="callout info">📝 各级别题型分布：单选题 15 道（2 分/道）+ 判断题 10 道（2 分/道）+ 编程题 2 道（25 分/道）。考试时间：<b>1-4 级 120 分钟，5-8 级 180 分钟</b>。</div>
+  </div>
+
+  <div class="panel" id="pastPapers">
+    <h2>🧾 历年真题及解析</h2>
+    <div class="callout info">以下链接追踪自 CCF GESP 官网“真题解析”栏目，按发布时间从新到旧整理。打开后可查看对应批次的官方真题资料。</div>
+    <div class="paper-list">
+      <a class="paper-card" href="https://gesp.ccf.org.cn/101/1010/10284.html" target="_blank" rel="noopener">
+        <b>2026年6月GESP认证真题</b><span>2026-06-29 ｜ CCF 官方</span>
+      </a>
+      <a class="paper-card" href="https://gesp.ccf.org.cn/101/1010/10269.html" target="_blank" rel="noopener">
+        <b>2026年3月GESP认证真题</b><span>2026-03-15 ｜ CCF 官方</span>
+      </a>
+      <a class="paper-card" href="https://gesp.ccf.org.cn/101/1010/10242.html" target="_blank" rel="noopener">
+        <b>2025年12月GESP认证真题</b><span>2025-12-29 ｜ CCF 官方</span>
+      </a>
+      <a class="paper-card" href="https://gesp.ccf.org.cn/101/1010/10229.html" target="_blank" rel="noopener">
+        <b>2025年9月GESP认证真题</b><span>2025-09-30 ｜ CCF 官方</span>
+      </a>
+      <a class="paper-card" href="https://gesp.ccf.org.cn/101/1010/10217.html" target="_blank" rel="noopener">
+        <b>2025年6月GESP认证真题</b><span>2025-06-29 ｜ CCF 官方</span>
+      </a>
+      <a class="paper-card" href="https://gesp.ccf.org.cn/101/1010/10200.html" target="_blank" rel="noopener">
+        <b>2025年3月GESP认证真题</b><span>2025-03-22 ｜ CCF 官方</span>
+      </a>
+      <a class="paper-card" href="https://gesp.ccf.org.cn/101/1010/10178.html" target="_blank" rel="noopener">
+        <b>2024年12月GESP认证真题</b><span>2024-12-07 ｜ CCF 官方</span>
+      </a>
+      <a class="paper-card" href="https://gesp.ccf.org.cn/101/1010/10166.html" target="_blank" rel="noopener">
+        <b>2024年9月GESP认证真题</b><span>2024-09-08 ｜ CCF 官方</span>
+      </a>
+      <a class="paper-card" href="https://gesp.ccf.org.cn/101/1010/10147.html" target="_blank" rel="noopener">
+        <b>2024年6月GESP认证真题</b><span>2024-06-29 ｜ CCF 官方</span>
+      </a>
+      <a class="paper-card" href="https://gesp.ccf.org.cn/101/1010/10134.html" target="_blank" rel="noopener">
+        <b>2024年3月GESP认证真题</b><span>2024-03-16 ｜ CCF 官方</span>
+      </a>
+      <a class="paper-card" href="https://gesp.ccf.org.cn/101/1010/10119.html" target="_blank" rel="noopener">
+        <b>2023年12月GESP认证真题</b><span>2023-12-12 ｜ CCF 官方</span>
+      </a>
+      <a class="paper-card" href="https://gesp.ccf.org.cn/101/1010/10105.html" target="_blank" rel="noopener">
+        <b>2023年9月GESP认证真题</b><span>2023-09-23 ｜ CCF 官方</span>
+      </a>
+      <a class="paper-card" href="https://gesp.ccf.org.cn/101/1010/10100.html" target="_blank" rel="noopener">
+        <b>2023年GESP三月、六月、九月、十二真题解析</b><span>2023-08-17 ｜ CCF 官方</span>
+      </a>
+      <a class="paper-card" href="https://gesp.ccf.org.cn/101/1010/10092.html" target="_blank" rel="noopener">
+        <b>2023年GESP 6月份认证真题</b><span>2023-06-20 ｜ CCF 官方</span>
+      </a>
+      <a class="paper-card" href="https://gesp.ccf.org.cn/101/1010/10068.html" target="_blank" rel="noopener">
+        <b>2023年GESP 3月认证真题</b><span>2023-03-22 ｜ CCF 官方</span>
+      </a>
+    </div>
+    <a class="btn" href="https://gesp.ccf.org.cn/101/1010/index_1.html" target="_blank" rel="noopener">去 CCF 官网查看真题栏目 →</a>
   </div>
 
   <div class="panel">

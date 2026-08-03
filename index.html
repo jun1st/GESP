@@ -4,98 +4,185 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="GESP C++ 备考学习中心：1-8 级课程地图、学习进度、错题复习与家长看板。">
-<title>GESP C++ 学习中心 🏠</title>
+<title>GESP C++ 学习中心</title>
 <link rel="stylesheet" href="gesp-style.css">
 <link rel="stylesheet" href="apple.css">
 </head>
 <body class="bg-slate-50 text-slate-800 antialiased">
-<div class="max-w-5xl mx-auto px-4 sm:px-6 pb-16">
+<div class="site-shell max-w-5xl mx-auto px-4 sm:px-6 pb-16">
 
-  <!-- 顶部导航 -->
-  <header class="flex items-center justify-between py-5 flex-wrap gap-2">
-    <a href="index.html" class="flex items-center gap-2 font-bold text-lg text-indigo-600">
-      <span class="w-9 h-9 rounded-xl bg-indigo-600 text-white grid place-items-center text-xl">C</span>
-      GESP 学习中心
+  <header class="site-topbar">
+    <a href="index.html" class="brand-mark" aria-label="GESP 学习中心首页">
+      <span class="brand-icon">C</span>
+      <span>GESP 学习中心</span>
     </a>
-    <nav class="flex gap-1 text-sm font-medium text-slate-600 flex-wrap">
-      <a class="px-3 py-2 rounded-lg hover:bg-indigo-50 hover:text-indigo-600 transition" href="复习站.html">📒 复习站</a>
-      <a class="px-3 py-2 rounded-lg hover:bg-indigo-50 hover:text-indigo-600 transition" href="家长中心.html">👨‍👩‍👧 家长中心</a>
-      <a class="px-3 py-2 rounded-lg hover:bg-indigo-50 hover:text-indigo-600 transition" href="GESP官方考纲.html">📋 官方考纲</a>
-      <a class="px-3 py-2 rounded-lg hover:bg-indigo-50 hover:text-indigo-600 transition" href="GESP二级知识点精讲.html">📖 知识笔记</a>
+    <nav class="site-nav" aria-label="主导航">
+      <a href="#pathPreview">课程体系</a>
+      <a href="GESP官方考纲.html">官方考纲</a>
+      <a href="家长中心.html">家长中心</a>
+      <a href="复习站.html">复习站</a>
     </nav>
+    <form id="loginForm" class="login-card" aria-label="本地学习档案登录">
+      <input id="studentNameInput" type="text" maxlength="16" autocomplete="nickname" placeholder="孩子昵称">
+      <button type="submit">登录学习</button>
+    </form>
+    <div id="profileBar" class="profile-card" hidden>
+      <span id="profileName">小勇士</span>
+      <button id="logoutBtn" type="button">退出</button>
+    </div>
   </header>
 
-  <!-- Hero -->
-  <section class="mt-2 rounded-3xl bg-gradient-to-br from-indigo-600 via-violet-600 to-fuchsia-600 text-white px-6 sm:px-10 py-10 sm:py-12 relative overflow-hidden shadow-xl">
-    <div class="absolute -top-10 -right-10 w-48 h-48 bg-white/10 rounded-full"></div>
-    <div class="absolute -bottom-16 -left-8 w-56 h-56 bg-white/10 rounded-full"></div>
-    <div class="relative">
-      <p class="text-indigo-200 text-sm font-semibold tracking-widest uppercase">GESP C++ 1-8 级 · 闯关学习</p>
-      <h1 class="mt-2 text-3xl sm:text-4xl font-extrabold" id="helloMsg">嗨，小勇士！</h1>
-      <p class="mt-2 max-w-2xl text-indigo-100 text-base">从"0 和 1"到"算法高手"，8 个级别一条路：学一课、打卡一课，错题自动进复习站。</p>
-      <div class="mt-5 bg-white/15 border border-white/25 rounded-2xl p-4 sm:p-5">
-        <div class="flex items-center justify-between text-sm font-bold mb-2">
-          <span>🚀 总闯关进度</span><span id="totalPct">0%</span>
+  <main>
+    <section id="visitorView" data-auth-view="visitor">
+      <section id="landingHero" class="landing-hero">
+        <div>
+          <p class="eyebrow">GESP C++ 1-8 级系统学习</p>
+          <h1>从第一次运行程序，到有节奏地通关 GESP。</h1>
+          <p class="hero-copy">把官方考纲拆成孩子能每天完成的小关卡：先理解概念，再动手编程，最后用错题复习把知识补牢。</p>
+          <div class="hero-actions">
+            <label class="primary-cta" for="studentNameInput">创建本地学习档案</label>
+            <a class="secondary-cta" href="GESP官方考纲.html">查看官方考纲</a>
+          </div>
+          <p class="local-note">当前登录仅保存在本浏览器，用于切换学习驾驶舱，不会上传账号信息。</p>
         </div>
-        <div class="h-3.5 rounded-full bg-white/25 overflow-hidden">
-          <div id="totalBar" class="h-full w-0 rounded-full bg-gradient-to-r from-amber-300 to-yellow-400 transition-all duration-700"></div>
+        <aside class="hero-panel" aria-label="课程概览">
+          <b>62 课</b>
+          <span>基础常识 + 1-8 级课程地图</span>
+          <div class="mini-path">
+            <i>基础</i><i>一级</i><i>二级</i><i>进阶</i>
+          </div>
+        </aside>
+      </section>
+
+      <section id="trustGrid" class="trust-grid" aria-label="核心价值">
+        <article>
+          <span>01</span>
+          <h2>对齐官方考纲</h2>
+          <p>课程入口保留官方考纲和知识笔记，备考前先看清范围，再按级别推进。</p>
+        </article>
+        <article>
+          <span>02</span>
+          <h2>每日只走一步</h2>
+          <p>登录后首页优先推荐下一课，降低选择成本，让孩子知道今天该学什么。</p>
+        </article>
+        <article>
+          <span>03</span>
+          <h2>错题自动回流</h2>
+          <p>课程测验答错后进入复习站，考前不用重新翻页面找薄弱点。</p>
+        </article>
+        <article>
+          <span>04</span>
+          <h2>家长可看进度</h2>
+          <p>家长中心汇总课程进度、错题数量和备考节奏，方便陪伴而不过度打扰。</p>
+        </article>
+      </section>
+
+      <section id="pathPreview" class="path-preview">
+        <div class="section-heading">
+          <p class="eyebrow">Learning Path</p>
+          <h2>三段式课程结构</h2>
+          <p>先建立计算机与 C++ 基础，再完成一级二级核心考点，最后进入三至八级算法能力提升。</p>
         </div>
-        <p class="mt-2 text-indigo-100 text-sm" id="totalMsg">共 62 课</p>
-      </div>
-    </div>
-  </section>
+        <div class="path-cards">
+          <a href="基础常识乐园.html">
+            <b>基础启蒙</b>
+            <span>基础常识 · 认识二进制、字节和存储单位</span>
+          </a>
+          <a href="GESP1学习乐园.html">
+            <b>一级入门</b>
+            <span>变量、输入输出、表达式、分支循环和基础调试</span>
+          </a>
+          <a href="GESP2学习乐园.html">
+            <b>二级巩固</b>
+            <span>网络、编码、流程图、多层结构和数学函数</span>
+          </a>
+          <a href="GESP3课程.html">
+            <b>三至八级进阶</b>
+            <span>数组、字符串、排序、递归、搜索、动态规划和图论</span>
+          </a>
+        </div>
+      </section>
 
-  <!-- 今天学什么 -->
-  <section class="mt-8 bg-white rounded-3xl border border-slate-200 p-6 sm:p-8 shadow-sm">
-    <h2 class="text-xl sm:text-2xl font-extrabold">🎯 今天学什么</h2>
-    <p class="mt-1 text-sm text-slate-500">跟着系统推荐的路线走，一次只学一课，不迷路。</p>
-    <div id="nextCard" class="mt-5"></div>
-  </section>
+      <section id="visitorCta" class="visitor-cta">
+        <div>
+          <p class="eyebrow">Start Smart</p>
+          <h2>准备好后，登录进入学习驾驶舱。</h2>
+          <p>登录后会优先展示下一课、总体进度、错题复习和家长中心入口。</p>
+        </div>
+        <label class="primary-cta" for="studentNameInput">输入昵称开始</label>
+      </section>
+    </section>
 
-  <!-- 学习路线 -->
-  <section class="mt-10">
-    <h2 class="text-2xl font-extrabold">🗺️ 学习路线（1-8 级）</h2>
-    <p class="mt-1 text-sm text-slate-500">学完一级再进下一级；每级内部按顺序学，全部打卡即可解锁下一级。</p>
-    <div class="mt-5 space-y-3" id="levelList"></div>
-  </section>
+    <section id="dashboardView" data-auth-view="dashboard" hidden>
+      <section class="dashboard-hero">
+        <div>
+          <p class="eyebrow">Student Dashboard</p>
+          <h1 id="helloMsg">嗨，小勇士！</h1>
+          <p>一次只学一课。完成打卡后，系统会继续推荐下一步。</p>
+        </div>
+        <div class="progress-card">
+          <div>
+            <span>总闯关进度</span>
+            <b id="totalPct">0%</b>
+          </div>
+          <div class="progress-track"><i id="totalBar"></i></div>
+          <p id="totalMsg">共 62 课</p>
+        </div>
+      </section>
 
-  <!-- 成就墙 -->
-  <section class="mt-10 bg-white rounded-3xl border border-slate-200 p-6 sm:p-8 shadow-sm">
-    <h2 class="text-xl sm:text-2xl font-extrabold">🏅 成就墙</h2>
-    <p class="mt-1 text-sm text-slate-500">每毕业一个级别点亮一枚徽章！</p>
-    <div class="mt-5 grid grid-cols-3 sm:grid-cols-5 gap-3 text-center" id="badgeWall"></div>
-  </section>
+      <section class="panel-card">
+        <div class="section-heading compact">
+          <h2>今天学什么</h2>
+          <p>跟着系统推荐的路线走，不迷路。</p>
+        </div>
+        <div id="nextCard"></div>
+      </section>
 
-  <!-- 工具书 -->
-  <section class="mt-10 grid sm:grid-cols-3 gap-4">
-    <a href="GESP官方考纲.html" class="bg-white rounded-3xl border border-slate-200 p-6 shadow-sm hover:shadow-md transition">
-      <div class="text-3xl">📋</div>
-      <h3 class="mt-2 font-extrabold">官方考纲</h3>
-      <p class="mt-1 text-sm text-slate-500">1-8 级考点总览，备考前先看清要求。</p>
-    </a>
-    <a href="GESP二级知识点精讲.html" class="bg-white rounded-3xl border border-slate-200 p-6 shadow-sm hover:shadow-md transition">
-      <div class="text-3xl">📖</div>
-      <h3 class="mt-2 font-extrabold">知识笔记</h3>
-      <p class="mt-1 text-sm text-slate-500">客观题速记卡 + 编程套路总结。</p>
-    </a>
-    <a href="GESP2学习乐园.html#editor" class="bg-white rounded-3xl border border-slate-200 p-6 shadow-sm hover:shadow-md transition">
-      <div class="text-3xl">🛠️</div>
-      <h3 class="mt-2 font-extrabold">编程练习场</h3>
-      <p class="mt-1 text-sm text-slate-500">在线编译 C++，真题随便跑（需联网）。</p>
-    </a>
-  </section>
+      <section id="priorityActions" class="action-grid" aria-label="优先操作">
+        <a href="复习站.html">
+          <span>复习错题</span>
+          <b>把答错的题重新做对</b>
+        </a>
+        <a href="GESP官方考纲.html">
+          <span>查看考纲</span>
+          <b>确认当前级别要掌握什么</b>
+        </a>
+        <a href="家长中心.html">
+          <span>家长中心</span>
+          <b>查看进度和备考节奏</b>
+        </a>
+      </section>
 
-  <footer class="mt-12 pt-6 border-t border-slate-200 text-sm text-slate-400 flex flex-wrap items-center justify-between gap-2">
+      <section class="route-section">
+        <div class="section-heading compact">
+          <h2>学习路线（1-8 级）</h2>
+          <p>学完一级再进下一级；每级内部按顺序学。</p>
+        </div>
+        <div class="level-list" id="levelList"></div>
+      </section>
+
+      <section class="panel-card">
+        <div class="section-heading compact">
+          <h2>成就墙</h2>
+          <p>每毕业一个级别点亮一枚徽章。</p>
+        </div>
+        <div class="badge-wall" id="badgeWall"></div>
+      </section>
+    </section>
+  </main>
+
+  <footer class="site-footer">
     <span>GESP C++ 学习中心</span>
-    <span class="flex gap-4">
-      <a class="hover:text-indigo-600 transition" href="复习站.html">复习站</a>
-      <a class="hover:text-indigo-600 transition" href="家长中心.html">家长中心</a>
-      <a class="hover:text-indigo-600 transition" href="GESP官方考纲.html">官方考纲</a>
+    <span>
+      <a href="复习站.html">复习站</a>
+      <a href="家长中心.html">家长中心</a>
+      <a href="GESP官方考纲.html">官方考纲</a>
     </span>
   </footer>
 </div>
 
 <script>
+const USER_KEY = 'gesp_user_profile';
 const MODULES = [
   { name: '基础常识', emoji: '🧠', key: 'gesp_lv0_prog', total: 3, page: '基础常识乐园.html', anchors: ['#s1', '#s2', '#s5'], color: 'from-sky-500 to-cyan-500' },
   { name: '一级', emoji: '🎒', key: 'gesp_lv1_prog', total: 9, page: 'GESP1学习乐园.html', anchors: ['#s1', '#s2', '#s3', '#s4', '#s5', '#s6', '#s7', '#s7b', '#s8'], color: 'from-teal-500 to-emerald-500' },
@@ -107,8 +194,20 @@ const MODULES = [
   { name: '七级', emoji: '📓', key: 'gesp_lv7_prog', total: 5, page: 'GESP7课程.html', anchors: ['#lv7l1', '#lv7l2', '#lv7l3', '#lv7l4', '#lv7l5'], color: 'from-violet-500 to-purple-500' },
   { name: '八级', emoji: '📔', key: 'gesp_lv8_prog', total: 8, page: 'GESP8课程.html', anchors: ['#lv8l1', '#lv8l2', '#lv8l3', '#lv8l4', '#lv8l5', '#lv8l6', '#lv8l7', '#lv8l8'], color: 'from-indigo-500 to-blue-500' }
 ];
-const HOUR = 3600000;
-const DAY = 86400000;
+function getUserProfile() {
+  try {
+    const profile = JSON.parse(localStorage.getItem(USER_KEY) || 'null');
+    if (profile && typeof profile.name === 'string') return profile;
+  } catch (e) {}
+  return null;
+}
+function saveUserProfile(name) {
+  const cleanName = name.trim() || '小勇士';
+  localStorage.setItem(USER_KEY, JSON.stringify({ name: cleanName, savedAt: Date.now() }));
+}
+function clearUserProfile() {
+  localStorage.removeItem(USER_KEY);
+}
 function getArr(key, n) {
   try {
     const v = JSON.parse(localStorage.getItem(key));
@@ -141,21 +240,21 @@ function hourWord() {
   if (h < 18) return '下午好！';
   return '晚上好！';
 }
-function render() {
+function renderDashboard(profile) {
   const st = state();
   const totalAll = st.reduce((s, x) => s + x.m.total, 0);
   const totalDone = st.reduce((s, x) => s + x.done, 0);
-  document.getElementById('helloMsg').textContent = hourWord() + ' 嗨，小勇士！';
+  document.getElementById('helloMsg').textContent = hourWord() + ' ' + profile.name + '，继续加油！';
   document.getElementById('totalPct').textContent = Math.round(totalDone / totalAll * 100) + '%';
   document.getElementById('totalBar').style.width = (totalDone / totalAll * 100) + '%';
-  document.getElementById('totalMsg').textContent = '已完成 ' + totalDone + ' / ' + totalAll + ' 课' + (totalDone === totalAll ? ' 🎉 全部通关！' : '');
+  document.getElementById('totalMsg').textContent = '已完成 ' + totalDone + ' / ' + totalAll + ' 课' + (totalDone === totalAll ? '，全部通关！' : '');
 
   const next = firstIncomplete();
   const nc = document.getElementById('nextCard');
   if (!next) {
-    nc.innerHTML = '<div class="bg-emerald-50 border-2 border-emerald-300 rounded-2xl p-6 text-center"><div class="text-4xl">🎉</div><p class="mt-2 font-bold text-emerald-800">8 级课程全部完成！你已经是 C++ 小高手了！</p><p class="mt-1 text-sm text-emerald-700">去 <a class="underline font-bold" href="复习站.html">复习站</a> 巩固错题，或看看 <a class="underline font-bold" href="GESP官方考纲.html">官方考纲</a> 查漏补缺。</p></div>';
+    nc.innerHTML = '<div class="complete-card"><b>全部课程已完成！</b><p>去 <a href="复习站.html">复习站</a> 巩固错题，或查看 <a href="GESP官方考纲.html">官方考纲</a> 查漏补缺。</p></div>';
   } else {
-    nc.innerHTML = '<div class="flex flex-wrap items-center justify-between gap-4 bg-gradient-to-r ' + next.m.color + ' text-white rounded-2xl p-6"><div><div class="text-sm opacity-90">' + next.m.emoji + ' ' + next.m.name + ' 级 · 第 ' + next.lesson + ' / ' + next.total + ' 课</div><div class="text-xl sm:text-2xl font-extrabold mt-1">继续你的闯关之旅</div></div><a href="' + next.m.page + next.m.anchors[next.lesson - 1] + '" class="bg-white text-slate-800 font-bold px-6 py-3 rounded-xl shadow hover:-translate-y-0.5 transition">开始学习 →</a></div>';
+    nc.innerHTML = '<div class="next-lesson"><div><span>' + next.m.emoji + ' ' + next.m.name + ' · 第 ' + next.lesson + ' / ' + next.total + ' 课</span><b>继续你的闯关之旅</b></div><a href="' + next.m.page + next.m.anchors[next.lesson - 1] + '">开始学习</a></div>';
   }
 
   const ll = document.getElementById('levelList');
@@ -164,13 +263,13 @@ function render() {
     const doneAll = done === m.total;
     const locked = i > 0 && st[i - 1].done < st[i - 1].m.total;
     const row = document.createElement('div');
-    row.className = 'bg-white rounded-2xl border border-slate-200 p-4 sm:p-5 shadow-sm flex flex-wrap items-center gap-4';
-    row.innerHTML = '<div class="w-11 h-11 rounded-xl bg-gradient-to-br ' + m.color + ' text-white grid place-items-center text-xl">' + m.emoji + '</div>'
-      + '<div class="min-w-[120px] flex-1"><div class="font-extrabold">' + m.name + '级</div><div class="text-xs text-slate-400">共 ' + m.total + ' 课</div>'
-      + '<div class="mt-1.5 h-2.5 rounded-full bg-slate-100 overflow-hidden max-w-md"><div class="h-full rounded-full bg-gradient-to-r ' + m.color + '" style="width:' + (done / m.total * 100) + '%"></div></div></div>'
-      + '<div class="text-sm font-bold text-slate-500">' + done + '/' + m.total + '</div>'
-      + (doneAll ? '<span class="text-sm font-bold text-emerald-600 bg-emerald-50 border border-emerald-200 rounded-full px-3 py-1">✅ 已毕业</span>'
-        : '<a href="' + m.page + (done > 0 ? m.anchors[arr.indexOf(false)] : '') + '" class="text-sm font-bold text-white bg-gradient-to-r ' + m.color + ' rounded-full px-5 py-2 hover:opacity-90 transition">' + (done > 0 ? '继续' : '开始') + '</a>');
+    row.className = 'level-row' + (locked ? ' is-locked' : '');
+    row.innerHTML = '<div class="level-icon">' + m.emoji + '</div>'
+      + '<div class="level-main"><b>' + m.name + '级</b><span>共 ' + m.total + ' 课</span>'
+      + '<div class="level-track"><i style="width:' + (done / m.total * 100) + '%"></i></div></div>'
+      + '<strong>' + done + '/' + m.total + '</strong>'
+      + (doneAll ? '<em>已毕业</em>'
+        : '<a href="' + m.page + (done > 0 ? m.anchors[arr.indexOf(false)] : '') + '">' + (done > 0 ? '继续' : '开始') + '</a>');
     ll.appendChild(row);
   });
 
@@ -178,12 +277,33 @@ function render() {
   bw.innerHTML = '';
   st.forEach(({ m, done }) => {
     const d = document.createElement('div');
-    d.className = 'bg-slate-50 border border-slate-200 rounded-2xl py-3 px-2';
-    d.innerHTML = '<div class="text-3xl">' + (done === m.total ? '🥇' : '🔒') + '</div><div class="mt-1 text-sm font-bold ' + (done === m.total ? 'text-amber-600' : 'text-slate-400') + '">' + m.name + '</div>';
+    d.className = 'badge-item' + (done === m.total ? ' is-done' : '');
+    d.innerHTML = '<div>' + (done === m.total ? '🥇' : '🔒') + '</div><b>' + m.name + '</b>';
     bw.appendChild(d);
   });
 }
-render();
+function renderAuthState() {
+  const profile = getUserProfile();
+  const isSignedIn = Boolean(profile);
+  document.getElementById('visitorView').hidden = isSignedIn;
+  document.getElementById('dashboardView').hidden = !isSignedIn;
+  document.getElementById('loginForm').hidden = isSignedIn;
+  document.getElementById('profileBar').hidden = !isSignedIn;
+  if (profile) {
+    document.getElementById('profileName').textContent = profile.name;
+    renderDashboard(profile);
+  }
+}
+document.getElementById('loginForm').addEventListener('submit', event => {
+  event.preventDefault();
+  saveUserProfile(document.getElementById('studentNameInput').value);
+  renderAuthState();
+});
+document.getElementById('logoutBtn').addEventListener('click', () => {
+  clearUserProfile();
+  renderAuthState();
+});
+renderAuthState();
 </script>
 </body>
 </html>
