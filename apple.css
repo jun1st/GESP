@@ -295,6 +295,11 @@ footer a { color: var(--accent); }
   background: rgba(0,113,227,.08);
   color: var(--accent);
 }
+.site-nav a.active {
+  background: rgba(0,113,227,.1);
+  color: var(--accent);
+  font-weight: 750;
+}
 .login-card, .profile-card {
   display: inline-flex;
   align-items: center;
