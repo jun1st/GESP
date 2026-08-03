@@ -698,3 +698,38 @@ footer a { color: var(--accent); }
   .progress-track, .level-track { background: rgba(255,255,255,.14); }
   footer { color: #86868b; }
 }
+
+/* ================= 首页与全站统一 ================= */
+.site-shell { max-width: 960px; }
+.mascot {
+  font-size: 50px;
+  display: block;
+  animation: float 3s ease-in-out infinite;
+}
+.landing-hero, .dashboard-hero {
+  border-radius: 20px;
+}
+.landing-hero > div, .dashboard-hero > div, .hero-panel, .progress-card,
+.panel-card, .visitor-cta, .trust-grid article, .path-cards a, .action-grid a {
+  border-radius: 20px;
+  box-shadow: 0 1px 2px rgba(0,0,0,.04), 0 10px 30px rgba(0,0,0,.05);
+}
+.landing-hero h1, .dashboard-hero h1 {
+  font-size: clamp(28px, 5vw, 40px);
+  line-height: 1.18;
+  letter-spacing: -0.02em;
+  margin: 8px 0 14px;
+}
+.hero-panel b { font-size: clamp(44px, 7vw, 64px); }
+.section-heading h2, .trust-grid h2, .visitor-cta h2 {
+  font-size: clamp(21px, 4vw, 28px);
+}
+.eyebrow { letter-spacing: .1em; }
+
+@media (prefers-color-scheme: dark) {
+  .landing-hero > div, .dashboard-hero > div, .hero-panel, .progress-card,
+  .panel-card, .visitor-cta, .trust-grid article, .path-cards a, .action-grid a {
+    background: #1c1c1e;
+    border-color: rgba(255,255,255,.12);
+  }
+}

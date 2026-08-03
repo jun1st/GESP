@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="GESP C++ 真题资料库：历年官方真题汇总、内置真题示例、考点索引。">
+<title>GESP 真题资料库 📚</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans SC", sans-serif;
+    background: var(--bg, #f5f5f7);
+    color: #2b2d42;
+    line-height: 1.8;
+    min-height: 100vh;
+  }
+  .wrap { max-width: 920px; margin: 0 auto; padding: 14px 18px 50px; }
+  header.pagehead { text-align: center; padding: 24px 12px 8px; }
+  header.pagehead .mascot { font-size: 50px; display: block; animation: float 3s ease-in-out infinite; }
+  @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+  header.pagehead h1 {
+    font-size: clamp(25px, 5vw, 38px);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: var(--ink, #1d1d1f);
+    margin: 8px 0 4px;
+  }
+  header.pagehead .slogan { color: var(--ink2, #6e6e73); font-size: 15px; }
+  .paper-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 10px; margin-top: 12px; }
+  .paper-card {
+    display: block;
+    text-decoration: none;
+    background: var(--bg, #f5f5f7);
+    border: 1px solid var(--hairline, rgba(0,0,0,.08));
+    border-radius: 14px;
+    padding: 12px 14px;
+    color: var(--ink, #1d1d1f);
+    transition: transform .15s, border-color .15s, box-shadow .15s;
+  }
+  .paper-card:hover { transform: translateY(-2px); border-color: var(--accent, #0071e3); }
+  .paper-card b { display: block; font-size: 15px; }
+  .paper-card span { display: block; color: var(--ink2, #6e6e73); font-size: 13px; margin-top: 2px; }
+  .probs { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px; margin-top: 12px; }
+  .prob {
+    background: var(--bg, #f5f5f7);
+    border: 1px solid var(--hairline, rgba(0,0,0,.08));
+    border-radius: 14px;
+    padding: 14px 16px;
+  }
+  .prob b { font-size: 15.5px; }
+  .prob .tag {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--accent, #0071e3);
+    background: rgba(0,113,227,.08);
+    border-radius: 999px;
+    padding: 2px 9px;
+    margin: 6px 2px 6px 0;
+  }
+  .prob p { font-size: 13.5px; color: var(--ink2, #6e6e73); margin: 4px 0; }
+  .prob a {
+    display: inline-block;
+    margin-top: 8px;
+    background: var(--accent, #0071e3);
+    color: #fff;
+    border-radius: 999px;
+    padding: 7px 14px;
+    font-size: 13px;
+    font-weight: 700;
+    text-decoration: none;
+  }
+  .prob a:hover { background: #0077ed; }
+  table { width: 100%; border-collapse: separate; border-spacing: 0; border: 1px solid var(--hairline, rgba(0,0,0,.08)); border-radius: 14px; overflow: hidden; margin: 12px 0; font-size: 14px; }
+  th, td { border: 1px solid rgba(0,0,0,.06); padding: 9px 12px; text-align: left; vertical-align: top; }
+  th { background: var(--bg, #f5f5f7); }
+  td a { color: var(--accent, #0071e3); font-weight: 600; text-decoration: none; }
+  td a:hover { text-decoration: underline; }
+  .callout { border-radius: 14px; padding: 12px 15px; font-size: 14.5px; margin: 12px 0; }
+  .callout.info { background: rgba(0,113,227,.08); border: 1px solid rgba(0,113,227,.25); }
+  footer { text-align: center; color: #86868b; font-size: 14px; padding: 18px 0 6px; }
+  footer a { color: var(--accent, #0071e3); font-weight: 700; text-decoration: none; }
+</style>
+<link rel="stylesheet" href="apple.css">
+</head>
+<body>
+<div class="wrap">
+
+  <header class="site-topbar">
+    <a href="index.html" class="brand-mark" aria-label="GESP 学习中心首页">
+      <span class="brand-icon">C</span>
+      <span>GESP 学习中心</span>
+    </a>
+    <nav class="site-nav" aria-label="主导航">
+      <a href="index.html">学习中心</a>
+      <a href="复习站.html">复习站</a>
+      <a href="家长中心.html">家长中心</a>
+      <a href="GESP官方考纲.html">官方考纲</a>
+      <a href="GESP二级知识点精讲.html">知识笔记</a>
+    </nav>
+  </header>
+  <div class="crumb">🏠 <a href="index.html">学习中心</a> › <span>真题资料库</span></div>
+
+  <header class="pagehead">
+    <span class="mascot">📚</span>
+    <h1>GESP 真题资料库</h1>
+    <p class="slogan">历年真题 + 内置练习 + 考点索引，练真题就像做游戏！</p>
+  </header>
+
+  <div class="panel">
+    <h2>📌 资料库结构</h2>
+    <div class="callout info">这个资料库有三层：① <b>官方真题汇总</b>——历年 CCF 官网真题入口；② <b>内置真题示例</b>——可以直接在编程练习场运行的真题（带输入输出样例）；③ <b>考点索引</b>——按考点找真题和对应课程。</div>
+  </div>
+
+  <div class="panel" id="official">
+    <h2>🧾 官方真题汇总（2023.03 ~ 2026.06）</h2>
+    <p style="font-size:14px;color:var(--ink2,#6e6e73)">按发布时间从新到旧，点卡片跳转到 CCF 官网查看官方真题（1-2 级为 C++ 单独标准，3-8 级为 C++&amp;Python 合并）。</p>
+    <div class="paper-list">
+      <a class="paper-card" href="https://gesp.ccf.org.cn/101/1010/10284.html" target="_blank" rel="noopener"><b>2026 年 6 月</b><span>GESP 认证真题 ｜ CCF 官方</span></a>
+      <a class="paper-card" href="https://gesp.ccf.org.cn/101/1010/10269.html" target="_blank" rel="noopener"><b>2026 年 3 月</b><span>GESP 认证真题 ｜ CCF 官方</span></a>
+      <a class="paper-card" href="https://gesp.ccf.org.cn/101/1010/10242.html" target="_blank" rel="noopener"><b>2025 年 12 月</b><span>含二级：环保能量球、黄金格</span></a>
+      <a class="paper-card" href="https://gesp.ccf.org.cn/101/1010/10229.html" target="_blank" rel="noopener"><b>2025 年 9 月</b><span>含二级：优美的数字、菱形</span></a>
+      <a class="paper-card" href="https://gesp.ccf.org.cn/101/1010/10217.html" target="_blank" rel="noopener"><b>2025 年 6 月</b><span>含二级：数三角形</span></a>
+      <a class="paper-card" href="https://gesp.ccf.org.cn/101/1010/10200.html" target="_blank" rel="noopener"><b>2025 年 3 月</b><span>含二级：等差矩阵、时间跨越</span></a>
+      <a class="paper-card" href="https://gesp.ccf.org.cn/101/1010/10178.html" target="_blank" rel="noopener"><b>2024 年 12 月</b><span>GESP 认证真题 ｜ CCF 官方</span></a>
+      <a class="paper-card" href="https://gesp.ccf.org.cn/101/1010/10166.html" target="_blank" rel="noopener"><b>2024 年 9 月</b><span>GESP 认证真题 ｜ CCF 官方</span></a>
+      <a class="paper-card" href="https://gesp.ccf.org.cn/101/1010/10147.html" target="_blank" rel="noopener"><b>2024 年 6 月</b><span>GESP 认证真题 ｜ CCF 官方</span></a>
+      <a class="paper-card" href="https://gesp.ccf.org.cn/101/1010/10134.html" target="_blank" rel="noopener"><b>2024 年 3 月</b><span>GESP 认证真题 ｜ CCF 官方</span></a>
+      <a class="paper-card" href="https://gesp.ccf.org.cn/101/1010/10119.html" target="_blank" rel="noopener"><b>2023 年 12 月</b><span>GESP 认证真题 ｜ CCF 官方</span></a>
+      <a class="paper-card" href="https://gesp.ccf.org.cn/101/1010/10105.html" target="_blank" rel="noopener"><b>2023 年 9 月</b><span>含二级：数字黑洞</span></a>
+      <a class="paper-card" href="https://gesp.ccf.org.cn/101/1010/10092.html" target="_blank" rel="noopener"><b>2023 年 6 月</b><span>含二级：自幂数</span></a>
+      <a class="paper-card" href="https://gesp.ccf.org.cn/101/1010/10068.html" target="_blank" rel="noopener"><b>2023 年 3 月</b><span>GESP 认证真题 ｜ CCF 官方</span></a>
+      <a class="paper-card" href="https://gesp.ccf.org.cn/101/1010/10100.html" target="_blank" rel="noopener"><b>2023 年合集</b><span>三月、六月、九月、十二月真题解析</span></a>
+    </div>
+    <a class="btn" href="https://gesp.ccf.org.cn/101/1010/index_1.html" target="_blank" rel="noopener">去 CCF 官网查看全部真题 →</a>
+  </div>
+
+  <div class="panel" id="builtin">
+    <h2>🛠️ 内置真题示例（可直接运行）</h2>
+    <p style="font-size:14px;color:var(--ink2,#6e6e73)">这些真题已经放进二级乐园的「编程练习场」，选出来就能编译运行，边做边对照输出。</p>
+    <div class="probs">
+      <div class="prob"><b>📐 等差矩阵</b><br><span class="tag">2025.03 二级</span><span class="tag">嵌套循环</span><p>输入 n m，输出 i×j 矩阵。样例：3 4 → 每行 1 2 3 4、2 4 6 8、3 6 9 12。</p><a href="GESP2学习乐园.html#editor">去编程练习场 →</a></div>
+      <div class="prob"><b>⏰ 时间跨越</b><br><span class="tag">2025.03 二级</span><span class="tag">闰年/分支</span><p>输入 y m d h k，求 k 小时后的时间。样例：2008 2 28 23 1 → 2008 2 29 0。</p><a href="GESP2学习乐园.html#editor">去编程练习场 →</a></div>
+      <div class="prob"><b>📏 数三角形</b><br><span class="tag">2025.06 二级</span><span class="tag">枚举</span><p>计数直角边 a、b ≤ n 且面积为整数的三角形。样例：3 → 3；5 → 9。</p><a href="GESP2学习乐园.html#editor">去编程练习场 →</a></div>
+      <div class="prob"><b>✨ 优美的数字</b><br><span class="tag">2025.09 二级</span><span class="tag">数位</span><p>数位全部相同的正整数个数。样例：100 → 18。</p><a href="GESP2学习乐园.html#editor">去编程练习场 →</a></div>
+      <div class="prob"><b>💎 画菱形</b><br><span class="tag">2025.09 二级</span><span class="tag">图形/循环</span><p>用 # 画菱形边框。样例：n=5 输出 ..#.. / .#.#. / #...# / .#.#. / ..#..。</p><a href="GESP2学习乐园.html#editor">去编程练习场 →</a></div>
+      <div class="prob"><b>♻️ 环保能量球</b><br><span class="tag">2025.12 二级</span><span class="tag">整除/枚举</span><p>输出 n + n/x。样例：3 组 (5,2)(10,3)(2,5) → 7 13 2。</p><a href="GESP2学习乐园.html#editor">去编程练习场 →</a></div>
+      <div class="prob"><b>🌟 黄金格</b><br><span class="tag">2025.12 二级</span><span class="tag">数学函数</span><p>计数满足 √(r²+c²) ≤ x+r−c 的格子。样例：4 4 2 → 4。</p><a href="GESP2学习乐园.html#editor">去编程练习场 →</a></div>
+      <div class="prob"><b>🕳️ 数字黑洞</b><br><span class="tag">2023.09 二级</span><span class="tag">数位/循环</span><p>三位数重排相减直到 495 的步数。样例：123 → 5。</p><a href="GESP2学习乐园.html#editor">去编程练习场 →</a></div>
+      <div class="prob"><b>🌺 自幂数</b><br><span class="tag">2023.06 二级</span><span class="tag">数位/循环</span><p>判断是否等于各位数字的 n 次方之和。样例：153/12/370/1634 → T F T T。</p><a href="GESP2学习乐园.html#editor">去编程练习场 →</a></div>
+    </div>
+  </div>
+
+  <div class="panel" id="index">
+    <h2>🧭 考点索引：按考点找真题和课程</h2>
+    <table>
+      <tr><th>考点</th><th>相关真题</th><th>对应课程</th></tr>
+      <tr><td>数位处理（n%10、n/10）</td><td>数字黑洞、自幂数、优美的数字</td><td><a href="GESP2学习乐园.html#s8">二级 第 8 课：多层循环</a></td></tr>
+      <tr><td>嵌套循环 / 图形输出</td><td>等差矩阵、画菱形</td><td><a href="GESP2学习乐园.html#s8">二级 第 8 课：多层循环</a></td></tr>
+      <tr><td>枚举 / 穷举</td><td>环保能量球、数三角形</td><td><a href="GESP2学习乐园.html#s8">二级 第 8 课</a> ｜ <a href="GESP3课程.html#lv3l6">三级 第 6 课：枚举与模拟</a></td></tr>
+      <tr><td>数学函数 / 判断</td><td>黄金格</td><td><a href="GESP2学习乐园.html#s9">二级 第 9 课：数学函数</a></td></tr>
+      <tr><td>闰年 / 分支判断</td><td>时间跨越</td><td><a href="GESP1学习乐园.html#s7">一级 第 7 课：分支</a></td></tr>
+    </table>
+  </div>
+
+  <footer>
+    GESP 真题资料库 📚 ｜ <a href="index.html">🏠 学习中心</a> ｜ <a href="复习站.html">📒 复习站</a> ｜ <a href="GESP官方考纲.html">📋 官方考纲</a><br>
+    官方真题链接来自 CCF 官网；内置示例可在二级乐园编程练习场直接运行（需联网）。
+  </footer>
+</div>
+</body>
+</html>

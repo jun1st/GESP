@@ -577,6 +577,16 @@ function renderStations() {
   document.getElementById('mapBar').style.width = (n / LESSON_NAMES.length * 100) + '%';
   document.getElementById('mapMsg').textContent = '进度 ' + n + ' / ' + LESSON_NAMES.length + ' 课' + (n === LESSON_NAMES.length ? ' 🎓🎓 八级完成！C++ 全 8 级通关，太厉害了！' : '');
 }
+document.addEventListener('click', (e) => {
+  const a = e.target.closest('a[href^="#"]');
+  if (!a) return;
+  const id = a.getAttribute('href').slice(1);
+  const el = id ? document.getElementById(id) : null;
+  if (el && el.tagName === 'DETAILS') {
+    el.open = true;
+    setTimeout(() => el.scrollIntoView({ behavior: 'smooth', block: 'start' }), 20);
+  }
+});
 buildLessonQuizzes();
 renderStations();
 </script>

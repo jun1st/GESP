@@ -518,6 +518,16 @@ function checkCurrent() {
   const q = document.querySelector('details.lesson[open]');
   if (q) q.querySelector('summary').scrollIntoView({ block: 'start' });
 }
+document.addEventListener('click', (e) => {
+  const a = e.target.closest('a[href^="#"]');
+  if (!a) return;
+  const id = a.getAttribute('href').slice(1);
+  const el = id ? document.getElementById(id) : null;
+  if (el && el.tagName === 'DETAILS') {
+    el.open = true;
+    setTimeout(() => el.scrollIntoView({ behavior: 'smooth', block: 'start' }), 20);
+  }
+});
 buildLessonQuizzes();
 renderStations();
 </script>
