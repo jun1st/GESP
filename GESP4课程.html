@@ -208,6 +208,7 @@
     <a class="chip" href="复习站.html">📒 复习站</a>
     <a class="chip" href="家长中心.html">👨‍👩‍👧 家长中心</a>
   </nav>
+  <div class="crumb">🏠 <a href="index.html">学习中心</a> › <span>四级</span></div>
 
   <div class="panel">
     <h2>📌 四级学什么？</h2>
@@ -246,6 +247,7 @@ int main() {
 }</pre><button class="cpy" onclick="copyCode(this)">📋 复制</button></div>
       <div class="lquiz" id="qz-l1"></div>
       <div class="callout info">📌 本节小结：&amp; 取地址，* 解引用；指针存的是地址，*p 才是它"指向的变量"。</div>
+      <div class="pnav"><span class="pn-spacer"></span><a class="next" href="#lv4l2">下一课：二维数组 →</a></div>
     </div>
   </details>
 
@@ -277,6 +279,7 @@ int main() {
 }</pre><button class="cpy" onclick="copyCode(this)">📋 复制</button></div>
       <div class="lquiz" id="qz-l2"></div>
       <div class="callout info">📌 本节小结：a[行][列]；外层管行、内层管列；图形题先想清楚 i、j 的关系再打字符。</div>
+      <div class="pnav"><a href="#lv4l1">← 上一课</a><a class="next" href="#lv4l3">下一课：结构体 →</a></div>
     </div>
   </details>
 
@@ -306,6 +309,7 @@ int main() {
 }</pre><button class="cpy" onclick="copyCode(this)">📋 复制</button></div>
       <div class="lquiz" id="qz-l3"></div>
       <div class="callout info">📌 本节小结：struct = 自定义打包类型；用 . 访问成员；还能做结构体数组、结构体指针。</div>
+      <div class="pnav"><a href="#lv4l2">← 上一课</a><a class="next" href="#lv4l4">下一课：函数 →</a></div>
     </div>
   </details>
 
@@ -331,6 +335,7 @@ int main() {
 }</pre><button class="cpy" onclick="copyCode(this)">📋 复制</button></div>
       <div class="lquiz" id="qz-l4"></div>
       <div class="callout info">📌 本节小结：形参是"占位"，实参是"真值"；函数外 = 全局，函数内 = 局部；void 表示没有返回值。</div>
+      <div class="pnav"><a href="#lv4l3">← 上一课</a><a class="next" href="#lv4l5">下一课：参数传递 →</a></div>
     </div>
   </details>
 
@@ -358,6 +363,7 @@ int main() {
 }</pre><button class="cpy" onclick="copyCode(this)">📋 复制</button></div>
       <div class="lquiz" id="qz-l5"></div>
       <div class="callout info">📌 本节小结：值传递复制一份（改不动外面）；引用 &amp; 和指针 * 都能改外面；交换两个数用引用或指针。</div>
+      <div class="pnav"><a href="#lv4l4">← 上一课</a><a class="next" href="#lv4l6">下一课：递推算法 →</a></div>
     </div>
   </details>
 
@@ -385,6 +391,7 @@ int main() {
 }</pre><button class="cpy" onclick="copyCode(this)">📋 复制</button></div>
       <div class="lquiz" id="qz-l6"></div>
       <div class="callout info">📌 本节小结：递推 = 初始值 + 关系式 + 循环；斐波那契 f[i]=f[i-1]+f[i-2] 是最典型的例子。</div>
+      <div class="pnav"><a href="#lv4l5">← 上一课</a><a class="next" href="#lv4l7">下一课：排序算法 →</a></div>
     </div>
   </details>
 
@@ -414,6 +421,7 @@ int main() {
 }</pre><button class="cpy" onclick="copyCode(this)">📋 复制</button></div>
       <div class="lquiz" id="qz-l7"></div>
       <div class="callout info">📌 本节小结：冒泡每趟冒最大的、选择每趟挑最小的、插入像插扑克牌；稳定 = 相同元素顺序不变。</div>
+      <div class="pnav"><a href="#lv4l6">← 上一课</a><a class="next" href="#lv4l8">下一课：文件与异常 →</a></div>
     </div>
   </details>
 
@@ -440,8 +448,14 @@ int main() {
 }</pre><button class="cpy" onclick="copyCode(this)">📋 复制</button></div>
       <div class="lquiz" id="qz-l8"></div>
       <div class="callout info">📌 本节小结：freopen("文件名","r",stdin) 读、("w",stdout) 写；try 里放可能出错的代码，catch 接住异常。</div>
+      <div class="pnav"><a href="#lv4l7">← 上一课</a><a class="next" href="GESP5课程.html">🎓 四级完成，去五级 →</a></div>
     </div>
   </details>
+
+  <div class="levelnav">
+    <a href="GESP3课程.html">← 三级</a>
+    <a class="next" href="GESP5课程.html">下一级：五级 →</a>
+  </div>
 
   <footer>
     GESP C++ 四级课程 📗 ｜ 内容依据 CCF《C++&amp;Python 认证标准》四级<br>

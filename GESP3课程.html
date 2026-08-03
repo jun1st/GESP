@@ -210,6 +210,7 @@
     <a class="chip" href="复习站.html">📒 复习站</a>
     <a class="chip" href="家长中心.html">👨‍👩‍👧 家长中心</a>
   </nav>
+  <div class="crumb">🏠 <a href="index.html">学习中心</a> › <span>三级</span></div>
 
   <div class="panel">
     <h2>📌 三级学什么？</h2>
@@ -244,6 +245,7 @@
 // 电脑里存的都是补码！</pre><button class="cpy" onclick="copyCode(this)">📋 复制</button></div>
       <div class="lquiz" id="qz-l1"></div>
       <div class="callout info">📌 本节小结：原码 = 符号位 + 数值；反码 = 负数取反（符号位不动）；补码 = 反码 + 1。存负数用补码，减法变加法。</div>
+      <div class="pnav"><span class="pn-spacer"></span><a class="next" href="#lv3l2">下一课：进制转换 →</a></div>
     </div>
   </details>
 
@@ -269,6 +271,7 @@ int main() {
 }</pre><button class="cpy" onclick="copyCode(this)">📋 复制</button></div>
       <div class="lquiz" id="qz-l2"></div>
       <div class="callout info">📌 本节小结：十六进制 A~F 对应 10~15；4 位二进制 = 1 位十六进制；转十进制用"份量相加"，转二进制用"除 2 取余倒着写"。</div>
+      <div class="pnav"><a href="#lv3l1">← 上一课</a><a class="next" href="#lv3l3">下一课：位运算 →</a></div>
     </div>
   </details>
 
@@ -297,6 +300,7 @@ int main() {
 }</pre><button class="cpy" onclick="copyCode(this)">📋 复制</button></div>
       <div class="lquiz" id="qz-l3"></div>
       <div class="callout info">📌 本节小结：位运算直接对二进制位操作；左移 = ×2ⁿ，右移 = ÷2ⁿ；x&amp;1 判断奇偶，异或"相同为 0、不同为 1"。</div>
+      <div class="pnav"><a href="#lv3l2">← 上一课</a><a class="next" href="#lv3l4">下一课：一维数组 →</a></div>
     </div>
   </details>
 
@@ -324,6 +328,7 @@ int main() {
 }</pre><button class="cpy" onclick="copyCode(this)">📋 复制</button></div>
       <div class="lquiz" id="qz-l4"></div>
       <div class="callout info">📌 本节小结：下标从 0 开始；循环 i 从 0 到 n-1 遍历；找最大就"比一比，留下大的"。</div>
+      <div class="pnav"><a href="#lv3l3">← 上一课</a><a class="next" href="#lv3l5">下一课：字符串函数 →</a></div>
     </div>
   </details>
 
@@ -353,6 +358,7 @@ int main() {
 }</pre><button class="cpy" onclick="copyCode(this)">📋 复制</button></div>
       <div class="lquiz" id="qz-l5"></div>
       <div class="callout info">📌 本节小结：string 常用四件套——size 长度、[] 取字符、find 找位置、substr 截取；大小写用 tolower/toupper。</div>
+      <div class="pnav"><a href="#lv3l4">← 上一课</a><a class="next" href="#lv3l6">下一课：枚举与模拟 →</a></div>
     </div>
   </details>
 
@@ -379,8 +385,14 @@ int main() {
 }</pre><button class="cpy" onclick="copyCode(this)">📋 复制</button></div>
       <div class="lquiz" id="qz-l6"></div>
       <div class="callout info">📌 本节小结：枚举 = 全部试一遍 + if 筛选；模拟 = 照着规则一步步演。看到"数据不大 + 情况不多"就想到枚举！</div>
+      <div class="pnav"><a href="#lv3l5">← 上一课</a><a class="next" href="GESP4课程.html">🎓 三级完成，去四级 →</a></div>
     </div>
   </details>
+
+  <div class="levelnav">
+    <a href="GESP2学习乐园.html">← 二级</a>
+    <a class="next" href="GESP4课程.html">下一级：四级 →</a>
+  </div>
 
   <footer>
     GESP C++ 三级课程 📘 ｜ 内容依据 CCF《C++&amp;Python 认证标准》三级<br>

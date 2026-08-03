@@ -219,6 +219,7 @@
     <a class="chip" href="GESP官方考纲.html">📋 考纲</a>
     <a class="chip" href="GESP7课程.html">📓 七级</a>
   </nav>
+  <div class="crumb">🏠 <a href="index.html">学习中心</a> › <span>八级</span></div>
 
   <div class="panel">
     <h2>📌 八级学什么？</h2>
@@ -253,7 +254,7 @@ int main() {
       <div class="lquiz" id="qz-l1"></div>
       <div class="callout info">📌 本节小结：分类 → 加法；分步 → 乘法。先想清楚是"选一类"还是"走完所有步骤"。</div>
       <label class="chkbtn"><input type="checkbox" onchange="toggleLesson(0, this)"> 学完了，打卡！</label>
-      <div class="pnav"><a href="#lv8l2">下一课：排列与组合 →</a></div>
+      <div class="pnav"><a class="next" href="#lv8l2">下一课：排列与组合 →</a></div>
     </div>
   </details>
 
@@ -285,7 +286,7 @@ int main() {
       <div class="lquiz" id="qz-l2"></div>
       <div class="callout info">📌 本节小结：排列分顺序、组合不分；C(n,k) 边乘边除防溢出。</div>
       <label class="chkbtn"><input type="checkbox" onchange="toggleLesson(1, this)"> 学完了，打卡！</label>
-      <div class="pnav"><a href="#lv8l1">← 上一课</a><a href="#lv8l3">下一课：杨辉三角 →</a></div>
+      <div class="pnav"><a href="#lv8l1">← 上一课</a><a class="next" href="#lv8l3">下一课：杨辉三角 →</a></div>
     </div>
   </details>
 
@@ -319,7 +320,7 @@ int main() {
       <div class="lquiz" id="qz-l3"></div>
       <div class="callout info">📌 本节小结：首尾 1、中间 = 上两个之和；第 n 行第 k 个就是 C(n,k)。</div>
       <label class="chkbtn"><input type="checkbox" onchange="toggleLesson(2, this)"> 学完了，打卡！</label>
-      <div class="pnav"><a href="#lv8l2">← 上一课</a><a href="#lv8l4">下一课：倍增法 →</a></div>
+      <div class="pnav"><a href="#lv8l2">← 上一课</a><a class="next" href="#lv8l4">下一课：倍增法 →</a></div>
     </div>
   </details>
 
@@ -353,7 +354,7 @@ int main() {
       <div class="lquiz" id="qz-l4"></div>
       <div class="callout info">📌 本节小结：倍增 = 每次翻倍跳；快速幂 O(log b) 求 aᵇ，记得取模防溢出。</div>
       <label class="chkbtn"><input type="checkbox" onchange="toggleLesson(3, this)"> 学完了，打卡！</label>
-      <div class="pnav"><a href="#lv8l3">← 上一课</a><a href="#lv8l5">下一课：代数与平面几何 →</a></div>
+      <div class="pnav"><a href="#lv8l3">← 上一课</a><a class="next" href="#lv8l5">下一课：代数与平面几何 →</a></div>
     </div>
   </details>
 
@@ -371,7 +372,7 @@ int main() {
       <div class="lquiz" id="qz-l5"></div>
       <div class="callout info">📌 本节小结：方程用消元解；面积公式要背熟；能用数学公式就不硬循环。</div>
       <label class="chkbtn"><input type="checkbox" onchange="toggleLesson(4, this)"> 学完了，打卡！</label>
-      <div class="pnav"><a href="#lv8l4">← 上一课</a><a href="#lv8l6">下一课：图论综合 →</a></div>
+      <div class="pnav"><a href="#lv8l4">← 上一课</a><a class="next" href="#lv8l6">下一课：图论综合 →</a></div>
     </div>
   </details>
 
@@ -395,7 +396,7 @@ for (int k = 1; k &lt;= n; k++)
       <div class="lquiz" id="qz-l6"></div>
       <div class="callout info">📌 本节小结：MST 用最少的边连通所有点；Dijkstra 单源、Floyd 多源；Kruskal 加最小边、Prim 往外长。</div>
       <label class="chkbtn"><input type="checkbox" onchange="toggleLesson(5, this)"> 学完了，打卡！</label>
-      <div class="pnav"><a href="#lv8l5">← 上一课</a><a href="#lv8l7">下一课：复杂度分析 →</a></div>
+      <div class="pnav"><a href="#lv8l5">← 上一课</a><a class="next" href="#lv8l7">下一课：复杂度分析 →</a></div>
     </div>
   </details>
 
@@ -412,7 +413,7 @@ for (int k = 1; k &lt;= n; k++)
       <div class="lquiz" id="qz-l7"></div>
       <div class="callout info">📌 本节小结：数循环层数估时间；n 到 10⁵ 就别用 O(n²) 了，想想二分、前缀和、哈希。</div>
       <label class="chkbtn"><input type="checkbox" onchange="toggleLesson(6, this)"> 学完了，打卡！</label>
-      <div class="pnav"><a href="#lv8l6">← 上一课</a><a href="#lv8l8">下一课：算法优化 →</a></div>
+      <div class="pnav"><a href="#lv8l6">← 上一课</a><a class="next" href="#lv8l8">下一课：算法优化 →</a></div>
     </div>
   </details>
 
@@ -446,9 +447,14 @@ int main() {
       <div class="lquiz" id="qz-l8"></div>
       <div class="callout info">📌 本节小结：数学公式 > 硬循环；前缀和让区间和变 O(1)；记忆化和剪枝都是"少干活"。</div>
       <label class="chkbtn"><input type="checkbox" onchange="toggleLesson(7, this)"> 学完了，打卡！</label>
-      <div class="pnav"><a href="#lv8l7">← 上一课</a><a href="index.html">🎓 八级毕业！回学习中心 →</a></div>
+      <div class="pnav"><a href="#lv8l7">← 上一课</a><a class="next" href="index.html">🎓 八级毕业！回学习中心 →</a></div>
     </div>
   </details>
+
+  <div class="levelnav">
+    <a href="GESP7课程.html">← 七级</a>
+    <span class="spacer">🎓 八级毕业！你是 C++ 高手！</span>
+  </div>
 
   <footer>
     GESP C++ 八级课程 📔 ｜ 内容依据 CCF《C++&amp;Python 认证标准》八级<br>

@@ -153,6 +153,73 @@ details.lesson, details.lvl {
 footer { color: #86868b; }
 footer a { color: var(--accent); }
 
+/* ---- 面包屑 ---- */
+.crumb {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+  font-size: 13px;
+  color: var(--ink2);
+  margin: 4px 0 0;
+}
+.crumb a { color: var(--accent); text-decoration: none; font-weight: 600; }
+.crumb a:hover { text-decoration: underline; }
+.crumb span:last-child { font-weight: 700; color: var(--ink); }
+
+/* ---- 上一课 / 下一课 ---- */
+.pnav { display: flex; justify-content: space-between; gap: 10px; margin-top: 16px; }
+.pnav a {
+  text-decoration: none;
+  background: var(--card);
+  border: 1px solid var(--hairline);
+  color: var(--ink);
+  font-weight: 700;
+  font-size: 13.5px;
+  border-radius: 999px;
+  padding: 8px 16px;
+}
+.pnav a.next { background: var(--accent); border-color: transparent; color: #fff; }
+.pnav a:hover { border-color: var(--accent); }
+.pnav a.next:hover { background: #0077ed; }
+.pnav .pn-spacer { flex: 1; }
+
+/* ---- 上一级 / 下一级 ---- */
+.levelnav { display: flex; gap: 12px; margin: 26px 0 6px; }
+.levelnav a, .levelnav span.spacer {
+  flex: 1;
+  text-align: center;
+  background: var(--card);
+  border: 1px solid var(--hairline);
+  border-radius: 14px;
+  padding: 13px 10px;
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--ink);
+  text-decoration: none;
+}
+.levelnav a.next { background: var(--accent); color: #fff; border-color: transparent; }
+.levelnav a:hover { transform: translateY(-1px); }
+
+/* ---- 主页吸顶导航 ---- */
+#topnav {
+  position: sticky;
+  top: 0;
+  z-index: 70;
+  background: rgba(245, 245, 247, .8);
+  -webkit-backdrop-filter: blur(18px) saturate(180%);
+  backdrop-filter: blur(18px) saturate(180%);
+}
+.site-topbar {
+  position: sticky;
+  top: 0;
+  z-index: 70;
+  background: rgba(245, 245, 247, .82);
+  -webkit-backdrop-filter: blur(18px) saturate(180%);
+  backdrop-filter: blur(18px) saturate(180%);
+  border-bottom: 1px solid var(--hairline);
+}
+
 /* ---- 主页（Tailwind）微调 ---- */
 .bg-slate-50 { background: var(--bg); }
 .text-slate-800 { color: var(--ink); }
@@ -579,6 +646,10 @@ footer a { color: var(--accent); }
   h1, h2, h3 { color: var(--ink); }
   .slogan, .sub { color: var(--ink2); }
   nav.chips { background: rgba(0, 0, 0, .72); box-shadow: 0 1px 0 rgba(255,255,255,.06); }
+  #topnav { background: rgba(0, 0, 0, .72); }
+  .site-topbar { background: rgba(0, 0, 0, .72); border-bottom-color: rgba(255,255,255,.1); }
+  .pnav a, .levelnav a { background: #1c1c1e; border-color: rgba(255,255,255,.16); color: #f5f5f7; }
+  .levelnav a.next { background: var(--accent); color: #fff; border-color: transparent; }
   .chip, .btn { background: #1c1c1e; border-color: rgba(255,255,255,.18); color: #f5f5f7; }
   .chip:hover { border-color: var(--chip, var(--accent)); }
   .box, .lqi, .station, .checks label, th { background: #2c2c2e; }

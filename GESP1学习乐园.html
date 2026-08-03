@@ -472,24 +472,15 @@
   </header>
 
   <nav class="chips" aria-label="知识点导航">
-    <a class="chip" style="--chip:#4f8ef7" href="#s1">🖥️ 认识电脑</a>
-    <a class="chip" style="--chip:#9b6ef3" href="#s2">🏗️ 编程第一课</a>
-    <a class="chip" style="--chip:#ef476f" href="#s3">📦 变量</a>
-    <a class="chip" style="--chip:#2ec4b6" href="#s4">📥 输入输出</a>
-    <a class="chip" style="--chip:#ff9f43" href="#s5">➗ 算术</a>
-    <a class="chip" style="--chip:#06d6a0" href="#s6">🕵️ 关系逻辑</a>
-    <a class="chip" style="--chip:#5e60ce" href="#s7">🌿 分支</a>
-    <a class="chip" style="--chip:#5e60ce" href="#s7b">🔁 循环</a>
-    <a class="chip" style="--chip:#e76f51" href="#s8">🐛 注释找虫</a>
-    <a class="chip" style="--chip:#118ab2" href="#editor">🛠️ 编程场</a>
-    <a class="chip" style="--chip:#06d6a0" href="#s9">🏆 大闯关</a>
+    <a class="chip" style="--chip:#0071e3" href="index.html">🏠 学习中心</a>
+    <a class="chip" style="--chip:#0071e3" href="复习站.html">📒 复习站</a>
+    <a class="chip" style="--chip:#0071e3" href="家长中心.html">👨‍👩‍👧 家长中心</a>
+    <a class="chip" style="--chip:#0071e3" href="GESP官方考纲.html">📋 官方考纲</a>
+    <a class="chip" style="--chip:#0071e3" href="GESP二级知识点精讲.html">📖 知识笔记</a>
     <a class="chip" style="--chip:#0ea5e9" href="基础常识乐园.html">🧠 基础常识</a>
-    <a class="chip" style="--chip:#f43f5e" href="GESP官方考纲.html">📋 考纲</a>
-    <a class="chip" style="--chip:#a855f7" href="复习站.html">📒 复习站</a>
-    <a class="chip" style="--chip:#0284c7" href="家长中心.html">👨‍👩‍👧 家长中心</a>
-    <a class="chip" style="--chip:#118ab2" href="index.html">🏠 主页</a>
-    <a class="chip" style="--chip:#5e60ce" href="GESP2学习乐园.html">🚀 去二级乐园</a>
+    <a class="chip" style="--chip:#5e60ce" href="GESP2学习乐园.html">🚀 二级</a>
   </nav>
+  <div class="crumb">🏠 <a href="index.html">学习中心</a> › <span>一级</span></div>
 
   <section class="topic" id="lvmap" style="--tc:#2ec4b6">
     <div class="big-emoji">🗺️</div>
@@ -553,6 +544,7 @@
     <div class="tip">📌 本节小结：CPU 是大脑、内存是工作台（断电就忘）、硬盘是大仓库（断电不忘）、键盘鼠标输入、显示器输出，操作系统是"大管家"。</div>
     <div class="lquiz" id="qz-l1"></div>
     <label class="chkbtn"><input type="checkbox" onchange="toggleLesson(0, this)"> 学完了，打卡！</label>
+    <div class="pnav"><span class="pn-spacer"></span><a class="next" href="#s2">下一课：第一个程序 →</a></div>
   </section>
 
   <!-- ========== 2 编程第一课 ========== -->
@@ -586,6 +578,7 @@
     <div class="tip">📌 本节小结：程序 = 头文件 + main 函数 + 一句句话。写代码 → 保存 → 编译 → 运行，Dev C++ 帮你完成。第一句话就用 cout！</div>
     <div class="lquiz" id="qz-l2"></div>
     <label class="chkbtn"><input type="checkbox" onchange="toggleLesson(1, this)"> 学完了，打卡！</label>
+    <div class="pnav"><a href="#s1">← 上一课</a><a class="next" href="#s3">下一课：变量和类型 →</a></div>
   </section>
 
   <!-- ========== 3 变量 ========== -->
@@ -647,6 +640,7 @@
     <div class="tip">📌 本节小结：先定义（做盒子）再使用；类型决定盒子大小；变量能改、常量不能改；名字要守规矩（字母数字下划线、不能数字开头、不能是关键字）。</div>
     <div class="lquiz" id="qz-l3"></div>
     <label class="chkbtn"><input type="checkbox" onchange="toggleLesson(2, this)"> 学完了，打卡！</label>
+    <div class="pnav"><a href="#s2">← 上一课</a><a class="next" href="#s4">下一课：输入输出 →</a></div>
   </section>
 
   <!-- ========== 4 输入输出 ========== -->
@@ -681,6 +675,7 @@ printf("我 %d 岁", age);    <span class="cm">// 在句子里塞数字</span></
     <div class="tip">📌 本节小结：cin>> 和 cout<< 是新式、scanf/printf 是老式；输出 endl 换行；scanf 读变量要加 &。</div>
     <div class="lquiz" id="qz-l4"></div>
     <label class="chkbtn"><input type="checkbox" onchange="toggleLesson(3, this)"> 学完了，打卡！</label>
+    <div class="pnav"><a href="#s3">← 上一课</a><a class="next" href="#s5">下一课：算术 →</a></div>
   </section>
 
   <!-- ========== 5 算术 ========== -->
@@ -715,6 +710,7 @@ printf("我 %d 岁", age);    <span class="cm">// 在句子里塞数字</span></
     <div class="tip">📌 本节小结：5 种基本运算 + 取余 % + 自增自减 i++；整数除整数还是整数；表达式=算式，先乘除后加减。</div>
     <div class="lquiz" id="qz-l5"></div>
     <label class="chkbtn"><input type="checkbox" onchange="toggleLesson(4, this)"> 学完了，打卡！</label>
+    <div class="pnav"><a href="#s4">← 上一课</a><a class="next" href="#s6">下一课：关系逻辑 →</a></div>
   </section>
 
   <!-- ========== 6 关系逻辑 ========== -->
@@ -744,6 +740,7 @@ printf("我 %d 岁", age);    <span class="cm">// 在句子里塞数字</span></
     <div class="tip">📌 本节小结：> < >= <= == != 是关系（比大小）；&& || ! 是逻辑（合起来判断）；非 0 即真，0 是假。</div>
     <div class="lquiz" id="qz-l6"></div>
     <label class="chkbtn"><input type="checkbox" onchange="toggleLesson(5, this)"> 学完了，打卡！</label>
+    <div class="pnav"><a href="#s5">← 上一课</a><a class="next" href="#s7">下一课：分支 →</a></div>
   </section>
 
   <!-- ========== 7 三大结构 ========== -->
@@ -797,6 +794,7 @@ else x = 0;</code></div>
     <div class="tip">📌 本节小结：顺序结构"从上到下"；if-else 二选一；switch 按编号多选（漏 break 会穿透）；三目是 if-else 的速写。写程序就是让电脑"做选择"！</div>
     <div class="lquiz" id="qz-l7"></div>
     <label class="chkbtn"><input type="checkbox" onchange="toggleLesson(6, this)"> 学完了，打卡！</label>
+    <div class="pnav"><a href="#s6">← 上一课</a><a class="next" href="#s7b">下一课：循环 →</a></div>
   </section>
 
   <!-- ========== 8 循环 ========== -->
@@ -864,6 +862,7 @@ do {
     <div class="tip">📌 本节小结：for 知道次数、while 先问再做、do-while 至少做一次；break 直接停，continue 跳过本次。三种循环考试都会考！</div>
     <div class="lquiz" id="qz-l8"></div>
     <label class="chkbtn"><input type="checkbox" onchange="toggleLesson(7, this)"> 学完了，打卡！</label>
+    <div class="pnav"><a href="#s7">← 上一课</a><a class="next" href="#s8">下一课：注释调试 →</a></div>
   </section>
 
   <!-- ========== 8 注释与找虫 ========== -->
@@ -890,6 +889,7 @@ cout &lt;&lt; age &lt;&lt; endl;</code></div>
     <div class="tip">📌 本节小结：注释写给"人"看（电脑跳过）；报错别慌——先看分号、再看括号、再查变量；边写边注释是好习惯！</div>
     <div class="lquiz" id="qz-l9"></div>
     <label class="chkbtn"><input type="checkbox" onchange="toggleLesson(8, this)"> 学完了，打卡！</label>
+    <div class="pnav"><a href="#s7b">← 上一课</a><a class="next" href="#s9">🏆 去期末大闯关 →</a></div>
   </section>
 
   <!-- ========== 9 编程练习场 ========== -->
@@ -948,6 +948,11 @@ cout &lt;&lt; age &lt;&lt; endl;</code></div>
     <summary>📖 给爸爸妈妈的话</summary>
     <p>这个网页严格对照 CCF《C++ 编程一级标准》制作，覆盖官方考纲一级的全部 7 个知识块：计算机基础知识、集成开发环境、结构化程序设计、程序的基本语句（cin/scanf/cout/printf）、程序的基本概念（标识符/关键字/常量/变量/表达式）、基本运算（含三目运算）、基本数据类型，外加循环三兄弟（for/while/do-while）和 12 题闯关。一级是"打地基"，建议按顺序玩：先认识电脑和框架（1、2 关），再玩变量和输入输出（3、4 关），接着是运算和三大结构（5~7 关），最后找虫子和闯关（8、9 关）。配合<a href="基础常识乐园.html">《基础常识乐园》</a>、<a href="GESP官方考纲.html">《官方考纲》</a>、<a href="GESP二级知识点精讲.html">《GESP二级知识点精讲》</a>和二级乐园网页，可以一路学到二级。「编程练习场」需要联网使用免费的在线编译器（Compiler Explorer），家长可先陪孩子试运行一次确认网络可用。</p>
   </details>
+
+  <div class="levelnav">
+    <a href="基础常识乐园.html">← 基础常识</a>
+    <a class="next" href="GESP2学习乐园.html">下一级：二级 →</a>
+  </div>
 
   <footer>每天学一点，考试没问题！🎒 <a href="index.html">🏠 学习中心</a> ｜ <a href="复习站.html">📒 复习站</a> ｜ <a href="家长中心.html">👨‍👩‍👧 家长中心</a> ｜ <a href="基础常识乐园.html">🧠 基础常识</a> ｜ <a href="GESP官方考纲.html">📋 考纲</a> ｜ <a href="GESP2学习乐园.html">学完一级，去二级乐园玩 →</a></footer>
 </div>

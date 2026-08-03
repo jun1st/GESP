@@ -208,6 +208,7 @@
     <a class="chip" href="复习站.html">📒 复习站</a>
     <a class="chip" href="家长中心.html">👨‍👩‍👧 家长中心</a>
   </nav>
+  <div class="crumb">🏠 <a href="index.html">学习中心</a> › <span>六级</span></div>
 
   <div class="panel">
     <h2>📌 六级学什么？</h2>
@@ -245,6 +246,7 @@ void pre(Node* p) {          // 先序遍历：根 左 右
 // 中序：左 根 右；后序：左 右 根，把顺序换一下就行</pre><button class="cpy" onclick="copyCode(this)">📋 复制</button></div>
       <div class="lquiz" id="qz-l1"></div>
       <div class="callout info">📌 本节小结：树=家谱（根/父/子/叶）；先序根左右、中序左根右、后序左右根。</div>
+      <div class="pnav"><span class="pn-spacer"></span><a class="next" href="#lv6l2">下一课：特殊二叉树 →</a></div>
     </div>
   </details>
 
@@ -260,6 +262,7 @@ void pre(Node* p) {          // 先序遍历：根 左 右
       </ul>
       <div class="lquiz" id="qz-l2"></div>
       <div class="callout info">📌 本节小结：完全二叉树没有空档；二叉排序树左小右大；哈夫曼树路径最短。</div>
+      <div class="pnav"><a href="#lv6l1">← 上一课</a><a class="next" href="#lv6l3">下一课：树编码 →</a></div>
     </div>
   </details>
 
@@ -275,6 +278,7 @@ void pre(Node* p) {          // 先序遍历：根 左 右
       </ul>
       <div class="lquiz" id="qz-l3"></div>
       <div class="callout info">📌 本节小结：哈夫曼=高频短码（压缩）；格雷=相邻只变一位（防错）。</div>
+      <div class="pnav"><a href="#lv6l2">← 上一课</a><a class="next" href="#lv6l4">下一课：DFS与BFS →</a></div>
     </div>
   </details>
 
@@ -304,6 +308,7 @@ void bfs(Node* root) {            // 层序遍历 = BFS
 }</pre><button class="cpy" onclick="copyCode(this)">📋 复制</button></div>
       <div class="lquiz" id="qz-l4"></div>
       <div class="callout info">📌 本节小结：DFS 走到黑再回头（递归），BFS 一层层扩散（队列、最短路径）。</div>
+      <div class="pnav"><a href="#lv6l3">← 上一课</a><a class="next" href="#lv6l5">下一课：简单动态规划 →</a></div>
     </div>
   </details>
 
@@ -331,6 +336,7 @@ int main() {
 }</pre><button class="cpy" onclick="copyCode(this)">📋 复制</button></div>
       <div class="lquiz" id="qz-l5"></div>
       <div class="callout info">📌 本节小结：DP = 子问题答案存起来复用；爬楼梯 f[i]=f[i-1]+f[i-2]；背包每件物品"装或不装"。</div>
+      <div class="pnav"><a href="#lv6l4">← 上一课</a><a class="next" href="#lv6l6">下一课：面向对象与栈队列 →</a></div>
     </div>
   </details>
 
@@ -361,8 +367,14 @@ int main() {
 }</pre><button class="cpy" onclick="copyCode(this)">📋 复制</button></div>
       <div class="lquiz" id="qz-l6"></div>
       <div class="callout info">📌 本节小结：类=图纸、对象=成品；栈后进先出（叠盘子）、队列先进先出（排队）。</div>
+      <div class="pnav"><a href="#lv6l5">← 上一课</a><a class="next" href="GESP7课程.html">🎓 六级完成，去七级 →</a></div>
     </div>
   </details>
+
+  <div class="levelnav">
+    <a href="GESP5课程.html">← 五级</a>
+    <a class="next" href="GESP7课程.html">下一级：七级 →</a>
+  </div>
 
   <footer>
     GESP C++ 六级课程 📕 ｜ 内容依据 CCF《C++&amp;Python 认证标准》六级<br>
