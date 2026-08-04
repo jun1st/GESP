@@ -5,7 +5,7 @@
   "description": "二维数组、结构体、函数、递推、排序、文件与异常。",
   "emoji": "🏗️",
   "progressKey": "gesp_lv4_prog",
-  "sourcePage": "GESP4课程.html",
+  "sourcePage": "level4.html",
   "lessons": [
     {
       "id": "matrix",

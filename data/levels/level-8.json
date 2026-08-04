@@ -5,7 +5,7 @@
   "description": "高级算法、综合建模和竞赛级问题分析。",
   "emoji": "🏁",
   "progressKey": "gesp_lv8_prog",
-  "sourcePage": "GESP8课程.html",
+  "sourcePage": "level8.html",
   "lessons": [
     {
       "id": "modeling",

@@ -2,9 +2,9 @@ import { readFileSync } from 'node:fs';
 import assert from 'node:assert/strict';
 import test from 'node:test';
 
-const html = readFileSync(new URL('../GESP官方考纲.html', import.meta.url), 'utf8');
-const paperLibraryHtml = readFileSync(new URL('../真题资料库.html', import.meta.url), 'utf8');
-const level2Html = readFileSync(new URL('../GESP2学习乐园.html', import.meta.url), 'utf8');
+const html = readFileSync(new URL('../syllabus.html', import.meta.url), 'utf8');
+const paperLibraryHtml = readFileSync(new URL('../papers.html', import.meta.url), 'utf8');
+const level2Html = readFileSync(new URL('../level2.html', import.meta.url), 'utf8');
 
 test('official resources page exposes a past-paper section', () => {
   assert.match(html, /id="pastPapers"/);

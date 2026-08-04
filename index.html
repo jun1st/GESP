@@ -18,12 +18,12 @@
     </a>
             <nav class="site-nav" aria-label="主导航">
       <a href="index.html" class="active" aria-current="page">学习中心</a>
-      <a href="课程.html">课程</a>
-      <a href="复习站.html">复习站</a>
-      <a href="家长中心.html">家长中心</a>
-      <a href="GESP官方考纲.html">官方考纲</a>
-      <a href="GESP二级知识点精讲.html">知识笔记</a>
-      <a href="真题资料库.html">真题资料库</a>
+      <a href="courses.html">课程</a>
+      <a href="review.html">复习站</a>
+      <a href="parent.html">家长中心</a>
+      <a href="syllabus.html">官方考纲</a>
+      <a href="notes.html">知识笔记</a>
+      <a href="papers.html">真题资料库</a>
     </nav>
     <form id="loginForm" class="login-card" aria-label="本地学习档案登录">
       <input id="studentNameInput" type="text" maxlength="16" autocomplete="nickname" placeholder="孩子昵称">
@@ -45,8 +45,8 @@
           <p class="hero-copy">把官方考纲拆成孩子能每天完成的小关卡：先理解概念，再动手编程，最后用错题复习把知识补牢。</p>
           <div class="hero-actions">
             <label class="primary-cta" for="studentNameInput">创建本地学习档案</label>
-            <a class="secondary-cta" href="GESP官方考纲.html">查看官方考纲</a>
-            <a class="secondary-cta" href="真题资料库.html">📚 真题资料库</a>
+            <a class="secondary-cta" href="syllabus.html">查看官方考纲</a>
+            <a class="secondary-cta" href="papers.html">📚 真题资料库</a>
           </div>
           <p class="local-note">当前登录仅保存在本浏览器，用于切换学习驾驶舱，不会上传账号信息。</p>
         </div>
@@ -89,19 +89,19 @@
           <p>先建立计算机与 C++ 基础，再完成一级二级核心考点，最后进入三至八级算法能力提升。</p>
         </div>
         <div class="path-cards">
-          <a href="基础常识乐园.html">
+          <a href="fundamentals.html">
             <b>基础启蒙</b>
             <span>基础常识 · 认识二进制、字节和存储单位</span>
           </a>
-          <a href="GESP1学习乐园.html">
+          <a href="level1.html">
             <b>一级入门</b>
             <span>变量、输入输出、表达式、分支循环和基础调试</span>
           </a>
-          <a href="GESP2学习乐园.html">
+          <a href="level2.html">
             <b>二级巩固</b>
             <span>网络、编码、流程图、多层结构和数学函数</span>
           </a>
-          <a href="GESP3课程.html">
+          <a href="level3.html">
             <b>三至八级进阶</b>
             <span>数组、字符串、排序、递归、搜索、动态规划和图论</span>
           </a>
@@ -145,19 +145,19 @@
       </section>
 
       <section id="priorityActions" class="action-grid" aria-label="优先操作">
-        <a href="复习站.html">
+        <a href="review.html">
           <span>复习错题</span>
           <b>把答错的题重新做对</b>
         </a>
-        <a href="真题资料库.html">
+        <a href="papers.html">
           <span>真题资料库</span>
           <b>历年真题按级别整理，直接练习</b>
         </a>
-        <a href="GESP官方考纲.html">
+        <a href="syllabus.html">
           <span>查看考纲</span>
           <b>确认当前级别要掌握什么</b>
         </a>
-        <a href="家长中心.html">
+        <a href="parent.html">
           <span>家长中心</span>
           <b>查看进度和备考节奏</b>
         </a>
@@ -184,9 +184,9 @@
   <footer class="site-footer">
     <span>GESP C++ 学习中心</span>
     <span>
-      <a href="复习站.html">复习站</a>
-      <a href="家长中心.html">家长中心</a>
-      <a href="GESP官方考纲.html">官方考纲</a>
+      <a href="review.html">复习站</a>
+      <a href="parent.html">家长中心</a>
+      <a href="syllabus.html">官方考纲</a>
     </span>
   </footer>
 </div>
@@ -194,15 +194,15 @@
 <script>
 const USER_KEY = 'gesp_user_profile';
 const MODULES = [
-  { name: '基础常识', emoji: '🧠', key: 'gesp_lv0_prog', total: 3, page: '基础常识乐园.html', anchors: ['#s1', '#s2', '#s5'], color: 'from-sky-500 to-cyan-500' },
-  { name: '一级', emoji: '🎒', key: 'gesp_lv1_prog', total: 9, page: 'GESP1学习乐园.html', anchors: ['#s1', '#s2', '#s3', '#s4', '#s5', '#s6', '#s7', '#s7b', '#s8'], color: 'from-teal-500 to-emerald-500' },
-  { name: '二级', emoji: '🚀', key: 'gesp_lv2_prog', total: 10, page: 'GESP2学习乐园.html', anchors: ['#s1', '#s2', '#s3', '#s4', '#s5', '#s6', '#s7', '#s8', '#s9', '#pastPaperPractice'], color: 'from-violet-600 to-fuchsia-500' },
-  { name: '三级', emoji: '📘', key: 'gesp_lv3_prog', total: 6, page: 'GESP3课程.html', anchors: ['#lv3l1', '#lv3l2', '#lv3l3', '#lv3l4', '#lv3l5', '#lv3l6'], color: 'from-sky-600 to-cyan-500' },
-  { name: '四级', emoji: '📗', key: 'gesp_lv4_prog', total: 8, page: 'GESP4课程.html', anchors: ['#lv4l1', '#lv4l2', '#lv4l3', '#lv4l4', '#lv4l5', '#lv4l6', '#lv4l7', '#lv4l8'], color: 'from-amber-500 to-yellow-500' },
-  { name: '五级', emoji: '📙', key: 'gesp_lv5_prog', total: 8, page: 'GESP5课程.html', anchors: ['#lv5l1', '#lv5l2', '#lv5l3', '#lv5l4', '#lv5l5', '#lv5l6', '#lv5l7', '#lv5l8'], color: 'from-rose-500 to-pink-500' },
-  { name: '六级', emoji: '📕', key: 'gesp_lv6_prog', total: 6, page: 'GESP6课程.html', anchors: ['#lv6l1', '#lv6l2', '#lv6l3', '#lv6l4', '#lv6l5', '#lv6l6'], color: 'from-emerald-600 to-teal-500' },
-  { name: '七级', emoji: '📓', key: 'gesp_lv7_prog', total: 5, page: 'GESP7课程.html', anchors: ['#lv7l1', '#lv7l2', '#lv7l3', '#lv7l4', '#lv7l5'], color: 'from-violet-500 to-purple-500' },
-  { name: '八级', emoji: '📔', key: 'gesp_lv8_prog', total: 8, page: 'GESP8课程.html', anchors: ['#lv8l1', '#lv8l2', '#lv8l3', '#lv8l4', '#lv8l5', '#lv8l6', '#lv8l7', '#lv8l8'], color: 'from-indigo-500 to-blue-500' }
+  { name: '基础常识', emoji: '🧠', key: 'gesp_lv0_prog', total: 3, page: 'fundamentals.html', anchors: ['#s1', '#s2', '#s5'], color: 'from-sky-500 to-cyan-500' },
+  { name: '一级', emoji: '🎒', key: 'gesp_lv1_prog', total: 9, page: 'level1.html', anchors: ['#s1', '#s2', '#s3', '#s4', '#s5', '#s6', '#s7', '#s7b', '#s8'], color: 'from-teal-500 to-emerald-500' },
+  { name: '二级', emoji: '🚀', key: 'gesp_lv2_prog', total: 10, page: 'level2.html', anchors: ['#s1', '#s2', '#s3', '#s4', '#s5', '#s6', '#s7', '#s8', '#s9', '#pastPaperPractice'], color: 'from-violet-600 to-fuchsia-500' },
+  { name: '三级', emoji: '📘', key: 'gesp_lv3_prog', total: 6, page: 'level3.html', anchors: ['#lv3l1', '#lv3l2', '#lv3l3', '#lv3l4', '#lv3l5', '#lv3l6'], color: 'from-sky-600 to-cyan-500' },
+  { name: '四级', emoji: '📗', key: 'gesp_lv4_prog', total: 8, page: 'level4.html', anchors: ['#lv4l1', '#lv4l2', '#lv4l3', '#lv4l4', '#lv4l5', '#lv4l6', '#lv4l7', '#lv4l8'], color: 'from-amber-500 to-yellow-500' },
+  { name: '五级', emoji: '📙', key: 'gesp_lv5_prog', total: 8, page: 'level5.html', anchors: ['#lv5l1', '#lv5l2', '#lv5l3', '#lv5l4', '#lv5l5', '#lv5l6', '#lv5l7', '#lv5l8'], color: 'from-rose-500 to-pink-500' },
+  { name: '六级', emoji: '📕', key: 'gesp_lv6_prog', total: 6, page: 'level6.html', anchors: ['#lv6l1', '#lv6l2', '#lv6l3', '#lv6l4', '#lv6l5', '#lv6l6'], color: 'from-emerald-600 to-teal-500' },
+  { name: '七级', emoji: '📓', key: 'gesp_lv7_prog', total: 5, page: 'level7.html', anchors: ['#lv7l1', '#lv7l2', '#lv7l3', '#lv7l4', '#lv7l5'], color: 'from-violet-500 to-purple-500' },
+  { name: '八级', emoji: '📔', key: 'gesp_lv8_prog', total: 8, page: 'level8.html', anchors: ['#lv8l1', '#lv8l2', '#lv8l3', '#lv8l4', '#lv8l5', '#lv8l6', '#lv8l7', '#lv8l8'], color: 'from-indigo-500 to-blue-500' }
 ];
 function getUserProfile() {
   try {
@@ -263,7 +263,7 @@ function renderDashboard(profile) {
   const next = firstIncomplete();
   const nc = document.getElementById('nextCard');
   if (!next) {
-    nc.innerHTML = '<div class="complete-card"><b>全部课程已完成！</b><p>去 <a href="复习站.html">复习站</a> 巩固错题，或查看 <a href="GESP官方考纲.html">官方考纲</a> 查漏补缺。</p></div>';
+    nc.innerHTML = '<div class="complete-card"><b>全部课程已完成！</b><p>去 <a href="review.html">复习站</a> 巩固错题，或查看 <a href="syllabus.html">官方考纲</a> 查漏补缺。</p></div>';
   } else {
     nc.innerHTML = '<div class="next-lesson"><div><span>' + next.m.emoji + ' ' + next.m.name + ' · 第 ' + next.lesson + ' / ' + next.total + ' 课</span><b>继续你的闯关之旅</b></div><a href="' + next.m.page + next.m.anchors[next.lesson - 1] + '">开始学习</a></div>';
   }

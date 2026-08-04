@@ -76,12 +76,12 @@
     </a>
         <nav class="site-nav" aria-label="主导航">
       <a href="index.html">学习中心</a>
-      <a href="课程.html" class="active" aria-current="page">课程</a>
-      <a href="复习站.html">复习站</a>
-      <a href="家长中心.html">家长中心</a>
-      <a href="GESP官方考纲.html">官方考纲</a>
-      <a href="GESP二级知识点精讲.html">知识笔记</a>
-      <a href="真题资料库.html">真题资料库</a>
+      <a href="courses.html" class="active" aria-current="page">课程</a>
+      <a href="review.html">复习站</a>
+      <a href="parent.html">家长中心</a>
+      <a href="syllabus.html">官方考纲</a>
+      <a href="notes.html">知识笔记</a>
+      <a href="papers.html">真题资料库</a>
     </nav>
   </header>
   <div class="crumb">🏠 <a href="index.html">学习中心</a> › <span>课程</span></div>
@@ -103,22 +103,22 @@
   </div>
 
   <footer>
-    GESP 课程体系 📚 ｜ <a href="index.html">🏠 学习中心</a> ｜ <a href="复习站.html">📒 复习站</a> ｜ <a href="家长中心.html">👨‍👩‍👧 家长中心</a><br>
+    GESP 课程体系 📚 ｜ <a href="index.html">🏠 学习中心</a> ｜ <a href="review.html">📒 复习站</a> ｜ <a href="parent.html">👨‍👩‍👧 家长中心</a><br>
     进度与打卡保存在当前浏览器。
   </footer>
 </div>
 
 <script>
 const COURSES = [
-  { emoji: '🧠', name: '基础常识', page: '基础常识乐园.html', total: 3, key: 'gesp_lv0_prog', desc: '二进制、比特字节、存储单位' },
-  { emoji: '🎒', name: '一级', page: 'GESP1学习乐园.html', total: 9, key: 'gesp_lv1_prog', desc: '认识电脑、变量、输入输出、算术、分支、循环、调试' },
-  { emoji: '🚀', name: '二级', page: 'GESP2学习乐园.html', total: 9, key: 'gesp_lv2_prog', desc: '存储、网络、语言、流程图、ASCII、类型转换、多层结构、数学函数' },
-  { emoji: '📘', name: '三级', page: 'GESP3课程.html', total: 6, key: 'gesp_lv3_prog', desc: '编码、进制、位运算、数组、字符串、枚举与模拟' },
-  { emoji: '📗', name: '四级', page: 'GESP4课程.html', total: 8, key: 'gesp_lv4_prog', desc: '指针、结构体、函数、递推、排序、文件与异常' },
-  { emoji: '📙', name: '五级', page: 'GESP5课程.html', total: 8, key: 'gesp_lv5_prog', desc: '数论、高精度、链表、二分、递归、贪心、分治' },
-  { emoji: '📕', name: '六级', page: 'GESP6课程.html', total: 6, key: 'gesp_lv6_prog', desc: '树、编码、DFS/BFS、动态规划、面向对象、栈队列' },
-  { emoji: '📓', name: '七级', page: 'GESP7课程.html', total: 5, key: 'gesp_lv7_prog', desc: '数学库、复杂 DP、图、图论算法、哈希表' },
-  { emoji: '📔', name: '八级', page: 'GESP8课程.html', total: 8, key: 'gesp_lv8_prog', desc: '计数原理、排列组合、图论综合、算法优化' }
+  { emoji: '🧠', name: '基础常识', page: 'fundamentals.html', total: 3, key: 'gesp_lv0_prog', desc: '二进制、比特字节、存储单位' },
+  { emoji: '🎒', name: '一级', page: 'level1.html', total: 9, key: 'gesp_lv1_prog', desc: '认识电脑、变量、输入输出、算术、分支、循环、调试' },
+  { emoji: '🚀', name: '二级', page: 'level2.html', total: 9, key: 'gesp_lv2_prog', desc: '存储、网络、语言、流程图、ASCII、类型转换、多层结构、数学函数' },
+  { emoji: '📘', name: '三级', page: 'level3.html', total: 6, key: 'gesp_lv3_prog', desc: '编码、进制、位运算、数组、字符串、枚举与模拟' },
+  { emoji: '📗', name: '四级', page: 'level4.html', total: 8, key: 'gesp_lv4_prog', desc: '指针、结构体、函数、递推、排序、文件与异常' },
+  { emoji: '📙', name: '五级', page: 'level5.html', total: 8, key: 'gesp_lv5_prog', desc: '数论、高精度、链表、二分、递归、贪心、分治' },
+  { emoji: '📕', name: '六级', page: 'level6.html', total: 6, key: 'gesp_lv6_prog', desc: '树、编码、DFS/BFS、动态规划、面向对象、栈队列' },
+  { emoji: '📓', name: '七级', page: 'level7.html', total: 5, key: 'gesp_lv7_prog', desc: '数学库、复杂 DP、图、图论算法、哈希表' },
+  { emoji: '📔', name: '八级', page: 'level8.html', total: 8, key: 'gesp_lv8_prog', desc: '计数原理、排列组合、图论综合、算法优化' }
 ];
 function getArr(key, n) {
   try {

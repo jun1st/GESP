@@ -5,7 +5,7 @@
   "description": "树、DFS、BFS、动态规划、面向对象、栈和队列。",
   "emoji": "🌳",
   "progressKey": "gesp_lv6_prog",
-  "sourcePage": "GESP6课程.html",
+  "sourcePage": "level6.html",
   "lessons": [
     {
       "id": "trees",

@@ -138,8 +138,8 @@ test('package scripts support starting and testing the Express app', async () =>
 
 test('level 2 entry points are wired to the dynamic course route', async () => {
   const indexHtml = await readFile(new URL('../index.html', import.meta.url), 'utf8');
-  const oldLevel2Html = await readFile(new URL('../GESP2学习乐园.html', import.meta.url), 'utf8');
-  assert.match(indexHtml, /\/course\/2/);
-  assert.match(oldLevel2Html, /动态新版/);
-  assert.match(oldLevel2Html, /\/course\/2/);
+  const oldLevel2Html = await readFile(new URL('../level2.html', import.meta.url), 'utf8');
+  assert.match(indexHtml, /level2\.html/);
+  assert.match(oldLevel2Html, /真题改编练习/);
+  assert.match(oldLevel2Html, /course\.html\?level=2/);
 });

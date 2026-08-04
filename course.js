@@ -109,15 +109,25 @@ function renderLevel(level) {
   });
 }
 
+async function loadLevel(id) {
+  try {
+    const response = await fetch(`/api/levels/${encodeURIComponent(id)}`);
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+    return await response.json();
+  } catch (error) {
+    const response = await fetch(`data/levels/level-${encodeURIComponent(id)}.json`);
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+    return await response.json();
+  }
+}
+
 async function init() {
   try {
-    const response = await fetch(`/api/levels/${encodeURIComponent(getLevelId())}`);
-    if (!response.ok) throw new Error(`HTTP ${response.status}`);
-    const level = await response.json();
+    const level = await loadLevel(getLevelId());
     document.title = level.title;
     renderLevel(level);
   } catch (error) {
-    root.innerHTML = '<div class="course-panel course-empty">课程加载失败，请确认服务端已启动，并且该级别已经迁移。</div>';
+    root.innerHTML = '<div class="course-panel course-empty">课程加载失败，请确认服务端已启动或数据文件存在。</div>';
   }
 }
 

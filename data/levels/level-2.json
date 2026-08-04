@@ -5,7 +5,7 @@
   "description": "计算机存储、网络、流程图、ASCII、类型转换、多层分支、多层循环、数学函数与真题改编练习。",
   "emoji": "🚀",
   "progressKey": "gesp_lv2_prog",
-  "sourcePage": "GESP2学习乐园.html",
+  "sourcePage": "level2.html",
   "lessons": [
     {
       "id": "storage",
@@ -167,19 +167,19 @@
       "practice": {
         "title": "训练路线",
         "prompt": "选择一个方向：数位循环、图形输出、数学枚举、时间分支，然后到编程练习场运行对应示例。",
-        "href": "真题资料库.html#derivedPractice"
+        "href": "papers.html#derivedPractice"
       }
     }
   ],
   "practiceLinks": [
     {
       "title": "编程练习场",
-      "href": "GESP2学习乐园.html#editor",
+      "href": "level2.html#editor",
       "description": "保留旧页面中的在线编译器和真题示例。"
     },
     {
       "title": "真题资料库",
-      "href": "真题资料库.html#derivedPractice",
+      "href": "papers.html#derivedPractice",
       "description": "按历年真题考点组织的原创改编训练路线。"
     }
   ]

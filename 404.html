@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>页面搬家啦 🏠 GESP 学习中心</title>
+<link rel="stylesheet" href="apple.css">
+<style>
+  body {
+    font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans SC", sans-serif;
+    background: var(--bg, #f5f5f7);
+    color: var(--ink, #1d1d1f);
+    min-height: 100vh;
+    display: grid;
+    place-items: center;
+    text-align: center;
+    padding: 24px;
+    line-height: 1.8;
+  }
+  .box { max-width: 460px; }
+  .box .mascot { font-size: 56px; display: block; animation: float 3s ease-in-out infinite; }
+  @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+  h1 { font-size: clamp(24px, 5vw, 34px); margin: 10px 0 6px; }
+  p { color: var(--ink2, #6e6e73); font-size: 15px; }
+  a.btn {
+    display: inline-block;
+    margin-top: 14px;
+    background: var(--accent, #0071e3);
+    color: #fff;
+    border-radius: 999px;
+    padding: 10px 20px;
+    font-weight: 700;
+    text-decoration: none;
+  }
+</style>
+</head>
+<body>
+<div class="box">
+  <span class="mascot">🏠</span>
+  <h1>这个页面搬家啦</h1>
+  <p id="msg">正在带你去新地址……如果没跳转，点下面的按钮回学习中心。</p>
+  <a class="btn" href="index.html">回学习中心</a>
+</div>
+<script>
+const RENAMES = {
+  '基础常识乐园.html': 'fundamentals.html',
+  'GESP1学习乐园.html': 'level1.html',
+  'GESP2学习乐园.html': 'level2.html',
+  'GESP3课程.html': 'level3.html',
+  'GESP4课程.html': 'level4.html',
+  'GESP5课程.html': 'level5.html',
+  'GESP6课程.html': 'level6.html',
+  'GESP7课程.html': 'level7.html',
+  'GESP8课程.html': 'level8.html',
+  '复习站.html': 'review.html',
+  '家长中心.html': 'parent.html',
+  'GESP官方考纲.html': 'syllabus.html',
+  'GESP二级知识点精讲.html': 'notes.html',
+  '真题资料库.html': 'papers.html',
+  '课程.html': 'courses.html'
+};
+try {
+  const raw = decodeURIComponent(window.location.pathname);
+  const name = raw.split('/').pop() || '';
+  const target = RENAMES[name];
+  if (target) {
+    const base = raw.slice(0, raw.lastIndexOf('/') + 1);
+    window.location.replace(base + target);
+  } else {
+    document.getElementById('msg').textContent = '没找到这个页面，可能已经改版了。';
+  }
+} catch (e) {}
+</script>
+</body>
+</html>

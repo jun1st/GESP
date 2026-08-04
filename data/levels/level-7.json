@@ -5,7 +5,7 @@
   "description": "复杂动态规划、图、图论算法和哈希表。",
   "emoji": "🕸️",
   "progressKey": "gesp_lv7_prog",
-  "sourcePage": "GESP7课程.html",
+  "sourcePage": "level7.html",
   "lessons": [
     {
       "id": "advanced-dp",

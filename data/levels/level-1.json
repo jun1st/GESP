@@ -5,7 +5,7 @@
   "description": "C++ 入门、变量、输入输出、运算、分支、循环和调试。",
   "emoji": "🚗",
   "progressKey": "gesp_lv1_prog",
-  "sourcePage": "GESP1学习乐园.html",
+  "sourcePage": "level1.html",
   "lessons": [
     {
       "id": "hello",

@@ -5,7 +5,7 @@
   "description": "复杂度、高精度、链表、数论、二分和基础算法能力。",
   "emoji": "🧠",
   "progressKey": "gesp_lv5_prog",
-  "sourcePage": "GESP5课程.html",
+  "sourcePage": "level5.html",
   "lessons": [
     {
       "id": "complexity",
