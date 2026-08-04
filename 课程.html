@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="GESP C++ 课程体系：基础常识 + 1-8 级课程地图。">
+<title>GESP 课程体系 📚</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans SC", sans-serif;
+    background: var(--bg, #f5f5f7);
+    color: #2b2d42;
+    line-height: 1.8;
+    min-height: 100vh;
+  }
+  .wrap { max-width: 920px; margin: 0 auto; padding: 14px 18px 50px; }
+  header.pagehead { text-align: center; padding: 24px 12px 8px; }
+  header.pagehead .mascot { font-size: 50px; display: block; animation: float 3s ease-in-out infinite; }
+  @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+  header.pagehead h1 {
+    font-size: clamp(25px, 5vw, 38px);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: var(--ink, #1d1d1f);
+    margin: 8px 0 4px;
+  }
+  header.pagehead .slogan { color: var(--ink2, #6e6e73); font-size: 15px; }
+  .callout { border-radius: 14px; padding: 12px 15px; font-size: 14.5px; margin: 12px 0; }
+  .callout.info { background: rgba(0,113,227,.08); border: 1px solid rgba(0,113,227,.25); }
+  .course-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px; margin-top: 12px; }
+  .course-card {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    text-decoration: none;
+    background: var(--bg, #f5f5f7);
+    border: 1px solid var(--hairline, rgba(0,0,0,.08));
+    border-radius: 16px;
+    padding: 16px 18px;
+    color: var(--ink, #1d1d1f);
+    transition: transform .15s, border-color .15s, box-shadow .15s;
+  }
+  .course-card:hover { transform: translateY(-2px); border-color: var(--accent, #0071e3); box-shadow: 0 8px 24px rgba(0,0,0,.07); }
+  .course-card .cemoji { font-size: 30px; }
+  .course-card b { font-size: 16px; }
+  .course-card .cdesc { font-size: 13.5px; color: var(--ink2, #6e6e73); }
+  .course-card .ctrack { background: rgba(0,0,0,.08); border-radius: 999px; height: 8px; overflow: hidden; margin-top: 4px; }
+  .course-card .ctrack i { display: block; height: 100%; width: 0; background: var(--accent, #0071e3); border-radius: 999px; }
+  .course-card .cpct { font-size: 12.5px; font-weight: 700; color: var(--ink2, #6e6e73); }
+  .btn {
+    display: inline-block;
+    background: var(--accent, #0071e3);
+    color: #fff;
+    border-radius: 999px;
+    padding: 9px 18px;
+    font-size: 14px;
+    font-weight: 700;
+    text-decoration: none;
+    margin-top: 8px;
+  }
+  .btn:hover { background: #0077ed; }
+  footer { text-align: center; color: #86868b; font-size: 14px; padding: 18px 0 6px; }
+  footer a { color: var(--accent, #0071e3); font-weight: 700; text-decoration: none; }
+</style>
+<link rel="stylesheet" href="apple.css">
+</head>
+<body>
+<div class="wrap">
+
+  <header class="site-topbar">
+    <a href="index.html" class="brand-mark" aria-label="GESP 学习中心首页">
+      <span class="brand-icon">C</span>
+      <span>GESP 学习中心</span>
+    </a>
+        <nav class="site-nav" aria-label="主导航">
+      <a href="index.html">学习中心</a>
+      <a href="课程.html" class="active" aria-current="page">课程</a>
+      <a href="复习站.html">复习站</a>
+      <a href="家长中心.html">家长中心</a>
+      <a href="GESP官方考纲.html">官方考纲</a>
+      <a href="GESP二级知识点精讲.html">知识笔记</a>
+      <a href="真题资料库.html">真题资料库</a>
+    </nav>
+  </header>
+  <div class="crumb">🏠 <a href="index.html">学习中心</a> › <span>课程</span></div>
+
+  <header class="pagehead">
+    <span class="mascot">📚</span>
+    <h1>课程体系（0-8 级）</h1>
+    <p class="slogan">先打基础，再按 1 → 8 级闯关，每一课都有打卡和错题反馈。</p>
+  </header>
+
+  <div class="panel">
+    <h2>📌 学习路径</h2>
+    <div class="callout info">建议顺序：<b>基础常识 → 一级 → 二级</b>（GESP 认证重点），之后按 三 → 八级 进阶。每级内部按课时顺序学，学完一课点"打卡"，全部完成即可解锁下一级。</div>
+  </div>
+
+  <div class="panel">
+    <h2>🗺️ 全部课程</h2>
+    <div class="course-list" id="courseList"></div>
+  </div>
+
+  <footer>
+    GESP 课程体系 📚 ｜ <a href="index.html">🏠 学习中心</a> ｜ <a href="复习站.html">📒 复习站</a> ｜ <a href="家长中心.html">👨‍👩‍👧 家长中心</a><br>
+    进度与打卡保存在当前浏览器。
+  </footer>
+</div>
+
+<script>
+const COURSES = [
+  { emoji: '🧠', name: '基础常识', page: '基础常识乐园.html', total: 3, key: 'gesp_lv0_prog', desc: '二进制、比特字节、存储单位' },
+  { emoji: '🎒', name: '一级', page: 'GESP1学习乐园.html', total: 9, key: 'gesp_lv1_prog', desc: '认识电脑、变量、输入输出、算术、分支、循环、调试' },
+  { emoji: '🚀', name: '二级', page: 'GESP2学习乐园.html', total: 9, key: 'gesp_lv2_prog', desc: '存储、网络、语言、流程图、ASCII、类型转换、多层结构、数学函数' },
+  { emoji: '📘', name: '三级', page: 'GESP3课程.html', total: 6, key: 'gesp_lv3_prog', desc: '编码、进制、位运算、数组、字符串、枚举与模拟' },
+  { emoji: '📗', name: '四级', page: 'GESP4课程.html', total: 8, key: 'gesp_lv4_prog', desc: '指针、结构体、函数、递推、排序、文件与异常' },
+  { emoji: '📙', name: '五级', page: 'GESP5课程.html', total: 8, key: 'gesp_lv5_prog', desc: '数论、高精度、链表、二分、递归、贪心、分治' },
+  { emoji: '📕', name: '六级', page: 'GESP6课程.html', total: 6, key: 'gesp_lv6_prog', desc: '树、编码、DFS/BFS、动态规划、面向对象、栈队列' },
+  { emoji: '📓', name: '七级', page: 'GESP7课程.html', total: 5, key: 'gesp_lv7_prog', desc: '数学库、复杂 DP、图、图论算法、哈希表' },
+  { emoji: '📔', name: '八级', page: 'GESP8课程.html', total: 8, key: 'gesp_lv8_prog', desc: '计数原理、排列组合、图论综合、算法优化' }
+];
+function getArr(key, n) {
+  try {
+    const v = JSON.parse(localStorage.getItem(key));
+    if (Array.isArray(v) && v.length === n) return v.map(Boolean);
+  } catch (e) {}
+  return new Array(n).fill(false);
+}
+function render() {
+  const box = document.getElementById('courseList');
+  box.innerHTML = '';
+  COURSES.forEach(c => {
+    const arr = getArr(c.key, c.total);
+    const done = arr.filter(Boolean).length;
+    const pct = Math.round(done / c.total * 100);
+    const card = document.createElement('a');
+    card.className = 'course-card';
+    card.href = c.page;
+    card.innerHTML = '<span class="cemoji">' + c.emoji + '</span><b>' + c.name + '级</b>'
+      + '<span class="cdesc">' + c.desc + '</span>'
+      + '<span class="ctrack"><i style="width:' + pct + '%"></i></span>'
+      + '<span class="cpct">' + done + ' / ' + c.total + ' 课' + (pct === 100 ? ' ✅ 已毕业' : '') + '</span>';
+    box.appendChild(card);
+  });
+}
+render();
+</script>
+</body>
+</html>
