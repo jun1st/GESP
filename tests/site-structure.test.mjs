@@ -54,7 +54,7 @@ test('pages share a stable outer layout shell', () => {
 
 test('top navigation stays pinned consistently across pages', () => {
   assert.match(css, /html\s*\{[^}]*scroll-padding-top:\s*96px/);
-  assert.match(css, /\.site-shell, \.wrap, \.course-shell\s*\{[^}]*padding-top:\s*0\s*!important;/);
+  assert.doesNotMatch(css, /padding-(top|left|right):\s*0\s*!important/);
   assert.match(css, /\.site-topbar\s*\{[^}]*position:\s*sticky;[^}]*top:\s*0;/);
   assert.match(css, /\.site-topbar\s*\{[^}]*text-align:\s*left;/);
   assert.doesNotMatch(css, /\.site-topbar\s*\{[^}]*top:\s*12px;/);
