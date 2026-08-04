@@ -51,8 +51,20 @@
           <p class="local-note">当前登录仅保存在本浏览器，用于切换学习驾驶舱，不会上传账号信息。</p>
         </div>
         <aside class="hero-panel" aria-label="课程概览">
-          <b>62 课</b>
-          <span>基础常识 + 1-8 级课程地图</span>
+          <div>
+            <b id="heroTotal">63 课</b>
+            <span>基础常识 + 1-8 级课程地图</span>
+          </div>
+          <div class="hero-stats">
+            <div class="hs"><b>9</b><span>个级别</span></div>
+            <div class="hs"><b>15</b><span>期官方真题</span></div>
+            <div class="hs"><b>9</b><span>道内置真题</span></div>
+            <div class="hs"><b>∞</b><span>在线编译</span></div>
+          </div>
+          <div class="hero-progress">
+            <div class="hp-row"><span>我的学习进度</span><b id="heroPct">0%</b></div>
+            <div class="hp-track"><i id="heroBar"></i></div>
+          </div>
           <div class="mini-path">
             <i>基础</i><i>一级</i><i>二级</i><i>进阶</i>
           </div>
@@ -244,6 +256,18 @@ function firstIncomplete() {
   }
   return null;
 }
+function renderHeroProgress() {
+  const st = state();
+  const total = st.reduce((s, x) => s + x.m.total, 0);
+  const done = st.reduce((s, x) => s + x.done, 0);
+  const pct = total ? Math.round(done / total * 100) : 0;
+  const totalEl = document.getElementById('heroTotal');
+  const pctEl = document.getElementById('heroPct');
+  const barEl = document.getElementById('heroBar');
+  if (totalEl) totalEl.textContent = total + ' 课';
+  if (pctEl) pctEl.textContent = pct + '%';
+  if (barEl) barEl.style.width = pct + '%';
+}
 function hourWord() {
   const h = new Date().getHours();
   if (h < 6) return '夜深了，注意休息';
@@ -315,6 +339,7 @@ document.getElementById('logoutBtn').addEventListener('click', () => {
   renderAuthState();
 });
 renderAuthState();
+renderHeroProgress();
 </script>
 </body>
 </html>

@@ -424,6 +424,60 @@ footer a { color: var(--accent); }
 .trust-grid p, .visitor-cta p, .action-grid span, .level-main span {
   color: var(--ink2);
 }
+.hero-stats {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+  margin: 16px 0 6px;
+}
+.hero-stats .hs {
+  background: var(--bg);
+  border: 1px solid var(--hairline);
+  border-radius: 14px;
+  padding: 9px 8px;
+  text-align: center;
+}
+.hero-stats .hs b {
+  display: block;
+  font-size: 22px;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+.hero-stats .hs span {
+  font-size: 12px;
+  color: var(--ink2);
+}
+.hero-progress {
+  margin: 8px 0 2px;
+}
+.hero-progress .hp-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--ink2);
+  margin-bottom: 6px;
+}
+.hero-progress .hp-row b {
+  font-size: 13px;
+  color: var(--accent);
+}
+.hero-progress .hp-track {
+  height: 10px;
+  background: rgba(0,0,0,.08);
+  border-radius: 999px;
+  overflow: hidden;
+}
+.hero-progress .hp-track i {
+  display: block;
+  height: 100%;
+  width: 0;
+  background: var(--accent);
+  border-radius: 999px;
+  transition: width .4s ease;
+}
 .mini-path {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -714,6 +768,12 @@ footer a { color: var(--accent); }
   .mini-path i, .next-lesson, .complete-card, .level-icon, .badge-item {
     background: #2c2c2e;
   }
+  .hero-stats .hs {
+    background: #2c2c2e;
+    border-color: rgba(255,255,255,.12);
+  }
+  .hero-stats .hs b { color: #f5f5f7; }
+  .hero-progress .hp-track { background: rgba(255,255,255,.14); }
   .progress-track, .level-track { background: rgba(255,255,255,.14); }
   footer { color: #86868b; }
 }
