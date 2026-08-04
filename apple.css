@@ -20,6 +20,10 @@
   text-rendering: optimizeLegibility;
 }
 
+html {
+  scroll-padding-top: 96px;
+}
+
 body {
   background: var(--bg);
   color: var(--ink);
@@ -31,6 +35,7 @@ body {
   max-width: var(--page-max) !important;
   margin-left: auto;
   margin-right: auto;
+  padding-top: 0 !important;
   padding-left: 0 !important;
   padding-right: 0 !important;
 }
@@ -172,7 +177,7 @@ footer a { color: var(--accent); }
 
 /* ---- 面包屑 ---- */
 .crumb {
-  display: flex;
+  display: none;
   flex-wrap: wrap;
   gap: 6px;
   align-items: center;
@@ -255,20 +260,21 @@ footer a { color: var(--accent); }
 }
 .site-topbar {
   position: sticky;
-  top: 12px;
+  top: 0;
   z-index: 80;
   display: flex;
   align-items: center;
   gap: 14px;
   justify-content: space-between;
-  margin: 14px 0 30px;
+  margin: 0 0 30px;
   padding: 10px 12px;
   background: rgba(245, 245, 247, .78);
   -webkit-backdrop-filter: blur(20px) saturate(180%);
   backdrop-filter: blur(20px) saturate(180%);
   border: 1px solid var(--hairline);
-  border-radius: 999px;
+  border-radius: 0 0 28px 28px;
   box-shadow: 0 1px 0 rgba(0,0,0,.04), 0 12px 34px rgba(0,0,0,.06);
+  text-align: left;
 }
 .brand-mark, .site-nav a, .site-footer a, .path-cards a, .action-grid a {
   text-decoration: none;
@@ -611,7 +617,7 @@ footer a { color: var(--accent); }
 
 @media (max-width: 900px) {
   .site-topbar {
-    border-radius: 28px;
+    border-radius: 0 0 28px 28px;
     align-items: flex-start;
     flex-direction: column;
   }

@@ -51,3 +51,16 @@ test('pages share a stable outer layout shell', () => {
   assert.match(css, /--page-max/);
   assert.match(css, /--page-gutter/);
 });
+
+test('top navigation stays pinned consistently across pages', () => {
+  assert.match(css, /html\s*\{[^}]*scroll-padding-top:\s*96px/);
+  assert.match(css, /\.site-shell, \.wrap, \.course-shell\s*\{[^}]*padding-top:\s*0\s*!important;/);
+  assert.match(css, /\.site-topbar\s*\{[^}]*position:\s*sticky;[^}]*top:\s*0;/);
+  assert.match(css, /\.site-topbar\s*\{[^}]*text-align:\s*left;/);
+  assert.doesNotMatch(css, /\.site-topbar\s*\{[^}]*top:\s*12px;/);
+  assert.doesNotMatch(css, /\.site-topbar\s*\{[^}]*margin:\s*14px\s+0\s+30px;/);
+});
+
+test('breadcrumb labels are hidden from page headers', () => {
+  assert.match(css, /\.crumb\s*\{[^}]*display:\s*none;/);
+});

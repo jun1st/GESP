@@ -1,0 +1,44 @@
+{
+  "id": 8,
+  "slug": "level-8",
+  "title": "GESP C++ 八级课程",
+  "description": "高级算法、综合建模和竞赛级问题分析。",
+  "emoji": "🏁",
+  "progressKey": "gesp_lv8_prog",
+  "sourcePage": "GESP8课程.html",
+  "lessons": [
+    {
+      "id": "modeling",
+      "anchor": "lv8l1",
+      "title": "第 1 课：问题建模",
+      "summary": "把复杂题意转化成数据结构和算法模型。",
+      "goal": "能识别题目中的状态、约束和目标。",
+      "tags": ["建模"],
+      "blocks": ["建模是高级题的第一步。", "同一问题可能有多种模型表达。"],
+      "practice": { "title": "抽象建模", "prompt": "把一个路线规划问题抽象成图模型。" }
+    },
+    {
+      "id": "optimization",
+      "anchor": "lv8l4",
+      "title": "第 2 课：算法优化",
+      "summary": "通过剪枝、预处理和数据结构优化程序。",
+      "goal": "理解从可运行到高效运行的优化路径。",
+      "tags": ["优化"],
+      "blocks": ["先保证正确，再分析瓶颈。", "预处理可以减少重复计算。"],
+      "practice": { "title": "优化思路", "prompt": "说出一个把重复查询变快的方法。" }
+    },
+    {
+      "id": "comprehensive",
+      "anchor": "lv8l8",
+      "title": "第 3 课：综合演练",
+      "summary": "综合使用数据结构和算法解决完整题目。",
+      "goal": "形成读题、建模、实现、测试的完整流程。",
+      "tags": ["综合"],
+      "blocks": ["高级题往往需要多个知识点配合。", "测试样例能帮助发现边界错误。"],
+      "practice": { "title": "解题流程", "prompt": "描述一道综合题从读题到提交的步骤。" }
+    }
+  ],
+  "practiceLinks": [
+    { "title": "打开互动版", "description": "查看原八级课程的综合题、测验和打卡互动。", "href": "/levels/8" }
+  ]
+}

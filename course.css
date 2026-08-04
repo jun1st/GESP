@@ -1,0 +1,55 @@
+.course-shell { max-width: var(--page-max, 1120px); margin: 0 auto; padding: 0 0 52px; }
+.course-hero, .course-panel {
+  background: var(--card, #fff);
+  border: 1px solid var(--hairline, rgba(0,0,0,.08));
+  border-radius: 28px;
+  padding: 24px;
+  margin: 18px 0;
+  box-shadow: 0 1px 2px rgba(0,0,0,.04), 0 18px 48px rgba(0,0,0,.06);
+}
+.course-hero h1 { font-size: clamp(30px, 6vw, 56px); line-height: 1; margin: 8px 0 10px; }
+.course-hero p, .lesson-card p, .course-empty { color: var(--ink2, #6e6e73); }
+.course-map { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin-top: 14px; }
+.course-map a, .lesson-card, .practice-card {
+  background: var(--bg, #f5f5f7);
+  border: 1px solid var(--hairline, rgba(0,0,0,.08));
+  border-radius: 18px;
+  padding: 14px;
+  color: var(--ink, #1d1d1f);
+  text-decoration: none;
+}
+.course-map a.is-done { border-color: rgba(52,199,89,.45); }
+.lesson-list { display: grid; gap: 14px; }
+.lesson-card h2 { margin: 0 0 6px; font-size: clamp(20px, 4vw, 28px); }
+.lesson-tags { display: flex; flex-wrap: wrap; gap: 6px; margin: 8px 0; }
+.lesson-tags span {
+  background: rgba(0,113,227,.1);
+  color: var(--accent, #0071e3);
+  border-radius: 999px;
+  padding: 3px 10px;
+  font-size: 12px;
+  font-weight: 800;
+}
+.lesson-blocks { margin: 8px 0 8px 20px; color: var(--ink, #1d1d1f); }
+.lesson-practice {
+  background: var(--card, #fff);
+  border: 1px solid var(--hairline, rgba(0,0,0,.08));
+  border-radius: 14px;
+  padding: 12px;
+  margin-top: 10px;
+}
+.lesson-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+.lesson-actions button, .lesson-actions a, .practice-card a {
+  border: 0;
+  border-radius: 999px;
+  padding: 8px 14px;
+  background: var(--accent, #0071e3);
+  color: #fff;
+  font: inherit;
+  font-weight: 800;
+  text-decoration: none;
+  cursor: pointer;
+}
+.practice-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 10px; }
+.progress-track { height: 12px; margin: 12px 0; background: rgba(0,0,0,.08); border-radius: 999px; overflow: hidden; }
+.progress-track i { display: block; height: 100%; background: var(--accent, #0071e3); width: 0; transition: width .25s ease; }
