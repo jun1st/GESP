@@ -28,7 +28,7 @@ export function createPagesRouter() {
         title: levelPage.title,
         description: `${levelPage.title} 互动课程页面。`,
         source: levelPage.source,
-        shellClass: 'wrap'
+        shellClass: 'page-shell'
       }));
     } catch (error) {
       next(error);

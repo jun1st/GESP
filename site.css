@@ -205,7 +205,8 @@ html { scroll-padding-top: 96px; }
 .levelnav a.next { background: #5e60ce; color: #fff; border-color: #5e60ce; }
 
 /* ---- 外层框架（仅居中） ---- */
-.site-shell, .wrap, .course-shell { margin-left: auto; margin-right: auto; }
+.site-shell, .wrap, .course-shell, .page-shell { margin-left: auto; margin-right: auto; }
+.page-shell { max-width: 1120px; padding: 14px 18px 40px; }
 
 /* ---- 首页（学习中心） ---- */
 .site-shell { max-width: 960px; }
