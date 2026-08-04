@@ -45,3 +45,9 @@ test('apple design system styles the new homepage structure responsively', () =>
   assert.match(css, /\.next-lesson/);
   assert.match(css, /@media \(max-width: 720px\)/);
 });
+
+test('pages share a stable outer layout shell', () => {
+  assert.match(css, /\.site-shell, \.wrap, \.course-shell/);
+  assert.match(css, /--page-max/);
+  assert.match(css, /--page-gutter/);
+});

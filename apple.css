@@ -11,6 +11,8 @@
   --ink: #1d1d1f;
   --ink2: #6e6e73;
   --hairline: rgba(0, 0, 0, .08);
+  --page-max: 1120px;
+  --page-gutter: clamp(14px, 3vw, 24px);
 }
 
 * {
@@ -21,6 +23,16 @@
 body {
   background: var(--bg);
   color: var(--ink);
+}
+
+/* ---- 全站外层框架：减少页面切换 layout jump ---- */
+.site-shell, .wrap, .course-shell {
+  width: min(calc(100% - (var(--page-gutter) * 2)), var(--page-max));
+  max-width: var(--page-max) !important;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
 }
 
 /* ---- 标题：去渐变，统一近黑色大标题 ---- */

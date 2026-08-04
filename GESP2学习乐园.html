@@ -520,6 +520,11 @@
   </header>
   <div class="crumb">🏠 <a href="index.html">学习中心</a> › <span>二级</span></div>
 
+  <div class="goal" style="margin:16px 0">
+    🚀 已上线二级课程动态新版：课程内容现在可以从服务端 API 加载。旧版互动实验和编程练习场暂时保留在本页。
+    <a href="course.html?level=2" style="color:#5e60ce;font-weight:800">打开动态新版 →</a>
+  </div>
+
   <header>
     <span class="rocket">🚀</span>
     <h1>GESP C++ 二级学习乐园</h1>
@@ -930,10 +935,40 @@ int x = rand() % 100;  <span class="dim">// 0~99 的随机数</span></code></div
     <div class="tip">📌 本节小结：数学函数都在 &lt;cmath&gt;；rand()%n 得 0~n-1，想 1~6 写 rand()%6+1；记得 srand(time(0)) 播种。</div>
     <div class="lquiz" id="qz-l9"></div>
     <label class="chkbtn"><input type="checkbox" onchange="toggleLesson(8, this)"> 学完了，打卡！</label>
-    <div class="pnav"><a href="#s8">← 上一课</a><a class="next" href="#s10">🏆 去期末大闯关 →</a></div>
+    <div class="pnav"><a href="#s8">← 上一课</a><a class="next" href="#pastPaperPractice">🧩 去真题改编练习 →</a></div>
   </section>
 
-  <!-- ========== 10 编程练习场 ========== -->
+  <!-- ========== 10 真题改编练习 ========== -->
+  <section class="topic" id="pastPaperPractice" style="--tc:#7c3aed">
+    <div class="big-emoji">🧩</div>
+    <h2>真题改编练习：把考点练成肌肉记忆</h2>
+    <p class="sub">来源：CCF GESP 历年真题考点；以下练习为原创改写，不搬运原题，适合学完二级核心知识后集中训练。</p>
+    <div class="goal">🎯 本节目标：1. 把历年真题拆成考点；2. 选择对应训练路线；3. 到编程练习场运行内置示例并改参数。</div>
+
+    <div class="cards">
+      <div class="box">
+        <div class="name">🔢 数位循环训练</div>
+        <div class="desc">改编自数字黑洞、自幂数、优美的数字等考点。先会拆位，再做排序、计数和循环判断。</div>
+      </div>
+      <div class="box">
+        <div class="name">📐 图形输出训练</div>
+        <div class="desc">改编自等差矩阵、菱形输出等考点。关键是写清楚行列关系：第 i 行、第 j 列什么时候输出字符。</div>
+      </div>
+      <div class="box">
+        <div class="name">🧮 数学与枚举训练</div>
+        <div class="desc">改编自数三角形、黄金格、环保能量球等考点。练习循环范围、整除判断和数学函数组合。</div>
+      </div>
+      <div class="box">
+        <div class="name">⏰ 时间分支训练</div>
+        <div class="desc">改编自时间跨越类考点。重点练闰年、月份天数、小时进位和多层分支。</div>
+      </div>
+    </div>
+
+    <div class="tip">练习方法：先在纸上写“输入是什么、循环变量是什么、判断条件是什么”，再去下面的编程练习场选对应示例运行。</div>
+    <div class="pnav"><a href="#s9">← 回数学函数</a><a class="next" href="#editor">🛠️ 去编程练习场 →</a></div>
+  </section>
+
+  <!-- ========== 11 编程练习场 ========== -->
   <section class="topic" id="editor" style="--tc:#118ab2">
     <div class="big-emoji">🛠️</div>
     <h2>🧪 编程练习场（课后实验室）</h2>
@@ -978,7 +1013,7 @@ int x = rand() % 100;  <span class="dim">// 0~99 的随机数</span></code></div
     <div class="tip">🌐 运行需要联网：代码会发送到免费的在线编译器（Compiler Explorer）。</div>
   </section>
 
-  <!-- ========== 11 大闯关 ========== -->
+  <!-- ========== 12 大闯关 ========== -->
   <section class="topic" id="s10" style="--tc:#06d6a0">
     <div class="big-emoji">🏆</div>
     <h2>🏆 期末大闯关：考考自己！</h2>
