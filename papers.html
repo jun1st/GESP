@@ -10,7 +10,7 @@
   html { scroll-behavior: smooth; }
   body {
     font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans SC", sans-serif;
-    background: var(--bg, #f5f5f7);
+    background: var(--bg, #f7f9ff);
     color: #2b2d42;
     line-height: 1.8;
     min-height: 100vh;
@@ -23,28 +23,28 @@
     font-size: clamp(25px, 5vw, 38px);
     font-weight: 800;
     letter-spacing: -0.02em;
-    color: var(--ink, #1d1d1f);
+    color: var(--ink, #2b2d42);
     margin: 8px 0 4px;
   }
-  header.pagehead .slogan { color: var(--ink2, #6e6e73); font-size: 15px; }
+  header.pagehead .slogan { color: var(--ink2, #6c6f93); font-size: 15px; }
   .paper-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 10px; margin-top: 12px; }
   .paper-card {
     display: block;
     text-decoration: none;
-    background: var(--bg, #f5f5f7);
-    border: 1px solid var(--hairline, rgba(0,0,0,.08));
+    background: var(--bg, #f7f9ff);
+    border: 1px solid var(--hairline, rgba(43,45,66,.12));
     border-radius: 14px;
     padding: 12px 14px;
-    color: var(--ink, #1d1d1f);
+    color: var(--ink, #2b2d42);
     transition: transform .15s, border-color .15s, box-shadow .15s;
   }
-  .paper-card:hover { transform: translateY(-2px); border-color: var(--accent, #0071e3); }
+  .paper-card:hover { transform: translateY(-2px); border-color: var(--accent, #5e60ce); }
   .paper-card b { display: block; font-size: 15px; }
-  .paper-card span { display: block; color: var(--ink2, #6e6e73); font-size: 13px; margin-top: 2px; }
+  .paper-card span { display: block; color: var(--ink2, #6c6f93); font-size: 13px; margin-top: 2px; }
   .probs { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px; margin-top: 12px; }
   .prob {
-    background: var(--bg, #f5f5f7);
-    border: 1px solid var(--hairline, rgba(0,0,0,.08));
+    background: var(--bg, #f7f9ff);
+    border: 1px solid var(--hairline, rgba(43,45,66,.12));
     border-radius: 14px;
     padding: 14px 16px;
   }
@@ -53,17 +53,17 @@
     display: inline-block;
     font-size: 12px;
     font-weight: 700;
-    color: var(--accent, #0071e3);
-    background: rgba(0,113,227,.08);
+    color: var(--accent, #5e60ce);
+    background: rgba(94,96,206,.08);
     border-radius: 999px;
     padding: 2px 9px;
     margin: 6px 2px 6px 0;
   }
-  .prob p { font-size: 13.5px; color: var(--ink2, #6e6e73); margin: 4px 0; }
+  .prob p { font-size: 13.5px; color: var(--ink2, #6c6f93); margin: 4px 0; }
   .prob a {
     display: inline-block;
     margin-top: 8px;
-    background: var(--accent, #0071e3);
+    background: var(--accent, #5e60ce);
     color: #fff;
     border-radius: 999px;
     padding: 7px 14px;
@@ -71,8 +71,8 @@
     font-weight: 700;
     text-decoration: none;
   }
-  .prob a:hover { background: #0077ed; }
-  .route-note { color: var(--ink2, #6e6e73); font-size: 14px; }
+  .prob a:hover { background: #6a6fd9; }
+  .route-note { color: var(--ink2, #6c6f93); font-size: 14px; }
   .practice-route {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -80,25 +80,25 @@
     margin-top: 12px;
   }
   .route-card {
-    background: var(--bg, #f5f5f7);
-    border: 1px solid var(--hairline, rgba(0,0,0,.08));
+    background: var(--bg, #f7f9ff);
+    border: 1px solid var(--hairline, rgba(43,45,66,.12));
     border-radius: 16px;
     padding: 14px 16px;
   }
-  .route-card b { display: block; color: var(--ink, #1d1d1f); }
-  .route-card span { display: inline-block; margin-top: 6px; color: var(--accent, #0071e3); font-size: 12px; font-weight: 800; }
-  .route-card p { color: var(--ink2, #6e6e73); font-size: 13.5px; margin-top: 6px; }
-  table { width: 100%; border-collapse: separate; border-spacing: 0; border: 1px solid var(--hairline, rgba(0,0,0,.08)); border-radius: 14px; overflow: hidden; margin: 12px 0; font-size: 14px; }
+  .route-card b { display: block; color: var(--ink, #2b2d42); }
+  .route-card span { display: inline-block; margin-top: 6px; color: var(--accent, #5e60ce); font-size: 12px; font-weight: 800; }
+  .route-card p { color: var(--ink2, #6c6f93); font-size: 13.5px; margin-top: 6px; }
+  table { width: 100%; border-collapse: separate; border-spacing: 0; border: 1px solid var(--hairline, rgba(43,45,66,.12)); border-radius: 14px; overflow: hidden; margin: 12px 0; font-size: 14px; }
   th, td { border: 1px solid rgba(0,0,0,.06); padding: 9px 12px; text-align: left; vertical-align: top; }
-  th { background: var(--bg, #f5f5f7); }
-  td a { color: var(--accent, #0071e3); font-weight: 600; text-decoration: none; }
+  th { background: var(--bg, #f7f9ff); }
+  td a { color: var(--accent, #5e60ce); font-weight: 600; text-decoration: none; }
   td a:hover { text-decoration: underline; }
   .callout { border-radius: 14px; padding: 12px 15px; font-size: 14.5px; margin: 12px 0; }
-  .callout.info { background: rgba(0,113,227,.08); border: 1px solid rgba(0,113,227,.25); }
+  .callout.info { background: rgba(94,96,206,.08); border: 1px solid rgba(94,96,206,.25); }
   footer { text-align: center; color: #86868b; font-size: 14px; padding: 18px 0 6px; }
-  footer a { color: var(--accent, #0071e3); font-weight: 700; text-decoration: none; }
+  footer a { color: var(--accent, #5e60ce); font-weight: 700; text-decoration: none; }
 </style>
-<link rel="stylesheet" href="apple.css">
+<link rel="stylesheet" href="site.css">
 </head>
 <body>
 <div class="wrap">
@@ -161,7 +161,7 @@
 
   <div class="panel" id="official">
     <h2>🧾 官方真题汇总（2023.03 ~ 2026.06）</h2>
-    <p style="font-size:14px;color:var(--ink2,#6e6e73)">按发布时间从新到旧，点卡片跳转到 CCF 官网查看官方真题（1-2 级为 C++ 单独标准，3-8 级为 C++&amp;Python 合并）。</p>
+    <p style="font-size:14px;color:var(--ink2,#6c6f93)">按发布时间从新到旧，点卡片跳转到 CCF 官网查看官方真题（1-2 级为 C++ 单独标准，3-8 级为 C++&amp;Python 合并）。</p>
     <div class="paper-list">
       <a class="paper-card" href="https://gesp.ccf.org.cn/101/1010/10284.html" target="_blank" rel="noopener"><b>2026 年 6 月</b><span>GESP 认证真题 ｜ CCF 官方</span></a>
       <a class="paper-card" href="https://gesp.ccf.org.cn/101/1010/10269.html" target="_blank" rel="noopener"><b>2026 年 3 月</b><span>GESP 认证真题 ｜ CCF 官方</span></a>
@@ -184,7 +184,7 @@
 
   <div class="panel" id="builtin">
     <h2>🛠️ 内置真题示例（可直接运行）</h2>
-    <p style="font-size:14px;color:var(--ink2,#6e6e73)">这些真题已经放进二级乐园的「编程练习场」，选出来就能编译运行，边做边对照输出。</p>
+    <p style="font-size:14px;color:var(--ink2,#6c6f93)">这些真题已经放进二级乐园的「编程练习场」，选出来就能编译运行，边做边对照输出。</p>
     <div class="probs">
       <div class="prob"><b>📐 等差矩阵</b><br><span class="tag">2025.03 二级</span><span class="tag">嵌套循环</span><p>输入 n m，输出 i×j 矩阵。样例：3 4 → 每行 1 2 3 4、2 4 6 8、3 6 9 12。</p><a href="level2.html#editor">去编程练习场 →</a></div>
       <div class="prob"><b>⏰ 时间跨越</b><br><span class="tag">2025.03 二级</span><span class="tag">闰年/分支</span><p>输入 y m d h k，求 k 小时后的时间。样例：2008 2 28 23 1 → 2008 2 29 0。</p><a href="level2.html#editor">去编程练习场 →</a></div>
