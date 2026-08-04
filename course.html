@@ -60,6 +60,21 @@
     text-decoration: none;
     cursor: pointer;
   }
+  .lesson-actions .demo-toggle {
+    background: transparent;
+    color: var(--accent, #0071e3);
+    border: 1.5px solid rgba(0,113,227,.35);
+  }
+  .lesson-actions .demo-toggle:hover { background: rgba(0,113,227,.08); }
+  .demo-box { margin-top: 12px; }
+  .demo-box[hidden] { display: none; }
+  .demo-box iframe {
+    width: 100%;
+    height: clamp(420px, 60vh, 640px);
+    border: 1px solid var(--hairline, rgba(0,0,0,.08));
+    border-radius: 16px;
+    background: #fff;
+  }
   .practice-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 10px; }
   .progress-track { height: 12px; margin: 12px 0; background: rgba(0,0,0,.08); border-radius: 999px; overflow: hidden; }
   .progress-track i { display: block; height: 100%; background: var(--accent, #0071e3); width: 0; transition: width .25s ease; }

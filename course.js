@@ -49,8 +49,9 @@ function renderLesson(lesson, index, progress, level) {
       </div>
       <div class="lesson-actions">
         <button data-lesson-index="${index}">${progress[index] ? '已打卡，点击取消' : '学完了，打卡'}</button>
-        <a href="${escapeHtml(level.sourcePage)}#${escapeHtml(lesson.anchor)}">查看旧版互动内容</a>
+        <button type="button" class="demo-toggle" data-src="${escapeHtml(level.sourcePage)}#${escapeHtml(lesson.anchor)}">▶ 展开互动演示</button>
       </div>
+      <div class="demo-box" hidden></div>
     </article>
   `;
 }
@@ -131,4 +132,30 @@ async function init() {
   }
 }
 
+function attachDemo() {
+  root.addEventListener('click', (event) => {
+    const btn = event.target.closest('.demo-toggle');
+    if (!btn) return;
+    const box = btn.parentElement.nextElementSibling;
+    if (!box || !box.classList.contains('demo-box')) return;
+    const src = btn.dataset.src;
+    if (box.hidden) {
+      if (!box.dataset.loaded && src) {
+        const frame = document.createElement('iframe');
+        frame.src = src;
+        frame.title = '互动演示';
+        frame.setAttribute('loading', 'lazy');
+        box.appendChild(frame);
+        box.dataset.loaded = '1';
+      }
+      box.hidden = false;
+      btn.textContent = '收起演示';
+    } else {
+      box.hidden = true;
+      btn.textContent = '展开互动演示';
+    }
+  });
+}
+
+attachDemo();
 init();

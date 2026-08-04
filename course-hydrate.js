@@ -47,4 +47,27 @@ if (root) {
   });
 
   refresh(progress);
+
+  root.addEventListener('click', (event) => {
+    const btn = event.target.closest('.demo-toggle');
+    if (!btn) return;
+    const box = btn.parentElement.nextElementSibling;
+    if (!box || !box.classList.contains('demo-box')) return;
+    const src = btn.dataset.src;
+    if (box.hidden) {
+      if (!box.dataset.loaded && src) {
+        const frame = document.createElement('iframe');
+        frame.src = src;
+        frame.title = '互动演示';
+        frame.setAttribute('loading', 'lazy');
+        box.appendChild(frame);
+        box.dataset.loaded = '1';
+      }
+      box.hidden = false;
+      btn.textContent = '收起演示';
+    } else {
+      box.hidden = true;
+      btn.textContent = '展开互动演示';
+    }
+  });
 }
