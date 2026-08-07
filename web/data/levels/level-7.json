@@ -1,0 +1,44 @@
+{
+  "id": 7,
+  "slug": "level-7",
+  "title": "GESP C++ 七级课程",
+  "description": "复杂动态规划、图、图论算法和哈希表。",
+  "emoji": "🕸️",
+  "progressKey": "gesp_lv7_prog",
+  "sourcePage": "level7.html",
+  "lessons": [
+    {
+      "id": "advanced-dp",
+      "anchor": "lv7l1",
+      "title": "第 1 课：复杂动态规划",
+      "summary": "在更复杂状态中使用动态规划。",
+      "goal": "理解多维状态和阶段划分。",
+      "tags": ["动态规划"],
+      "blocks": ["复杂 DP 需要更清晰的状态定义。", "先写出子问题，再考虑转移。"],
+      "practice": { "title": "状态设计", "prompt": "为一个背包类问题描述状态含义。" }
+    },
+    {
+      "id": "graphs",
+      "anchor": "lv7l3",
+      "title": "第 2 课：图的定义与遍历",
+      "summary": "认识点、边、邻接表和图遍历。",
+      "goal": "能用 DFS/BFS 遍历图。",
+      "tags": ["图"],
+      "blocks": ["图由点和边组成。", "邻接表适合存储稀疏图。"],
+      "practice": { "title": "图遍历", "prompt": "画出一个小图并写出 BFS 顺序。" }
+    },
+    {
+      "id": "hashing",
+      "anchor": "lv7l5",
+      "title": "第 3 课：哈希表",
+      "summary": "用哈希思想快速查找数据。",
+      "goal": "理解 key、hash 和冲突的基本概念。",
+      "tags": ["哈希"],
+      "blocks": ["哈希表追求接近 O(1) 的查找。", "冲突需要用合适方法处理。"],
+      "practice": { "title": "查重问题", "prompt": "说明如何用哈希表判断数组里是否有重复元素。" }
+    }
+  ],
+  "practiceLinks": [
+    { "title": "打开互动版", "description": "查看原七级课程的图论、哈希和测验互动。", "href": "/levels/7" }
+  ]
+}

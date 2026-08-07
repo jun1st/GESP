@@ -1,0 +1,44 @@
+{
+  "id": 5,
+  "slug": "level-5",
+  "title": "GESP C++ 五级课程",
+  "description": "复杂度、高精度、链表、数论、二分和基础算法能力。",
+  "emoji": "🧠",
+  "progressKey": "gesp_lv5_prog",
+  "sourcePage": "level5.html",
+  "lessons": [
+    {
+      "id": "complexity",
+      "anchor": "lv5l1",
+      "title": "第 1 课：算法复杂度",
+      "summary": "用规模和次数评估算法效率。",
+      "goal": "理解 O(n)、O(n log n)、O(n^2) 的直观差异。",
+      "tags": ["复杂度"],
+      "blocks": ["复杂度描述算法随输入规模增长的趋势。", "同一题可以有不同效率的算法。"],
+      "practice": { "title": "估算次数", "prompt": "比较单层循环和双层循环的执行次数。" }
+    },
+    {
+      "id": "number-theory",
+      "anchor": "lv5l4",
+      "title": "第 2 课：欧几里得与筛法",
+      "summary": "最大公约数和素数筛的基础算法。",
+      "goal": "会使用辗转相除法和埃氏筛思想。",
+      "tags": ["数论"],
+      "blocks": ["gcd 可以用辗转相除快速计算。", "筛法通过标记倍数找到素数。"],
+      "practice": { "title": "数论练习", "prompt": "手算 gcd(48, 18) 的过程。" }
+    },
+    {
+      "id": "binary-search",
+      "anchor": "lv5l5",
+      "title": "第 3 课：二分算法",
+      "summary": "在有序或单调范围内快速缩小答案。",
+      "goal": "理解左右边界、mid 和循环条件。",
+      "tags": ["二分"],
+      "blocks": ["二分每次排除一半候选。", "边界处理决定算法是否正确。"],
+      "practice": { "title": "二分查找", "prompt": "描述在有序数组中查找 7 的过程。" }
+    }
+  ],
+  "practiceLinks": [
+    { "title": "打开互动版", "description": "查看原五级课程的题目、打卡和算法示例。", "href": "/levels/5" }
+  ]
+}

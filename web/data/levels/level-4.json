@@ -1,0 +1,44 @@
+{
+  "id": 4,
+  "slug": "level-4",
+  "title": "GESP C++ 四级课程",
+  "description": "二维数组、结构体、函数、递推、排序、文件与异常。",
+  "emoji": "🏗️",
+  "progressKey": "gesp_lv4_prog",
+  "sourcePage": "level4.html",
+  "lessons": [
+    {
+      "id": "matrix",
+      "anchor": "lv4l1",
+      "title": "第 1 课：二维数组",
+      "summary": "用行和列组织表格型数据。",
+      "goal": "能遍历二维数组并处理矩阵类问题。",
+      "tags": ["二维数组"],
+      "blocks": ["二维数组可以表示棋盘、表格和矩阵。", "常用双层循环访问每个元素。"],
+      "practice": { "title": "矩阵遍历", "prompt": "说明如何按行遍历一个 3x3 数组。" }
+    },
+    {
+      "id": "functions",
+      "anchor": "lv4l4",
+      "title": "第 2 课：函数",
+      "summary": "把重复逻辑封装成可复用函数。",
+      "goal": "理解参数、返回值和函数调用。",
+      "tags": ["函数"],
+      "blocks": ["函数让程序结构更清晰。", "参数用于传入数据，返回值用于带回结果。"],
+      "practice": { "title": "设计函数", "prompt": "设计一个判断整数是否为偶数的函数接口。" }
+    },
+    {
+      "id": "sorting",
+      "anchor": "lv4l7",
+      "title": "第 3 课：排序算法",
+      "summary": "认识基础排序思想。",
+      "goal": "理解比较、交换和排序结果的关系。",
+      "tags": ["排序"],
+      "blocks": ["排序把数据按指定规则排列。", "稳定性和复杂度是进阶关注点。"],
+      "practice": { "title": "手工排序", "prompt": "用选择排序思想排列 5、2、4、1。" }
+    }
+  ],
+  "practiceLinks": [
+    { "title": "打开互动版", "description": "查看原四级课程的题目、打卡和代码示例。", "href": "/levels/4" }
+  ]
+}

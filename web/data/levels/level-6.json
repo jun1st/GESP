@@ -1,0 +1,44 @@
+{
+  "id": 6,
+  "slug": "level-6",
+  "title": "GESP C++ 六级课程",
+  "description": "树、DFS、BFS、动态规划、面向对象、栈和队列。",
+  "emoji": "🌳",
+  "progressKey": "gesp_lv6_prog",
+  "sourcePage": "level6.html",
+  "lessons": [
+    {
+      "id": "trees",
+      "anchor": "lv6l1",
+      "title": "第 1 课：树与二叉树",
+      "summary": "认识树形结构和二叉树基础。",
+      "goal": "理解根、父子节点、叶子和深度等概念。",
+      "tags": ["树"],
+      "blocks": ["树适合表示层级关系。", "二叉树每个节点最多有两个孩子。"],
+      "practice": { "title": "树结构识别", "prompt": "指出一棵树里的根节点和叶子节点。" }
+    },
+    {
+      "id": "search",
+      "anchor": "lv6l4",
+      "title": "第 2 课：DFS 与 BFS",
+      "summary": "深度优先和广度优先遍历。",
+      "goal": "区分 DFS 先走到底和 BFS 一层层扩展。",
+      "tags": ["搜索"],
+      "blocks": ["DFS 常用递归或栈。", "BFS 常用队列。"],
+      "practice": { "title": "遍历顺序", "prompt": "说明从一个节点出发 BFS 的访问顺序。" }
+    },
+    {
+      "id": "dp",
+      "anchor": "lv6l5",
+      "title": "第 3 课：简单动态规划",
+      "summary": "用状态和转移解决重复子问题。",
+      "goal": "理解状态定义、初值和转移方程。",
+      "tags": ["动态规划"],
+      "blocks": ["动态规划保存子问题答案。", "状态设计决定问题能否被清晰表达。"],
+      "practice": { "title": "台阶问题", "prompt": "写出走台阶问题的状态转移思路。" }
+    }
+  ],
+  "practiceLinks": [
+    { "title": "打开互动版", "description": "查看原六级课程的搜索、DP 和打卡互动。", "href": "/levels/6" }
+  ]
+}

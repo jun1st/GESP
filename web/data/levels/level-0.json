@@ -1,0 +1,44 @@
+{
+  "id": 0,
+  "slug": "level-0",
+  "title": "GESP C++ 基础常识乐园",
+  "description": "计算机基础、二进制、存储单位和入门常识。",
+  "emoji": "🌱",
+  "progressKey": "gesp_lv0_prog",
+  "sourcePage": "fundamentals.html",
+  "lessons": [
+    {
+      "id": "computer-basics",
+      "anchor": "s1",
+      "title": "第 1 课：电脑和程序",
+      "summary": "认识计算机、程序、输入、处理和输出。",
+      "goal": "理解计算机如何按照程序处理信息。",
+      "tags": ["基础常识"],
+      "blocks": ["程序是一组让计算机执行的指令。", "输入、处理、输出是理解计算任务的基本框架。"],
+      "practice": { "title": "生活中的程序", "prompt": "举一个生活流程，并拆成输入、处理、输出。" }
+    },
+    {
+      "id": "bits-bytes",
+      "anchor": "s2",
+      "title": "第 2 课：比特和字节",
+      "summary": "认识 bit、Byte 和常见存储单位。",
+      "goal": "掌握 8 bit = 1 Byte，以及 KB、MB、GB 的层级关系。",
+      "tags": ["存储单位"],
+      "blocks": ["bit 是最小的信息单位。", "Byte 常用于表示文件和内存大小。"],
+      "practice": { "title": "单位换算", "prompt": "把 1KB 换算成 Byte，把 1MB 换算成 KB。" }
+    },
+    {
+      "id": "binary",
+      "anchor": "s3",
+      "title": "第 3 课：二进制入门",
+      "summary": "用 0 和 1 表示信息。",
+      "goal": "理解二进制位权和简单十进制转换。",
+      "tags": ["二进制"],
+      "blocks": ["二进制每一位只有 0 或 1。", "从右往左的位权依次是 1、2、4、8。"],
+      "practice": { "title": "二进制读数", "prompt": "计算二进制 1011 对应的十进制数。" }
+    }
+  ],
+  "practiceLinks": [
+    { "title": "打开互动版", "description": "保留原页面中的单位、二进制和期末闯关互动。", "href": "/levels/0" }
+  ]
+}
