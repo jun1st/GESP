@@ -28,6 +28,12 @@ html { scroll-padding-top: 96px; }
   box-shadow: 0 4px 14px rgba(43, 45, 66, .08);
   text-align: left;
 }
+.site-topbar,
+.site-topbar a,
+.site-topbar input,
+.site-topbar button {
+  line-height: 1.5;
+}
 .brand-mark {
   display: inline-flex;
   align-items: center;
@@ -205,11 +211,16 @@ html { scroll-padding-top: 96px; }
 .levelnav a.next { background: #5e60ce; color: #fff; border-color: #5e60ce; }
 
 /* ---- 外层框架（仅居中） ---- */
-.site-shell, .wrap, .course-shell, .page-shell { margin-left: auto; margin-right: auto; }
+.site-shell, .wrap, .course-shell, .page-shell {
+  max-width: 1120px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.site-shell { padding-left: 18px; padding-right: 18px; }
+.wrap { padding-left: 18px; padding-right: 18px; }
 .page-shell { max-width: 1120px; padding: 14px 18px 40px; }
 
 /* ---- 首页（学习中心） ---- */
-.site-shell { max-width: 960px; }
 .landing-hero, .dashboard-hero {
   display: grid;
   grid-template-columns: minmax(0, 1.35fr) minmax(260px, .65fr);
