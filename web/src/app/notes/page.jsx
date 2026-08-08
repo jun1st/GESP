@@ -24,10 +24,14 @@ export default function NotesPage() {
     <div className="panel">
       <h2>📖 客观题速记卡（考前背这张表）</h2>
       <table>
-        <tr><th>考点</th><th>答案</th></tr>
-        {CARDS.map(([point, answer]) => (
-          <tr key={point}><td>{point}</td><td><b>{answer}</b></td></tr>
-        ))}
+        <thead>
+          <tr><th>考点</th><th>答案</th></tr>
+        </thead>
+        <tbody>
+          {CARDS.map(([point, answer]) => (
+            <tr key={point}><td>{point}</td><td><b>{answer}</b></td></tr>
+          ))}
+        </tbody>
       </table>
       <div className="callout info">
         备考顺序建议：先把"多层循环 + 数位分解 + 枚举"练熟（编程题 50 分），再背速记卡（客观题 50 分）。

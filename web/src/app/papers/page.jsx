@@ -67,10 +67,14 @@ export default function PapersPage() {
       <div className="panel">
         <h2>🧭 考点索引</h2>
         <table>
-          <tr><th>考点</th><th>相关真题</th><th>对应课程</th></tr>
-          {INDEX.map(([point, papers, href, label]) => (
-            <tr key={point}><td>{point}</td><td>{papers}</td><td><Link href={href}>{label}</Link></td></tr>
-          ))}
+          <thead>
+            <tr><th>考点</th><th>相关真题</th><th>对应课程</th></tr>
+          </thead>
+          <tbody>
+            {INDEX.map(([point, papers, href, label]) => (
+              <tr key={point}><td>{point}</td><td>{papers}</td><td><Link href={href}>{label}</Link></td></tr>
+            ))}
+          </tbody>
         </table>
       </div>
     </>

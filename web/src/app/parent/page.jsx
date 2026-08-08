@@ -1,17 +1,26 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import lv0 from '../../../data/levels/level-0.json';
+import lv1 from '../../../data/levels/level-1.json';
+import lv2 from '../../../data/levels/level-2.json';
+import lv3 from '../../../data/levels/level-3.json';
+import lv4 from '../../../data/levels/level-4.json';
+import lv5 from '../../../data/levels/level-5.json';
+import lv6 from '../../../data/levels/level-6.json';
+import lv7 from '../../../data/levels/level-7.json';
+import lv8 from '../../../data/levels/level-8.json';
 
 const MODULES = [
-  ['🧠 基础常识', 'gesp_lv0_prog', 3],
-  ['🎒 一级', 'gesp_lv1_prog', 9],
-  ['🚀 二级', 'gesp_lv2_prog', 10],
-  ['📘 三级', 'gesp_lv3_prog', 6],
-  ['📗 四级', 'gesp_lv4_prog', 8],
-  ['📙 五级', 'gesp_lv5_prog', 8],
-  ['📕 六级', 'gesp_lv6_prog', 6],
-  ['📓 七级', 'gesp_lv7_prog', 5],
-  ['📔 八级', 'gesp_lv8_prog', 8]
+  ['🧠 基础常识', lv0],
+  ['🎒 一级', lv1],
+  ['🚀 二级', lv2],
+  ['📘 三级', lv3],
+  ['📗 四级', lv4],
+  ['📙 五级', lv5],
+  ['📕 六级', lv6],
+  ['📓 七级', lv7],
+  ['📔 八级', lv8]
 ];
 
 const WEEKS = [
@@ -30,13 +39,13 @@ export default function ParentPage() {
   const [wrong, setWrong] = useState(0);
 
   useEffect(() => {
-    const data = MODULES.map(([name, key, total]) => {
+    const data = MODULES.map(([name, level]) => {
       try {
-        const saved = JSON.parse(localStorage.getItem(key) || '[]');
+        const saved = JSON.parse(localStorage.getItem(level.progressKey) || '[]');
         const done = Array.isArray(saved) ? saved.filter(Boolean).length : 0;
-        return { name, total, done };
+        return { name, total: level.lessons.length, done };
       } catch (e) {
-        return { name, total, done: 0 };
+        return { name, total: level.lessons.length, done: 0 };
       }
     });
     setRows(data);
@@ -55,14 +64,18 @@ export default function ParentPage() {
         <h2>📊 学习进度总览</h2>
         <div className="total">总进度：{totalDone} / {totalAll} 课（{Math.round((totalDone / totalAll) * 100)}%）</div>
         <table>
-          <tr><th>模块</th><th>进度</th><th>完成</th></tr>
-          {rows.map((r) => (
-            <tr key={r.name}>
-              <td>{r.name}</td>
-              <td><div className="bar"><i style={{ width: (r.done / r.total) * 100 + '%' }} /></div></td>
-              <td>{r.done} / {r.total} 课{r.done === r.total ? ' ✅' : ''}</td>
-            </tr>
-          ))}
+          <thead>
+            <tr><th>模块</th><th>进度</th><th>完成</th></tr>
+          </thead>
+          <tbody>
+            {rows.map((r) => (
+              <tr key={r.name}>
+                <td>{r.name}</td>
+                <td><div className="bar"><i style={{ width: (r.done / r.total) * 100 + '%' }} /></div></td>
+                <td>{r.done} / {r.total} 课{r.done === r.total ? ' ✅' : ''}</td>
+              </tr>
+            ))}
+          </tbody>
         </table>
         <div className="callout info">
           {wrong > 0 ? `📚 错题本里有 ${wrong} 道错题，建议每周去「复习站」重做一遍。` : '🎉 错题本是空的，继续保持！'}

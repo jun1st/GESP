@@ -21,10 +21,14 @@ export default function SyllabusPage() {
       <div className="panel">
         <h2>🗺️ 知识体系总览（C++）</h2>
         <table>
-          <tr><th>级别</th><th>C++ 知识内容</th><th>知识目标</th></tr>
-          {ROWS.map(([lv, content, goal]) => (
-            <tr key={lv}><td><b>{lv}</b></td><td>{content}</td><td>{goal}</td></tr>
-          ))}
+          <thead>
+            <tr><th>级别</th><th>C++ 知识内容</th><th>知识目标</th></tr>
+          </thead>
+          <tbody>
+            {ROWS.map(([lv, content, goal]) => (
+              <tr key={lv}><td><b>{lv}</b></td><td>{content}</td><td>{goal}</td></tr>
+            ))}
+          </tbody>
         </table>
       </div>
     </>
