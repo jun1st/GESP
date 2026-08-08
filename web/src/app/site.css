@@ -357,3 +357,131 @@ html { scroll-padding-top: 96px; }
   .level-row { grid-template-columns: auto 1fr; }
   .level-row strong, .level-row em, .level-row a { grid-column: 2; justify-self: start; }
 }
+
+/* ================= 工具页组件（复习站/家长中心/考纲/笔记/真题库） ================= */
+.panel {
+  background: #fff;
+  border: 2px solid #dce3f5;
+  border-top: 5px solid #5e60ce;
+  border-radius: 20px;
+  padding: 20px 20px 24px;
+  margin: 20px 0;
+  box-shadow: 0 6px 20px rgba(43, 45, 66, .07);
+}
+.panel h2 { font-size: clamp(20px, 4vw, 26px); color: #2b2d42; margin-bottom: 8px; }
+
+.callout { border-radius: 14px; padding: 12px 15px; font-size: 14.5px; margin: 12px 0; }
+.callout.info { background: #eef4ff; border: 2px solid #bcd0ff; }
+.callout.warn { background: #fff8e6; border: 2px solid #ffd166; }
+.callout.key { background: #ffeef1; border: 2px solid #fda4af; }
+
+.btn {
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  border-radius: 999px;
+  padding: 9px 18px;
+  background: #fff;
+  color: #2b2d42;
+  border: 2px solid #dce3f5;
+  text-decoration: none;
+  display: inline-block;
+}
+.btn:hover { transform: translateY(-1px); border-color: #5e60ce; }
+.btn.go { background: #5e60ce; border-color: #5e60ce; color: #fff; }
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 12px 0;
+  font-size: 14px;
+  border: 1px solid #dce3f5;
+  border-radius: 12px;
+  overflow: hidden;
+}
+th, td { border: 1px solid #dce3f5; padding: 8px 10px; text-align: left; vertical-align: top; }
+th { background: #f1f4fb; }
+
+.total { font-size: 18px; font-weight: 800; color: #5e60ce; text-align: center; padding: 6px 0; }
+
+.plan { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 10px; margin: 12px 0; }
+.wk { background: #f7f9ff; border: 2px solid #e2e8f8; border-radius: 14px; padding: 12px 14px; font-size: 14px; }
+.wk b { color: #5e60ce; display: block; margin-bottom: 4px; }
+
+.lvgroup {
+  margin: 18px 0 6px;
+  font-size: 16px;
+  color: #5e60ce;
+  font-weight: 800;
+  border-left: 5px solid #5e60ce;
+  padding-left: 10px;
+}
+.qi { background: #f7f9ff; border-radius: 14px; padding: 13px 15px; margin: 10px 0; }
+.qhead { font-size: 13px; color: #8b8fa8; font-weight: 600; margin-bottom: 4px; }
+.qq { font-weight: 700; font-size: 15px; margin-bottom: 6px; }
+.qo {
+  display: block;
+  width: 100%;
+  text-align: left;
+  margin: 5px 0;
+  border: 2px solid #dce3f5;
+  background: #fff;
+  border-radius: 12px;
+  padding: 7px 12px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+}
+.qo:hover { border-color: #5e60ce; }
+.qo.right { background: #d1fae5 !important; border-color: #10b981 !important; color: #065f46 !important; }
+.qo.wrong { background: #ffe4e6 !important; border-color: #f43f5e !important; color: #881337 !important; }
+
+.paper-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 10px; margin-top: 12px; }
+.paper-card {
+  display: block;
+  text-decoration: none;
+  background: #f7f9ff;
+  border: 1px solid rgba(43, 45, 66, .12);
+  border-radius: 14px;
+  padding: 12px 14px;
+  color: #2b2d42;
+  transition: transform .15s, border-color .15s, box-shadow .15s;
+}
+.paper-card:hover { transform: translateY(-2px); border-color: #5e60ce; box-shadow: 0 6px 16px rgba(43, 45, 66, .1); }
+.paper-card b { display: block; font-size: 15px; color: #5e60ce; }
+.paper-card span { display: block; color: #6c6f93; font-size: 13px; margin-top: 2px; }
+
+.probs { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px; margin-top: 12px; }
+.prob {
+  background: #f7f9ff;
+  border: 1px solid rgba(43, 45, 66, .12);
+  border-radius: 14px;
+  padding: 14px 16px;
+}
+.prob b { font-size: 15.5px; color: #2b2d42; }
+.prob .tag {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 700;
+  color: #5e60ce;
+  background: rgba(94, 96, 206, .08);
+  border-radius: 999px;
+  padding: 2px 9px;
+  margin: 6px 2px 6px 0;
+}
+.prob p { font-size: 13.5px; color: #6c6f93; margin: 4px 0; }
+.prob a {
+  display: inline-block;
+  margin-top: 8px;
+  background: #5e60ce;
+  color: #fff;
+  border-radius: 999px;
+  padding: 7px 14px;
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
+}
+.prob a:hover { background: #6a6fd9; }
