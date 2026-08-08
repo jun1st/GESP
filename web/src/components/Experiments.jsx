@@ -59,10 +59,24 @@ export default function Experiments({ level }) {
       </>
     );
   }
+  if (level >= 3) {
+    return (
+      <>
+        <div className="exp-card">
+          <h3>🎯 本级别互动玩法</h3>
+          <p>
+            每一课的代码都能一键复制；课后小测点一点立刻判分，错题会自动进复习站。
+            下面再配上在线编译器，随时验证你写的 C++ 代码。
+          </p>
+        </div>
+        <CodeRunner />
+      </>
+    );
+  }
   return (
     <div className="exp-card">
       <h3>🧪 互动实验</h3>
-      <div className="exp-out">该级别的互动实验迁移中，先体验上面的课程内容～</div>
+      <div className="exp-out">该级别的互动实验整理中，先体验上面的课程内容～</div>
     </div>
   );
 }

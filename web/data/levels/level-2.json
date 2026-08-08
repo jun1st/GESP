@@ -171,16 +171,5 @@
       }
     }
   ],
-  "practiceLinks": [
-    {
-      "title": "编程练习场",
-      "href": "level2.html#editor",
-      "description": "保留旧页面中的在线编译器和真题示例。"
-    },
-    {
-      "title": "真题资料库",
-      "href": "papers.html#derivedPractice",
-      "description": "按历年真题考点组织的原创改编训练路线。"
-    }
-  ]
+  "practiceLinks": []
 }

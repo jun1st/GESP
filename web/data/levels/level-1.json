@@ -38,7 +38,5 @@
       "practice": { "title": "流程判断", "prompt": "写出判断分数是否及格的条件。" }
     }
   ],
-  "practiceLinks": [
-    { "title": "打开互动版", "description": "保留原页面中的变量盒子、流程演示、编译器和闯关练习。", "href": "/levels/1" }
-  ]
+  "practiceLinks": []
 }

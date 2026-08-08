@@ -1,11 +1,9 @@
-import Link from 'next/link';
-import { readLevel } from '@/lib/courseData';
+import { readLevel, LEVEL_CN } from '@/lib/courseData';
 import ProgressBar from './ProgressBar';
 import CheckButton from './CheckButton';
 import Experiments from '@/components/Experiments';
-
-// 互动实验页（二进制开关、编译器练习场等）暂由旧版页面提供，迁移完成后移除。
-const LEGACY_BASE = 'https://jun1st.github.io/GESP';
+import CodeBlock from '@/components/experiments/CodeBlock';
+import LessonQuiz from '@/components/experiments/LessonQuiz';
 
 export const dynamic = 'force-static';
 
@@ -16,6 +14,7 @@ export async function generateStaticParams() {
 export default async function CoursePage({ params }) {
   const { level } = await params;
   const data = await readLevel(level);
+  const levelName = LEVEL_CN[data.id] || `${data.id} 级`;
 
   return (
     <>
@@ -48,35 +47,23 @@ export default async function CoursePage({ params }) {
               <ul className="lesson-blocks">
                 {(lesson.blocks || []).map((block, i) => <li key={i}>{block}</li>)}
               </ul>
-              <div className="lesson-practice">
-                <b>{lesson.practice?.title || '练习'}</b>
-                <p>{lesson.practice?.prompt || '完成本课配套练习。'}</p>
-              </div>
+              {!lesson.quiz && lesson.practice && (
+                <div className="lesson-practice">
+                  <b>{lesson.practice.title}</b>
+                  <p>{lesson.practice.prompt}</p>
+                </div>
+              )}
+              {(lesson.code || []).map((code, i) => (
+                <CodeBlock key={i} code={code} title={i === 0 ? '💻 代码示例' : `💻 代码示例 ${i + 1}`} />
+              ))}
+              <LessonQuiz quiz={lesson.quiz} levelName={levelName} lessonTitle={lesson.title} />
               <div className="lesson-actions">
                 <CheckButton progressKey={data.progressKey} index={index} />
-                <a href={`${LEGACY_BASE}/${data.sourcePage}#${lesson.anchor}`} target="_blank" rel="noopener">
-                  打开互动版
-                </a>
               </div>
             </article>
           ))}
         </div>
       </section>
-
-      {data.practiceLinks?.length > 0 && (
-        <section className="course-panel">
-          <h2>练习入口</h2>
-          <div className="practice-grid">
-                {data.practiceLinks.map((link) => (
-                  <div className="practice-card" key={link.title}>
-                    <b>{link.title}</b>
-                    <p>{link.description}</p>
-                    <a href={`${LEGACY_BASE}/${link.href}`} target="_blank" rel="noopener">打开</a>
-                  </div>
-                ))}
-          </div>
-        </section>
-      )}
 
       <section className="course-panel">
         <h2>🧪 互动实验</h2>

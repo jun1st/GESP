@@ -38,5 +38,19 @@ npm run build    # 静态导出到 out/
 ## 迁移状态
 
 - 已迁移：首页、课程地图、1-8 级课程、复习站、家长中心、官方考纲、知识笔记、真题资料库
-- 已迁移互动实验（0-2 级课程页内）：二进制字节开关、进制转换、存储单位、电脑零件、变量盒子、算术、逻辑灯、分支滑块、数星星、断电实验、网络圈、流程图、ASCII 编码器、整数除法、switch 穿透、循环图形、数学函数、掷骰子、在线编译器
-- 待迁移：3-8 级互动实验（迁移完成后可退役 `server.js` / `legacyPage` 与旧 HTML）
+- 已迁移互动实验：
+  - 0 级：二进制字节开关、进制转换、存储单位
+  - 1 级：电脑零件、变量盒子、算术、逻辑灯、分支滑块、数星星、在线编译器
+  - 2 级：断电实验、网络圈、流程图、ASCII 编码器、整数除法、switch 穿透、循环图形、数学函数、掷骰子、在线编译器
+  - 3-8 级：每课完整讲解 + 代码一键复制 + 每课小测（错题自动进复习站）+ 在线编译器
+- 旧站与 Express 路由（`server.js` / `legacyPage` / 根目录 HTML）已由 GitHub Pages 部署切换退役
+
+## GitHub Pages 部署
+
+`.github/workflows/pages.yml` 会用 `NEXT_PUBLIC_BASE_PATH=/GESP` 构建 `web/out` 并发布到
+`https://jun1st.github.io/GESP/`。本地开发直接 `npm run dev`（根路径）；构建静态站：
+
+```bash
+NEXT_PUBLIC_BASE_PATH=/GESP npm run build   # 与线上一致的产物
+npm run build                               # 无前缀版本（本地预览）
+```

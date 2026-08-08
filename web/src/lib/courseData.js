@@ -26,3 +26,15 @@ export async function listLevels() {
   );
   return levels.sort((a, b) => a.id - b.id);
 }
+
+export const LEVEL_CN = {
+  0: '零级入门',
+  1: '一级',
+  2: '二级',
+  3: '三级',
+  4: '四级',
+  5: '五级',
+  6: '六级',
+  7: '七级',
+  8: '八级'
+};

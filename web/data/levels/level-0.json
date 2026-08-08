@@ -38,7 +38,5 @@
       "practice": { "title": "二进制读数", "prompt": "计算二进制 1011 对应的十进制数。" }
     }
   ],
-  "practiceLinks": [
-    { "title": "打开互动版", "description": "保留原页面中的单位、二进制和期末闯关互动。", "href": "/levels/0" }
-  ]
+  "practiceLinks": []
 }
