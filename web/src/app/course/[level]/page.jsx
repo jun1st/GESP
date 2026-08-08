@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { readLevel } from '@/lib/courseData';
 import ProgressBar from './ProgressBar';
 import CheckButton from './CheckButton';
+import Experiments from '@/components/Experiments';
 
 // 互动实验页（二进制开关、编译器练习场等）暂由旧版页面提供，迁移完成后移除。
 const LEGACY_BASE = 'https://jun1st.github.io/GESP';
@@ -76,6 +77,11 @@ export default async function CoursePage({ params }) {
           </div>
         </section>
       )}
+
+      <section className="course-panel">
+        <h2>🧪 互动实验</h2>
+        <Experiments level={data.id} />
+      </section>
     </>
   );
 }

@@ -1,5 +1,6 @@
 import './site.css';
 import './course.css';
+import './experiments.css';
 import Topbar from '@/components/Topbar';
 import Footer from '@/components/Footer';
 
