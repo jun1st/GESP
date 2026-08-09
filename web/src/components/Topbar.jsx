@@ -1,5 +1,6 @@
 'use client';
 
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
@@ -16,6 +17,26 @@ const NAV = [
 export default function Topbar() {
   const pathname = usePathname() || '/';
   const active = pathname === '/' ? '/' : '/' + pathname.split('/')[1];
+  const [me, setMe] = useState(null);
+
+  useEffect(() => {
+    const load = async () => {
+      try {
+        const res = await fetch('/api/account/me', { cache: 'no-store' });
+        const data = await res.json();
+        setMe(data.user || null);
+      } catch {
+        setMe(null);
+      }
+    };
+    load();
+    window.addEventListener('gesp-auth-changed', load);
+    window.addEventListener('storage', load);
+    return () => {
+      window.removeEventListener('gesp-auth-changed', load);
+      window.removeEventListener('storage', load);
+    };
+  }, []);
 
   return (
     <header className="site-topbar">
@@ -30,6 +51,16 @@ export default function Topbar() {
           </Link>
         ))}
       </nav>
+      <div className="topbar-user">
+        {me ? (
+          <Link href="/account" className="user-chip">
+            <span>👤 {me.phone.slice(0, 3)}****{me.phone.slice(7)}</span>
+            {me.isMember && <i className="user-vip">VIP</i>}
+          </Link>
+        ) : (
+          <Link href="/account" className="user-chip">👤 登录</Link>
+        )}
+      </div>
     </header>
   );
 }

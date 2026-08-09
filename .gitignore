@@ -8,3 +8,11 @@ __pycache__/
 
 # 本地真题 PDF 资料库（已解析为题库 JSON，不入库）
 真题PDF/
+.local.db
+.local.db-journal
+.local.db-shm
+.local.db-wal
+
+# Next.js 自动生成的 agent 说明文件
+web/AGENTS.md
+web/CLAUDE.md

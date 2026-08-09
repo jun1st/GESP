@@ -5,7 +5,7 @@ import Link from 'next/link';
 
 const MODULES = [
   { name: '基础常识', emoji: '🧠', key: 'gesp_lv0_prog', total: 3, page: '/course/0', color: 'sky' },
-  { name: '一级', emoji: '🎒', key: 'gesp_lv1_prog', total: 9, page: '/course/1', color: 'teal' },
+  { name: '一级', emoji: '🎒', key: 'gesp_lv1_prog', total: 3, page: '/course/1', color: 'teal' },
   { name: '二级', emoji: '🚀', key: 'gesp_lv2_prog', total: 10, page: '/course/2', color: 'violet' },
   { name: '三级', emoji: '📘', key: 'gesp_lv3_prog', total: 6, page: '/course/3', color: 'sky' },
   { name: '四级', emoji: '📗', key: 'gesp_lv4_prog', total: 8, page: '/course/4', color: 'amber' },
@@ -27,12 +27,27 @@ function getArr(key, n) {
 export default function HomePage() {
   const [profile, setProfile] = useState(null);
   const [name, setName] = useState('');
+  const [progress, setProgress] = useState(null);
 
   useEffect(() => {
     try {
       const p = JSON.parse(localStorage.getItem('gesp_user_profile') || 'null');
       if (p && typeof p.name === 'string') setProfile(p);
     } catch (e) {}
+    const loadProgress = () => {
+      const state = MODULES.map((m) => {
+        const arr = getArr(m.key, m.total);
+        return { m, arr, done: arr.filter(Boolean).length };
+      });
+      setProgress(state);
+    };
+    loadProgress();
+    window.addEventListener('gesp-progress', loadProgress);
+    window.addEventListener('storage', loadProgress);
+    return () => {
+      window.removeEventListener('gesp-progress', loadProgress);
+      window.removeEventListener('storage', loadProgress);
+    };
   }, []);
 
   const login = (e) => {
@@ -48,13 +63,10 @@ export default function HomePage() {
     setProfile(null);
   };
 
-  const state = MODULES.map((m) => {
-    const arr = getArr(m.key, m.total);
-    return { m, arr, done: arr.filter(Boolean).length };
-  });
+  const state = progress || MODULES.map((m) => ({ m, arr: new Array(m.total).fill(false), done: 0 }));
   const total = state.reduce((s, x) => s + x.m.total, 0);
   const done = state.reduce((s, x) => s + x.done, 0);
-  const pct = Math.round((done / total) * 100);
+  const pct = progress ? Math.round((done / total) * 100) : null;
   const firstIncomplete = state.find((x) => x.arr.indexOf(false) >= 0);
   const hour = new Date().getHours();
   const greet = hour < 6 ? '夜深了，注意休息' : hour < 12 ? '早上好！' : hour < 18 ? '下午好！' : '晚上好！';
@@ -94,13 +106,13 @@ export default function HomePage() {
           </div>
           <div className="hero-stats">
             <div className="hs"><b>9</b><span>个级别</span></div>
-            <div className="hs"><b>15</b><span>期官方真题</span></div>
-            <div className="hs"><b>9</b><span>道内置真题</span></div>
+            <div className="hs"><b>14</b><span>期官方真题</span></div>
+            <div className="hs"><b>2646</b><span>道真题</span></div>
             <div className="hs"><b>∞</b><span>在线编译</span></div>
           </div>
           <div className="hero-progress">
-            <div className="hp-row"><span>我的学习进度</span><b>{pct}%</b></div>
-            <div className="hp-track"><i style={{ width: pct + '%' }} /></div>
+            <div className="hp-row"><span>我的学习进度</span><b>{pct ?? 0}%</b></div>
+            <div className="hp-track"><i style={{ width: (pct ?? 0) + '%' }} /></div>
           </div>
           <div className="mini-path">
             <i>基础</i><i>一级</i><i>二级</i><i>进阶</i>
@@ -137,8 +149,8 @@ export default function HomePage() {
             <p>一次只学一课。完成打卡后，系统会继续推荐下一步。</p>
           </div>
           <div className="progress-card">
-            <div><span>总闯关进度</span><b>{pct}%</b></div>
-            <div className="progress-track"><i style={{ width: pct + '%' }} /></div>
+            <div><span>总闯关进度</span><b>{pct ?? 0}%</b></div>
+            <div className="progress-track"><i style={{ width: (pct ?? 0) + '%' }} /></div>
             <p>已完成 {done} / {total} 课</p>
           </div>
         </section>

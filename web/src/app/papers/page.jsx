@@ -2,8 +2,8 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import Link from 'next/link';
 import PapersBrowser from '@/components/PapersBrowser';
-
-export const dynamic = 'force-static';
+import LockedPanel from '@/components/LockedPanel';
+import { getMemberContext } from '@/lib/member';
 
 const OFFICIAL = [
   ['2026 年 6 月', 'https://gesp.ccf.org.cn/101/1010/10284.html', 'GESP 认证真题 ｜ CCF 官方'],
@@ -44,6 +44,7 @@ const INDEX = [
 ];
 
 export default async function PapersPage() {
+  const { isMember } = await getMemberContext();
   let batches = [];
   try {
     const raw = await fs.readFile(path.join(process.cwd(), 'public', 'data', 'papers', 'index.json'), 'utf8');
@@ -53,7 +54,7 @@ export default async function PapersPage() {
   }
   return (
     <>
-      {batches.length > 0 && (
+      {batches.length > 0 && isMember && (
         <div className="panel">
           <h2>🖥️ 真题在线练习（2023.03 ~ 2026.06，共 {batches.length} 个批次）</h2>
           <p className="panel-sub">
@@ -61,6 +62,9 @@ export default async function PapersPage() {
           </p>
           <PapersBrowser batches={batches} />
         </div>
+      )}
+      {batches.length > 0 && !isMember && (
+        <LockedPanel title="历年真题与解析为会员专享" />
       )}
       <div className="panel">
         <h2>🧾 官方真题汇总（2023.03 ~ 2026.06）</h2>
