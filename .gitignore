@@ -3,3 +3,8 @@ node_modules/
 .env.*
 npm-debug.log*
 .vercel
+.DS_Store
+__pycache__/
+
+# 本地真题 PDF 资料库（已解析为题库 JSON，不入库）
+真题PDF/

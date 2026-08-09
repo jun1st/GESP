@@ -1,9 +1,10 @@
-import { readLevel, LEVEL_CN } from '@/lib/courseData';
+import { readLevel, readRelated, LEVEL_CN } from '@/lib/courseData';
 import ProgressBar from './ProgressBar';
 import CheckButton from './CheckButton';
 import Experiments from '@/components/Experiments';
 import CodeBlock from '@/components/experiments/CodeBlock';
 import LessonQuiz from '@/components/experiments/LessonQuiz';
+import RelatedQuestions from '@/components/RelatedQuestions';
 
 export const dynamic = 'force-static';
 
@@ -14,7 +15,12 @@ export async function generateStaticParams() {
 export default async function CoursePage({ params }) {
   const { level } = await params;
   const data = await readLevel(level);
+  const related = await readRelated(data.id);
   const levelName = LEVEL_CN[data.id] || `${data.id} 级`;
+  const relatedByAnchor = {};
+  for (const lesson of related.lessons || []) {
+    relatedByAnchor[lesson.anchor] = lesson.questions || [];
+  }
 
   return (
     <>
@@ -57,6 +63,7 @@ export default async function CoursePage({ params }) {
                 <CodeBlock key={i} code={code} title={i === 0 ? '💻 代码示例' : `💻 代码示例 ${i + 1}`} />
               ))}
               <LessonQuiz quiz={lesson.quiz} levelName={levelName} lessonTitle={lesson.title} />
+              <RelatedQuestions questions={relatedByAnchor[lesson.anchor]} />
               <div className="lesson-actions">
                 <CheckButton progressKey={data.progressKey} index={index} />
               </div>

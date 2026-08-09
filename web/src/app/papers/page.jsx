@@ -1,4 +1,9 @@
+import fs from 'node:fs/promises';
+import path from 'node:path';
 import Link from 'next/link';
+import PapersBrowser from '@/components/PapersBrowser';
+
+export const dynamic = 'force-static';
 
 const OFFICIAL = [
   ['2026 年 6 月', 'https://gesp.ccf.org.cn/101/1010/10284.html', 'GESP 认证真题 ｜ CCF 官方'],
@@ -38,9 +43,25 @@ const INDEX = [
   ['闰年 / 分支判断', '时间跨越', '/course/1', '一级 课程']
 ];
 
-export default function PapersPage() {
+export default async function PapersPage() {
+  let batches = [];
+  try {
+    const raw = await fs.readFile(path.join(process.cwd(), 'public', 'data', 'papers', 'index.json'), 'utf8');
+    batches = JSON.parse(raw);
+  } catch (e) {
+    /* 题库数据缺失时仅展示原有内容 */
+  }
   return (
     <>
+      {batches.length > 0 && (
+        <div className="panel">
+          <h2>🖥️ 真题在线练习（2023.03 ~ 2026.06，共 {batches.length} 个批次）</h2>
+          <p className="panel-sub">
+            选择题点开即看答案；2023 年四个批次附官方解析，错题可对照“考纲知识点”回课程复习。
+          </p>
+          <PapersBrowser batches={batches} />
+        </div>
+      )}
       <div className="panel">
         <h2>🧾 官方真题汇总（2023.03 ~ 2026.06）</h2>
         <div className="paper-list">

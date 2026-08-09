@@ -1,0 +1,688 @@
+{
+ "level": 8,
+ "lessons": [
+  {
+   "anchor": "lv8l1",
+   "title": "第 1 课：计数原理：加法与乘法",
+   "questions": [
+    {
+     "id": "2026-06-j1",
+     "batch": "2026-06",
+     "type": "judge",
+     "no": 1,
+     "title": "",
+     "text": "若⼀项任务可从两种互斥的⽅案中选择⼀种完成，其中，⽅案 A 有 种做法，⽅案 B 有 种做法，则总做 法数为 。",
+     "options": [],
+     "answer": "A",
+     "point": "",
+     "analysis": "",
+     "outline": "",
+     "thinking": "",
+     "program": ""
+    },
+    {
+     "id": "2026-06-j2",
+     "batch": "2026-06",
+     "type": "judge",
+     "no": 2,
+     "title": "",
+     "text": "将 个不同元素围成⼀圈，若只把旋转视为同⼀种排法、翻转仍视为不同排法，则⽅案数为 。",
+     "options": [],
+     "answer": "B",
+     "point": "",
+     "analysis": "",
+     "outline": "",
+     "thinking": "",
+     "program": ""
+    },
+    {
+     "id": "2026-06-j3",
+     "batch": "2026-06",
+     "type": "judge",
+     "no": 3,
+     "title": "",
+     "text": "从 个不同元素中可重复地选取 个且不考虑顺序，⽅案数为 。",
+     "options": [],
+     "answer": "",
+     "point": "",
+     "analysis": "",
+     "outline": "",
+     "thinking": "",
+     "program": ""
+    },
+    {
+     "id": "2026-06-p2",
+     "batch": "2026-06",
+     "type": "program",
+     "no": 2,
+     "title": "堆⽯⼦",
+     "text": "3.2 编程题 2 时间限制：1.0 s 内存限制：512.0 MB 3.2.1 题目描述 有 堆⽯⼦，编号为 ，其⽯⼦数量分别记为 。 现在要求第 堆⽯⼦恰有 个（即 ），并且此后每堆⽯⼦的数量严格⼩于前⼀堆，即 （ ）。此外，每堆⾄少需要有⼀个⽯⼦，即 （ ）。 在总⽯⼦数量不设限制的情况下，给定 ，有多少个满⾜要求的⽯⼦堆放⽅案？ 两个⽅案不同，当且仅当，两个⽅案中⾄少有⼀堆⽯⼦数量不同。 如果不存在满⾜要求的⽅案，输出 。由于⽅案数可能很⼤，请输出⽅案数对 取模后的结果。 3.2.2 输入格式 输⼊⼀⾏两个正整数 和 。 3.2.3 输出格式 输出⼀个整数，表⽰总⽅案数对 取模后的结果。 3.2.4 样例 3.2.5 输入样例 1 1 3 5 3.2.6 输出样例 1 1 6 3.2.7 样例解释 1 有 ， ， ， ， 和 共计 种⽅案。 3.2.8 数据范围 数据点编号 数据范围 特殊性质 1,2 , 3,4,5 , ⽆ 6,7,8,9,10 , ⽆ 3.2.9 参考程序 1 #include <iostream> 2 using namespace std; 3 4 const int MOD = (int)1e9 + 7; 5 6 int qpow(int base, int exp) { 7 if (!exp) return 1; 8 if (exp & 1) return (long long)base * qpow((long long)base * base % MOD, exp >> 1) % MOD; 9 return qpow((long long)base * base % MOD, exp >> 1); 10 } 11 12 int comb(int n, int m) { 13 if (m > n) return 0; 14 int ans = 1; 15 for (int i = 0; i < m; ++i) { 16 ans = (long long)ans * (n - i) % MOD; 17 ans = (long long)ans * qpow(i + 1, MOD - 2) % MOD; 18 } 19 return ans; 20 } 21 22 int main() { 23 int m, n; 24 cin >> m >> n; 25 cout << comb(n - 1, m - 1) << endl; 26 return 0; 27 }",
+     "options": [],
+     "answer": "",
+     "point": "",
+     "analysis": "",
+     "outline": "",
+     "thinking": "",
+     "program": ""
+    },
+    {
+     "id": "2026-03-s2",
+     "batch": "2026-03",
+     "type": "single",
+     "no": 2,
+     "title": "",
+     "text": "在杨辉三角中，从第0⾏开始计数，第10⾏的所有数之和为（ ）。",
+     "options": [
+      "512",
+      "1024",
+      "2048",
+      "4096"
+     ],
+     "answer": "B",
+     "point": "",
+     "analysis": "",
+     "outline": "",
+     "thinking": "",
+     "program": ""
+    },
+    {
+     "id": "2025-12-j1",
+     "batch": "2025-12",
+     "type": "judge",
+     "no": 1,
+     "title": "",
+     "text": "若⼀项任务可⽤两种互斥⽅案完成：⽅案A有 种做法，⽅案B有 种做法，则总做法数为 。",
+     "options": [],
+     "answer": "",
+     "point": "",
+     "analysis": "",
+     "outline": "",
+     "thinking": "",
+     "program": ""
+    },
+    {
+     "id": "2025-12-j5",
+     "batch": "2025-12",
+     "type": "judge",
+     "no": 5,
+     "title": "",
+     "text": "在杨辉三角形中，第 ⾏（从0开始计数，即第 ⾏有 个数）的所有数字之和等于 。",
+     "options": [],
+     "answer": "",
+     "point": "",
+     "analysis": "",
+     "outline": "",
+     "thinking": "",
+     "program": ""
+    },
+    {
+     "id": "2025-12-j7",
+     "batch": "2025-12",
+     "type": "judge",
+     "no": 7,
+     "title": "",
+     "text": "个不同元素依次⼊栈的出栈序列数与将 个不同元素划分成若⼲⾮空⼦集的⽅案数相等。",
+     "options": [],
+     "answer": "",
+     "point": "",
+     "analysis": "",
+     "outline": "",
+     "thinking": "",
+     "program": ""
+    }
+   ]
+  },
+  {
+   "anchor": "lv8l2",
+   "title": "第 2 课：排列与组合",
+   "questions": [
+    {
+     "id": "2026-06-s1",
+     "batch": "2026-06",
+     "type": "single",
+     "no": 1,
+     "title": "",
+     "text": "从 本不同的算法书和 本不同的数学书中选出 本，要求两类书都⾄少选 本，共有（ ）种不同选法。",
+     "options": [
+      "420",
+      "455",
+      "465",
+      "495"
+     ],
+     "answer": "B",
+     "point": "",
+     "analysis": "",
+     "outline": "",
+     "thinking": "",
+     "program": ""
+    },
+    {
+     "id": "2026-06-s4",
+     "batch": "2026-06",
+     "type": "single",
+     "no": 4,
+     "title": "",
+     "text": "下⾯代码⽤于预处理组合数，横线处应填⼊的是（ ）。 1 for (int i = 0; i <= n; i++) { 2 c[i][0] = c[i][i] = 1; 3 for (int j = 1; j < i; j++) 4 c[i][j] = __________; 5 }",
+     "options": [
+      "c[i - 1][j - 1] + c[i - 1][j]",
+      "c[i][j - 1] + c[i - 1][j - 1]",
+      "c[i - 1][j] + c[i][j + 1]",
+      "c[i][j - 1] * c[i - 1][j]"
+     ],
+     "answer": "A",
+     "point": "",
+     "analysis": "",
+     "outline": "",
+     "thinking": "",
+     "program": ""
+    },
+    {
+     "id": "2026-06-j4",
+     "batch": "2026-06",
+     "type": "judge",
+     "no": 4,
+     "title": "",
+     "text": "杨辉三角中的组合数满⾜ 。",
+     "options": [],
+     "answer": "",
+     "point": "",
+     "analysis": "",
+     "outline": "",
+     "thinking": "",
+     "program": ""
+    },
+    {
+     "id": "2026-03-s1",
+     "batch": "2026-03",
+     "type": "single",
+     "no": 1,
+     "title": "",
+     "text": "某班级有8名男⽣和6名⼥⽣，现要选出3⼈组成学习⼩组，要求⼩组中⾄少有1名男⽣和1名⼥⽣，则不同的 选法共有（ ）种。",
+     "options": [
+      "112",
+      "168",
+      "224",
+      "288"
+     ],
+     "answer": "D",
+     "point": "",
+     "analysis": "",
+     "outline": "",
+     "thinking": "",
+     "program": ""
+    },
+    {
+     "id": "2026-03-s4",
+     "batch": "2026-03",
+     "type": "single",
+     "no": 4,
+     "title": "",
+     "text": "从5本不同的数学书和4本不同的物理书中选取3本书，要求⾄少包含1本数学书，则不同的选法有（ ）种。",
+     "options": [
+      "60 第 1 页 / 共 9 页",
+      "74",
+      "80",
+      "84"
+     ],
+     "answer": "C",
+     "point": "",
+     "analysis": "",
+     "outline": "",
+     "thinking": "",
+     "program": ""
+    },
+    {
+     "id": "2026-03-s9",
+     "batch": "2026-03",
+     "type": "single",
+     "no": 9,
+     "title": "",
+     "text": "关于图论中的最短路径算法，下列说法中严格正确的是（ ）。",
+     "options": [
+      "Dijkstra 算法能够⾼效处理包含负权边的有向图。",
+      "Floyd 算法可以求出任意两点间的最短路径，且允许图中存在负权边（但不能有负权环）。",
+      "单源最短路径算法⽆法⽤于⽆向图，⽆向图只能通过 BFS 求解。",
+      "Dijkstra 算法的每⼀步必定从当前未访问的节点中，选取距离起始点最远的节点进⾏松弛操作。"
+     ],
+     "answer": "B",
+     "point": "",
+     "analysis": "",
+     "outline": "",
+     "thinking": "",
+     "program": ""
+    },
+    {
+     "id": "2026-03-s11",
+     "batch": "2026-03",
+     "type": "single",
+     "no": 11,
+     "title": "",
+     "text": "下列代码试图实现Floyd算法求所有点对之间的最短路径，横线处应填⼊（ ）。 1 void floyd(int n, int dist[][MAXN]) { 2 for (int k = 0; k < n; k++) 3 for (int i = 0; i < n; i++) 4 for (int j = 0; j < n; j++) 5 if (__________) // 在此处填入选项 6 dist[i][j] = dist[i][k] + dist[k][j]; 7 }",
+     "options": [
+      "dist[i][k] + dist[k][j] < dist[i][j]",
+      "dist[i][k] != INF && dist[k][j] != INF",
+      "dist[i][k] != INF && dist[k][j] != INF && dist[i][k] + dist[k][j] < dist[i][j]",
+      "dist[i][j] == INF"
+     ],
+     "answer": "C",
+     "point": "",
+     "analysis": "",
+     "outline": "",
+     "thinking": "",
+     "program": ""
+    },
+    {
+     "id": "2026-03-p1",
+     "batch": "2026-03",
+     "type": "program",
+     "no": 1,
+     "title": "消息查找",
+     "text": "3.1 编程题 1 时间限制：1.0 s 内存限制：512.0 MB 3.1.1 题目描述 ⼩ A 的消息记录中有 条消息，依次以 编号。编号⼩的消息发送时间早于编号⼤的消息。 ⼀条消息可以引⽤⼀条编号⼩于它的消息，也可以不引⽤消息。⼩ A 注意到消息记录⾥有引⽤的消息数量不会⾮常 多。消息记录的⼀个例⼦是： 【消息 1】小 A：有人做了今天的第一题吗？ 【消息 2】小 A：我第一题 WA 了，可能是什么原因？ 【消息 3：引用消息 1】小 B：我我我 【消息 4：引用消息 2】小 C：我也 WA 了 【消息 5：引用消息 2】小 B：是不是没开 long long？ 【消息 6：引用消息 5】小 A：改了就 AC 了，太厉害了！ 对于消息 （ ），⼩ A 以 标记消息 是否有引⽤，以及所引⽤的消息编号。如果 ，则消息 为引 ⽤了消息 ；如果 ，则消息 没有引⽤消息。 消息记录⾥有⾮常多条消息。为了快速查找所需要的消息，⼩ A 准备实现⼀个简单的消息查找⼯具。消息查找⼯具 任意时刻只能定位恰好⼀条消息，如果当前位于消息 （ ），那么接下来可以选择以下两种操作之⼀： 定位到消息 ； 如果消息 引⽤了消息 ，定位到消息 。 以上操作可以执⾏任意次（包括零次）。 ⼩ A 有 次询问。在第 （ ）次询问中，⼩ A 给出消息编号 （ ）。⼩ A 想知道，如果当前消 息查找⼯具位于 ，⾄少需要多少次操作才能定位到消息 。 3.1.2 输入格式 第⼀⾏，两个正整数 ，分别表⽰消息条数与询问次数。 第⼆⾏， 个⾮负整数 ，表⽰消息的引⽤关系，具体含义见题⽬描述。 接下来 ⾏中的第 ⾏（ ）包含两个正整数 ，表⽰⼀次询问。 保证⾄多只有 条引⽤消息。 第 5 页 / 共 9 页 3.1.3 输出格式 输出 ⾏，每⾏⼀个整数，表⽰将界⾯从消息 切换到消息 所需的最少操作次数。 3.1.4 样例 3.1.4.1 输入样例 1 1 6 3 2 0 0 1 2 2 5 3 4 1 4 6 2 5 6 3 3.1.4.2 输出样例 1 1 2 2 2 3 3 3.1.4.3 输入样例 2 1 5 5 2 0 0 0 1 3 3 4 1 4 4 2 5 5 1 6 5 2 7 5 3 3.1.4.4 输出样例 2 1 1 2 2 3 2 4 2 5 1 3.1.5 数据范围 对于 的测试点，保证 ， 。 对于所有测试点，保证 ， ， ， ，保证⾄多有 条引⽤消息。 第 6 页 / 共 9 页 3.1.6 参考程序 1 #include <cstdio> 2 #include <algorithm> 3 4 using namespace std; 5 6 const int N = 1e5 + 5; 7 const int C = 2e3 + 5; 8 const int oo = 1e9; 9 10 int n, q; 11 int r[N], mark[N], pos[N]; 12 int p[C], cnt; 13 int d[C][C]; 14 int pre[N], suf[N]; 15 16 int main() { 17 scanf(\"%d%d\", &n, &q); 18 for (int i = 1; i <= n; i++) { 19 scanf(\"%d\", &r[i]); 20 if (r[i]) 21 mark[i] = mark[r[i]] = 1; 22 } 23 for (int i = 1; i <= n; i++) 24 if (mark[i]) { 25 p[++cnt] = i; 26 pos[i] = cnt; 27 } 28 for (int i = 1; i <= cnt; i++) { 29 for (int j = 1; j <= i; j++) 30 d[i][j] = oo; 31 d[i][i] = 0; 32 for (int j = i; j > 1; j--) { 33 d[i][j - 1] = min(d[i][j - 1], d[i][j] + p[j] - p[j - 1]); 34 if (r[p[j]]) { 35 int k = pos[r[p[j]]]; 36 d[i][k] = min(d[i][k], d[i][j] + 1); 37 } 38 } 39 } 40 for (int i = 1; i <= n; i++) { 41 pre[i] = pre[i - 1]; 42 if (mark[i]) 43 pre[i] = i; 44 } 45 suf[n + 1] = n + 1; 46 for (int i = n; i; i--) { 47 suf[i] = suf[i + 1]; 48 if (mark[i]) 49 suf[i] = i; 50 } 51 while (q--) { 52 int x, y; 53 scanf(\"%d%d\", &x, &y); 54 if (pre[x] < suf[y]) 55 printf(\"%d\\n\", x - y); 56 else 57 printf(\"%d\\n\", x - pre[x] + d[pos[pre[x]]][pos[suf[y]]] + suf[y] - y); 58 } 59 return 0; 60 } 第 7 页 / 共 9 页",
+     "options": [],
+     "answer": "",
+     "point": "",
+     "analysis": "",
+     "outline": "",
+     "thinking": "",
+     "program": ""
+    }
+   ]
+  },
+  {
+   "anchor": "lv8l3",
+   "title": "第 3 课：杨辉三角",
+   "questions": [
+    {
+     "id": "2024-12-j8",
+     "batch": "2024-12",
+     "type": "judge",
+     "no": 8,
+     "title": "",
+     "text": "杨辉三角中的第 ⾏、第 项，即为将⼆项式 展开后 项的系数。",
+     "options": [],
+     "answer": "",
+     "point": "",
+     "analysis": "",
+     "outline": "",
+     "thinking": "",
+     "program": ""
+    },
+    {
+     "id": "2024-06-s12",
+     "batch": "2024-06",
+     "type": "single",
+     "no": 12,
+     "title": "",
+     "text": "⼆项展开式 的系数，正好满⾜杨辉三角的规律。当 时，⼆项式展开式中 项的系数是（ ）。",
+     "options": [
+      "5",
+      "9",
+      "10",
+      "8"
+     ],
+     "answer": "C",
+     "point": "",
+     "analysis": "",
+     "outline": "",
+     "thinking": "",
+     "program": ""
+    }
+   ]
+  },
+  {
+   "anchor": "lv8l4",
+   "title": "第 4 课：倍增法：步子翻倍的智慧",
+   "questions": [
+    {
+     "id": "2025-03-s8",
+     "batch": "2025-03",
+     "type": "single",
+     "no": 8,
+     "title": "",
+     "text": "下列关于算法的说法，错误的是（ ）。",
+     "options": [
+      "如果有⾜够的时间和空间，枚举法能解决⼀切有限的问题。",
+      "分治算法将原问题分为多个⼦问题进⾏求解，且分解出的⼦问题必须相互独⽴。",
+      "如果能找到合理的贪⼼原则，贪⼼算法往往能够⽐其他⽅法更快求解。",
+      "倍增法在搜索未知长度的有序数组时，通过动态倍增或减半步长，快速定位⽬标范围。"
+     ],
+     "answer": "B",
+     "point": "",
+     "analysis": "",
+     "outline": "",
+     "thinking": "",
+     "program": ""
+    }
+   ]
+  },
+  {
+   "anchor": "lv8l5",
+   "title": "第 5 课：代数与平面几何（初中数学）",
+   "questions": [
+    {
+     "id": "2026-06-s7",
+     "batch": "2026-06",
+     "type": "single",
+     "no": 7,
+     "title": "",
+     "text": "在平⾯直角坐标系中，三角形三个顶点为 、 、 ，该三角形⾯积为（ ）。",
+     "options": [],
+     "answer": "A",
+     "point": "",
+     "analysis": "",
+     "outline": "",
+     "thinking": "",
+     "program": ""
+    },
+    {
+     "id": "2026-06-p1",
+     "batch": "2026-06",
+     "type": "program",
+     "no": 1,
+     "title": "线⽹建设",
+     "text": "3.1 编程题 1 时间限制：1.0 s 内存限制：512.0 MB 3.1.1 题目描述 A 市有 座基站需要通过线⽹互相连接。第 座基站位于⼆维平⾯上坐标 处。 第 座基站与第 座基站之间的距离定义为 。 如果两座基站之间的距离不超过给定的整数 ，那么可以修建连接这两座基站的线路，线路长度为基站间的距离。 如果从⼀座基站出发，经过⼀系列线⽹中的线路可以到达另⼀座基站，则称这两座基站是互相连接的。 请问使得 座基站两两之间都互相连接，需要修建的线路总长度最⼩是多少？如果不能修建满⾜条件的线⽹，则输 出 Impossible。 3.1.2 输入格式 第⼀⾏，两个正整数 ，分别表⽰基站数量与线路长度上限。 接下来 ⾏，每⾏两个整数 ，表⽰基站的坐标。 3.1.3 输出格式 输出⼀⾏。如果能修建满⾜条件的线⽹，则输出需要修建的最⼩线路总长度，保留两位⼩数。否则输出 Impossible。 3.1.4 样例 3.1.5 输入样例 1 1 4 2 2 1 0 3 -1 -1 4 0 0 5 1 1 3.1.6 输出样例 1 1 3.41 3.1.7 输入样例 2 1 4 1 2 1 0 3 -1 -1 4 0 0 5 1 1 3.1.8 输出样例 2 1 Impossible 3.1.9 数据范围 对于 的测试点，保证 。 对于所有测试点，保证 ， ， 。 3.1.10 参考程序 1 #include <iostream> 2 #include <cstdio> 3 #include <algorithm> 4 #include <cmath> 5 using namespace std; 6 7 const int N = 510; 8 const int E = N * N; 9 10 int n, l; 11 int x[N], y[N]; 12 int p[E], u[E], v[E], cnt; 13 int f[N], t = 0; 14 double d[E], ans = 0; 15 16 int getf(int u) { 17 return f[u] ? f[u] = getf(f[u]) : u; 18 } 19 20 bool cmp(int a, int b) { 21 return d[a] < d[b]; 22 } 23 24 int main() { 25 cin >> n >> l; 26 for (int i = 1; i <= n; i++) 27 cin >> x[i] >> y[i]; 28 for (int i = 1; i <= n; i++) 29 for (int j = i + 1; j <= n; j++) { 30 int dx = x[i] - x[j], dy = y[i] - y[j]; 31 if (dx * dx + dy * dy > l * l) 32 continue; 33 cnt++; 34 p[cnt] = cnt; 35 u[cnt] = i; 36 v[cnt] = j; 37 d[cnt] = sqrt(dx * dx + dy * dy); 38 } 39 sort(p + 1, p + cnt + 1, cmp); 40 for (int i = 1; i <= cnt; i++) { 41 int pu = u[p[i]], pv = v[p[i]]; 42 if (getf(pu) == getf(pv)) 43 continue; 44 t++; 45 ans += d[p[i]]; 46 f[getf(pu)] = pv; 47 } 48 if (t == n - 1) 49 printf(\"%.2lf\\n\", ans); 50 else 51 printf(\"Impossible\\n\"); 52 return 0; 53 }",
+     "options": [],
+     "answer": "",
+     "point": "",
+     "analysis": "",
+     "outline": "",
+     "thinking": "",
+     "program": ""
+    },
+    {
+     "id": "2026-03-s14",
+     "batch": "2026-03",
+     "type": "single",
+     "no": 14,
+     "title": "",
+     "text": "已知三个点 在平⾯直角坐标系中的坐标。下列 C++ 表达式中，在精度误差范 围1e-8内能正确计算判断这三个点是三点共线的表达式是（ ）。 第 3 页 / 共 9 页",
+     "options": [
+      "(x2-x1)/(y2-y1) == (x3-x1)/(y3-y1)",
+      "(x2-x1)*(y3-y1)-(x3-x1)*(y2-y1) == 0",
+      "fabs((x2-x1)*(y3-y1)-(x3-x1)*(y2-y1)) < 1e-8",
+      "fabs((x2-x1)/(y2-y1)-(x3-x1)/(y3-y1)) < 1e-8"
+     ],
+     "answer": "C",
+     "point": "",
+     "analysis": "",
+     "outline": "",
+     "thinking": "",
+     "program": ""
+    },
+    {
+     "id": "2025-12-s7",
+     "batch": "2025-12",
+     "type": "single",
+     "no": 7,
+     "title": "",
+     "text": "已知两个点 和 在平⾯直角坐标系中的坐标。下列C++表达式中，能正确计算这两点之间 直线距离的是（ ）。",
+     "options": [
+      "sqrt((x1 - x2) ^ 2 + (y1 - y2) ^ 2)",
+      "sqrt(pow(x1 - x2, 2) + pow(y1 - y2, 2))",
+      "pow(x1 - x2, 2) + pow(y1 - y2, 2)",
+      "abs(x1 - x2) + abs(y1 - y2)"
+     ],
+     "answer": "B",
+     "point": "",
+     "analysis": "",
+     "outline": "",
+     "thinking": "",
+     "program": ""
+    },
+    {
+     "id": "2025-06-s6",
+     "batch": "2025-06",
+     "type": "single",
+     "no": 6,
+     "title": "",
+     "text": "已定义变量double a, b;，下列哪个表达式可以⽤来判断⼀元⼆次⽅程 是否有实根？（ ）。",
+     "options": [
+      "4 * b - a * a < 0",
+      "4 * b <= a * a",
+      "a * a - 4 * b",
+      "b * 4 - a * a"
+     ],
+     "answer": "B",
+     "point": "",
+     "analysis": "",
+     "outline": "",
+     "thinking": "",
+     "program": ""
+    },
+    {
+     "id": "2025-06-j8",
+     "batch": "2025-06",
+     "type": "judge",
+     "no": 8,
+     "title": "",
+     "text": "已知三个double类型的变量a、b和theta分别表⽰⼀个三角形的两条边长及⼆者的夹角（弧度），则三 角形的周长可以通过表达式sqrt(a * a + b * b - 2 * a * b * cos(theta))求得。",
+     "options": [],
+     "answer": "",
+     "point": "",
+     "analysis": "",
+     "outline": "",
+     "thinking": "",
+     "program": ""
+    },
+    {
+     "id": "2024-12-s6",
+     "batch": "2024-12",
+     "type": "single",
+     "no": 6,
+     "title": "",
+     "text": "已知两个点A、B在平⾯直角坐标系下的坐标分别为 和 ，并分别定义变量double xa, ya, xb, yb;存储坐标。假设直线AB的斜率存在，下列哪个表达式可以⽤来表达它？（ ）。",
+     "options": [
+      "(xa - xb) / (ya - yb)",
+      "(xa - xb) / (yb - ya)",
+      "(ya - yb) / (xa - xb)",
+      "(ya - yb) / (xb - xa)"
+     ],
+     "answer": "C",
+     "point": "",
+     "analysis": "",
+     "outline": "",
+     "thinking": "",
+     "program": ""
+    },
+    {
+     "id": "2024-12-j10",
+     "batch": "2024-12",
+     "type": "judge",
+     "no": 10,
+     "title": "",
+     "text": "要求解⼀元⼆次⽅程 ，需要先判断表达式a ^ 2 - b * 4 >= 0是否为真。 3",
+     "options": [],
+     "answer": "",
+     "point": "",
+     "analysis": "",
+     "outline": "",
+     "thinking": "",
+     "program": ""
+    }
+   ]
+  },
+  {
+   "anchor": "lv8l6",
+   "title": "第 6 课：图论算法及综合应用：MST 与最短路",
+   "questions": [
+    {
+     "id": "2026-03-s13",
+     "batch": "2026-03",
+     "type": "single",
+     "no": 13,
+     "title": "",
+     "text": "在⼀个⽆向带权图中，若使⽤ Prim 算法从顶点 0 开始构造最⼩⽣成树（边权均为正整数，且graph[u][v] == 0表⽰⽆边），下列代码中横线处应填⼊（ ）。 1 int prim(vector<vector<int>>& graph, int n) { 2 vector<bool> inMST(n, false); 3 vector<int> minEdge(n, INT_MAX); 4 minEdge[0] = 0; 5 int result = 0; 6 for (int i = 0; i < n; i++) { 7 int u = -1; 8 for (int j = 0; j < n; j++) 9 if (!inMST[j] && (u == -1 || minEdge[j] < minEdge[u])) 10 u = j; 11 inMST[u] = true; 12 result += minEdge[u]; 13 for (int v = 0; v < n; v++) 14 if (__________) // 在此处填入选项 15 minEdge[v] = graph[u][v]; 16 } 17 return result; 18 }",
+     "options": [
+      "graph[u][v] && !inMST[v] && graph[u][v] < minEdge[v]",
+      "!inMST[v] && graph[u][v] < minEdge[v]",
+      "graph[u][v] > 0 && !inMST[v]",
+      "!inMST[v] && minEdge[v] > 0"
+     ],
+     "answer": "A",
+     "point": "",
+     "analysis": "",
+     "outline": "",
+     "thinking": "",
+     "program": ""
+    }
+   ]
+  },
+  {
+   "anchor": "lv8l7",
+   "title": "第 7 课：算法的时间和空间效率分析",
+   "questions": [
+    {
+     "id": "2026-06-s6",
+     "batch": "2026-06",
+     "type": "single",
+     "no": 6,
+     "title": "",
+     "text": "归并排序每次把长度为 的序列分成两个规模约为 的⼦序列，递归排序后再⽤线性时间合并。该算法的 时间复杂度通常为（ ）。",
+     "options": [],
+     "answer": "D",
+     "point": "",
+     "analysis": "",
+     "outline": "",
+     "thinking": "",
+     "program": ""
+    },
+    {
+     "id": "2026-06-s11",
+     "batch": "2026-06",
+     "type": "single",
+     "no": 11,
+     "title": "",
+     "text": "下列代码⽚段的时间复杂度为（ ）。 1 long long s = 0; 2 for (int i = 1; i <= n; i++) { 3 for (int j = 1; j * j <= n; j++) { 4 s += i + j; 5 } 6 }",
+     "options": [],
+     "answer": "C",
+     "point": "",
+     "analysis": "",
+     "outline": "",
+     "thinking": "",
+     "program": ""
+    },
+    {
+     "id": "2026-06-s12",
+     "batch": "2026-06",
+     "type": "single",
+     "no": 12,
+     "title": "",
+     "text": "某优化问题的答案是 内的整数，存在单调判定函数 check(x)，且每次判定的时间复杂度为 。 使⽤⼆分答案求最⼩可⾏值，整体时间复杂度通常为（ ）。",
+     "options": [],
+     "answer": "B",
+     "point": "",
+     "analysis": "",
+     "outline": "",
+     "thinking": "",
+     "program": ""
+    },
+    {
+     "id": "2026-06-s13",
+     "batch": "2026-06",
+     "type": "single",
+     "no": 13,
+     "title": "",
+     "text": "下列线性筛的代码⽚段中，当枚举到质数 p 且 i % p == 0 时，使⽤ break; 语句停⽌继续枚举。这样 做的主要⽬的是（ ）。 1 for (int i = 2; i <= n; ++i) { 2 if (!is_composite[i]) 3 primes.push_back(i); 4 for (int p : primes) { 5 if (i * p > n) 6 break; 7 is_composite[i * p] = true; 8 if (i % p == 0) 9 break; // 这条语句的目的是？ 10 } 11 }",
+     "options": [
+      "保证递归深度不超过 。",
+      "保证每个合数只被它的最⼩质因⼦筛去⼀次。",
+      "保证每个素数都被标记为合数。",
+      "把筛法时间复杂度提⾼到 。"
+     ],
+     "answer": "B",
+     "point": "",
+     "analysis": "",
+     "outline": "",
+     "thinking": "",
+     "program": ""
+    },
+    {
+     "id": "2026-06-j10",
+     "batch": "2026-06",
+     "type": "judge",
+     "no": 10,
+     "title": "",
+     "text": "归并排序是⼀种稳定排序算法，常见实现的时间复杂度为 。 3",
+     "options": [],
+     "answer": "",
+     "point": "",
+     "analysis": "",
+     "outline": "",
+     "thinking": "",
+     "program": ""
+    },
+    {
+     "id": "2026-03-s3",
+     "batch": "2026-03",
+     "type": "single",
+     "no": 3,
+     "title": "",
+     "text": "下列代码实现了快速幂算法，其时间复杂度为（ ）。 1 long long fastPow(long long b, long long e, long long mod) { 2 long long result = 1; 3 while (e > 0) { 4 if (e & 1) 5 result = result * b % mod; 6 b = b * b % mod; 7 e >>= 1; 8 } 9 return result; 10 }",
+     "options": [],
+     "answer": "B",
+     "point": "",
+     "analysis": "",
+     "outline": "",
+     "thinking": "",
+     "program": ""
+    },
+    {
+     "id": "2026-03-s6",
+     "batch": "2026-03",
+     "type": "single",
+     "no": 6,
+     "title": "",
+     "text": "在⼀个有向带权图中，使⽤Dijkstra算法求单源最短路时，若使⽤优先队列（⼩根堆）优化，其时间复杂度为 （ ）。",
+     "options": [],
+     "answer": "C",
+     "point": "",
+     "analysis": "",
+     "outline": "",
+     "thinking": "",
+     "program": ""
+    },
+    {
+     "id": "2026-03-s8",
+     "batch": "2026-03",
+     "type": "single",
+     "no": 8,
+     "title": "",
+     "text": "在使⽤Floyd算法求任意两点间最短路径时，时间复杂度为 。若在某次算法执⾏前，已经⽤ Dijkstra 算 法正确求出了所有点对的最短路并存⼊了dist数组。如果此时继续对该dist数组执⾏⼀次完整的 Floyd 算法过程 （⽆任何提前终⽌），执⾏完毕后dist数组内的值（ ）。",
+     "options": [
+      "会发⽣改变，因为 Floyd ⼜做了⼀次松弛",
+      "不会发⽣改变",
+      "可能变⼤，因为未针对已有最短路优化",
+      "可能在某些负权图中陷⼊死循环"
+     ],
+     "answer": "B",
+     "point": "",
+     "analysis": "",
+     "outline": "",
+     "thinking": "",
+     "program": ""
+    }
+   ]
+  },
+  {
+   "anchor": "lv8l8",
+   "title": "第 8 课：算法优化：用数学打败暴力",
+   "questions": [
+    {
+     "id": "2025-12-j10",
+     "batch": "2025-12",
+     "type": "judge",
+     "no": 10,
+     "title": "",
+     "text": "求两个序列的最长公共⼦序列（LCS）时，使⽤滚动数组优化空间后，仍然可以还原出具体的LCS序列。 3",
+     "options": [],
+     "answer": "",
+     "point": "",
+     "analysis": "",
+     "outline": "",
+     "thinking": "",
+     "program": ""
+    }
+   ]
+  }
+ ]
+}

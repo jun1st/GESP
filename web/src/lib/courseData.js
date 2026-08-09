@@ -27,6 +27,15 @@ export async function listLevels() {
   return levels.sort((a, b) => a.id - b.id);
 }
 
+export async function readRelated(id) {
+  try {
+    const raw = await fs.readFile(path.join(process.cwd(), 'data', 'papers', 'related', `level-${id}.json`), 'utf8');
+    return JSON.parse(raw);
+  } catch (e) {
+    return { level: id, lessons: [] };
+  }
+}
+
 export const LEVEL_CN = {
   0: '零级入门',
   1: '一级',

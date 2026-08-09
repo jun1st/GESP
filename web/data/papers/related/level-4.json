@@ -1,0 +1,1061 @@
+{
+ "level": 4,
+ "lessons": [
+  {
+   "anchor": "lv4l1",
+   "title": "第 1 课：指针：存\"地址\"的变量",
+   "questions": [
+    {
+     "id": "2026-03-j6",
+     "batch": "2026-03",
+     "type": "judge",
+     "no": 6,
+     "title": "",
+     "text": "在 C++ 中，如果声明了⼀个指针变量但没有显式初始化，该指针会⾃动被初始化为 nullptr。",
+     "options": [],
+     "answer": "",
+     "point": "",
+     "analysis": "",
+     "outline": "",
+     "thinking": "",
+     "program": ""
+    },
+    {
+     "id": "2025-12-s1",
+     "batch": "2025-12",
+     "type": "single",
+     "no": 1,
+     "title": "",
+     "text": "⼩杨想让指针 p 指向整数变量 x，正确写法是（ ）。",
+     "options": [
+      "1 int p = &x;",
+      "1 int *p = x;",
+      "1 int *p = &x;",
+      "1 p = *x;"
+     ],
+     "answer": "C",
+     "point": "",
+     "analysis": "",
+     "outline": "",
+     "thinking": "",
+     "program": ""
+    },
+    {
+     "id": "2025-12-s2",
+     "batch": "2025-12",
+     "type": "single",
+     "no": 2,
+     "title": "",
+     "text": "⼩杨写了如下的指针接⼒程序，程序执⾏完后变量 a、*p1和*p2的值分别是（ ）。 1 int a = 5; 2 int* p1 = &a; 3 int* p2 = p1; 4 *p2 = 10;",
+     "options": [
+      "5 10 10",
+      "5 10 15",
+      "10 10 10",
+      "5 5 10"
+     ],
+     "answer": "C",
+     "point": "",
+     "analysis": "",
+     "outline": "",
+     "thinking": "",
+     "program": ""
+    },
+    {
+     "id": "2025-12-j5",
+     "batch": "2025-12",
+     "type": "judge",
+     "no": 5,
+     "title": "",
+     "text": "执⾏下⾯的C++代码，会输出 8，因为两个指针地址相差 8 个字节（假设 int 占 4 字节）。 1 int arr[5] = {1, 2, 3, 4, 5}; 2 int* p1 = arr; 3 int* p2 = arr + 2; 4 5 cout << p2 - p1; // 输出结果 第 7 页 / 共 12 页",
+     "options": [],
+     "answer": "",
+     "point": "",
+     "analysis": "",
+     "outline": "",
+     "thinking": "",
+     "program": ""
+    },
+    {
+     "id": "2025-09-s2",
+     "batch": "2025-09",
+     "type": "single",
+     "no": 2,
+     "title": "",
+     "text": "以下关于数组的描述中，（ ）是错误的。",
+     "options": [
+      "数组名是⼀个指针常量",
+      "随机访问数组的元素⽅便快捷",
+      "数组可以像指针⼀样进⾏⾃增操作",
+      "sizeof(arr) 返回的是整个数组arr占⽤的字节数"
+     ],
+     "answer": "C",
+     "point": "",
+     "analysis": "",
+     "outline": "",
+     "thinking": "",
+     "program": ""
+    },
+    {
+     "id": "2025-09-j1",
+     "batch": "2025-09",
+     "type": "judge",
+     "no": 1,
+     "title": "",
+     "text": "以下代码能正确初始化指针。 1 int a = 5; 2 int *p = a;",
+     "options": [],
+     "answer": "",
+     "point": "",
+     "analysis": "",
+     "outline": "",
+     "thinking": "",
+     "program": ""
+    },
+    {
+     "id": "2025-06-s1",
+     "batch": "2025-06",
+     "type": "single",
+     "no": 1,
+     "title": "",
+     "text": "在C++中，声明⼀个指向整型变量的指针的正确语法是（ ）。",
+     "options": [
+      "int* ptr;",
+      "*int ptr;",
+      "int ptr*;",
+      "ptr int;"
+     ],
+     "answer": "A",
+     "point": "",
+     "analysis": "",
+     "outline": "",
+     "thinking": "",
+     "program": ""
+    },
+    {
+     "id": "2025-03-j4",
+     "batch": "2025-03",
+     "type": "judge",
+     "no": 4,
+     "title": "",
+     "text": "假设整数数组arr[4]= {0, 1, 2, 3};的第⼀个元素在内存中的地址为0x7ffee4065820, 经过int* p = arr; p += 1;后，指针p的值是1。",
+     "options": [],
+     "answer": "",
+     "point": "",
+     "analysis": "",
+     "outline": "",
+     "thinking": "",
+     "program": ""
+    }
+   ]
+  },
+  {
+   "anchor": "lv4l2",
+   "title": "第 2 课：二维及多维数组：表格",
+   "questions": [
+    {
+     "id": "2023-06-s4",
+     "batch": "2023-06",
+     "type": "single",
+     "no": 4,
+     "title": "",
+     "text": "下列关于C++语言中数组的叙述，不正确的是（ ）。",
+     "options": [
+      "一维数组在内存中一定是连续存放的。",
+      "二维数组是一维数组的一维数组。",
+      "二维数组中的每个一维数组在内存中都是连续存放的。",
+      "二维数组在内存中可以不是连续存放的。"
+     ],
+     "answer": "D",
+     "point": "二维及多维数组(四级)",
+     "analysis": "本题属于考察二维数组的基本概念；数组（包括多维数组）在内存中必 须要连续存放，所以本题正确答案为D。",
+     "outline": "",
+     "thinking": "",
+     "program": ""
+    },
+    {
+     "id": "2023-06-s7",
+     "batch": "2023-06",
+     "type": "single",
+     "no": 7,
+     "title": "",
+     "text": "一个二维数组定义为double array[3][10];，则这个二维数组占用内存的 大小为（ ）。",
+     "options": [
+      "30",
+      "60",
+      "120",
+      "240"
+     ],
+     "answer": "D",
+     "point": "二维及多维数组(四级)",
+     "analysis": "本题属于考察内存的基本概念； double类型的数据占用内存是8 字节， array数组共使用了30个double类型的数据，占用内存为30*8=240字节。所以 本题正确答案为D。",
+     "outline": "",
+     "thinking": "",
+     "program": ""
+    },
+    {
+     "id": "2023-06-s9",
+     "batch": "2023-06",
+     "type": "single",
+     "no": 9,
+     "title": "",
+     "text": "一个二维数组定义为int array[5][3];，则array[1][2]和array[2][1] 在内存中的位置相差多少字节？（ ）",
+     "options": [
+      "2字节。",
+      "4字节。",
+      "8字节。",
+      "无法确定。"
+     ],
+     "answer": "C",
+     "point": "二维及多维数组(四级)",
+     "analysis": "本题属于考察内存地址的基本概念；array[1][2]和array[2][1]中间差了 array[2][0]，相当于差了2个int，也就是8字节，所以本题正确答案为C。",
+     "outline": "",
+     "thinking": "",
+     "program": ""
+    },
+    {
+     "id": "2023-06-j4",
+     "batch": "2023-06",
+     "type": "judge",
+     "no": 4,
+     "title": "",
+     "text": "在 C++语言中，可以定义四维数组，但在解决实际问题时不可能用到，因为 世界是三维的。",
+     "options": [],
+     "answer": "错",
+     "point": "二维及多维数组（四级）",
+     "analysis": "本题属于考察数组相关概念。实际问题中是有可能使用到四维甚至更多 维数组的，所以本题错误。",
+     "outline": "",
+     "thinking": "",
+     "program": ""
+    },
+    {
+     "id": "2023-06-j7",
+     "batch": "2023-06",
+     "type": "judge",
+     "no": 7,
+     "title": "",
+     "text": "如果希望记录10个最长为99字节的字符串，可以将字符串数组定义为char s[100][10];。",
+     "options": [],
+     "answer": "错",
+     "point": "二维及多维数组（四级）",
+     "analysis": "本题属于考察数组相关概念。最长为99 个字节的字符串，应申请100 个char的数组；要定义10 个最长为99字节的字符串，应该将字符串数组定义 为chars[10][100]，所以本题错误。",
+     "outline": "",
+     "thinking": "",
+     "program": ""
+    }
+   ]
+  },
+  {
+   "anchor": "lv4l3",
+   "title": "第 3 课：结构体：把数据\"打包\"",
+   "questions": [
+    {
+     "id": "2026-06-s9",
+     "batch": "2026-06",
+     "type": "single",
+     "no": 9,
+     "title": "",
+     "text": "⼩杨定义了⼀个结构体 Hero 来表⽰游戏角⾊，下⾯哪种初始化⽅式会由于语法错误导致编译失败？（ ）。 1 struct Hero { 2 string name; 3 int hp; 4 };",
+     "options": [
+      "Hero h = {\"Arthur\", 100};",
+      "1 Hero h; 2 h.name = \"Arthur\"; 3 h.hp = 100;",
+      "Hero h = new Hero{\"Arthur\", 100};",
+      "Hero *p = new Hero{\"Arthur\", 100};"
+     ],
+     "answer": "C",
+     "point": "",
+     "analysis": "",
+     "outline": "",
+     "thinking": "",
+     "program": ""
+    },
+    {
+     "id": "2026-03-s6",
+     "batch": "2026-03",
+     "type": "single",
+     "no": 6,
+     "title": "",
+     "text": "下列关于结构体初始化的写法，正确的是（ ）。",
+     "options": [
+      "1 struct Point { int x, y; }; 2 3 Point p = (1,2);",
+      "1 struct Point { int x, y; }; 2 3 Point p = {1,2}; 第 2 页 / 共 11 页",
+      "1 struct Point { int x, y; }; 2 3 Point p = new Point(1,2);",
+      "1 struct Point { int x, y; }; 2 3 Point p = <1,2>;"
+     ],
+     "answer": "B",
+     "point": "",
+     "analysis": "",
+     "outline": "",
+     "thinking": "",
+     "program": ""
+    },
+    {
+     "id": "2025-12-j2",
+     "batch": "2025-12",
+     "type": "judge",
+     "no": 2,
+     "title": "",
+     "text": "⼀个结构体不能包含另⼀个结构体。",
+     "options": [],
+     "answer": "",
+     "point": "",
+     "analysis": "",
+     "outline": "",
+     "thinking": "",
+     "program": ""
+    },
+    {
+     "id": "2025-09-s7",
+     "batch": "2025-09",
+     "type": "single",
+     "no": 7,
+     "title": "",
+     "text": "关于结构体初始化，以下哪个选项中正确的是（ ）。 1 struct Point {int x,y;};",
+     "options": [
+      "Point p = (1,2);",
+      "Point p = {1,2};",
+      "Point p = new {1,2};",
+      "Point p = <1,2>;"
+     ],
+     "answer": "B",
+     "point": "",
+     "analysis": "",
+     "outline": "",
+     "thinking": "",
+     "program": ""
+    },
+    {
+     "id": "2025-06-j3",
+     "batch": "2025-06",
+     "type": "judge",
+     "no": 3,
+     "title": "",
+     "text": "下⾯c++代码在⼀个结构体中⼜定义了别的结构体。这种结构嵌套定义的⽅式语法不正确。 1 #include <string> 2 #include <vector> 3 4 using namespace std; 5 6 struct Library { 7 struct Book { 8 struct Author { 9 string name; 10 int birthYear; 11 }; 12 13 string title; 14 int year; 15 Author author; 16 }; 17 18 string name; 19 vector<Book> books; 20 };",
+     "options": [],
+     "answer": "",
+     "point": "",
+     "analysis": "",
+     "outline": "",
+     "thinking": "",
+     "program": ""
+    },
+    {
+     "id": "2025-03-s6",
+     "batch": "2025-03",
+     "type": "single",
+     "no": 6,
+     "title": "",
+     "text": "下⾯的描述中，（ ）正确定义⼀个名为Person的结构体并正确初始化了⼀个Person结构体的变量p。",
+     "options": [
+      "1 struct Person { 2 string name; 3 int age; 4 }; 5 Person p(\"Yang\", 10);",
+      "1 struct Person { 2 string name, 3 int age; 4 }; 5 Person p; 6 p.name = \"Yang\"; 7 p.age = 10;",
+      "1 struct Person { 2 string name; 3 int age; 4 }; 5 Person p = { \"Yang\", 10 };",
+      "1 struct Person { 2 string name; 3 int age; 4 }; 5 Person p = new Person(\"Yang\", 10);"
+     ],
+     "answer": "C",
+     "point": "",
+     "analysis": "",
+     "outline": "",
+     "thinking": "",
+     "program": ""
+    },
+    {
+     "id": "2025-03-j3",
+     "batch": "2025-03",
+     "type": "judge",
+     "no": 3,
+     "title": "",
+     "text": "结构体的成员默认是public访问权限。",
+     "options": [],
+     "answer": "",
+     "point": "",
+     "analysis": "",
+     "outline": "",
+     "thinking": "",
+     "program": ""
+    },
+    {
+     "id": "2024-12-s6",
+     "batch": "2024-12",
+     "type": "single",
+     "no": 6,
+     "title": "",
+     "text": "下⾯的描述中，（ ）不能正确定义⼀个名为Student的结构体以及⼀个包含20个元素的结构数组。",
+     "options": [
+      "1 struct Student { 2 string name; 3 int age; 4 float score; 5 }; 6 struct Student students[20];",
+      "1 struct Student { 2 string name; 3 int age; 4 float score; 5 }; 6 Student students[20];",
+      "1 struct Student { 2 string name; 3 int age; 4 float score; 5 }; 6 Student* students = new Student[20];",
+      "1 struct Student { 2 string name; 3 int age; 4 float score; 5 }; 6 Student students = new Student[20];"
+     ],
+     "answer": "D",
+     "point": "",
+     "analysis": "",
+     "outline": "",
+     "thinking": "",
+     "program": ""
+    }
+   ]
+  },
+  {
+   "anchor": "lv4l4",
+   "title": "第 4 课：函数：定义、调用、形参实参、作用域",
+   "questions": [
+    {
+     "id": "2026-06-s1",
+     "batch": "2026-06",
+     "type": "single",
+     "no": 1,
+     "title": "",
+     "text": "⼩杨正在编写⼀个“数字交换器”程序，他希望通过函数交换两个变量的值。请问运⾏以下代码后，屏幕上输 出的是（ ）。 1 void exchange(int *a, int &b) { 2 int t = *a; 3 *a = b; 4 b = t; 5 } 6 int main() { 7 int x = 100, y = 200; 8 exchange(&x, y); 9 cout << x << \" \" << y; 10 return 0; 11 }",
+     "options": [
+      "100 200",
+      "200 100",
+      "200 200",
+      "编译错误"
+     ],
+     "answer": "B",
+     "point": "",
+     "analysis": "",
+     "outline": "",
+     "thinking": "",
+     "program": ""
+    },
+    {
+     "id": "2026-06-s2",
+     "batch": "2026-06",
+     "type": "single",
+     "no": 2,
+     "title": "",
+     "text": "下⾯程序想通过函数计算三门课总分，横线处应填⼊的是（ ）。 1 int sumScore(int a, int b, int c) { 2 return a + b + c; 3 } 4 int main() { 5 int chinese = 88, math = 95, english = 90; 6 int total = __________; 7 cout << total; 8 return 0; 9 }",
+     "options": [
+      "sumScore",
+      "sumScore(chinese, math, english)",
+      "sumScore(int chinese, int math, int english)",
+      "sumScore(a, b, c)"
+     ],
+     "answer": "B",
+     "point": "",
+     "analysis": "",
+     "outline": "",
+     "thinking": "",
+     "program": ""
+    },
+    {
+     "id": "2026-06-s4",
+     "batch": "2026-06",
+     "type": "single",
+     "no": 4,
+     "title": "",
+     "text": "关于下⾯程序，说法正确的是（ ）。 1 void show() { 2 int stars = 5; 3 } 4 int main() { 5 cout << stars; 6 return 0; 7 }",
+     "options": [
+      "程序输出 5",
+      "程序可以通过编译，但输出随机值",
+      "程序不能通过编译，因为 stars 只在 show 函数中有效",
+      "程序不能通过编译，因为 cout 不能输出变量"
+     ],
+     "answer": "C",
+     "point": "",
+     "analysis": "",
+     "outline": "",
+     "thinking": "",
+     "program": ""
+    },
+    {
+     "id": "2026-06-j6",
+     "batch": "2026-06",
+     "type": "judge",
+     "no": 6,
+     "title": "",
+     "text": "在 C++ 中定义⼆维数组并初始化时，可以省略第⼀维，但不能省略第⼆维。因此 int a[][2] = {{1, 2}, {3, 4}}; 是合法的，⽽ int a[][] = {{1, 2}, {3, 4}}; 是不合法的。",
+     "options": [],
+     "answer": "",
+     "point": "",
+     "analysis": "",
+     "outline": "",
+     "thinking": "",
+     "program": ""
+    },
+    {
+     "id": "2026-06-p1",
+     "batch": "2026-06",
+     "type": "program",
+     "no": 1,
+     "title": "扫雷",
+     "text": "3.1 编程题 1 时间限制：1.0 s 内存限制：512.0 MB 3.1.1 题目描述 ⼩杨同学正在游玩经典游戏「扫雷」，他想⾃⼰⽣成⼀个「扫雷」的地图。 ⼩杨同学希望⽣成的地图⼤⼩为 ⾏ 列，⼀共 个区块。 区块⾏号为 ，列号为 。 其中⼀些区块为雷区，其它区块不为雷区。 ⼩杨同学指定了 个区块为雷区，⽽其它区块均不为雷区。⼩杨同学希望你帮忙计算⾮雷区的区块，每个区块与多 少个雷区相邻？ 我们定义区块相邻，当且仅当两个区块⾄少有⼀个公共顶点（也就是说对于不在地图边缘的区块，周围 个区块均 与其相邻）。 3.1.2 输入格式 输⼊包含 ⾏。 第⼀⾏，三个正整数 ， 和 ，分别表⽰地图⾏数和列数，以及雷区数量。 接下来的 ⾏，每⾏有 个整数，分别表⽰第 个雷区的⾏号和列号。 保证输⼊的雷区不重复。 3.1.3 输出格式 输出 ⾏，每⾏ 个 字符（使⽤空格分割），对于第 ⾏第 列，输出地图对应区块的信息： 1. 如果为雷区，输出 *； 2. 如果不是雷区，输出其相邻雷区数量（输出 到 中的⼀个数字）。 3.1.4 样例 3.1.5 输入样例 1 1 3 4 4 2 1 1 3 1 3 4 2 4 5 3 2 3.1.6 输出样例 1 1 * 2 * 2 2 2 3 3 * 3 1 * 2 1 3.1.7 输出解释 1 根据输⼊，在 的地图上有 个雷区，分别是 ， ， 和 ，如输出样例中 * 所⽰，其它⾮雷 区区块的相邻雷区数量可以直观看出。 3.1.8 数据范围 。 输⼊的雷区必定在地图内且不重复，注意⾏号和列号均从 开始。 3.1.9 参考程序 1 #include <iostream> 2 using namespace std; 3 4 int mp[510][510]; 5 6 int main() { 7 int n, m, q; 8 cin >> n >> m >> q; 9 for (int i = 0; i < q; ++i) { 10 int x, y; 11 cin >> x >> y; 12 mp[x-1][y-1] = -1; 13 } 14 for (int i = 0; i < n; ++i) { 15 for (int j = 0; j < m; ++j) { 16 if (mp[i][j] == -1) { 17 cout << '*' << ' '; 18 continue; 19 } 20 for (int di = -1; di <= 1; ++di) { 21 for (int dj = -1; dj <= 1; ++dj) { 22 if (i + di < 0 || i + di >= n || j + dj < 0 || j + dj >= m) 23 continue; 24 if (mp[i+di][j+dj] == -1) 25 mp[i][j] += 1; 26 } 27 } 28 cout << mp[i][j] << ' '; 29 } 30 cout << '\\n'; 31 } 32 return 0; 33 }",
+     "options": [],
+     "answer": "",
+     "point": "",
+     "analysis": "",
+     "outline": "",
+     "thinking": "",
+     "program": ""
+    },
+    {
+     "id": "2026-03-s8",
+     "batch": "2026-03",
+     "type": "single",
+     "no": 8,
+     "title": "",
+     "text": "关于递推算法的描述，正确的是（ ）。",
+     "options": [
+      "递推表现为函数⾃⼰调⽤⾃⼰",
+      "递推从已知初值出发，利⽤递推关系逐步推出后续结果",
+      "递推只能⽤于指数复杂度问题",
+      "递推⼀定需要回溯"
+     ],
+     "answer": "B",
+     "point": "",
+     "analysis": "",
+     "outline": "",
+     "thinking": "",
+     "program": ""
+    },
+    {
+     "id": "2026-03-s15",
+     "batch": "2026-03",
+     "type": "single",
+     "no": 15,
+     "title": "",
+     "text": "下列函数实现排⾏榜中单个元素的位置调整（类似插⼊排序的相邻搬移）。当某玩家分数增加，需将其向 前移动时，while 循环的条件应为（ ）。 1 struct Player{ int score; }; 2 void up(Player players[], int n, int idx){ 3 Player cur = players[idx]; 4 int i = idx; 5 while( ____________________ ){ 6 players[i] = players[i-1]; 7 i--; 8 } 9 players[i] = cur; 10 }",
+     "options": [
+      "i > 0 && cur.score > players[i-1].score",
+      "i > 0 && cur.score < players[i-1].score",
+      "i < n-1 && cur.score > players[i+1].score 第 5 页 / 共 11 页",
+      "i < n-1 && cur.score < players[i+1].score 2"
+     ],
+     "answer": "A",
+     "point": "",
+     "analysis": "",
+     "outline": "",
+     "thinking": "",
+     "program": ""
+    },
+    {
+     "id": "2025-12-s9",
+     "batch": "2025-12",
+     "type": "single",
+     "no": 9,
+     "title": "",
+     "text": "给定函数 climbStairs(int n) 的定义如下，则 climbStairs(5) 的返回的值是（ ）。 第 3 页 / 共 12 页 1 int climbStairs(int n) { 2 if(n <= 2) return n; 3 int a = 1, b = 2; 4 for(int i = 3; i <= n; i++) { 5 int temp = a + b; 6 a = b; 7 b = temp; 8 } 9 return b; 10 }",
+     "options": [
+      "5",
+      "8",
+      "13",
+      "10"
+     ],
+     "answer": "B",
+     "point": "",
+     "analysis": "",
+     "outline": "",
+     "thinking": "",
+     "program": ""
+    }
+   ]
+  },
+  {
+   "anchor": "lv4l5",
+   "title": "第 5 课：参数传递：值、引用、指针",
+   "questions": [
+    {
+     "id": "2026-06-j2",
+     "batch": "2026-06",
+     "type": "judge",
+     "no": 2,
+     "title": "",
+     "text": "在 C++ 中，引⽤⼀旦初始化并绑定到某个变量后，可以通过赋值语句将其重新绑定到另⼀个变量。",
+     "options": [],
+     "answer": "",
+     "point": "",
+     "analysis": "",
+     "outline": "",
+     "thinking": "",
+     "program": ""
+    },
+    {
+     "id": "2026-03-j2",
+     "batch": "2026-03",
+     "type": "judge",
+     "no": 2,
+     "title": "",
+     "text": "引⽤⼀旦绑定某个变量，就不能再绑定其他变量。（ ）",
+     "options": [],
+     "answer": "",
+     "point": "",
+     "analysis": "",
+     "outline": "",
+     "thinking": "",
+     "program": ""
+    },
+    {
+     "id": "2025-06-s5",
+     "batch": "2025-06",
+     "type": "single",
+     "no": 5,
+     "title": "",
+     "text": "在C++中，如果希望通过函数修改传⼊的结构体对象的内容，应该使⽤哪种参数传递⽅式？",
+     "options": [
+      "值传递或引⽤传递",
+      "值传递或指针传递",
+      "引⽤传递或指针传递",
+      "仅指针传递"
+     ],
+     "answer": "C",
+     "point": "",
+     "analysis": "",
+     "outline": "",
+     "thinking": "",
+     "program": ""
+    },
+    {
+     "id": "2025-06-j4",
+     "batch": "2025-06",
+     "type": "judge",
+     "no": 4,
+     "title": "",
+     "text": "在C++中，相⽐于值传递，使⽤引⽤传递作的优点可以直接操作和修改原始变量，避免数据拷贝，提⾼效 率。",
+     "options": [],
+     "answer": "",
+     "point": "",
+     "analysis": "",
+     "outline": "",
+     "thinking": "",
+     "program": ""
+    },
+    {
+     "id": "2025-03-s4",
+     "batch": "2025-03",
+     "type": "single",
+     "no": 4,
+     "title": "",
+     "text": "以下哪种参数传递⽅式可以避免拷贝⼤型对象？",
+     "options": [
+      "只能⽤值传递",
+      "只能⽤引⽤传递",
+      "只能⽤指针传递",
+      "引⽤传递和指针传递均可"
+     ],
+     "answer": "D",
+     "point": "",
+     "analysis": "",
+     "outline": "",
+     "thinking": "",
+     "program": ""
+    },
+    {
+     "id": "2024-06-j3",
+     "batch": "2024-06",
+     "type": "judge",
+     "no": 3,
+     "title": "",
+     "text": "引⽤是⼀个指针常量。",
+     "options": [],
+     "answer": "",
+     "point": "",
+     "analysis": "",
+     "outline": "",
+     "thinking": "",
+     "program": ""
+    },
+    {
+     "id": "2024-06-j6",
+     "batch": "2024-06",
+     "type": "judge",
+     "no": 6,
+     "title": "",
+     "text": "函数参数传递过程中，如果传常量值、常量引⽤和常量指针都是不能被修改的，它们可以防⽌函数对实参的 值或地址进⾏修改。",
+     "options": [],
+     "answer": "",
+     "point": "",
+     "analysis": "",
+     "outline": "",
+     "thinking": "",
+     "program": ""
+    }
+   ]
+  },
+  {
+   "anchor": "lv4l6",
+   "title": "第 6 课：递推算法：一步一步往前推",
+   "questions": [
+    {
+     "id": "2025-06-s10",
+     "batch": "2025-06",
+     "type": "single",
+     "no": 10,
+     "title": "",
+     "text": "以下关于递推算法基本思想的描述，正确的是（ ）。",
+     "options": [
+      "递推算法通过将问题分解为相互独⽴的⼦问题来解决。",
+      "递推算法从已知的基础情况出发，通过某种关系逐步推导出更⼤规模问题的解。",
+      "递推算法通常⽤于穷举所有可能的解决⽅案。",
+      "递推算法适⽤于在每⼀步做出局部最优选择以达到全局最优。"
+     ],
+     "answer": "B",
+     "point": "",
+     "analysis": "",
+     "outline": "",
+     "thinking": "",
+     "program": ""
+    },
+    {
+     "id": "2025-03-s10",
+     "batch": "2025-03",
+     "type": "single",
+     "no": 10,
+     "title": "",
+     "text": "⼩杨正在爬楼梯，需要爬 阶才能到达楼顶。如果每次可以爬 个或 个台阶，下⾯代码采⽤递推算法来计算 ⼀共有多少种不同的⽅法可以爬到楼顶，则横线上应填写（ ）。 1 int f(int n) { 2 if (n == 1 || n == 2) 3 return n; 4 5 int f1 = 1; 6 int f2 = 2; 7 int res = 0; 8 for (int i = 3; i <= n; i++) { 9 ________________________________ // 在此处填入代码 10 } 11 return res; 12 }",
+     "options": [
+      "1 res += f1 + f2; 2 f1 = f2; 3 f2 = res;",
+      "1 res = f1 + f2; 2 f1 = f2; 3 f2 = res;",
+      "1 res += f1 + f2; 2 f2 = res; 3 f1 = f2;",
+      "1 res = f1 + f2; 2 f2 = res; 3 f1 = f2;"
+     ],
+     "answer": "B",
+     "point": "",
+     "analysis": "",
+     "outline": "",
+     "thinking": "",
+     "program": ""
+    },
+    {
+     "id": "2024-12-s9",
+     "batch": "2024-12",
+     "type": "single",
+     "no": 9,
+     "title": "",
+     "text": "下⾯代码采⽤递推算法来计算斐波那契数列 ，则横线上应填写（ ）。 1 int fib(int n) { 2 if (n == 0 || n == 1) 3 return n; 4 5 int f1 = 0; 6 int f2 = 1; 7 int result = 0; 8 for (int i = 2; i <= n; i++) { 9 ________________________________ // 在此处填入代码 10 } 11 return result; 12 }",
+     "options": [
+      "1 result = f1 + f2; 2 f1 = f2; 3 f2 = result;",
+      "1 result += f1 + f2; 2 f1 = f2; 3 f2 = result;",
+      "1 result += f1 + f2; 2 f2 = result; 3 f1 = f2;",
+      "1 result = f1 + f2; 2 f2 = result; 3 f1 = f2;"
+     ],
+     "answer": "A",
+     "point": "",
+     "analysis": "",
+     "outline": "",
+     "thinking": "",
+     "program": ""
+    },
+    {
+     "id": "2023-06-j2",
+     "batch": "2023-06",
+     "type": "judge",
+     "no": 2,
+     "title": "",
+     "text": "数列 1, 1, 2, 3, 5, 8 ... 是以意大利数学家列昂纳多·斐波那契命名的 数列，从第三个数开始，每个数是前面两项之和。如果计算该数列的第 n 项（其 中n>3）fib(n)，我们采用如下方法：① 令 fib(1)=fib(2)=1 ②用循环 fori=3 to n 分别计算 f(i) ③输出fib(n)。这体现了递推的编程思想。",
+     "options": [],
+     "answer": "对",
+     "point": "递推算法（四级）",
+     "analysis": "本题属于考察递推相关概念，递推是按照一定的规律来计算序列中的每 个项，本题中规律是从第三个数开始，每个数是前面两项之和，且我们按照从小 到大的顺序依次计算数列中的每个项，这和递归的编程思想一致，所以本题正确。",
+     "outline": "",
+     "thinking": "",
+     "program": ""
+    }
+   ]
+  },
+  {
+   "anchor": "lv4l7",
+   "title": "第 7 课：排序算法：冒泡、插入、选择",
+   "questions": [
+    {
+     "id": "2026-06-s11",
+     "batch": "2026-06",
+     "type": "single",
+     "no": 11,
+     "title": "",
+     "text": "⼩杨在对“能量晶⽯”按亮度进⾏排序。如果两块晶⽯亮度相同，他希望保持它们在原始序列中的相对顺 序。下列关于排序算法稳定性的说法，错误的是（ ）。",
+     "options": [
+      "冒泡排序是稳定的，因为只有在左边⽐右边⼤时才交换。",
+      "插⼊排序是稳定的，因为它将元素插⼊到相等元素的右侧。",
+      "选择排序是稳定的，因为它每次选出最⼩元素放在前⾯。",
+      "稳定性是指排序后相等元素的相对位置不发⽣改变。"
+     ],
+     "answer": "C",
+     "point": "",
+     "analysis": "",
+     "outline": "",
+     "thinking": "",
+     "program": ""
+    },
+    {
+     "id": "2026-06-s14",
+     "batch": "2026-06",
+     "type": "single",
+     "no": 14,
+     "title": "",
+     "text": "下⾯代码使⽤某种排序算法，将数组中的元素按从⼩到⼤排序。这段代码使⽤的排序算法是（ ）。 1 void mystery_sort(double arr[], int n) { 2 for (int i = 0; i < n - 1; i++) { 3 int minPos = i; 4 for (int j = i + 1; j < n; j++) { 5 if (arr[j] < arr[minPos]) { 6 minPos = j; 7 } 8 } 9 double temp = arr[i]; 10 arr[i] = arr[minPos]; 11 arr[minPos] = temp; 12 } 13 }",
+     "options": [
+      "冒泡排序",
+      "插⼊排序",
+      "选择排序",
+      "⾮典型排序"
+     ],
+     "answer": "C",
+     "point": "",
+     "analysis": "",
+     "outline": "",
+     "thinking": "",
+     "program": ""
+    },
+    {
+     "id": "2026-06-j4",
+     "batch": "2026-06",
+     "type": "judge",
+     "no": 4,
+     "title": "",
+     "text": "选择排序算法在寻找每⼀轮最⼩值时，如果遇到相等的元素不进⾏交换，则选择排序是⼀种稳定的排序算 法。",
+     "options": [],
+     "answer": "",
+     "point": "",
+     "analysis": "",
+     "outline": "",
+     "thinking": "",
+     "program": ""
+    },
+    {
+     "id": "2026-06-j5",
+     "batch": "2026-06",
+     "type": "judge",
+     "no": 5,
+     "title": "",
+     "text": "如果使⽤带 flag 的冒泡排序，且待排序数组⼀开始就是有序的，那么算法只需⼀轮扫描即可结束，时间 复杂度为 。",
+     "options": [],
+     "answer": "",
+     "point": "",
+     "analysis": "",
+     "outline": "",
+     "thinking": "",
+     "program": ""
+    },
+    {
+     "id": "2026-03-s10",
+     "batch": "2026-03",
+     "type": "single",
+     "no": 10,
+     "title": "",
+     "text": "某排序算法对如下数据排序（按 score 升序），则下⾯关于该排序算法稳定性的描述中，说法正确的是（ ）。 初始：(90,'A'), (90,'B'), (80,'C'), (90,'D') 排序后：(80,'C'), (90,'A'), (90,'B'), (90,'D')",
+     "options": [
+      "不稳定，因为出现了相同分数",
+      "稳定，因为相同 score 的相对顺序保持为 A 在 B 前、B 在 D 前",
+      "不稳定，因为 C 跑到前⾯了",
+      "⽆法判断"
+     ],
+     "answer": "B",
+     "point": "",
+     "analysis": "",
+     "outline": "",
+     "thinking": "",
+     "program": ""
+    },
+    {
+     "id": "2026-03-s11",
+     "batch": "2026-03",
+     "type": "single",
+     "no": 11,
+     "title": "",
+     "text": "下⾯代码试图把数组按升序进⾏“插⼊排序”，横线处应填写（ ）。 1 void ins(int a[], int n){ 2 for(int i = 1; i < n; i++){ 3 int key = a[i]; 4 int j = i-1; 5 while(j >= 0 && __________){ 6 a[j+1] = a[j]; 7 j--; 8 } 9 a[j+1] = key; 10 } 11 }",
+     "options": [
+      "a[j] < key",
+      "a[j] > key",
+      "a[j+1] > key",
+      "a[j] == key"
+     ],
+     "answer": "B",
+     "point": "",
+     "analysis": "",
+     "outline": "",
+     "thinking": "",
+     "program": ""
+    },
+    {
+     "id": "2026-03-j9",
+     "batch": "2026-03",
+     "type": "judge",
+     "no": 9,
+     "title": "",
+     "text": "由于选择排序和插⼊排序的时间复杂度均为 ，在任何实际场景下两者的性能表现⼏乎相同，可以互相 替代。",
+     "options": [],
+     "answer": "",
+     "point": "",
+     "analysis": "",
+     "outline": "",
+     "thinking": "",
+     "program": ""
+    },
+    {
+     "id": "2025-12-s10",
+     "batch": "2025-12",
+     "type": "single",
+     "no": 10,
+     "title": "",
+     "text": "对如下4个扑克牌进⾏排序， 1 struct Card { 2 int value; 3 char suit; // 花色 4 }; 5 6 Card cards[4] = {{5,'A'}, {3,'B'}, {5,'C'}, {3,'D'}}; 使⽤某排序算法按value排序后，结果为: {3,'D'}, {3,'B'}, {5,'A'}, {5,'C'}，则这个排序算法是稳定的吗？",
+     "options": [
+      "稳定，因为相同 value 的元素相对顺序保持不变",
+      "不稳定，因为 {3,'D'} 出现在 {3,'B'} 之前",
+      "⽆法判断",
+      "稳定，因为结果是有序的"
+     ],
+     "answer": "B",
+     "point": "",
+     "analysis": "",
+     "outline": "",
+     "thinking": "",
+     "program": ""
+    }
+   ]
+  },
+  {
+   "anchor": "lv4l8",
+   "title": "第 8 课：文件读写与异常处理",
+   "questions": [
+    {
+     "id": "2026-06-s13",
+     "batch": "2026-06",
+     "type": "single",
+     "no": 13,
+     "title": "",
+     "text": "在“模拟实验室”程序中，为了防⽌除以 导致崩溃，⼩杨使⽤了异常处理机制。执⾏以下代码将输出（ ）。 1 try { 2 int x = 10, y = 0; 3 if (y == 0) throw \"Zero Error\"; 4 cout << x / y; 5 } catch (int e) { 6 cout << \"Error Code: \" << e; 7 } catch (const char* msg) { 8 cout << \"Caught: \" << msg; 9 }",
+     "options": [
+      "0",
+      "Error Code: 0",
+      "Caught: Zero Error",
+      "程序直接崩溃"
+     ],
+     "answer": "C",
+     "point": "",
+     "analysis": "",
+     "outline": "",
+     "thinking": "",
+     "program": ""
+    },
+    {
+     "id": "2026-06-s15",
+     "batch": "2026-06",
+     "type": "single",
+     "no": 15,
+     "title": "",
+     "text": "⼩杨正在读取“冒险⽇志”⽂件 quest.txt。若⽂件内容为 Level 10，执⾏以下程序后输出为（ ）。 1 ifstream fin(\"quest.txt\"); 2 string s; 3 int v; 4 fin >> s >> v; 5 cout << s.length() * v;",
+     "options": [
+      "50",
+      "15",
+      "70",
+      "5 2"
+     ],
+     "answer": "A",
+     "point": "",
+     "analysis": "",
+     "outline": "",
+     "thinking": "",
+     "program": ""
+    },
+    {
+     "id": "2026-06-j8",
+     "batch": "2026-06",
+     "type": "judge",
+     "no": 8,
+     "title": "",
+     "text": "假设⽂件 output.txt 能正常打开，下⾯代码通过 rdbuf 将 cout 的输出重定向到了⽂件中。 1 ofstream fout(\"output.txt\"); 2 streambuf* old_buf = cout.rdbuf(); 3 cout.rdbuf(fout.rdbuf()); 4 cout << \"GESP Exam\"; 5 cout.rdbuf(old_buf);",
+     "options": [],
+     "answer": "",
+     "point": "",
+     "analysis": "",
+     "outline": "",
+     "thinking": "",
+     "program": ""
+    },
+    {
+     "id": "2026-03-s13",
+     "batch": "2026-03",
+     "type": "single",
+     "no": 13,
+     "title": "",
+     "text": "下⾯哪种⽅式不能实现将字符串 Welcome to 2026! 输出重定向到⽂件 log.txt（ ）。",
+     "options": [
+      "1 freopen(\"log.txt\", \"w\", stdout); 2 cout << \"Welcome to 2026!\" << endl; 3 fclose(stdout); 第 4 页 / 共 11 页",
+      "1 std::ofstream outFile(\"log.txt\"); 2 cout << \"Welcome to 2026!\" << endl; 3 outFile.close();",
+      "1 ofstream log_file(\"log.txt\"); 2 streambuf* org_cout = cout.rdbuf(); 3 cout.rdbuf(log_file.rdbuf()); 4 cout << \"Welcome to 2026!\" << endl; 5 cout.rdbuf(org_cout);",
+      "1 std::ofstream outFile(\"log.txt\"); 2 outFile << \"Welcome to 2026!\" << endl; 3 outFile.close();"
+     ],
+     "answer": "B",
+     "point": "",
+     "analysis": "",
+     "outline": "",
+     "thinking": "",
+     "program": ""
+    },
+    {
+     "id": "2026-03-s14",
+     "batch": "2026-03",
+     "type": "single",
+     "no": 14,
+     "title": "",
+     "text": "执⾏下⾯程序，输出结果是（ ）。 1 int divi(int a,int b){ 2 if(b==0) throw 0; 3 return a/b; 4 } 5 6 int main(){ 7 try{ 8 cout << divi(10,0); 9 }catch(const char* msg){ 10 cout << \"A\"; 11 }catch(int){ 12 cout << \"B\"; 13 } 14 }",
+     "options": [
+      "程序崩溃",
+      "⽆输出"
+     ],
+     "answer": "B",
+     "point": "",
+     "analysis": "",
+     "outline": "",
+     "thinking": "",
+     "program": ""
+    },
+    {
+     "id": "2026-03-j8",
+     "batch": "2026-03",
+     "type": "judge",
+     "no": 8,
+     "title": "",
+     "text": "下⾯程序能够把 Hello 写⼊ data.txt ⽂件中。 1 ofstream fout(\"data.txt\"); 2 cout << \"Hello\"; 3 fout.close();",
+     "options": [],
+     "answer": "",
+     "point": "",
+     "analysis": "",
+     "outline": "",
+     "thinking": "",
+     "program": ""
+    },
+    {
+     "id": "2025-12-s15",
+     "batch": "2025-12",
+     "type": "single",
+     "no": 15,
+     "title": "",
+     "text": "执⾏下⾯C++代码，会输出( )。 第 6 页 / 共 12 页 1 int divide(int a, int b) { 2 if(b == 0) throw \"Division by zero\"; 3 return a / b; 4 } 5 6 int main() { 7 int result = 0; 8 try { 9 result = divide(10, 0); 10 cout << \"A\"; 11 } 12 catch(const char* msg) { 13 cout << \"B\"; 14 result = -1; 15 } 16 cout << result; 17 return 0; 18 }",
+     "options": [
+      "A0",
+      "B-1",
+      "A10",
+      "程序崩溃 2"
+     ],
+     "answer": "B",
+     "point": "",
+     "analysis": "",
+     "outline": "",
+     "thinking": "",
+     "program": ""
+    },
+    {
+     "id": "2025-09-s15",
+     "batch": "2025-09",
+     "type": "single",
+     "no": 15,
+     "title": "",
+     "text": "关于异常处理，以下说法错误的是（ ）。",
+     "options": [
+      "try 块中的代码可能会抛出异常",
+      "catch 块可以有多个，处理不同类型的异常",
+      "throw 语句⽤于抛出异常",
+      "所有异常都必须被捕获，否则程序会崩溃 2"
+     ],
+     "answer": "D",
+     "point": "",
+     "analysis": "",
+     "outline": "",
+     "thinking": "",
+     "program": ""
+    }
+   ]
+  }
+ ]
+}

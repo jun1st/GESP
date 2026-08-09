@@ -1,0 +1,448 @@
+{
+ "level": 1,
+ "lessons": [
+  {
+   "anchor": "s1",
+   "title": "第 1 课：认识 C++ 程序",
+   "questions": [
+    {
+     "id": "2026-06-s2",
+     "batch": "2026-06",
+     "type": "single",
+     "no": 2,
+     "title": "",
+     "text": "在使⽤某集成开发环境（⽐如 Dev-C++）来编辑源代码⽂件时，程序员经常需要在编辑区中对代码进⾏各种 修改。以下关于在编辑区中执⾏的操作描述不正确的（ ）。",
+     "options": [
+      "可以将变量名 count 统⼀修改为 number",
+      "可以连续撤销最近 次输⼊的内容",
+      "可以调整代码⾏的缩进（如按 Tab 键）",
+      "在注释⽂本中间不能混⽤中英⽂"
+     ],
+     "answer": "D",
+     "point": "",
+     "analysis": "",
+     "outline": "",
+     "thinking": "",
+     "program": ""
+    },
+    {
+     "id": "2026-06-s3",
+     "batch": "2026-06",
+     "type": "single",
+     "no": 3,
+     "title": "",
+     "text": "有关如下 C++ 代码的说法，正确的是（ ）。 1 float a = 3 + 3.5; 2 cout << a;",
+     "options": [
+      "代码执⾏将报错。如果将 a = 3 + 3.5 改为 a = 3 + 3 + 1/2 将能正常执⾏。",
+      "代码执⾏将报错。如果将 a = 3 + 3.5 改为 a = 3.0 + 3.5 将能正常执⾏。",
+      "代码能正常执⾏，将输出 6。",
+      "代码能正常执⾏，将输出 6.5。"
+     ],
+     "answer": "D",
+     "point": "",
+     "analysis": "",
+     "outline": "",
+     "thinking": "",
+     "program": ""
+    },
+    {
+     "id": "2026-06-s4",
+     "batch": "2026-06",
+     "type": "single",
+     "no": 4,
+     "title": "",
+     "text": "下列 C++ 表达式与 - 2 * 2 % 4 的值不同的是（ ）。",
+     "options": [
+      "- (2 * 2) % 4",
+      "(- 2 * 2) % 4",
+      "- 2 * (2 % 4)",
+      "(2 * 2) % - 4"
+     ],
+     "answer": "C",
+     "point": "",
+     "analysis": "",
+     "outline": "",
+     "thinking": "",
+     "program": ""
+    },
+    {
+     "id": "2026-06-s5",
+     "batch": "2026-06",
+     "type": "single",
+     "no": 5,
+     "title": "",
+     "text": "执⾏如下 C++ 代码⽚段，其输出是（ ）。 1 int a = 3; 2 int b = a; 3 a = 4; 4 printf(\"%d %d\", a, b);",
+     "options": [
+      "3 3",
+      "4 3",
+      "4 4",
+      "3 4"
+     ],
+     "answer": "B",
+     "point": "",
+     "analysis": "",
+     "outline": "",
+     "thinking": "",
+     "program": ""
+    },
+    {
+     "id": "2026-06-s6",
+     "batch": "2026-06",
+     "type": "single",
+     "no": 6,
+     "title": "",
+     "text": "如下 C++ 代码执⾏时输⼊ 2026-6-27，下列说法正确的是（ ）。 1 int N; 2 cin >> N; 3 cout << N;",
+     "options": [
+      "输⼊失败，不允许输⼊减号，没有输出",
+      "允许输⼊，输出 1993",
+      "允许输⼊并原样输出 2026-6-27",
+      "允许输⼊并输出 2026"
+     ],
+     "answer": "D",
+     "point": "",
+     "analysis": "",
+     "outline": "",
+     "thinking": "",
+     "program": ""
+    },
+    {
+     "id": "2026-06-s7",
+     "batch": "2026-06",
+     "type": "single",
+     "no": 7,
+     "title": "",
+     "text": "如下 C++ 代码执⾏时，其说法错误的是（ ）。 1 int N, M; 2 cin >> N >> M; 3 4 if (N > M) 5 cout << \"A \" << (N - M); 6 else 7 cout << \"B \" << (M - N);",
+     "options": [
+      "如果输⼊ 4 3，将输出 A 1",
+      "如果输⼊ 3 4，将输出 B 1",
+      "如果输⼊ 3 3，将输出 A 0",
+      "如果输⼊ 4 4，将输出 B 0"
+     ],
+     "answer": "C",
+     "point": "",
+     "analysis": "",
+     "outline": "",
+     "thinking": "",
+     "program": ""
+    },
+    {
+     "id": "2026-06-s8",
+     "batch": "2026-06",
+     "type": "single",
+     "no": 8,
+     "title": "",
+     "text": "阅读如下 C++ 代码，下列说法错误的是（ ）。 1 int cnt = 0; 2 for (int i = 0; i < 5; i++) 3 cnt += 1; 4 cout << cnt;",
+     "options": [
+      "将 cnt += 1 修改为 cnt = cnt + 1，执⾏效果相同",
+      "将 cnt += 1 修改为 cnt = 1 + cnt，执⾏效果相同",
+      "将 cnt += 1 修改为 cnt =+ 1，执⾏效果相同",
+      "将 cnt += 1 修改为 cnt = + 1 + cnt，执⾏效果相同"
+     ],
+     "answer": "C",
+     "point": "",
+     "analysis": "",
+     "outline": "",
+     "thinking": "",
+     "program": ""
+    },
+    {
+     "id": "2026-06-s9",
+     "batch": "2026-06",
+     "type": "single",
+     "no": 9,
+     "title": "",
+     "text": "如下 C++ 代码执⾏后输出是 1 2 3 4 5 6 7 8 9 10 11 5 6 7 8 9 10 11 5 6 7 8 9 10 11 5 6 7 8 9 10 11 5 6 7。横线处应该先后依次填⼊的运算符是（ ）。 1 int num = 1; 2 for (int i = 0; i < 35; i++) { 3 printf(\"%d \", num); 4 if (num _______ 10) 5 num _______ 2; 6 else 7 num _______ 1; 8 }",
+     "options": [
+      "> /= +=",
+      ">= %= +=",
+      "> %= +=",
+      "> /= =+"
+     ],
+     "answer": "A",
+     "point": "",
+     "analysis": "",
+     "outline": "",
+     "thinking": "",
+     "program": ""
+    }
+   ]
+  },
+  {
+   "anchor": "s3",
+   "title": "第 2 课：变量和类型",
+   "questions": [
+    {
+     "id": "2026-03-j7",
+     "batch": "2026-03",
+     "type": "judge",
+     "no": 7,
+     "title": "",
+     "text": "执⾏下⾯的C++代码段，如果变量都为整型变量，输⼊为⼤于0的整数，则输出数值⼀定为 -N 的值。 1 cin >> N; 2 total = 0; 3 for (i = -N; i < N; i +=2) 4 total += i; 5 cout << total;",
+     "options": [],
+     "answer": "",
+     "point": "",
+     "analysis": "",
+     "outline": "",
+     "thinking": "",
+     "program": ""
+    },
+    {
+     "id": "2025-12-s3",
+     "batch": "2025-12",
+     "type": "single",
+     "no": 3,
+     "title": "",
+     "text": "下⾯有关C++变量的说法，正确的是( )。",
+     "options": [
+      "不可以⽤ for 作为变量名，因为 for 是C++的关键字（保留字）。",
+      "_tnt 不可以是变量名，因为变量名的第⼀个字符必须是英⽂字母。",
+      "_tnt_ 不可以是变量名，因为最后⼀个字符容易与减号混淆。",
+      "可以⽤ printf 作为变量名，因为 printf 是关键字，但这不是好习惯，因为 printf 有约定的功能与含 义。"
+     ],
+     "answer": "A",
+     "point": "",
+     "analysis": "",
+     "outline": "",
+     "thinking": "",
+     "program": ""
+    },
+    {
+     "id": "2025-12-j9",
+     "batch": "2025-12",
+     "type": "judge",
+     "no": 9,
+     "title": "",
+     "text": "如果 x 是C++代码中的 double 型变量，则对 cout << ( x? 1227 : 12.27); 编译时将报错，因为 1227 和 12.12分别是 int 和 double 类型，导致识别混乱。（ ）",
+     "options": [],
+     "answer": "",
+     "point": "",
+     "analysis": "",
+     "outline": "",
+     "thinking": "",
+     "program": ""
+    },
+    {
+     "id": "2025-09-j8",
+     "batch": "2025-09",
+     "type": "judge",
+     "no": 8,
+     "title": "",
+     "text": "执⾏C++代码cout << (12 + 12.12)将报错，因为 12 是 int 类型，⽽ 12.12 是 floa t类型，不同 类型不能直接运算。（ ）",
+     "options": [],
+     "answer": "",
+     "point": "",
+     "analysis": "",
+     "outline": "",
+     "thinking": "",
+     "program": ""
+    },
+    {
+     "id": "2025-06-s2",
+     "batch": "2025-06",
+     "type": "single",
+     "no": 2,
+     "title": "",
+     "text": "在某集成开发环境中调试下⾯代码段时尝试设置断点和检查局部变量，下⾯哪个说法是错误的（ ）。 1 int i,N = 0; // L1 2 cin >> N; // L2 3 for (i = 1; i < 9; i++) 4 if (N % i == 0) break; // L3 5 if (i < 9) 6 printf(\"N不能大于9\\n\"); // L4",
+     "options": [
+      "断点不可以设在L1标记的代码⾏",
+      "执⾏暂停在L2标记的代码⾏时，可以检测i的值",
+      "执⾏暂停在L3标记的代码⾏时，可以修改i的值",
+      "执⾏有可能暂停在L4标记的代码⾏"
+     ],
+     "answer": "A",
+     "point": "",
+     "analysis": "",
+     "outline": "",
+     "thinking": "",
+     "program": ""
+    },
+    {
+     "id": "2025-06-s7",
+     "batch": "2025-06",
+     "type": "single",
+     "no": 7,
+     "title": "",
+     "text": "定义整型变量int a=16，则执⾏++a += 3之后，a的值会是（ ）。",
+     "options": [
+      "3",
+      "17",
+      "19",
+      "20"
+     ],
+     "answer": "D",
+     "point": "",
+     "analysis": "",
+     "outline": "",
+     "thinking": "",
+     "program": ""
+    },
+    {
+     "id": "2025-06-s8",
+     "batch": "2025-06",
+     "type": "single",
+     "no": 8,
+     "title": "",
+     "text": "C++的int类型变量X的值为8，如果执⾏cout << (++X)++;，则输出和执⾏后X的值分别是（ ）。",
+     "options": [
+      "8 9",
+      "9 9",
+      "9 10",
+      "编译错误，⽆法执⾏"
+     ],
+     "answer": "C",
+     "point": "",
+     "analysis": "",
+     "outline": "",
+     "thinking": "",
+     "program": ""
+    },
+    {
+     "id": "2025-06-j8",
+     "batch": "2025-06",
+     "type": "judge",
+     "no": 8,
+     "title": "",
+     "text": "执⾏C++代码cout << (12 + 12.12)将报错，因为12是int类型，⽽12.12是float类型，不同类型不能直接运 算。（ ）",
+     "options": [],
+     "answer": "",
+     "point": "",
+     "analysis": "",
+     "outline": "",
+     "thinking": "",
+     "program": ""
+    }
+   ]
+  },
+  {
+   "anchor": "s7",
+   "title": "第 3 课：分支和循环",
+   "questions": [
+    {
+     "id": "2025-09-s2",
+     "batch": "2025-09",
+     "type": "single",
+     "no": 2,
+     "title": "",
+     "text": "⼩杨这学期刚开学就选修了⼀门编程课，然后就想编写程序来计算1到10001之间的所有偶数的和。他希望程 序采⽤简单累加整数的⽅法，同时希望源程序尽可能清晰、简洁，则下⾯关于实现累加时采⽤的主要控制结构的哪 个说法最不合适（ ）。",
+     "options": [
+      "使⽤循环结构",
+      "使⽤循环和分⽀的组合",
+      "仅使⽤顺序结构",
+      "不使⽤分⽀结构"
+     ],
+     "answer": "C",
+     "point": "",
+     "analysis": "",
+     "outline": "",
+     "thinking": "",
+     "program": ""
+    },
+    {
+     "id": "2025-09-j9",
+     "batch": "2025-09",
+     "type": "judge",
+     "no": 9,
+     "title": "",
+     "text": "下⾯C++代码执⾏时将导致⽆限循环（也称死循环）。（ ） 1 int count = 0; 2 while (count < 5){ 3 count += 1; 4 if (count == 3) 5 continue; 6 cout << count << ' '; 7 }",
+     "options": [],
+     "answer": "",
+     "point": "",
+     "analysis": "",
+     "outline": "",
+     "thinking": "",
+     "program": ""
+    },
+    {
+     "id": "2024-12-j10",
+     "batch": "2024-12",
+     "type": "judge",
+     "no": 10,
+     "title": "",
+     "text": "在C++的循环体内部，如果 break 和 continue 语句连续在⼀起，那么作⽤抵消，可以顺利执⾏下⼀次 循环。 ( ) 3",
+     "options": [],
+     "answer": "",
+     "point": "",
+     "analysis": "",
+     "outline": "",
+     "thinking": "",
+     "program": ""
+    },
+    {
+     "id": "2024-06-j5",
+     "batch": "2024-06",
+     "type": "judge",
+     "no": 5,
+     "title": "",
+     "text": "在C++中，break语句⽤于终⽌当前层次的循环，循环可以是for循环，也可以是while循环。（ ）",
+     "options": [],
+     "answer": "",
+     "point": "",
+     "analysis": "",
+     "outline": "",
+     "thinking": "",
+     "program": ""
+    },
+    {
+     "id": "2024-03-j5",
+     "batch": "2024-03",
+     "type": "judge",
+     "no": 5,
+     "title": "",
+     "text": "在C++中，while可能是死循环，⽽for循环不可能是死循环。（ ）",
+     "options": [],
+     "answer": "",
+     "point": "",
+     "analysis": "",
+     "outline": "",
+     "thinking": "",
+     "program": ""
+    },
+    {
+     "id": "2024-03-j6",
+     "batch": "2024-03",
+     "type": "judge",
+     "no": 6,
+     "title": "",
+     "text": "在C++，break语句⽤于提前终⽌当前层次循环，适⽤于while循环，但不适⽤于for循环。（ ）",
+     "options": [],
+     "answer": "",
+     "point": "",
+     "analysis": "",
+     "outline": "",
+     "thinking": "",
+     "program": ""
+    },
+    {
+     "id": "2024-03-j10",
+     "batch": "2024-03",
+     "type": "judge",
+     "no": 10,
+     "title": "",
+     "text": "任何⼀个for循环都可以转化为等价的while循环（ ）。 3",
+     "options": [],
+     "answer": "",
+     "point": "",
+     "analysis": "",
+     "outline": "",
+     "thinking": "",
+     "program": ""
+    },
+    {
+     "id": "2023-12-j10",
+     "batch": "2023-12",
+     "type": "judge",
+     "no": 10,
+     "title": "",
+     "text": "任何⼀个while循环都可以转化为等价的for循环（ ）。 3",
+     "options": [],
+     "answer": "",
+     "point": "",
+     "analysis": "",
+     "outline": "",
+     "thinking": "",
+     "program": ""
+    }
+   ]
+  }
+ ]
+}
