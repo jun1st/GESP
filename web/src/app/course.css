@@ -18,7 +18,13 @@
   color: var(--ink, #2b2d42);
   text-decoration: none;
 }
-.course-map a.is-done { border-color: rgba(52,199,89,.45); }
+.course-map a { display: flex; flex-direction: column; gap: 3px; }
+.course-map a.is-done { border-color: rgba(52,199,89,.5); background: #eafaf1; }
+.course-map a.is-done b { color: #0a7c55; }
+.course-map a.cur { border-color: #5e60ce; box-shadow: 0 0 0 2px rgba(94,96,206,.16); }
+.course-map a span { font-size: 12px; font-weight: 700; color: #9aa2bd; }
+.course-map a.is-done span { color: #0a7c55; }
+.course-map a.cur span { color: #5e60ce; }
 .lesson-list { display: grid; gap: 14px; }
 .lesson-card h2 { margin: 0 0 6px; font-size: clamp(20px, 4vw, 28px); }
 .lesson-tags { display: flex; flex-wrap: wrap; gap: 6px; margin: 8px 0; }
@@ -50,6 +56,30 @@
   text-decoration: none;
   cursor: pointer;
 }
+.lesson-pnav {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 1px dashed rgba(43, 45, 66, .18);
+}
+.lesson-pnav a {
+  border: 1.5px solid rgba(94, 96, 206, .32);
+  background: transparent;
+  color: var(--accent, #5e60ce);
+  border-radius: 999px;
+  padding: 8px 15px;
+  font: inherit;
+  font-size: 13.5px;
+  font-weight: 800;
+  text-decoration: none;
+  cursor: pointer;
+}
+.lesson-pnav a:hover { background: rgba(94, 96, 206, .08); }
+.lesson-pnav .pn-next { margin-left: auto; max-width: 100%; }
 .lesson-actions .demo-toggle {
   background: transparent;
   color: var(--accent, #5e60ce);

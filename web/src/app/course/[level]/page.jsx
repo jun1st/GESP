@@ -1,6 +1,7 @@
 import { readLevel, readRelated, LEVEL_CN } from '@/lib/courseData';
 import ProgressBar from './ProgressBar';
 import CheckButton from './CheckButton';
+import CourseMap from './CourseMap';
 import Experiments from '@/components/Experiments';
 import CodeBlock from '@/components/experiments/CodeBlock';
 import LessonQuiz from '@/components/experiments/LessonQuiz';
@@ -24,19 +25,12 @@ export default async function CoursePage({ params }) {
 
   return (
     <>
-      <section className="course-hero">
+      <section className="course-hero" id="course-top">
         <p className="eyebrow">Dynamic Course</p>
         <h1>{data.emoji} {data.title}</h1>
         <p>{data.description}</p>
         <ProgressBar progressKey={data.progressKey} total={data.lessons.length} />
-        <div className="course-map">
-          {data.lessons.map((lesson, index) => (
-            <a key={lesson.anchor} href={`#${lesson.anchor}`}>
-              <b>{index + 1}. {lesson.title.replace(/^第 \d+ 课：/, '')}</b>
-              <span>打卡后点亮</span>
-            </a>
-          ))}
-        </div>
+        <CourseMap lessons={data.lessons} progressKey={data.progressKey} />
       </section>
 
       <section className="course-panel">
@@ -66,6 +60,18 @@ export default async function CoursePage({ params }) {
               <RelatedQuestions questions={relatedByAnchor[lesson.anchor]} />
               <div className="lesson-actions">
                 <CheckButton progressKey={data.progressKey} index={index} />
+              </div>
+              <div className="lesson-pnav">
+                {index > 0 && (
+                  <a className="pn-prev" href={`#${data.lessons[index - 1].anchor}`}>← 上一课</a>
+                )}
+                {index < data.lessons.length - 1 ? (
+                  <a className="pn-next" href={`#${data.lessons[index + 1].anchor}`}>
+                    下一课：{data.lessons[index + 1].title.replace(/^第 \d+ 课：/, '')} →
+                  </a>
+                ) : (
+                  <a className="pn-next" href="#course-top">🏆 本级别学完，返回顶部 ↑</a>
+                )}
               </div>
             </article>
           ))}
