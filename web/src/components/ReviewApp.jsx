@@ -20,6 +20,7 @@ export default function ReviewApp() {
   const save = (list) => {
     localStorage.setItem('gesp_wrong', JSON.stringify(list));
     setWrong([...list]);
+    window.dispatchEvent(new CustomEvent('gesp-data-changed', { detail: { key: 'gesp_wrong' } }));
   };
 
   const answer = (idx, chosen) => {

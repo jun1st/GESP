@@ -3,6 +3,7 @@ import './course.css';
 import './experiments.css';
 import Topbar from '@/components/Topbar';
 import Footer from '@/components/Footer';
+import CloudSync from '@/components/CloudSync';
 
 export const metadata = {
   title: 'GESP C++ 学习中心',
@@ -15,6 +16,7 @@ export default function RootLayout({ children }) {
       <body>
         <div className="page-shell">
           <Topbar />
+          <CloudSync />
           <main>{children}</main>
           <Footer />
         </div>

@@ -24,6 +24,15 @@ async function init() {
         created_at TEXT NOT NULL
       )
     `);
+    await impl.run(`
+      CREATE TABLE IF NOT EXISTS user_data (
+        user_id INTEGER NOT NULL,
+        key TEXT NOT NULL,
+        value TEXT NOT NULL,
+        updated_at TEXT NOT NULL,
+        PRIMARY KEY (user_id, key)
+      )
+    `);
   } else {
     const { DatabaseSync } = await import('node:sqlite');
     const path = await import('node:path');
@@ -36,6 +45,15 @@ async function init() {
         password_hash TEXT NOT NULL,
         membership_expires_at TEXT,
         created_at TEXT NOT NULL
+      )
+    `);
+    db.exec(`
+      CREATE TABLE IF NOT EXISTS user_data (
+        user_id INTEGER NOT NULL,
+        key TEXT NOT NULL,
+        value TEXT NOT NULL,
+        updated_at TEXT NOT NULL,
+        PRIMARY KEY (user_id, key)
       )
     `);
     impl = {

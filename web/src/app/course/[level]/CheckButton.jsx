@@ -18,7 +18,7 @@ export default function CheckButton({ progressKey, index }) {
       saved[index] = !checked;
       localStorage.setItem(progressKey, JSON.stringify(saved));
       setChecked(!checked);
-      window.dispatchEvent(new CustomEvent('gesp-progress'));
+      window.dispatchEvent(new CustomEvent('gesp-progress', { detail: { key: progressKey } }));
     } catch (e) {}
   };
 

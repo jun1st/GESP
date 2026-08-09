@@ -56,11 +56,13 @@ export default function HomePage() {
     const p = { name: clean, savedAt: Date.now() };
     localStorage.setItem('gesp_user_profile', JSON.stringify(p));
     setProfile(p);
+    window.dispatchEvent(new CustomEvent('gesp-data-changed', { detail: { key: 'gesp_user_profile' } }));
   };
 
   const logout = () => {
     localStorage.removeItem('gesp_user_profile');
     setProfile(null);
+    window.dispatchEvent(new CustomEvent('gesp-data-changed', { detail: { key: 'gesp_user_profile' } }));
   };
 
   const state = progress || MODULES.map((m) => ({ m, arr: new Array(m.total).fill(false), done: 0 }));

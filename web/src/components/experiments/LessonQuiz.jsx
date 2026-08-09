@@ -7,6 +7,7 @@ function recordWrong(item) {
     const list = JSON.parse(localStorage.getItem('gesp_wrong') || '[]');
     list.push(Object.assign({ time: Date.now() }, item));
     localStorage.setItem('gesp_wrong', JSON.stringify(list));
+    window.dispatchEvent(new CustomEvent('gesp-data-changed', { detail: { key: 'gesp_wrong' } }));
   } catch (e) {
     /* localStorage 不可用时静默跳过 */
   }
