@@ -380,5 +380,11 @@
       }
     }
   ],
-  "practiceLinks": []
+  "practiceLinks": [
+    {
+      "title": "打开互动版",
+      "description": "查看原四级课程的题目、打卡和代码示例。",
+      "href": "/levels/4"
+    }
+  ]
 }

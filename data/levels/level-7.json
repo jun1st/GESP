@@ -2,43 +2,250 @@
   "id": 7,
   "slug": "level-7",
   "title": "GESP C++ 七级课程",
-  "description": "复杂动态规划、图、图论算法和哈希表。",
+  "description": "数学库函数、复杂动态规划、图的遍历、图论算法、哈希表。",
   "emoji": "🕸️",
   "progressKey": "gesp_lv7_prog",
   "sourcePage": "level7.html",
   "lessons": [
     {
-      "id": "advanced-dp",
+      "id": "数学库函数-三角-对数-指数",
       "anchor": "lv7l1",
-      "title": "第 1 课：复杂动态规划",
-      "summary": "在更复杂状态中使用动态规划。",
-      "goal": "理解多维状态和阶段划分。",
-      "tags": ["动态规划"],
-      "blocks": ["复杂 DP 需要更清晰的状态定义。", "先写出子问题，再考虑转移。"],
-      "practice": { "title": "状态设计", "prompt": "为一个背包类问题描述状态含义。" }
+      "title": "第 1 课：数学库函数：三角、对数、指数",
+      "summary": "sin/cos 管角度、log10/log2 管对数、exp 管 e 的次方；都来自 <cmath>。",
+      "goal": "🎯 本节目标：1. 会用 sin/cos、log10/log2、exp；2. 知道它们都在 <cmath> 里。",
+      "tags": [
+        "数学库函数"
+      ],
+      "blocks": [
+        "三角函数：sin(x)、cos(x)（注意：参数是弧度，不是角度）。",
+        "对数函数：log10(x) = 以 10 为底，log2(x) = 以 2 为底。",
+        "指数函数：exp(x) = e 的 x 次方（e ≈ 2.718）。",
+        "考试常考\"会读函数名、知道它算什么\"，写代码前先想清楚定义域（log 里不能是负数或 0）。"
+      ],
+      "code": [
+        "#include <iostream>\n#include <cmath>\nusing namespace std;\nint main() {\n    cout << sin(0) << endl;        // 0\n    cout << log10(1000) << endl;   // 3\n    cout << log2(8) << endl;       // 3\n    cout << exp(1) << endl;        // e ≈ 2.71828\n    return 0;\n}"
+      ],
+      "quiz": [
+        {
+          "q": "log2(8) 等于多少？",
+          "options": [
+            "3",
+            "2",
+            "8",
+            "4"
+          ],
+          "answer": 0,
+          "explain": "2 的 3 次方是 8，所以 log2(8)=3。"
+        },
+        {
+          "q": "exp(x) 表示什么？",
+          "options": [
+            "e 的 x 次方",
+            "x 的平方",
+            "10 的 x 次方",
+            "绝对值"
+          ],
+          "answer": 0,
+          "explain": "exp(x) = eˣ，e ≈ 2.718。"
+        }
+      ],
+      "practice": {
+        "title": "考一考",
+        "prompt": "log2(8) 等于多少？"
+      }
     },
     {
-      "id": "graphs",
+      "id": "复杂动态规划-二维-区间-lis-lcs",
+      "anchor": "lv7l2",
+      "title": "第 2 课：复杂动态规划：二维、区间、LIS、LCS",
+      "summary": "dp[i][j] 是二维表格；LIS 找最长上升子序列、LCS 找最长公共子序列；滚动数组省空间。",
+      "goal": "🎯 本节目标：1. 会用 dp[i][j] 二维表格；2. 认识 LIS、LCS；3. 知道滚动数组省空间。",
+      "tags": [
+        "复杂动态规划"
+      ],
+      "blocks": [
+        "二维 DP：用 dp[i][j] 这张\"表格\"记答案，比如区间 DP 记 dp[i][j] = 区间 i~j 的答案。",
+        "LIS：最长上升子序列——在序列里挑一个\"越来越大的子序列\"，越长越好。",
+        "LCS：最长公共子序列——两个字符串共同的最长\"子序列\"（可以跳着选，顺序不变）。",
+        "滚动数组：很多 DP 只用到上一行，用两行数组\"滚着用\"，把空间从 O(n²) 省到 O(n)。"
+      ],
+      "code": [
+        "#include <iostream>\nusing namespace std;\nint a[1005], dp[1005];\nint main() {\n    int n; cin >> n;\n    for (int i = 1; i <= n; i++) cin >> a[i];\n    int ans = 0;\n    for (int i = 1; i <= n; i++) {        // LIS 最长上升子序列\n        dp[i] = 1;\n        for (int j = 1; j < i; j++)\n            if (a[j] < a[i]) dp[i] = max(dp[i], dp[j] + 1);\n        ans = max(ans, dp[i]);\n    }\n    cout << ans << endl;\n    return 0;\n}"
+      ],
+      "quiz": [
+        {
+          "q": "滚动数组的作用是？",
+          "options": [
+            "节省空间",
+            "让程序变快",
+            "自动排序",
+            "处理输入"
+          ],
+          "answer": 0,
+          "explain": "只用两行滚动覆盖，把空间从 O(n²) 省到 O(n)。"
+        },
+        {
+          "q": "LCS 指的是？",
+          "options": [
+            "最长公共子序列",
+            "最长上升子序列",
+            "最小生成树",
+            "最短路径"
+          ],
+          "answer": 0,
+          "explain": "LCS = Longest Common Subsequence，两个序列共同的最长子序列。"
+        }
+      ],
+      "practice": {
+        "title": "考一考",
+        "prompt": "滚动数组的作用是？"
+      }
+    },
+    {
+      "id": "图的定义与遍历",
       "anchor": "lv7l3",
-      "title": "第 2 课：图的定义与遍历",
-      "summary": "认识点、边、邻接表和图遍历。",
-      "goal": "能用 DFS/BFS 遍历图。",
-      "tags": ["图"],
-      "blocks": ["图由点和边组成。", "邻接表适合存储稀疏图。"],
-      "practice": { "title": "图遍历", "prompt": "画出一个小图并写出 BFS 顺序。" }
+      "title": "第 3 课：图的定义与遍历",
+      "summary": "图 = 顶点 + 边；无向图边没方向、有向图有方向；度 = 连着几条边；邻接矩阵/邻接表存图，DFS/BFS 遍历。",
+      "goal": "🎯 本节目标：1. 知道图 = 顶点 + 边；2. 会分有向/无向；3. 会用 DFS/BFS 遍历图。",
+      "tags": [
+        "图的定义与遍历"
+      ],
+      "blocks": [
+        "图就像\"朋友圈\"：顶点是人，边是朋友关系。",
+        "无向图：边没有方向（你认识我，我也认识你）；有向图：边有方向（我关注了你）。",
+        "顶点的度 = 连着它的边数；有向图里分入度（指向它的）和出度（它指出的）。",
+        "存图：邻接矩阵 g[u][v]（简单直观）或邻接表（省空间）。遍历用 DFS/BFS。"
+      ],
+      "code": [
+        "#include <iostream>\nusing namespace std;\nint g[105][105], n, m;   // 邻接矩阵\nbool vis[105];\nvoid dfs(int u) {        // 深度优先遍历\n    vis[u] = true;\n    cout << u << \" \";\n    for (int v = 1; v <= n; v++)\n        if (g[u][v] && !vis[v]) dfs(v);\n}"
+      ],
+      "quiz": [
+        {
+          "q": "无向图里，一个顶点的\"度\"是？",
+          "options": [
+            "连着它的边的数量",
+            "顶点总数",
+            "边的总数",
+            "深度"
+          ],
+          "answer": 0,
+          "explain": "度 = 和它相连的边数。"
+        },
+        {
+          "q": "有向图和无向图的区别是？",
+          "options": [
+            "有向图的边有方向",
+            "有向图一定更大",
+            "无向图一定更快",
+            "没有区别"
+          ],
+          "answer": 0,
+          "explain": "有向图边带箭头，方向很重要。"
+        }
+      ],
+      "practice": {
+        "title": "考一考",
+        "prompt": "无向图里，一个顶点的\"度\"是？"
+      }
     },
     {
-      "id": "hashing",
+      "id": "图论算法-泛洪-flood-fill",
+      "anchor": "lv7l4",
+      "title": "第 4 课：图论算法：泛洪 flood fill",
+      "summary": "flood fill = 从起点四周蔓延，把连通块全部标记；数岛屿、油漆桶都是它。",
+      "goal": "🎯 本节目标：1. 知道泛洪算法\"从起点往四周蔓延\"；2. 会用 DFS 数连通块。",
+      "tags": [
+        "图论算法"
+      ],
+      "blocks": [
+        "泛洪算法（flood fill）：从起点开始，向上下左右\"蔓延\"，把连成一片的格子全部标记。",
+        "典型应用：数岛屿（几块 # 连在一起算 1 个岛）、画图软件的\"油漆桶填充\"。",
+        "四连通是上下左右 4 个方向；八连通再加 4 个斜角。"
+      ],
+      "code": [
+        "#include <iostream>\nusing namespace std;\nint n, m;\nchar mp[105][105];\nbool vis[105][105];\nint dx[4] = {0, 0, 1, -1};\nint dy[4] = {1, -1, 0, 0};\nvoid flood(int x, int y) {\n    vis[x][y] = true;\n    for (int k = 0; k < 4; k++) {\n        int nx = x + dx[k], ny = y + dy[k];\n        if (nx >= 1 && nx <= n && ny >= 1 && ny <= m\n            && !vis[nx][ny] && mp[nx][ny] == '#')\n            flood(nx, ny);   // 蔓延到下一格\n    }\n}"
+      ],
+      "quiz": [
+        {
+          "q": "flood fill 常用来？",
+          "options": [
+            "数连通块（比如岛屿）",
+            "排序",
+            "求素数",
+            "反转字符串"
+          ],
+          "answer": 0,
+          "explain": "从起点蔓延，把连成片的格子全标出来。"
+        },
+        {
+          "q": "四连通的 flood fill 往几个方向蔓延？",
+          "options": [
+            "4 个（上下左右）",
+            "2 个",
+            "8 个",
+            "1 个"
+          ],
+          "answer": 0,
+          "explain": "四连通 = 上下左右 4 个方向。"
+        }
+      ],
+      "practice": {
+        "title": "考一考",
+        "prompt": "flood fill 常用来？"
+      }
+    },
+    {
+      "id": "哈希表-直接按名字找抽屉",
       "anchor": "lv7l5",
-      "title": "第 3 课：哈希表",
-      "summary": "用哈希思想快速查找数据。",
-      "goal": "理解 key、hash 和冲突的基本概念。",
-      "tags": ["哈希"],
-      "blocks": ["哈希表追求接近 O(1) 的查找。", "冲突需要用合适方法处理。"],
-      "practice": { "title": "查重问题", "prompt": "说明如何用哈希表判断数组里是否有重复元素。" }
+      "title": "第 5 课：哈希表：直接按名字找抽屉",
+      "summary": "哈希 = 算位置直接取（平均 O(1)）；冲突用链地址/开放寻址解决；桶计数是最简单用法。",
+      "goal": "🎯 本节目标：1. 知道哈希 = \"算出位置直接拿\"；2. 了解冲突和解决方法；3. 会用\"桶\"统计出现次数。",
+      "tags": [
+        "哈希表"
+      ],
+      "blocks": [
+        "哈希表：用哈希函数算出数据该放哪个\"抽屉\"，查找平均只要 O(1)，超快。",
+        "冲突：两个不同的 key 算出同一个位置 → 用链地址法（一个位置挂一串）或开放寻址解决。",
+        "简单应用：用数组当\"桶\"，统计每个字母/数字出现几次。"
+      ],
+      "code": [
+        "#include <iostream>\n#include <string>\nusing namespace std;\nint cnt[26];\nint main() {\n    string s;\n    cin >> s;\n    for (char c : s) cnt[c - 'a']++;   // 用\"桶\"计数\n    for (int i = 0; i < 26; i++)\n        if (cnt[i]) cout << char('a' + i) << \":\" << cnt[i] << endl;\n    return 0;\n}"
+      ],
+      "quiz": [
+        {
+          "q": "哈希表查找的平均时间复杂度是？",
+          "options": [
+            "O(1)",
+            "O(n)",
+            "O(log n)",
+            "O(n²)"
+          ],
+          "answer": 0,
+          "explain": "算出位置直接拿，平均 O(1)。"
+        },
+        {
+          "q": "两个不同的 key 算到同一个位置，叫？",
+          "options": [
+            "冲突",
+            "合并",
+            "排序",
+            "溢出"
+          ],
+          "answer": 0,
+          "explain": "冲突用链地址法或开放寻址解决。"
+        }
+      ],
+      "practice": {
+        "title": "考一考",
+        "prompt": "哈希表查找的平均时间复杂度是？"
+      }
     }
   ],
   "practiceLinks": [
-    { "title": "打开互动版", "description": "查看原七级课程的图论、哈希和测验互动。", "href": "/levels/7" }
+    {
+      "title": "打开互动版",
+      "description": "查看原七级课程的图论、哈希和测验互动。",
+      "href": "/levels/7"
+    }
   ]
 }

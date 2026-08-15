@@ -292,5 +292,11 @@
       }
     }
   ],
-  "practiceLinks": []
+  "practiceLinks": [
+    {
+      "title": "打开互动版",
+      "description": "查看原三级课程的测验、地图和代码复制功能。",
+      "href": "/levels/3"
+    }
+  ]
 }

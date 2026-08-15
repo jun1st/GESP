@@ -1,8 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   trailingSlash: true,
-  // GitHub Pages 站点位于 https://jun1st.github.io/GESP/，
-  // 部署时由 workflow 传入 NEXT_PUBLIC_BASE_PATH=/GESP；本地开发保持根路径。
+  // 兼容早期 GitHub Pages（https://jun1st.github.io/GESP/）部署：传入 NEXT_PUBLIC_BASE_PATH=/GESP；
+  // Vercel 部署保持根路径（默认空）。
   basePath: process.env.NEXT_PUBLIC_BASE_PATH || ''
 };
 

@@ -241,5 +241,11 @@
       }
     }
   ],
-  "practiceLinks": []
+  "practiceLinks": [
+    {
+      "title": "打开互动版",
+      "description": "查看原七级课程的图论、哈希和测验互动。",
+      "href": "/levels/7"
+    }
+  ]
 }

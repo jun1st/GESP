@@ -2,43 +2,389 @@
   "id": 4,
   "slug": "level-4",
   "title": "GESP C++ 四级课程",
-  "description": "二维数组、结构体、函数、递推、排序、文件与异常。",
+  "description": "指针、二维数组、结构体、函数、参数传递、递推、排序、文件与异常。",
   "emoji": "🏗️",
   "progressKey": "gesp_lv4_prog",
   "sourcePage": "level4.html",
   "lessons": [
     {
-      "id": "matrix",
+      "id": "指针-存-地址-的变量",
       "anchor": "lv4l1",
-      "title": "第 1 课：二维数组",
-      "summary": "用行和列组织表格型数据。",
-      "goal": "能遍历二维数组并处理矩阵类问题。",
-      "tags": ["二维数组"],
-      "blocks": ["二维数组可以表示棋盘、表格和矩阵。", "常用双层循环访问每个元素。"],
-      "practice": { "title": "矩阵遍历", "prompt": "说明如何按行遍历一个 3x3 数组。" }
+      "title": "第 1 课：指针：存\"地址\"的变量",
+      "summary": "& 取地址，* 解引用；指针存的是地址，*p 才是它\"指向的变量\"。",
+      "goal": "🎯 本节目标：1. 理解\"地址\"和\"指针\"；2. 会写 int *p = &x; 并用 *p 解引用。",
+      "tags": [
+        "指针"
+      ],
+      "blocks": [
+        "变量住在内存里，每个变量都有自己的地址（就像房间号）。",
+        "指针就是\"存地址的变量\"：int *p = &x; 让 p 记住 x 的房间号。",
+        "& 是取地址，*p 是解引用——\"顺着地址找到那个变量\"。",
+        "改 *p 就等于改 x，因为指向的是同一个变量！"
+      ],
+      "code": [
+        "#include <iostream>\nusing namespace std;\nint main() {\n    int x = 10;\n    int *p = &x;        // p 存 x 的地址\n    cout << *p << endl; // 10：顺着地址取值\n    *p = 20;            // 改 *p 就是改 x\n    cout << x << endl;  // 20\n    return 0;\n}"
+      ],
+      "quiz": [
+        {
+          "q": "int *p = &x; 里的 &x 表示什么？",
+          "options": [
+            "x 的地址",
+            "x 的值",
+            "指针的指针",
+            "报错"
+          ],
+          "answer": 0,
+          "explain": "& 是取地址，&x 就是 x 的地址。"
+        },
+        {
+          "q": "*p 这个操作叫？",
+          "options": [
+            "解引用：顺着地址找变量",
+            "取地址",
+            "乘法",
+            "赋值"
+          ],
+          "answer": 0,
+          "explain": "*p 是解引用，找到 p 指向的那个变量。"
+        }
+      ],
+      "practice": {
+        "title": "考一考",
+        "prompt": "int *p = &x; 里的 &x 表示什么？"
+      }
     },
     {
-      "id": "functions",
+      "id": "二维及多维数组-表格",
+      "anchor": "lv4l2",
+      "title": "第 2 课：二维及多维数组：表格",
+      "summary": "a[行][列]；外层管行、内层管列；图形题先想清楚 i、j 的关系再打字符。",
+      "goal": "🎯 本节目标：1. 会定义二维数组；2. 会用双重循环遍历（外层行、内层列）。",
+      "tags": [
+        "二维及多维数组"
+      ],
+      "blocks": [
+        "二维数组像一张表格：a[i][j] 表示第 i 行第 j 列（下标还是从 0 开始）。",
+        "遍历套路：外层循环管行，内层循环管列。",
+        "二维数组可以做矩阵题、图形题（画 X、日字、N 字都是它的天下）。"
+      ],
+      "code": [
+        "#include <iostream>\nusing namespace std;\nint a[105][105];\nint main() {\n    int n, m;\n    cin >> n >> m;\n    for (int i = 0; i < n; i++)\n        for (int j = 0; j < m; j++)\n            cin >> a[i][j];\n    for (int i = 0; i < n; i++) {   // 每行求和\n        int s = 0;\n        for (int j = 0; j < m; j++) s += a[i][j];\n        cout << s << endl;\n    }\n    return 0;\n}"
+      ],
+      "quiz": [
+        {
+          "q": "二维数组 a[i][j] 里，i 表示？",
+          "options": [
+            "行",
+            "列",
+            "值",
+            "地址"
+          ],
+          "answer": 0,
+          "explain": "a[行][列]，外层循环管行。"
+        },
+        {
+          "q": "访问第 2 行第 3 列（从 0 开始数）写？",
+          "options": [
+            "a[2][3]",
+            "a[3][2]",
+            "a[1][2]",
+            "a[2][2]"
+          ],
+          "answer": 0,
+          "explain": "行是 2、列是 3，所以是 a[2][3]。"
+        }
+      ],
+      "practice": {
+        "title": "考一考",
+        "prompt": "二维数组 a[i][j] 里，i 表示？"
+      }
+    },
+    {
+      "id": "结构体-把数据-打包",
+      "anchor": "lv4l3",
+      "title": "第 3 课：结构体：把数据\"打包\"",
+      "summary": "struct = 自定义打包类型；用 . 访问成员；还能做结构体数组、结构体指针。",
+      "goal": "🎯 本节目标：1. 会定义 struct；2. 会用点号 . 访问成员；3. 会用结构体数组存多个对象。",
+      "tags": [
+        "结构体"
+      ],
+      "blocks": [
+        "struct 让我们自己造一种\"新类型\"，把相关数据打包：比如学生 = 名字 + 分数。",
+        "访问成员用点号：s.name、s.score。",
+        "结构体数组 Student a[100]; 可以存全班同学！"
+      ],
+      "code": [
+        "#include <iostream>\n#include <string>\nusing namespace std;\nstruct Student {\n    string name;\n    int score;\n};\nint main() {\n    Student s;\n    s.name = \"小明\";\n    s.score = 95;\n    cout << s.name << \" \" << s.score << endl;\n    return 0;\n}"
+      ],
+      "quiz": [
+        {
+          "q": "struct 的作用是？",
+          "options": [
+            "把相关数据打包成一种新类型",
+            "定义函数",
+            "写循环",
+            "做输入"
+          ],
+          "answer": 0,
+          "explain": "struct = 自定义打包类型，比如学生(名字+分数)。"
+        },
+        {
+          "q": "访问结构体成员用什么符号？",
+          "options": [
+            "点号 .",
+            "逗号 ,",
+            "空格",
+            "箭头 >"
+          ],
+          "answer": 0,
+          "explain": "s.name、s.score 用点号访问。"
+        }
+      ],
+      "practice": {
+        "title": "考一考",
+        "prompt": "struct 的作用是？"
+      }
+    },
+    {
+      "id": "函数-定义-调用-形参实参-作用域",
       "anchor": "lv4l4",
-      "title": "第 2 课：函数",
-      "summary": "把重复逻辑封装成可复用函数。",
-      "goal": "理解参数、返回值和函数调用。",
-      "tags": ["函数"],
-      "blocks": ["函数让程序结构更清晰。", "参数用于传入数据，返回值用于带回结果。"],
-      "practice": { "title": "设计函数", "prompt": "设计一个判断整数是否为偶数的函数接口。" }
+      "title": "第 4 课：函数：定义、调用、形参实参、作用域",
+      "summary": "形参是\"占位\"，实参是\"真值\"；函数外 = 全局，函数内 = 局部；void 表示没有返回值。",
+      "goal": "🎯 本节目标：1. 会写函数并调用；2. 分清形参和实参；3. 知道全局/局部变量的作用域。",
+      "tags": [
+        "函数"
+      ],
+      "blocks": [
+        "函数 = 把一段代码\"打包\"起来，起个名字，随时调用（代码的积木）。",
+        "形参：函数定义里的小括号占位；实参：调用时给的真实值。",
+        "全局变量写在所有函数外面，谁都能用；局部变量写在 { } 里，出括号就\"消失\"。",
+        "返回结果用 return 值;，没有结果就写 void。"
+      ],
+      "code": [
+        "#include <iostream>\nusing namespace std;\nint add(int a, int b) {   // a、b 是形参\n    return a + b;\n}\nint main() {\n    cout << add(3, 5) << endl;  // 3、5 是实参，输出 8\n    return 0;\n}"
+      ],
+      "quiz": [
+        {
+          "q": "函数定义里的 a、b 叫什么？",
+          "options": [
+            "形参",
+            "实参",
+            "常量",
+            "数组"
+          ],
+          "answer": 0,
+          "explain": "定义里的占位叫形参，调用时给的真值叫实参。"
+        },
+        {
+          "q": "全局变量应该写在哪里？",
+          "options": [
+            "所有函数的外面",
+            "main 函数里面",
+            "任何位置",
+            "注释里"
+          ],
+          "answer": 0,
+          "explain": "全局变量在函数外面定义，谁都看得见。"
+        }
+      ],
+      "practice": {
+        "title": "考一考",
+        "prompt": "函数定义里的 a、b 叫什么？"
+      }
     },
     {
-      "id": "sorting",
+      "id": "参数传递-值-引用-指针",
+      "anchor": "lv4l5",
+      "title": "第 5 课：参数传递：值、引用、指针",
+      "summary": "值传递复制一份（改不动外面）；引用 & 和指针 * 都能改外面；交换两个数用引用或指针。",
+      "goal": "🎯 本节目标：1. 知道值传递改不动外面；2. 会用引用 & 和指针直接改外面。",
+      "tags": [
+        "参数传递"
+      ],
+      "blocks": [
+        "值传递 f(int x)：把值复制一份进去，函数里怎么改都不影响外面。",
+        "引用传递 f(int &x)：直接\"贴上\"外面的变量，改它外面就变。",
+        "指针传递 f(int *x)：把地址传进去，用 *x 改外面的变量。",
+        "想\"换掉\"外面的值（比如交换两个数），就用引用或指针。"
+      ],
+      "code": [
+        "#include <iostream>\nusing namespace std;\nvoid f1(int x) { x = 100; }      // 值传递：外面不变\nvoid f2(int &x) { x = 100; }     // 引用传递：外面变 100\nvoid f3(int *x) { *x = 100; }    // 指针传递：外面也变\nint main() {\n    int a = 1, b = 1, c = 1;\n    f1(a); f2(b); f3(&c);\n    cout << a << \" \" << b << \" \" << c << endl; // 1 100 100\n    return 0;\n}"
+      ],
+      "quiz": [
+        {
+          "q": "值传递修改的是？",
+          "options": [
+            "副本，外面不变",
+            "原来的变量",
+            "地址",
+            "报错"
+          ],
+          "answer": 0,
+          "explain": "值传递复制一份，函数里怎么改都影响不到外面。"
+        },
+        {
+          "q": "void f(int &x) 是哪种传递？",
+          "options": [
+            "引用传递",
+            "值传递",
+            "指针传递",
+            "数组传递"
+          ],
+          "answer": 0,
+          "explain": "int &x 是引用，直接绑定外面的变量。"
+        }
+      ],
+      "practice": {
+        "title": "考一考",
+        "prompt": "值传递修改的是？"
+      }
+    },
+    {
+      "id": "递推算法-一步一步往前推",
+      "anchor": "lv4l6",
+      "title": "第 6 课：递推算法：一步一步往前推",
+      "summary": "递推 = 初始值 + 关系式 + 循环；斐波那契 f[i]=f[i-1]+f[i-2] 是最典型的例子。",
+      "goal": "🎯 本节目标：1. 会写递推关系式；2. 能用数组\"从前往后\"推（如斐波那契）。",
+      "tags": [
+        "递推算法"
+      ],
+      "blocks": [
+        "递推：从已知的\"开头几项\"出发，用关系式一步步推出后面的项。",
+        "经典例子：爬楼梯，第 i 阶只能从 i-1 或 i-2 阶上来，所以 f[i] = f[i-1] + f[i-2]。",
+        "套路：先找初始值（f[1]、f[2]），再写关系式，最后 for 循环推到底。"
+      ],
+      "code": [
+        "#include <iostream>\nusing namespace std;\nint f[50];\nint main() {\n    int n;\n    cin >> n;\n    f[1] = 1; f[2] = 1;              // 初始值\n    for (int i = 3; i <= n; i++)\n        f[i] = f[i - 1] + f[i - 2];  // 递推关系式\n    cout << f[n] << endl;             // 第 n 项\n    return 0;\n}"
+      ],
+      "quiz": [
+        {
+          "q": "斐波那契的递推关系式是？",
+          "options": [
+            "f[i] = f[i-1] + f[i-2]",
+            "f[i] = f[i-1] * 2",
+            "f[i] = i * i",
+            "f[i] = f[i+1] - 1"
+          ],
+          "answer": 0,
+          "explain": "每一项等于前两项之和。"
+        },
+        {
+          "q": "写递推要准备哪两样？",
+          "options": [
+            "初始值 + 关系式",
+            "循环 + 排序",
+            "指针 + 结构体",
+            "文件 + 异常"
+          ],
+          "answer": 0,
+          "explain": "先定初始值，再写关系式，然后循环推。"
+        }
+      ],
+      "practice": {
+        "title": "考一考",
+        "prompt": "斐波那契的递推关系式是？"
+      }
+    },
+    {
+      "id": "排序算法-冒泡-插入-选择",
       "anchor": "lv4l7",
-      "title": "第 3 课：排序算法",
-      "summary": "认识基础排序思想。",
-      "goal": "理解比较、交换和排序结果的关系。",
-      "tags": ["排序"],
-      "blocks": ["排序把数据按指定规则排列。", "稳定性和复杂度是进阶关注点。"],
-      "practice": { "title": "手工排序", "prompt": "用选择排序思想排列 5、2、4、1。" }
+      "title": "第 7 课：排序算法：冒泡、插入、选择",
+      "summary": "冒泡每趟冒最大的、选择每趟挑最小的、插入像插扑克牌；稳定 = 相同元素顺序不变。",
+      "goal": "🎯 本节目标：1. 会写冒泡排序；2. 知道插入、选择的思想；3. 理解\"稳定性\"。",
+      "tags": [
+        "排序算法"
+      ],
+      "blocks": [
+        "冒泡：相邻两个比较，大的往后\"冒\"，每趟把最大的送到最后。",
+        "选择：每趟挑最小的放到最前面。",
+        "插入：像抓扑克牌，把新牌插到已排好序列的合适位置。",
+        "稳定性：相同元素排序后相对顺序不变，叫稳定（冒泡、插入稳定，选择不稳定）。"
+      ],
+      "code": [
+        "#include <iostream>\nusing namespace std;\nint main() {\n    int n, a[105];\n    cin >> n;\n    for (int i = 0; i < n; i++) cin >> a[i];\n    for (int i = 0; i < n - 1; i++)            // 冒泡排序\n        for (int j = 0; j < n - 1 - i; j++)\n            if (a[j] > a[j + 1]) swap(a[j], a[j + 1]);\n    for (int i = 0; i < n; i++) cout << a[i] << \" \";\n    cout << endl;\n    return 0;\n}"
+      ],
+      "quiz": [
+        {
+          "q": "冒泡排序每一趟把什么送到最后？",
+          "options": [
+            "当前最大的",
+            "当前最小的",
+            "中间的",
+            "第一个"
+          ],
+          "answer": 0,
+          "explain": "相邻比较，大的往后冒。"
+        },
+        {
+          "q": "\"稳定排序\"指什么？",
+          "options": [
+            "相同元素排序后相对顺序不变",
+            "排序非常快",
+            "永远不会崩",
+            "只能排整数"
+          ],
+          "answer": 0,
+          "explain": "稳定性 = 相同元素前后顺序不变。"
+        }
+      ],
+      "practice": {
+        "title": "考一考",
+        "prompt": "冒泡排序每一趟把什么送到最后？"
+      }
+    },
+    {
+      "id": "文件读写与异常处理",
+      "anchor": "lv4l8",
+      "title": "第 8 课：文件读写与异常处理",
+      "summary": "freopen(\"文件名\",\"r\",stdin) 读、(\"w\",stdout) 写；try 里放可能出错的代码，catc…",
+      "goal": "🎯 本节目标：1. 会用 freopen 把输入输出重定向到文件；2. 了解 try-catch 异常处理。",
+      "tags": [
+        "文件读写与异常处理"
+      ],
+      "blocks": [
+        "考试看到\"文件读写\"提示，就在 main 开头加两行 freopen，之后 cin/cout 照常用。",
+        "freopen(\"in.txt\", \"r\", stdin) 从 in.txt 读；freopen(\"out.txt\", \"w\", stdout) 写到 out.txt。",
+        "异常处理：把可能出错的代码放进 try，出错时 catch 接住，程序不会直接崩。"
+      ],
+      "code": [
+        "#include <iostream>\n#include <cstdio>\nusing namespace std;\nint main() {\n    // freopen(\"in.txt\", \"r\", stdin);   // 从文件读入\n    // freopen(\"out.txt\", \"w\", stdout); // 写到文件\n    int a, b;\n    cin >> a >> b;\n    cout << a + b << endl;\n    return 0;\n}"
+      ],
+      "quiz": [
+        {
+          "q": "从文件读入应该写？",
+          "options": [
+            "freopen(\"in.txt\",\"r\",stdin)",
+            "freopen(\"in.txt\",\"w\",stdin)",
+            "cin 自动读",
+            "不需要写"
+          ],
+          "answer": 0,
+          "explain": "\"r\" 是读，\"w\" 是写，别忘了写 stdin/stdout。"
+        },
+        {
+          "q": "异常处理用哪对关键字？",
+          "options": [
+            "try / catch",
+            "if / else",
+            "for / while",
+            "class / struct"
+          ],
+          "answer": 0,
+          "explain": "try 里放可能出错的代码，catch 接住异常。"
+        }
+      ],
+      "practice": {
+        "title": "考一考",
+        "prompt": "从文件读入应该写？"
+      }
     }
   ],
   "practiceLinks": [
-    { "title": "打开互动版", "description": "查看原四级课程的题目、打卡和代码示例。", "href": "/levels/4" }
+    {
+      "title": "打开互动版",
+      "description": "查看原四级课程的题目、打卡和代码示例。",
+      "href": "/levels/4"
+    }
   ]
 }

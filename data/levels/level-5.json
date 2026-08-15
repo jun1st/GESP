@@ -2,43 +2,389 @@
   "id": 5,
   "slug": "level-5",
   "title": "GESP C++ 五级课程",
-  "description": "复杂度、高精度、链表、数论、二分和基础算法能力。",
+  "description": "初等数论、高精度、链表、欧几里得与筛法、二分、递归、贪心、分治。",
   "emoji": "🧠",
   "progressKey": "gesp_lv5_prog",
   "sourcePage": "level5.html",
   "lessons": [
     {
-      "id": "complexity",
+      "id": "初等数论-数字世界的-基本零件",
       "anchor": "lv5l1",
-      "title": "第 1 课：算法复杂度",
-      "summary": "用规模和次数评估算法效率。",
-      "goal": "理解 O(n)、O(n log n)、O(n^2) 的直观差异。",
-      "tags": ["复杂度"],
-      "blocks": ["复杂度描述算法随输入规模增长的趋势。", "同一题可以有不同效率的算法。"],
-      "practice": { "title": "估算次数", "prompt": "比较单层循环和双层循环的执行次数。" }
+      "title": "第 1 课：初等数论：数字世界的\"基本零件\"",
+      "summary": "素数=只有 1 和本身；gcd/lcm 是数论好搭档；判断素数试除到 sqrt(n) 就够。",
+      "goal": "🎯 本节目标：1. 分清素数/合数；2. 会求最大公约数 gcd、最小公倍数 lcm；3. 知道同余和质因数分解。",
+      "tags": [
+        "初等数论"
+      ],
+      "blocks": [
+        "素数：只有 1 和它本身两个约数（2、3、5、7…）；合数：还有别的约数（4、6、8…）。1 既不是素数也不是合数。",
+        "gcd 最大公约数、lcm 最小公倍数，记住公式：lcm(a,b) = a × b ÷ gcd(a,b)。",
+        "同余：a、b 除以 m 余数一样，就说 a ≡ b (mod m)。",
+        "质因数分解：把数拆成质数相乘，如 12 = 2×2×3。"
+      ],
+      "code": [
+        "#include <iostream>\nusing namespace std;\nbool isPrime(int n) {\n    if (n < 2) return false;\n    for (int i = 2; i * i <= n; i++)   // 试到 sqrt(n) 就够了\n        if (n % i == 0) return false;\n    return true;\n}\nint main() {\n    int n;\n    cin >> n;\n    cout << (isPrime(n) ? \"是素数\" : \"不是素数\") << endl;\n    return 0;\n}"
+      ],
+      "quiz": [
+        {
+          "q": "素数是指？",
+          "options": [
+            "只有 1 和它本身两个约数",
+            "能被 2 整除",
+            "大于 100 的数",
+            "小数"
+          ],
+          "answer": 0,
+          "explain": "素数只有两个约数；1 既不是素数也不是合数。"
+        },
+        {
+          "q": "lcm(a, b) 等于？",
+          "options": [
+            "a × b ÷ gcd(a, b)",
+            "a + b",
+            "a ÷ b",
+            "gcd(a, b) × 2"
+          ],
+          "answer": 0,
+          "explain": "最小公倍数 = 两数乘积 ÷ 最大公约数。"
+        }
+      ],
+      "practice": {
+        "title": "考一考",
+        "prompt": "素数是指？"
+      }
     },
     {
-      "id": "number-theory",
+      "id": "高精度运算-装不下的超级大数",
+      "anchor": "lv5l2",
+      "title": "第 2 课：高精度运算：装不下的超级大数",
+      "summary": "大数逐位存数组；倒着存、逐位算、处理进位、倒着输出——\"竖式搬家\"。",
+      "goal": "🎯 本节目标：1. 知道 int/long long 装不下的大数要用数组存；2. 会写高精度加法。",
+      "tags": [
+        "高精度运算"
+      ],
+      "blocks": [
+        "100 位的大数 int 和 long long 都装不下，怎么办？一位一位存进数组，像列竖式一样算。",
+        "套路：字符串读入 → 倒着存（个位存下标 0，方便进位）→ 逐位相加 → 处理进位 → 倒着输出。",
+        "乘法、减法、除法思路一样：模拟手算竖式。"
+      ],
+      "code": [
+        "#include <iostream>\n#include <string>\nusing namespace std;\nint a[105], b[105], c[105];\nint main() {\n    string s1, s2;\n    cin >> s1 >> s2;\n    for (int i = 0; i < s1.size(); i++) a[s1.size()-1-i] = s1[i]-'0';\n    for (int i = 0; i < s2.size(); i++) b[s2.size()-1-i] = s2[i]-'0';\n    int len = max(s1.size(), s2.size());\n    for (int i = 0; i < len; i++) {\n        c[i] += a[i] + b[i];\n        if (c[i] >= 10) { c[i+1]++; c[i] -= 10; }  // 进位\n    }\n    if (c[len]) len++;\n    for (int i = len-1; i >= 0; i--) cout << c[i];\n    cout << endl;\n    return 0;\n}"
+      ],
+      "quiz": [
+        {
+          "q": "100 位的大数用什么存？",
+          "options": [
+            "数组逐位存",
+            "double",
+            "char 一个格子",
+            "int 多开几个"
+          ],
+          "answer": 0,
+          "explain": "int/long long 都装不下，必须数组逐位存。"
+        },
+        {
+          "q": "高精度加法从哪一位开始算？",
+          "options": [
+            "个位（存的时候倒着存）",
+            "最高位",
+            "中间",
+            "随便"
+          ],
+          "answer": 0,
+          "explain": "个位存下标 0，进位才方便。"
+        }
+      ],
+      "practice": {
+        "title": "考一考",
+        "prompt": "100 位的大数用什么存？"
+      }
+    },
+    {
+      "id": "链表-手拉手的节点们",
+      "anchor": "lv5l3",
+      "title": "第 3 课：链表：手拉手的节点们",
+      "summary": "节点 = 数据 + 指针；单链表往后走、双链表前后走、循环链表首尾相连。",
+      "goal": "🎯 本节目标：1. 知道链表由\"节点 + 指针\"组成；2. 区分单链表、双链表、循环链表。",
+      "tags": [
+        "链表"
+      ],
+      "blocks": [
+        "链表像小朋友手拉手：每个节点存自己的数据，还握着一个指向下一个的\"指针\"。",
+        "单链表：只能从前往后走（next）。",
+        "双链表：有 next 还有 prev，前后都能走。",
+        "循环链表：最后一个又指回第一个，首尾相连。",
+        "链表插入/删除快，但\"按下标访问\"慢——和数组正好互补。"
+      ],
+      "code": [
+        "#include <iostream>\nusing namespace std;\nstruct Node {\n    int val;\n    Node* next;\n};\nint main() {\n    Node a, b, c;\n    a.val = 1; b.val = 2; c.val = 3;\n    a.next = &b; b.next = &c; c.next = nullptr;\n    for (Node* p = &a; p != nullptr; p = p->next)\n        cout << p->val << \" \";   // 1 2 3\n    cout << endl;\n    return 0;\n}"
+      ],
+      "quiz": [
+        {
+          "q": "单链表只能怎么走？",
+          "options": [
+            "从头往后走",
+            "从后往前走",
+            "随便走",
+            "不走"
+          ],
+          "answer": 0,
+          "explain": "单链表只有 next，只能往后走。"
+        },
+        {
+          "q": "循环链表的特点是？",
+          "options": [
+            "首尾相连",
+            "没有头",
+            "不能遍历",
+            "一定是空的"
+          ],
+          "answer": 0,
+          "explain": "最后一个节点又指回第一个，首尾相连。"
+        }
+      ],
+      "practice": {
+        "title": "考一考",
+        "prompt": "单链表只能怎么走？"
+      }
+    },
+    {
+      "id": "辗转相除法与素数筛法",
       "anchor": "lv5l4",
-      "title": "第 2 课：欧几里得与筛法",
-      "summary": "最大公约数和素数筛的基础算法。",
-      "goal": "会使用辗转相除法和埃氏筛思想。",
-      "tags": ["数论"],
-      "blocks": ["gcd 可以用辗转相除快速计算。", "筛法通过标记倍数找到素数。"],
-      "practice": { "title": "数论练习", "prompt": "手算 gcd(48, 18) 的过程。" }
+      "title": "第 4 课：辗转相除法与素数筛法",
+      "summary": "gcd 用辗转相除\"余数接力\"；埃氏筛划掉倍数求素数表；质因数分解唯一。",
+      "goal": "🎯 本节目标：1. 会用辗转相除法求 gcd；2. 知道埃氏筛\"划掉倍数\"的思路。",
+      "tags": [
+        "辗转相除法与素数筛法"
+      ],
+      "blocks": [
+        "辗转相除法（欧几里得算法）：gcd(a,b) = gcd(b, a%b)，一直除到余 0，最后的除数就是答案。",
+        "埃氏筛：先假设全是素数，然后从 2 开始，把每个素数的倍数全部\"划掉\"，剩下的就是素数表。",
+        "唯一分解定理：每个大于 1 的整数都能唯一写成质数相乘。"
+      ],
+      "code": [
+        "#include <iostream>\nusing namespace std;\nint gcd(int a, int b) {           // 辗转相除法\n    while (b) {\n        int t = a % b;\n        a = b;\n        b = t;\n    }\n    return a;\n}\nint main() {\n    int a, b;\n    cin >> a >> b;\n    cout << gcd(a, b) << endl;\n    return 0;\n}"
+      ],
+      "quiz": [
+        {
+          "q": "辗转相除法求的是？",
+          "options": [
+            "最大公约数",
+            "最小公倍数",
+            "素数",
+            "总和"
+          ],
+          "answer": 0,
+          "explain": "gcd(a,b)=gcd(b,a%b) 除到余 0，就是最大公约数。"
+        },
+        {
+          "q": "埃氏筛法用来？",
+          "options": [
+            "快速求素数表",
+            "排序",
+            "找最大值",
+            "反转数组"
+          ],
+          "answer": 0,
+          "explain": "从 2 开始划掉每个素数的倍数，剩下的就是素数。"
+        }
+      ],
+      "practice": {
+        "title": "考一考",
+        "prompt": "辗转相除法求的是？"
+      }
     },
     {
-      "id": "binary-search",
+      "id": "二分查找与二分答案",
       "anchor": "lv5l5",
-      "title": "第 3 课：二分算法",
-      "summary": "在有序或单调范围内快速缩小答案。",
-      "goal": "理解左右边界、mid 和循环条件。",
-      "tags": ["二分"],
-      "blocks": ["二分每次排除一半候选。", "边界处理决定算法是否正确。"],
-      "practice": { "title": "二分查找", "prompt": "描述在有序数组中查找 7 的过程。" }
+      "title": "第 5 课：二分查找与二分答案",
+      "summary": "二分 = 每次砍一半；查找要数组有序；答案也能\"二分\"：判断行不行再缩范围。",
+      "goal": "🎯 本节目标：1. 会写有序数组的二分查找；2. 知道二分答案\"判断后砍一半\"的套路。",
+      "tags": [
+        "二分查找与二分答案"
+      ],
+      "blocks": [
+        "二分查找：猜中间的数，大了往左、小了往右，每次砍掉一半，O(log n) 飞快。",
+        "前提：数组必须有序！",
+        "二分答案：当\"答案在一个范围内、能判断行不行\"时，对答案二分：行就往一边走，不行就往另一边。"
+      ],
+      "code": [
+        "#include <iostream>\nusing namespace std;\nint a[100005];\nint main() {\n    int n, x;\n    cin >> n >> x;\n    for (int i = 0; i < n; i++) cin >> a[i];\n    int l = 0, r = n - 1, ans = -1;\n    while (l <= r) {\n        int mid = (l + r) / 2;\n        if (a[mid] >= x) { ans = mid; r = mid - 1; }  // 第一个 >= x 的位置\n        else l = mid + 1;\n    }\n    cout << ans << endl;\n    return 0;\n}"
+      ],
+      "quiz": [
+        {
+          "q": "二分查找的前提是？",
+          "options": [
+            "数组有序",
+            "数组乱序",
+            "数组很大",
+            "没有前提"
+          ],
+          "answer": 0,
+          "explain": "必须有序才能二分！"
+        },
+        {
+          "q": "二分每次把搜索范围？",
+          "options": [
+            "砍掉一半",
+            "减一",
+            "翻一倍",
+            "不变"
+          ],
+          "answer": 0,
+          "explain": "每次砍一半，所以复杂度是 O(log n)。"
+        }
+      ],
+      "practice": {
+        "title": "考一考",
+        "prompt": "二分查找的前提是？"
+      }
+    },
+    {
+      "id": "递归-函数调用自己",
+      "anchor": "lv5l6",
+      "title": "第 6 课：递归：函数调用自己",
+      "summary": "递归 = 出口 + 自己调用自己；每次调用都把问题变小；没有出口会栈溢出。",
+      "goal": "🎯 本节目标：1. 会写递归函数；2. 知道递归必须有\"出口\"；3. 能分析简单递归的复杂度。",
+      "tags": [
+        "递归"
+      ],
+      "blocks": [
+        "递归 = 函数自己调用自己，把大问题拆成\"小一号的自己\"。",
+        "两个必备零件：出口（最小的情况直接返回）+ 递推调用（变小再调用）。",
+        "没有出口会无限调用，直到栈溢出崩溃。",
+        "例子：n! = n × (n-1)!，出口是 0! = 1。"
+      ],
+      "code": [
+        "#include <iostream>\nusing namespace std;\nint fact(int n) {\n    if (n <= 1) return 1;       // 出口\n    return n * fact(n - 1);     // 自己调用自己\n}\nint main() {\n    int n;\n    cin >> n;\n    cout << fact(n) << endl;\n    return 0;\n}"
+      ],
+      "quiz": [
+        {
+          "q": "递归函数必须有？",
+          "options": [
+            "出口 + 自己调用自己",
+            "循环 + 排序",
+            "指针 + 数组",
+            "文件 + 异常"
+          ],
+          "answer": 0,
+          "explain": "没有出口会无限调用到栈溢出。"
+        },
+        {
+          "q": "没有出口的递归会？",
+          "options": [
+            "栈溢出崩溃",
+            "马上停止",
+            "报错提示后继续",
+            "正常运行"
+          ],
+          "answer": 0,
+          "explain": "一直调用自己，把栈撑爆。"
+        }
+      ],
+      "practice": {
+        "title": "考一考",
+        "prompt": "递归函数必须有？"
+      }
+    },
+    {
+      "id": "贪心算法-每次都选最好的",
+      "anchor": "lv5l7",
+      "title": "第 7 课：贪心算法：每次都选最好的",
+      "summary": "贪心每步选当前最优；用之前要想清楚\"局部最优 = 整体最优\"是否成立。",
+      "goal": "🎯 本节目标：1. 理解贪心\"每步选当前最优\"；2. 知道贪心不一定对，要验证。",
+      "tags": [
+        "贪心算法"
+      ],
+      "blocks": [
+        "贪心：每一步都选\"眼前看起来最好\"的，希望最后整体也最好。",
+        "经典例子：找零钱用最少硬币——先拿大面额（10 元 → 5 元 → 1 元）。",
+        "注意：贪心不是一定对！只有\"局部最优能推出全局最优\"时才能用，要会证明或验证。"
+      ],
+      "code": [
+        "#include <iostream>\nusing namespace std;\nint main() {\n    int n;\n    cin >> n;                  // 需要找的钱\n    int cnt = 0;\n    cnt += n / 10;  n %= 10;   // 先拿 10 元\n    cnt += n / 5;   n %= 5;    // 再拿 5 元\n    cnt += n;                  // 剩下 1 元\n    cout << cnt << endl;       // 最少硬币数\n    return 0;\n}"
+      ],
+      "quiz": [
+        {
+          "q": "贪心算法的特点是？",
+          "options": [
+            "每一步选当前最优",
+            "每一步选最差",
+            "随机选",
+            "全部试一遍"
+          ],
+          "answer": 0,
+          "explain": "贪心 = 眼前最优，希望整体最优。"
+        },
+        {
+          "q": "贪心算法一定正确吗？",
+          "options": [
+            "不一定，要验证局部最优能否推出全局最优",
+            "一定正确",
+            "一定错误",
+            "看运气"
+          ],
+          "answer": 0,
+          "explain": "能用贪心的前提是\"局部最优 = 整体最优\"。"
+        }
+      ],
+      "practice": {
+        "title": "考一考",
+        "prompt": "贪心算法的特点是？"
+      }
+    },
+    {
+      "id": "分治算法-归并排序与快速排序",
+      "anchor": "lv5l8",
+      "title": "第 8 课：分治算法：归并排序与快速排序",
+      "summary": "分治三步 = 分解、解决、合并；归并先排两半再合并，快排选基准数分两边。",
+      "goal": "🎯 本节目标：1. 记住分治三步：分解 → 解决 → 合并；2. 知道归并、快排的思路。",
+      "tags": [
+        "分治算法"
+      ],
+      "blocks": [
+        "分治 = 分而治之：把大问题拆成小问题，分别解决，再合并结果。",
+        "归并排序：把数组分成两半，各自排好，再\"合并\"成有序的（合并两个有序序列很快）。",
+        "快速排序：选一个\"基准数\"，比它小的放左边、大的放右边，再对两边递归。"
+      ],
+      "code": [
+        "#include <iostream>\nusing namespace std;\nint a[100005], tmp[100005];\nvoid mergeSort(int l, int r) {\n    if (l >= r) return;                 // 出口\n    int mid = (l + r) / 2;\n    mergeSort(l, mid);                  // 分：左半\n    mergeSort(mid + 1, r);              // 分：右半\n    int i = l, j = mid + 1, k = l;      // 合并两个有序部分\n    while (i <= mid && j <= r)\n        tmp[k++] = (a[i] <= a[j]) ? a[i++] : a[j++];\n    while (i <= mid) tmp[k++] = a[i++];\n    while (j <= r) tmp[k++] = a[j++];\n    for (int t = l; t <= r; t++) a[t] = tmp[t];\n}\nint main() {\n    int n;\n    cin >> n;\n    for (int i = 0; i < n; i++) cin >> a[i];\n    mergeSort(0, n - 1);\n    for (int i = 0; i < n; i++) cout << a[i] << \" \";\n    return 0;\n}"
+      ],
+      "quiz": [
+        {
+          "q": "分治的三步是？",
+          "options": [
+            "分解 → 解决 → 合并",
+            "输入 → 输出",
+            "循环 → 判断",
+            "读入 → 排序"
+          ],
+          "answer": 0,
+          "explain": "分而治之：分解、解决、合并。"
+        },
+        {
+          "q": "快速排序的关键是？",
+          "options": [
+            "选基准数把数组分成两边",
+            "数个数",
+            "交换相邻元素",
+            "找最小元素"
+          ],
+          "answer": 0,
+          "explain": "基准数左边小、右边大，再递归排两边。"
+        }
+      ],
+      "practice": {
+        "title": "考一考",
+        "prompt": "分治的三步是？"
+      }
     }
   ],
   "practiceLinks": [
-    { "title": "打开互动版", "description": "查看原五级课程的题目、打卡和算法示例。", "href": "/levels/5" }
+    {
+      "title": "打开互动版",
+      "description": "查看原五级课程的题目、打卡和算法示例。",
+      "href": "/levels/5"
+    }
   ]
 }

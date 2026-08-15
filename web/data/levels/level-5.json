@@ -380,5 +380,11 @@
       }
     }
   ],
-  "practiceLinks": []
+  "practiceLinks": [
+    {
+      "title": "打开互动版",
+      "description": "查看原五级课程的题目、打卡和算法示例。",
+      "href": "/levels/5"
+    }
+  ]
 }

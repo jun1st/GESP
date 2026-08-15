@@ -4,10 +4,11 @@
 
 ## 技术栈
 
-- Next.js 16 + React 19（静态导出 `output: 'export'`，可部署 GitHub Pages / Vercel / 任意静态托管）
-- 课程数据来自 `data/levels/*.json`（服务端读取，构建时生成静态页）
+- Next.js 16 + React 19（App Router；登录 / 会员 / 云端同步走服务端 API 路由，部署在 Vercel 动态渲染）
+- 课程数据来自 `data/levels/*.json`（服务端读取；`/courses` 等公开页静态生成，`/course/[level]` 因会员门禁按需渲染）
 - 共享组件：`Topbar`（全站唯一导航栏）、`Footer`、布局统一在 `src/app/layout.jsx`
-- 进度/错题/登录均使用浏览器 localStorage（与旧站共用同一批 key，进度互通）
+- 学习记录默认存浏览器 localStorage（与旧站共用同一批 key，进度互通），登录后自动云端同步（见下文）
+- 注意：`data/levels/*.json` 在仓库根目录与 `web/data/levels/` 各存一份，必须保持内容一致（当前已同步）
 
 ## 页面
 
@@ -43,7 +44,7 @@ npm run build    # 生产构建
 | `SESSION_SECRET` | 会话签名密钥（`openssl rand -hex 32` 生成） |
 | `ADMIN_TOKEN` | 管理员密码，用于 `/admin` 页人工开通会员 |
 
-首次启动自动建表 `users`（手机号、密码哈希、会员到期时间）。
+首次启动自动建表 `users`（手机号、密码哈希、会员到期时间）与 `user_data`（学习记录同步，按用户+key 存储）。
 
 ## 会员体系
 
@@ -71,4 +72,4 @@ npm run build    # 生产构建
   - `web/scripts/extract_papers.py` 解析本地 `真题PDF/`（2023.03 ~ 2026.06 共 14 个批次）为题库 JSON（`web/public/data/papers/`）
   - 真题资料库页新增「真题在线练习」：按批次/级别筛选，点击看答案；2023 年四个批次附考纲知识点与解析
   - `web/scripts/build_related.py` 按考纲知识点+关键词把题目挂到课程各章，课程页每课可展开「本节相关真题」
-- 旧站与 Express 路由（`server.js` / `legacyPage` / 根目录 HTML）已退役；线上部署迁移至 Vercel
+- 根目录旧站 HTML 已不再线上使用；Express 兼容层（`server.js` / `routes/` / `lib/`）保留，由 `tests/` 覆盖，线上部署以 `web/` 目录的 Vercel 应用为准

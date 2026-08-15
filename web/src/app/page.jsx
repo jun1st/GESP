@@ -2,18 +2,34 @@
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
+import lv0 from '../../data/levels/level-0.json';
+import lv1 from '../../data/levels/level-1.json';
+import lv2 from '../../data/levels/level-2.json';
+import lv3 from '../../data/levels/level-3.json';
+import lv4 from '../../data/levels/level-4.json';
+import lv5 from '../../data/levels/level-5.json';
+import lv6 from '../../data/levels/level-6.json';
+import lv7 from '../../data/levels/level-7.json';
+import lv8 from '../../data/levels/level-8.json';
 
-const MODULES = [
-  { name: '基础常识', emoji: '🧠', key: 'gesp_lv0_prog', total: 3, page: '/course/0', color: 'sky' },
-  { name: '一级', emoji: '🎒', key: 'gesp_lv1_prog', total: 3, page: '/course/1', color: 'teal' },
-  { name: '二级', emoji: '🚀', key: 'gesp_lv2_prog', total: 10, page: '/course/2', color: 'violet' },
-  { name: '三级', emoji: '📘', key: 'gesp_lv3_prog', total: 6, page: '/course/3', color: 'sky' },
-  { name: '四级', emoji: '📗', key: 'gesp_lv4_prog', total: 8, page: '/course/4', color: 'amber' },
-  { name: '五级', emoji: '📙', key: 'gesp_lv5_prog', total: 8, page: '/course/5', color: 'rose' },
-  { name: '六级', emoji: '📕', key: 'gesp_lv6_prog', total: 6, page: '/course/6', color: 'emerald' },
-  { name: '七级', emoji: '📓', key: 'gesp_lv7_prog', total: 5, page: '/course/7', color: 'violet' },
-  { name: '八级', emoji: '📔', key: 'gesp_lv8_prog', total: 8, page: '/course/8', color: 'indigo' }
+// 课数 / 进度 key 从课程数据派生（与 ParentApp 同源），避免与 data/levels/*.json 脱节
+const MODULES_RAW = [
+  { name: '基础常识', emoji: '🧠', level: lv0, page: '/course/0', color: 'sky' },
+  { name: '一级', emoji: '🎒', level: lv1, page: '/course/1', color: 'teal' },
+  { name: '二级', emoji: '🚀', level: lv2, page: '/course/2', color: 'violet' },
+  { name: '三级', emoji: '📘', level: lv3, page: '/course/3', color: 'sky' },
+  { name: '四级', emoji: '📗', level: lv4, page: '/course/4', color: 'amber' },
+  { name: '五级', emoji: '📙', level: lv5, page: '/course/5', color: 'rose' },
+  { name: '六级', emoji: '📕', level: lv6, page: '/course/6', color: 'emerald' },
+  { name: '七级', emoji: '📓', level: lv7, page: '/course/7', color: 'violet' },
+  { name: '八级', emoji: '📔', level: lv8, page: '/course/8', color: 'indigo' }
 ];
+
+const MODULES = MODULES_RAW.map(({ level, ...rest }) => ({
+  ...rest,
+  key: level.progressKey,
+  total: level.lessons.length
+}));
 
 function getArr(key, n) {
   try {

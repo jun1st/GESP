@@ -373,5 +373,11 @@
       }
     }
   ],
-  "practiceLinks": []
+  "practiceLinks": [
+    {
+      "title": "打开互动版",
+      "description": "查看原八级课程的综合题、测验和打卡互动。",
+      "href": "/levels/8"
+    }
+  ]
 }

@@ -281,5 +281,11 @@
       }
     }
   ],
-  "practiceLinks": []
+  "practiceLinks": [
+    {
+      "title": "打开互动版",
+      "description": "查看原六级课程的搜索、DP 和打卡互动。",
+      "href": "/levels/6"
+    }
+  ]
 }
