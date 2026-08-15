@@ -1,5 +1,31 @@
-// 统一数据库接口：生产用 Vercel Postgres（DATABASE_URL），本地开发回退到 SQLite 文件。
+// 统一数据库接口：优先用 Vercel Postgres（DATABASE_URL）；未配置时回退到 SQLite 文件。
+// 注意：Vercel 上 SQLite 是临时存储（冷启动/扩缩容后会重置），仅适合演示/过渡，
+// 正式账号数据请配置 DATABASE_URL。
 let impl = null;
+
+// 探测一个可写目录放 SQLite 文件：本地沿用 web/.local.db；
+// Vercel 等 process.cwd() 只读的环境自动回退到系统临时目录（os.tmpdir()）。
+async function pickSqlitePath() {
+  const path = await import('node:path');
+  const fs = await import('node:fs');
+  const os = await import('node:os');
+  const candidates = [
+    { dir: process.cwd(), name: '.local.db' },
+    { dir: os.tmpdir(), name: 'gesp-local.db' }
+  ];
+  for (const { dir, name } of candidates) {
+    try {
+      fs.mkdirSync(dir, { recursive: true });
+      const probe = path.join(dir, '.gesp-write-test');
+      fs.writeFileSync(probe, '');
+      fs.unlinkSync(probe);
+      return path.join(dir, name);
+    } catch {
+      // 目录不可写，尝试下一个候选
+    }
+  }
+  return path.join(process.cwd(), '.local.db');
+}
 
 async function init() {
   if (impl) return impl;
@@ -35,9 +61,9 @@ async function init() {
     `);
   } else {
     const { DatabaseSync } = await import('node:sqlite');
-    const path = await import('node:path');
-    const db = new DatabaseSync(path.join(process.cwd(), '.local.db'));
+    const db = new DatabaseSync(await pickSqlitePath());
     db.exec('PRAGMA journal_mode = WAL;');
+    db.exec('PRAGMA busy_timeout = 5000;');
     db.exec(`
       CREATE TABLE IF NOT EXISTS users (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
