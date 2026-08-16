@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import DbWarning from '@/components/DbWarning';
 
 export default function AdminPage() {
   const [token, setToken] = useState('');
@@ -28,6 +29,7 @@ export default function AdminPage() {
 
   return (
     <div className="panel ac-panel">
+      <DbWarning />
       <h2>🔐 管理员：人工开通会员</h2>
       <p className="ac-hint">此页面仅限管理员使用。输入管理员密码，为已注册手机号开通/延长会员（按自然月累加，一年 = 12 个月）。</p>
       <form className="ac-form" onSubmit={submit}>

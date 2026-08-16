@@ -713,3 +713,19 @@ th { background: #f1f4fb; }
   font-weight: 800;
 }
 .ac-actions { display: flex; gap: 10px; margin-top: 18px; }
+.db-warning {
+  background: #fff7ed;
+  border: 1.5px solid #fdba74;
+  color: #9a3412;
+  border-radius: 12px;
+  padding: 10px 14px;
+  font-size: 13px;
+  line-height: 1.7;
+  margin-bottom: 14px;
+}
+.db-warning code {
+  background: rgba(249, 115, 22, .12);
+  border-radius: 6px;
+  padding: 1px 6px;
+  font-size: 12.5px;
+}

@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
+import DbWarning from '@/components/DbWarning';
 
 function Field({ label, type = 'text', value, onChange, placeholder, autoComplete }) {
   return (
@@ -101,9 +102,10 @@ export default function AccountPage() {
   if (me) {
     const expires = me.membershipExpiresAt ? new Date(me.membershipExpiresAt) : null;
     const daysLeft = expires ? Math.max(0, Math.ceil((expires - new Date()) / 86400000)) : 0;
-    return (
-      <div className="panel ac-panel">
-        <h2>👤 我的账号</h2>
+  return (
+    <div className="panel ac-panel">
+      <DbWarning />
+      <h2>👤 我的账号</h2>
         <div className="ac-account">
           <p><b>手机号：</b>{me.phone}</p>
           <p><b>会员状态：</b>
@@ -139,6 +141,7 @@ export default function AccountPage() {
 
   return (
     <div className="panel ac-panel">
+      <DbWarning />
       <h2>{mode === 'login' ? '👤 登录' : '📝 注册'}</h2>
       <p className="ac-hint">使用手机号 + 密码登录。注册后联系管理员开通会员，一年内解锁全部内容。</p>
       <div className="ac-tabs">
