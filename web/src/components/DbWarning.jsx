@@ -21,8 +21,9 @@ export default function DbWarning() {
   if (mode !== 'sqlite') return null;
   return (
     <div className="db-warning">
-      ⚠️ 当前站点未配置生产数据库（DATABASE_URL），数据保存在服务器临时目录，注册/进度等可能在扩容或重启后丢失。
-      请在 Vercel 项目设置中添加 <code>DATABASE_URL</code>（Vercel Postgres 或 Neon）后重新部署。
+      ℹ️ 当前使用 SQLite 存储（演示期默认方案）。账号和进度数据保存在临时目录，
+      部署或重启后可能清空；需要正式使用时，在 Vercel 项目设置中配置
+      <code>DATABASE_BACKEND=postgres</code> 和 <code>DATABASE_URL</code> 即可切换到 Postgres。
     </div>
   );
 }

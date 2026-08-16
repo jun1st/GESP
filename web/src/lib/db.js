@@ -1,6 +1,8 @@
-// 统一数据库接口：优先用 Vercel Postgres（DATABASE_URL）；未配置时回退到 SQLite 文件。
-// 注意：Vercel 上 SQLite 是临时存储（冷启动/扩缩容后会重置），仅适合演示/过渡，
-// 正式账号数据请配置 DATABASE_URL。
+// 统一数据库接口：默认使用 SQLite（本地文件、Vercel 上用临时目录）。
+// 只有显式设置 DATABASE_BACKEND=postgres 时才使用 Postgres（DATABASE_URL）。
+// 注意：Vercel 上 SQLite 是临时存储（部署/冷启动/扩缩容后会重置），
+// 适合当前演示期；需要正式持久化时，把环境变量 DATABASE_BACKEND 设为 postgres
+// 并提供 DATABASE_URL 即可切换，无需改代码。
 let impl = null;
 
 // 探测一个可写目录放 SQLite 文件：本地沿用 web/.local.db；
@@ -30,7 +32,7 @@ async function pickSqlitePath() {
 async function init() {
   if (impl) return impl;
 
-  if (process.env.DATABASE_URL) {
+  if (process.env.DATABASE_BACKEND === 'postgres' && process.env.DATABASE_URL) {
     const { sql } = await import('@vercel/postgres');
     impl = {
       async query(text, params = []) {

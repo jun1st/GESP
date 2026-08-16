@@ -40,7 +40,10 @@ npm run build    # 生产构建
 
 | 变量 | 说明 |
 |---|---|
-| `DATABASE_URL` | PostgreSQL 连接串（Vercel Postgres / Neon 等）。**未配置时自动回退到 SQLite**：本地持久在 `web/.local.db`；Vercel 上写入 `/tmp`（`gesp-local.db`），为临时存储，实例冷启动/扩缩容后会重置，仅适合过渡使用，正式账号数据请配置本变量 |
+| `DATABASE_BACKEND` | 数据库后端开关。默认不设置时使用 **SQLite**；设为 `postgres` 时启用 Postgres（需同时配置 `DATABASE_URL`） |
+| `DATABASE_URL` | PostgreSQL 连接串（Vercel Postgres / Neon 等）。仅在 `DATABASE_BACKEND=postgres` 时生效 |
+
+> SQLite 模式：本地持久在 `web/.local.db`；Vercel 上写入 `/tmp`（`gesp-local.db`），为临时存储，部署/冷启动/扩缩容后会重置，适合当前演示期。需要正式持久化时，设置 `DATABASE_BACKEND=postgres` 并配置 `DATABASE_URL` 即可，无需改代码。
 | `SESSION_SECRET` | 会话签名密钥（`openssl rand -hex 32` 生成） |
 | `ADMIN_TOKEN` | 管理员密码，用于 `/admin` 页人工开通会员 |
 
