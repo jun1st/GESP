@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import lv0 from '../../data/levels/level-0.json';
+import lv0 from '../../data/levels/fundamentals.json';
 import lv1 from '../../data/levels/level-1.json';
 import lv2 from '../../data/levels/level-2.json';
 import lv3 from '../../data/levels/level-3.json';
@@ -14,7 +14,7 @@ import lv8 from '../../data/levels/level-8.json';
 
 // 课数 / 进度 key 从课程数据派生（与 ParentApp 同源），避免与 data/levels/*.json 脱节
 const MODULES_RAW = [
-  { name: '基础常识', emoji: '🧠', level: lv0, page: '/course/0', color: 'sky' },
+  { name: '基础常识', emoji: '🧠', level: lv0, page: '/fundamentals', color: 'sky' },
   { name: '一级', emoji: '🎒', level: lv1, page: '/course/1', color: 'teal' },
   { name: '二级', emoji: '🚀', level: lv2, page: '/course/2', color: 'violet' },
   { name: '三级', emoji: '📘', level: lv3, page: '/course/3', color: 'sky' },
@@ -152,7 +152,7 @@ export default function HomePage() {
           <p>先建基础，再完成一级二级核心考点，最后进入三至八级算法能力提升。</p>
         </div>
         <div className="path-cards">
-          <Link href="/course/0"><b>基础启蒙</b><span>二进制、字节和存储单位</span></Link>
+          <Link href="/fundamentals"><b>基础启蒙</b><span>二进制、字节和存储单位</span></Link>
           <Link href="/course/1"><b>一级入门</b><span>变量、输入输出、分支循环和调试</span></Link>
           <Link href="/course/2"><b>二级巩固</b><span>网络、编码、流程图、多层结构</span></Link>
           <Link href="/courses"><b>三至八级进阶</b><span>数组、排序、递归、动态规划和图论</span></Link>

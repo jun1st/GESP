@@ -21,7 +21,7 @@ import MathButtons from './experiments/MathButtons';
 import Dice from './experiments/Dice';
 
 export default function Experiments({ level }) {
-  if (level === 0) {
+  if (level === 'fundamentals') {
     return (
       <>
         <BinaryByteBuilder />

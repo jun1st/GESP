@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import lv0 from '../../data/levels/level-0.json';
+import lv0 from '../../data/levels/fundamentals.json';
 import lv1 from '../../data/levels/level-1.json';
 import lv2 from '../../data/levels/level-2.json';
 import lv3 from '../../data/levels/level-3.json';

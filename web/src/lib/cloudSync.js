@@ -1,7 +1,7 @@
 // 客户端：localStorage 与云端数据合并（进度数组按位合并、错题去重、其余云端优先）
 
 export function isProgressKey(key) {
-  return /^gesp_lv\d_prog$/.test(key);
+  return /^gesp_(lv[1-8]|fundamentals)_prog$/.test(key);
 }
 
 function parseJson(raw, fallback) {

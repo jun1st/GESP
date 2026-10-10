@@ -1,11 +1,10 @@
 {
-  "id": 0,
-  "slug": "level-0",
-  "title": "GESP C++ 基础常识乐园",
+  "id": "fundamentals",
+  "slug": "fundamentals",
+  "title": "GESP C++ 基础常识",
   "description": "计算机基础、二进制、存储单位和入门常识。",
   "emoji": "🌱",
-  "progressKey": "gesp_lv0_prog",
-  "sourcePage": "fundamentals.html",
+  "progressKey": "gesp_fundamentals_prog",
   "lessons": [
     {
       "id": "computer-basics",

@@ -1,10 +1,11 @@
 import Link from 'next/link';
-import { listLevels } from '@/lib/courseData';
+import { listLevels, readFundamentals } from '@/lib/courseData';
 
 export const dynamic = 'force-static';
 
 export default async function CoursesPage() {
   const levels = await listLevels();
+  const fundamentals = await readFundamentals();
   return (
     <>
       <section className="course-hero">
@@ -15,6 +16,11 @@ export default async function CoursesPage() {
       <section className="course-panel">
         <h2>选择级别</h2>
         <div className="practice-grid">
+          <Link className="practice-card" href="/fundamentals">
+            <b>{fundamentals.emoji} {fundamentals.title}</b>
+            <p>{fundamentals.description}</p>
+            <span>{fundamentals.lessons.length} 课 · 免费</span>
+          </Link>
           {levels.map((level) => (
             <Link key={level.id} className="practice-card" href={`/course/${level.id}`}>
               <b>{level.emoji} {level.title}</b>

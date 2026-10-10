@@ -1,6 +1,6 @@
 // 云端同步的白名单 key（服务端与客户端共用）
 export const CLOUD_KEYS = [
-  'gesp_lv0_prog',
+  'gesp_fundamentals_prog',
   'gesp_lv1_prog',
   'gesp_lv2_prog',
   'gesp_lv3_prog',

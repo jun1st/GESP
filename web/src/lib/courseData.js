@@ -8,6 +8,11 @@ export async function readLevel(id) {
   return JSON.parse(raw);
 }
 
+export async function readFundamentals() {
+  const raw = await fs.readFile(path.join(levelsDir, 'fundamentals.json'), 'utf8');
+  return JSON.parse(raw);
+}
+
 export async function listLevels() {
   const files = await fs.readdir(levelsDir);
   const levels = await Promise.all(
@@ -27,17 +32,17 @@ export async function listLevels() {
   return levels.sort((a, b) => a.id - b.id);
 }
 
-export async function readRelated(id) {
+// slug: 'level-3' 或 'fundamentals'
+export async function readRelated(slug) {
   try {
-    const raw = await fs.readFile(path.join(process.cwd(), 'data', 'papers', 'related', `level-${id}.json`), 'utf8');
+    const raw = await fs.readFile(path.join(process.cwd(), 'data', 'papers', 'related', `${slug}.json`), 'utf8');
     return JSON.parse(raw);
   } catch (e) {
-    return { level: id, lessons: [] };
+    return { level: slug, lessons: [] };
   }
 }
 
 export const LEVEL_CN = {
-  0: '零级入门',
   1: '一级',
   2: '二级',
   3: '三级',
