@@ -57,6 +57,10 @@ _Avoid_: 家长账号, parent account
 A Lesson in which a Member repeatedly answers its related Past Questions wrong. Every Past Question is mapped to exactly one Lesson of its own Level.
 _Avoid_: 薄弱知识点, 弱项 as a separate tag system
 
+**Syllabus Item (考点)**:
+One topic of the official GESP syllabus for a Level (e.g. 一级的「变量」), split out of the official per-Level text. A Syllabus Item is covered by one or more Lessons of its Level, and a Lesson may cover several Syllabus Items. A Past Question belongs to a Syllabus Item through its Lesson, so one Past Question can count under more than one Syllabus Item.
+_Avoid_: 知识点 as a synonym, 考纲条目
+
 **Uncovered Question (未覆盖题)**:
 A Past Question that fits no existing Lesson of its Level. It counts toward no Weak Spot, and the number of them shows which Lessons are missing from a Course.
 

@@ -54,11 +54,11 @@ export default function Topbar() {
       <div className="topbar-user">
         {me ? (
           <Link href="/account" className="user-chip">
-            <span>👤 {me.phone.slice(0, 3)}****{me.phone.slice(7)}</span>
+            <span>{me.phone.slice(0, 3)}****{me.phone.slice(7)}</span>
             {me.isMember && <i className="user-vip">VIP</i>}
           </Link>
         ) : (
-          <Link href="/account" className="user-chip">👤 登录</Link>
+          <Link href="/account" className="user-chip">登录</Link>
         )}
       </div>
     </header>

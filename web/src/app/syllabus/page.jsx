@@ -1,35 +1,22 @@
-const ROWS = [
-  ['一级', '计算机基础与编程环境、变量、基本数据类型、控制语句结构、基本运算、输入输出语句', '完成单一功能的程序设计'],
-  ['二级', '存储与网络、程序设计语言特点、流程图、ASCII、数据类型转换、多层分支/循环、常用数学函数', '独立完成分支、循环嵌套的综合案例'],
-  ['三级', '数据编码、进制转换、位运算、算法描述、一维数组、字符串、枚举法、模拟法', '用模拟法、枚举法解决算法问题'],
-  ['四级', '函数、形参实参、作用域、指针、结构体、二维数组、递推、排序、复杂度估算、文件读写、异常', '掌握函数、排序、递推，解决递推问题'],
-  ['五级', '初等数论、高精度、链表、欧几里得算法、筛法、二分、递归、贪心、分治', '掌握数论、二分、分治、贪心思想'],
-  ['六级', '树、哈夫曼/格雷编码、DFS/BFS、简单动态规划、面向对象、栈队列', '掌握树与搜索，解决简单 DP 和背包'],
-  ['七级', '数学库函数、复杂动态规划、图的遍历、图论算法、哈希表', '掌握图论与复杂 DP'],
-  ['八级', '计数原理、排列组合、杨辉三角、倍增法、代数几何、图论综合、复杂度分析、算法优化', '掌握组合数学与算法优化']
-];
+import { buildSyllabus } from '@/lib/courseData';
+import SyllabusView from '@/components/SyllabusView';
 
-export default function SyllabusPage() {
+export const metadata = { title: '官方考纲 · GESP C++ 学习中心' };
+
+export default async function SyllabusPage() {
+  const levels = await buildSyllabus();
   return (
     <>
       <div className="panel">
-        <h2>📌 考试说明</h2>
+        <h2>考试说明</h2>
         <div className="callout info">
           题型：单选题 15×2 分 + 判断题 10×2 分 + 编程题 2×25 分。考试时间：1-4 级 120 分钟，5-8 级 180 分钟。C++ 考题以 C++11 标准为准。
         </div>
       </div>
       <div className="panel">
-        <h2>🗺️ 知识体系总览（C++）</h2>
-        <table>
-          <thead>
-            <tr><th>级别</th><th>C++ 知识内容</th><th>知识目标</th></tr>
-          </thead>
-          <tbody>
-            {ROWS.map(([lv, content, goal]) => (
-              <tr key={lv}><td><b>{lv}</b></td><td>{content}</td><td>{goal}</td></tr>
-            ))}
-          </tbody>
-        </table>
+        <h2>考纲 · 课程 · 真题</h2>
+        <p className="panel-sub">每个考点对应本站的课程，点课名进入学习，课末有该课相关真题。课程与完整真题为会员专享。</p>
+        <SyllabusView levels={levels} />
       </div>
     </>
   );

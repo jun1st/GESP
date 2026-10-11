@@ -1,0 +1,428 @@
+{
+ "levels": [
+  {
+   "level": 1,
+   "goal": "完成单一功能的程序设计",
+   "items": [
+    {
+     "name": "计算机基础与编程环境",
+     "lessons": [
+      "s1"
+     ]
+    },
+    {
+     "name": "变量",
+     "lessons": [
+      "s3"
+     ]
+    },
+    {
+     "name": "基本数据类型",
+     "lessons": [
+      "s3"
+     ]
+    },
+    {
+     "name": "控制语句结构",
+     "lessons": [
+      "s7"
+     ]
+    },
+    {
+     "name": "基本运算",
+     "lessons": [
+      "s3",
+      "s7"
+     ]
+    },
+    {
+     "name": "输入输出语句",
+     "lessons": [
+      "s1",
+      "s3"
+     ]
+    }
+   ]
+  },
+  {
+   "level": 2,
+   "goal": "独立完成分支、循环嵌套的综合案例",
+   "items": [
+    {
+     "name": "存储",
+     "lessons": [
+      "s1"
+     ]
+    },
+    {
+     "name": "网络",
+     "lessons": [
+      "s2"
+     ]
+    },
+    {
+     "name": "程序设计语言特点",
+     "lessons": [
+      "s3"
+     ]
+    },
+    {
+     "name": "流程图",
+     "lessons": [
+      "s4"
+     ]
+    },
+    {
+     "name": "ASCII",
+     "lessons": [
+      "s5"
+     ]
+    },
+    {
+     "name": "数据类型转换",
+     "lessons": [
+      "s6"
+     ]
+    },
+    {
+     "name": "多层分支",
+     "lessons": [
+      "s7"
+     ]
+    },
+    {
+     "name": "多层循环",
+     "lessons": [
+      "s8"
+     ]
+    },
+    {
+     "name": "常用数学函数",
+     "lessons": [
+      "s9"
+     ]
+    }
+   ]
+  },
+  {
+   "level": 3,
+   "goal": "用模拟法、枚举法解决算法问题",
+   "items": [
+    {
+     "name": "数据编码",
+     "lessons": [
+      "lv3l1"
+     ]
+    },
+    {
+     "name": "进制转换",
+     "lessons": [
+      "lv3l2"
+     ]
+    },
+    {
+     "name": "位运算",
+     "lessons": [
+      "lv3l3"
+     ]
+    },
+    {
+     "name": "算法描述",
+     "lessons": []
+    },
+    {
+     "name": "一维数组",
+     "lessons": [
+      "lv3l4"
+     ]
+    },
+    {
+     "name": "字符串",
+     "lessons": [
+      "lv3l5"
+     ]
+    },
+    {
+     "name": "枚举法",
+     "lessons": [
+      "lv3l6"
+     ]
+    },
+    {
+     "name": "模拟法",
+     "lessons": [
+      "lv3l6"
+     ]
+    }
+   ]
+  },
+  {
+   "level": 4,
+   "goal": "掌握函数、排序、递推，解决递推问题",
+   "items": [
+    {
+     "name": "函数",
+     "lessons": [
+      "lv4l4"
+     ]
+    },
+    {
+     "name": "形参与实参",
+     "lessons": [
+      "lv4l4",
+      "lv4l5"
+     ]
+    },
+    {
+     "name": "作用域",
+     "lessons": [
+      "lv4l4"
+     ]
+    },
+    {
+     "name": "指针",
+     "lessons": [
+      "lv4l1",
+      "lv4l5"
+     ]
+    },
+    {
+     "name": "结构体",
+     "lessons": [
+      "lv4l3"
+     ]
+    },
+    {
+     "name": "二维数组",
+     "lessons": [
+      "lv4l2"
+     ]
+    },
+    {
+     "name": "递推",
+     "lessons": [
+      "lv4l6"
+     ]
+    },
+    {
+     "name": "排序",
+     "lessons": [
+      "lv4l7"
+     ]
+    },
+    {
+     "name": "复杂度估算",
+     "lessons": []
+    },
+    {
+     "name": "文件读写",
+     "lessons": [
+      "lv4l8"
+     ]
+    },
+    {
+     "name": "异常处理",
+     "lessons": [
+      "lv4l8"
+     ]
+    }
+   ]
+  },
+  {
+   "level": 5,
+   "goal": "掌握数论、二分、分治、贪心思想",
+   "items": [
+    {
+     "name": "初等数论",
+     "lessons": [
+      "lv5l1",
+      "lv5l4"
+     ]
+    },
+    {
+     "name": "高精度",
+     "lessons": [
+      "lv5l2"
+     ]
+    },
+    {
+     "name": "链表",
+     "lessons": [
+      "lv5l3"
+     ]
+    },
+    {
+     "name": "欧几里得算法",
+     "lessons": [
+      "lv5l4"
+     ]
+    },
+    {
+     "name": "筛法",
+     "lessons": [
+      "lv5l4"
+     ]
+    },
+    {
+     "name": "二分",
+     "lessons": [
+      "lv5l5"
+     ]
+    },
+    {
+     "name": "递归",
+     "lessons": [
+      "lv5l6"
+     ]
+    },
+    {
+     "name": "贪心",
+     "lessons": [
+      "lv5l7"
+     ]
+    },
+    {
+     "name": "分治",
+     "lessons": [
+      "lv5l8"
+     ]
+    }
+   ]
+  },
+  {
+   "level": 6,
+   "goal": "掌握树与搜索，解决简单 DP 和背包",
+   "items": [
+    {
+     "name": "树",
+     "lessons": [
+      "lv6l1",
+      "lv6l2"
+     ]
+    },
+    {
+     "name": "哈夫曼编码与格雷编码",
+     "lessons": [
+      "lv6l2",
+      "lv6l3"
+     ]
+    },
+    {
+     "name": "DFS 与 BFS",
+     "lessons": [
+      "lv6l4"
+     ]
+    },
+    {
+     "name": "简单动态规划",
+     "lessons": [
+      "lv6l5"
+     ]
+    },
+    {
+     "name": "面向对象",
+     "lessons": [
+      "lv6l6"
+     ]
+    },
+    {
+     "name": "栈与队列",
+     "lessons": [
+      "lv6l6"
+     ]
+    }
+   ]
+  },
+  {
+   "level": 7,
+   "goal": "掌握图论与复杂 DP",
+   "items": [
+    {
+     "name": "数学库函数",
+     "lessons": [
+      "lv7l1"
+     ]
+    },
+    {
+     "name": "复杂动态规划",
+     "lessons": [
+      "lv7l2"
+     ]
+    },
+    {
+     "name": "图的遍历",
+     "lessons": [
+      "lv7l3"
+     ]
+    },
+    {
+     "name": "图论算法",
+     "lessons": [
+      "lv7l3",
+      "lv7l4"
+     ]
+    },
+    {
+     "name": "哈希表",
+     "lessons": [
+      "lv7l5"
+     ]
+    }
+   ]
+  },
+  {
+   "level": 8,
+   "goal": "掌握组合数学与算法优化",
+   "items": [
+    {
+     "name": "计数原理",
+     "lessons": [
+      "lv8l1"
+     ]
+    },
+    {
+     "name": "排列组合",
+     "lessons": [
+      "lv8l2"
+     ]
+    },
+    {
+     "name": "杨辉三角",
+     "lessons": [
+      "lv8l3"
+     ]
+    },
+    {
+     "name": "倍增法",
+     "lessons": [
+      "lv8l4"
+     ]
+    },
+    {
+     "name": "代数与几何",
+     "lessons": [
+      "lv8l5"
+     ]
+    },
+    {
+     "name": "图论综合",
+     "lessons": [
+      "lv8l6"
+     ]
+    },
+    {
+     "name": "复杂度分析",
+     "lessons": [
+      "lv8l7"
+     ]
+    },
+    {
+     "name": "算法优化",
+     "lessons": [
+      "lv8l8"
+     ]
+    }
+   ]
+  }
+ ]
+}

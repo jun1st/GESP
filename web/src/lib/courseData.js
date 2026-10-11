@@ -61,3 +61,31 @@ export async function getLevelMeta() {
   for (let i = 1; i <= 8; i += 1) list.push(await readLevel(i));
   return list.map((l) => ({ progressKey: l.progressKey, total: l.lessons.length }));
 }
+
+// 官方考纲：考点 → 课（多对多），题数由课的相关真题汇总。只含目录级信息，可公开。
+export async function buildSyllabus() {
+  const raw = await fs.readFile(path.join(process.cwd(), 'data', 'syllabus.json'), 'utf8');
+  const { levels } = JSON.parse(raw);
+  const result = [];
+  for (const lv of levels) {
+    const data = await readLevel(lv.level);
+    const related = await readRelated(`level-${lv.level}`);
+    const counts = {};
+    for (const l of related.lessons || []) counts[l.anchor] = (l.questions || []).length;
+    const byAnchor = {};
+    data.lessons.forEach((l, index) => {
+      byAnchor[l.anchor] = { anchor: l.anchor, index, title: l.title.replace(/^第 \d+ 课：/, ''), count: counts[l.anchor] || 0 };
+    });
+    result.push({
+      level: lv.level,
+      name: LEVEL_CN[lv.level],
+      goal: lv.goal,
+      progressKey: data.progressKey,
+      items: lv.items.map((it) => ({
+        name: it.name,
+        lessons: it.lessons.map((a) => byAnchor[a]).filter(Boolean)
+      }))
+    });
+  }
+  return result;
+}

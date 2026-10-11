@@ -35,7 +35,7 @@ export default function LoopPattern() {
       </div>
       <div className="gridout" style={{ gridTemplateColumns: 'repeat(' + n + ', 26px)' }}>
         {cells.map((c, k) => (
-          <div key={k} className="gcell" style={{ background: c.on ? '#5e60ce' : '#eef2ff', color: c.on ? '#fff' : '#c7d2fe' }}>
+          <div key={k} className="gcell" style={{ background: c.on ? '#2563eb' : '#eff6ff', color: c.on ? '#fff' : '#bfdbfe' }}>
             {c.on ? '#' : '.'}
           </div>
         ))}
