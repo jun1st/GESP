@@ -118,6 +118,12 @@ export default function AccountPage() {
           {me.isMember && expires && (
             <p><b>有效期至：</b>{expires.toLocaleDateString('zh-CN')}（还剩 {daysLeft} 天）</p>
           )}
+          {me.isMember && daysLeft <= 30 && (
+            <p className="ac-err">⚠️ 会员还剩 {daysLeft} 天到期，请联系管理员续费，到期后将无法打开课程和真题库。</p>
+          )}
+          {!me.isMember && expires && (
+            <p className="ac-err">会员已于 {expires.toLocaleDateString('zh-CN')} 到期，请联系管理员续费。</p>
+          )}
           {!me.isMember && (
             <p className="ac-hint">开通会员可解锁 1~8 级全部课程、真题与解析，有效期一年。请联系管理员人工开通。</p>
           )}

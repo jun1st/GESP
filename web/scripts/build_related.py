@@ -13,7 +13,7 @@ import re
 from unicodedata import normalize
 
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-PAPERS = os.path.join(ROOT, "web", "public", "data", "papers")
+PAPERS = os.path.join(ROOT, "web", "data", "papers", "sessions")
 LEVELS = os.path.join(ROOT, "web", "data", "levels")
 OUT = os.path.join(ROOT, "web", "data", "papers", "related")
 

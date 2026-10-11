@@ -1,14 +1,20 @@
 import { NextResponse } from 'next/server';
-import { getSession } from '@/lib/session';
+import { getMemberContext } from '@/lib/member';
 import { query, run } from '@/lib/db';
 import { isCloudKey } from '@/lib/syncKeys';
 
+async function guard() {
+  const { user, isMember } = await getMemberContext();
+  if (!user) return { error: NextResponse.json({ error: '请先登录' }, { status: 401 }) };
+  if (!isMember) return { error: NextResponse.json({ error: '会员专享' }, { status: 403 }) };
+  return { user };
+}
+
 export async function GET() {
-  const session = await getSession();
-  if (!session) {
-    return NextResponse.json({ error: '请先登录' }, { status: 401 });
-  }
-  const rows = await query('SELECT key, value FROM user_data WHERE user_id = $1', [session.id]);
+  const g = await guard();
+  if (g.error) return g.error;
+  const { user } = g;
+  const rows = await query('SELECT key, value FROM user_data WHERE user_id = $1', [user.id]);
   const data = {};
   for (const row of rows) {
     data[row.key] = row.value;
@@ -17,10 +23,9 @@ export async function GET() {
 }
 
 export async function POST(request) {
-  const session = await getSession();
-  if (!session) {
-    return NextResponse.json({ error: '请先登录' }, { status: 401 });
-  }
+  const g = await guard();
+  if (g.error) return g.error;
+  const { user } = g;
   let body;
   try {
     body = await request.json();
@@ -44,7 +49,7 @@ export async function POST(request) {
       `INSERT INTO user_data (user_id, key, value, updated_at)
        VALUES ($1, $2, $3, $4)
        ON CONFLICT (user_id, key) DO UPDATE SET value = excluded.value, updated_at = excluded.updated_at`,
-      [session.id, key, value, now]
+      [user.id, key, value, now]
     );
   }
   return NextResponse.json({ ok: true });

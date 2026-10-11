@@ -52,3 +52,12 @@ export const LEVEL_CN = {
   7: '七级',
   8: '八级'
 };
+
+// 只含进度统计所需字段（进度 key、课数）。客户端组件只能拿这份，
+// 不能直接 import 课程 JSON，否则整套课程内容会被打进公开的 JS 包。
+// 顺序：基础常识，然后 1~8 级。
+export async function getLevelMeta() {
+  const list = [await readFundamentals()];
+  for (let i = 1; i <= 8; i += 1) list.push(await readLevel(i));
+  return list.map((l) => ({ progressKey: l.progressKey, total: l.lessons.length }));
+}

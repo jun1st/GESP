@@ -5,7 +5,7 @@
 用法：python3 extract_papers.py
 产物：
   web/public/data/papers/index.json                     批次索引
-  web/public/data/papers/{batch}/level-{n}.json         每批次每级别题目（真题+答案+解析）
+  web/data/papers/sessions/{batch}/level-{n}.json        每批次每级别题目（真题+答案+解析）
   web/data/papers/related/level-{n}.json                课程章节 → 相关真题
 """
 
@@ -20,7 +20,8 @@ import pdfplumber
 
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 SRC = os.path.join(ROOT, "真题PDF")
-OUT_PUB = os.path.join(ROOT, "web", "public", "data", "papers")
+OUT_PUB = os.path.join(ROOT, "web", "public", "data", "papers")  # 仅放公开的 index.json
+OUT_SESS = os.path.join(ROOT, "web", "data", "papers", "sessions")  # 题目（含答案）放服务端，不对外公开
 OUT_REL = os.path.join(ROOT, "web", "data", "papers", "related")
 
 
@@ -342,7 +343,7 @@ def main():
         exam = parse_exam_paper(text)
         if batch in ana_index and level in ana_index[batch]:
             exam = merge_answer(exam, ana_index[batch][level])
-        out = os.path.join(OUT_PUB, batch)
+        out = os.path.join(OUT_SESS, batch)
         os.makedirs(out, exist_ok=True)
         with open(os.path.join(out, f"level-{level}.json"), "w", encoding="utf-8") as fh:
             json.dump({"batch": batch, "level": level, **exam}, fh, ensure_ascii=False)

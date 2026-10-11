@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import WeakSpots, { useReport } from './WeakSpots';
 
 function daysAgo(t) {
   const d = Math.floor((Date.now() - t) / 86400000);
@@ -9,6 +10,7 @@ function daysAgo(t) {
 
 export default function ReviewApp() {
   const [wrong, setWrong] = useState([]);
+  const { report, error } = useReport();
 
   useEffect(() => {
     try {
@@ -40,6 +42,12 @@ export default function ReviewApp() {
 
   return (
     <div className="panel">
+      {report && (
+        <>
+          <h2>🎯 薄弱项（来自模拟考）</h2>
+          <WeakSpots report={report} error={error} />
+        </>
+      )}
       <h2>📊 错题总览</h2>
       <div className="callout info">
         {wrong.length === 0

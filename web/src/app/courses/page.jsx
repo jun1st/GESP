@@ -1,11 +1,13 @@
 import Link from 'next/link';
 import { listLevels, readFundamentals } from '@/lib/courseData';
+import { getMemberContext } from '@/lib/member';
 
-export const dynamic = 'force-static';
+export const dynamic = 'force-dynamic';
 
 export default async function CoursesPage() {
   const levels = await listLevels();
   const fundamentals = await readFundamentals();
+  const { isMember } = await getMemberContext();
   return (
     <>
       <section className="course-hero">
@@ -25,7 +27,7 @@ export default async function CoursesPage() {
             <Link key={level.id} className="practice-card" href={`/course/${level.id}`}>
               <b>{level.emoji} {level.title}</b>
               <p>{level.description}</p>
-              <span>{level.lessonCount} 课</span>
+              <span>{level.lessonCount} 课{isMember ? '' : ' · 会员'}</span>
             </Link>
           ))}
         </div>

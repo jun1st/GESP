@@ -73,7 +73,7 @@ npm run build    # 生产构建
   - 2 级：断电实验、网络圈、流程图、ASCII 编码器、整数除法、switch 穿透、循环图形、数学函数、掷骰子、在线编译器
   - 3-8 级：每课完整讲解 + 代码一键复制 + 每课小测（错题自动进复习站）+ 在线编译器
 - 已集成历年真题：
-  - `web/scripts/extract_papers.py` 解析本地 `真题PDF/`（2023.03 ~ 2026.06 共 14 个批次）为题库 JSON（`web/public/data/papers/`）
+  - `web/scripts/extract_papers.py` 解析本地 `真题PDF/`（2023.03 ~ 2026.06 共 14 个批次）为题库 JSON（`web/data/papers/sessions/`（服务端读取，不对外公开））
   - 真题资料库页新增「真题在线练习」：按批次/级别筛选，点击看答案；2023 年四个批次附考纲知识点与解析
   - `web/scripts/build_related.py` 按考纲知识点+关键词把题目挂到课程各章，课程页每课可展开「本节相关真题」
 - 根目录旧站 HTML 已不再线上使用；Express 兼容层（`server.js` / `routes/` / `lib/`）保留，由 `tests/` 覆盖，线上部署以 `web/` 目录的 Vercel 应用为准

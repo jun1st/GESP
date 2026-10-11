@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
 const BASE = process.env.NEXT_PUBLIC_BASE_PATH || '';
@@ -16,7 +17,6 @@ function QCard({ q, type }) {
         <span className="pb-qno">{q.no}</span>
         <b>{TYPE_LABEL[type]}</b>
         {q.title && <span className="pb-qtitle">：{q.title}</span>}
-        {q.batch && <span className="pb-batch">{q.batch}</span>}
       </div>
       <div className="pb-qtext">{q.text}</div>
       {type === 'single' && (
@@ -26,7 +26,7 @@ function QCard({ q, type }) {
               <div key={i} className="pb-opt">{'ABCD'[i]}. {o}</div>
             ))
           ) : (
-            <div className="pb-note">（本题选项为图片，暂无法显示）</div>
+            <div className="pb-note">（选项在原卷中为图片，请对照 PDF 或模拟考中按 A–D 作答）</div>
           )}
         </div>
       )}
@@ -35,17 +35,13 @@ function QCard({ q, type }) {
         className={'pb-toggle' + (show ? ' open' : '')}
         onClick={() => setShow(!show)}
       >
-        {show ? '🙈 收起答案' : hasAnswer ? '👀 看答案' : '👀 查看'}
+        {show ? '收起' : hasAnswer ? '答案与解析' : '查看'}
       </button>
       {show && (
         <div className="pb-answer">
           <p className="pb-ans-line">
             <b>答案：</b>
-            {hasAnswer ? (
-              type === 'program' ? '见下方解析' : q.answer
-            ) : (
-              <span className="pb-note">官方未公布答案</span>
-            )}
+            {hasAnswer ? (type === 'program' ? '见下方解析' : q.answer) : <span className="pb-note">暂无</span>}
           </p>
           {q.point && <p className="pb-point"><b>考纲知识点：</b>{q.point}</p>}
           {hasAnalysis ? (
@@ -61,7 +57,7 @@ function QCard({ q, type }) {
               )}
             </>
           ) : (
-            <p className="pb-note">暂无官方解析（可到真题 PDF 查看）。</p>
+            <p className="pb-note">暂无官方文字解析。</p>
           )}
         </div>
       )}
@@ -69,28 +65,30 @@ function QCard({ q, type }) {
   );
 }
 
-export default function PapersBrowser({ batches }) {
-  const [batch, setBatch] = useState(batches[batches.length - 1]?.batch || '');
+export default function PapersBrowser({ sessions, sample = false }) {
+  const [session, setSession] = useState(sessions[sessions.length - 1]?.batch || '');
   const [level, setLevel] = useState('');
+  const [browse, setBrowse] = useState(sample);
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(false);
 
-  const current = batches.find((b) => b.batch === batch) || {};
-  const levels = current.levels || [];
+  const current = sessions.find((b) => b.batch === session) || {};
+  const levels = sample ? [1, 2, 3, 4, 5, 6, 7, 8] : current.levels || [];
 
   useEffect(() => {
-    if (levels.length && !levels.includes(level)) setLevel(String(levels[0]));
-  }, [batch, levels, level]);
+    if (levels.length && !levels.includes(Number(level))) setLevel(String(levels[0]));
+  }, [session, levels, level]);
 
   useEffect(() => {
-    if (!batch || !level) return;
+    if (!browse || !session || !level) return;
     setLoading(true);
-    fetch(`${BASE}/data/papers/${batch}/level-${level}.json`)
+    const qs = sample ? `sample=1&level=${level}` : `session=${session}&level=${level}`;
+    fetch(`${BASE}/api/papers/view?${qs}`)
       .then((r) => (r.ok ? r.json() : Promise.reject(new Error('HTTP ' + r.status))))
       .then(setData)
       .catch(() => setData(null))
       .finally(() => setLoading(false));
-  }, [batch, level]);
+  }, [browse, session, level, sample]);
 
   const counts = {
     single: data?.single?.length || 0,
@@ -98,48 +96,80 @@ export default function PapersBrowser({ batches }) {
     program: data?.program?.length || 0
   };
 
+  const examHref = session && level ? `/papers/exam/${session}/${level}/` : '#';
+
   return (
     <div className="pb-wrap">
-      <div className="pb-controls">
-        <label>
-          批次：
-          <select value={batch} onChange={(e) => setBatch(e.target.value)}>
-            {batches.map((b) => (
+      <div className="papers-picker">
+        {!sample && <label>
+          <span>考季</span>
+          <select value={session} onChange={(e) => setSession(e.target.value)}>
+            {[...sessions].reverse().map((b) => (
               <option key={b.batch} value={b.batch}>
-                {b.label}{b.hasAnalysis ? '（含解析）' : ''}
+                {b.label}{b.hasAnalysis ? ' · 含解析' : ''}
               </option>
             ))}
           </select>
-        </label>
+        </label>}
         <label>
-          级别：
-          <select value={level} onChange={(e) => setLevel(e.target.value)} disabled={!levels.length}>
+          <span>Level</span>
+          <div className="papers-levels">
             {levels.map((l) => (
-              <option key={l} value={String(l)}>{l} 级</option>
+              <button
+                type="button"
+                key={l}
+                className={'papers-level-chip' + (String(l) === level ? ' on' : '')}
+                onClick={() => setLevel(String(l))}
+              >
+                {l} 级
+              </button>
             ))}
-          </select>
+          </div>
         </label>
-        <span className="pb-count">
-          单选 {counts.single} 题 · 判断 {counts.judge} 题 · 编程 {counts.program} 题
-        </span>
       </div>
 
-      {loading && <div className="pb-loading">加载中…</div>}
-      {!loading && data && (
-        <div className="pb-sections">
-          {(['single', 'judge', 'program']).map((type) =>
-            (data[type] || []).length ? (
-              <section key={type} className="pb-section">
-                <h3>{TYPE_LABEL[type]}（{data[type].length} 题）</h3>
-                {data[type].map((q, i) => (
-                  <QCard key={i} q={q} type={type} />
-                ))}
-              </section>
-            ) : null
-          )}
+      {level && !sample && (
+        <div className="papers-actions">
+          <Link className="mx-btn primary big" href={examHref}>开始模拟考</Link>
+          <button
+            type="button"
+            className="mx-btn"
+            onClick={() => setBrowse((v) => !v)}
+          >
+            {browse ? '收起题目' : '查阅试卷与解析'}
+          </button>
         </div>
       )}
-      {!loading && !data && <div className="pb-note">该批次暂时没有题目数据。</div>}
+
+      {browse && level && (
+        <>
+          {sample && data?.batch && (
+            <p className="pb-count papers-meta">
+              样例：{data.batch.replace('-', ' 年 ')} 月 {level} 级的前 {data.single.length} 道单选题。开通会员可查看全部试卷并参加模拟考。
+            </p>
+          )}
+          {!sample && <p className="pb-count papers-meta">
+            本卷：单选 {counts.single || '—'} · 判断 {counts.judge || '—'} · 编程 {counts.program || '—'}
+            {current.hasAnalysis && ' · 部分题目附官方解析'}
+          </p>}
+          {loading && <div className="pb-loading">加载中…</div>}
+          {!loading && data && (
+            <div className="pb-sections">
+              {(['single', 'judge', 'program']).map((type) =>
+                (data[type] || []).length ? (
+                  <section key={type} className="pb-section">
+                    <h3>{TYPE_LABEL[type]}（{data[type].length} 题）</h3>
+                    {data[type].map((q, i) => (
+                      <QCard key={i} q={q} type={type} />
+                    ))}
+                  </section>
+                ) : null
+              )}
+            </div>
+          )}
+          {!loading && !data && <div className="pb-note">暂无题目数据。</div>}
+        </>
+      )}
     </div>
   );
 }

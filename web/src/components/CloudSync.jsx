@@ -14,7 +14,7 @@ export default function CloudSync() {
   }, [me]);
 
   const saveKey = async (key) => {
-    if (!meRef.current || !key) return;
+    if (!meRef.current?.isMember || !key) return;
     try {
       const raw = localStorage.getItem(key);
       if (raw == null) return;
@@ -89,7 +89,7 @@ export default function CloudSync() {
         const d = await res.json();
         if (cancelled) return;
         setMe(d.user || null);
-        if (d.user) await syncAll();
+        if (d.user?.isMember) await syncAll();
       } catch {
         /* 静默 */
       }

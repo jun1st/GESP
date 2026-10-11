@@ -1,45 +1,22 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import lv0 from '../../data/levels/fundamentals.json';
-import lv1 from '../../data/levels/level-1.json';
-import lv2 from '../../data/levels/level-2.json';
-import lv3 from '../../data/levels/level-3.json';
-import lv4 from '../../data/levels/level-4.json';
-import lv5 from '../../data/levels/level-5.json';
-import lv6 from '../../data/levels/level-6.json';
-import lv7 from '../../data/levels/level-7.json';
-import lv8 from '../../data/levels/level-8.json';
+import WeakSpots, { useReport } from './WeakSpots';
+import ScoreTrend from './ScoreTrend';
+import { LEVEL_NAMES } from '@/lib/levelNames';
 
-const MODULES = [
-  ['🧠 基础常识', lv0],
-  ['🎒 一级', lv1],
-  ['🚀 二级', lv2],
-  ['📘 三级', lv3],
-  ['📗 四级', lv4],
-  ['📙 五级', lv5],
-  ['📕 六级', lv6],
-  ['📓 七级', lv7],
-  ['📔 八级', lv8]
+const MODULE_NAMES = [
+  '🧠 基础常识', '🎒 一级', '🚀 二级', '📘 三级', '📗 四级', '📙 五级', '📕 六级', '📓 七级', '📔 八级'
 ];
 
-const WEEKS = [
-  '第 1 周：基础常识 + 一级 1~2 课',
-  '第 2 周：一级 3~5 课（变量/输入输出/算术）',
-  '第 3 周：一级 6~7 课（关系逻辑/分支）',
-  '第 4 周：一级 8~9 课 + 期末闯关',
-  '第 5 周：二级 1~3 课（存储/网络/语言）',
-  '第 6 周：二级 4~6 课（流程图/ASCII/类型转换）',
-  '第 7 周：二级 7~9 课（分支/循环/数学函数）',
-  '第 8 周：期末闯关 + 复习站刷错题 + 真题练习'
-];
-
-export default function ParentApp() {
+export default function ParentApp({ meta, weeks }) {
   const [rows, setRows] = useState([]);
   const [wrong, setWrong] = useState(0);
+  const { report, error } = useReport();
 
   useEffect(() => {
-    const data = MODULES.map(([name, level]) => {
+    const data = MODULE_NAMES.map((name, i) => {
+      const level = { progressKey: meta[i].progressKey, lessons: { length: meta[i].total } };
       try {
         const saved = JSON.parse(localStorage.getItem(level.progressKey) || '[]');
         const done = Array.isArray(saved) ? saved.filter(Boolean).length : 0;
@@ -53,7 +30,7 @@ export default function ParentApp() {
       const w = JSON.parse(localStorage.getItem('gesp_wrong') || '[]');
       setWrong(Array.isArray(w) ? w.length : 0);
     } catch (e) {}
-  }, []);
+  }, [meta]);
 
   const totalDone = rows.reduce((s, r) => s + r.done, 0);
   const totalAll = rows.reduce((s, r) => s + r.total, 0);
@@ -82,9 +59,40 @@ export default function ParentApp() {
         </div>
       </div>
       <div className="panel">
-        <h2>🗓️ 8 周备考计划（一级 → 二级）</h2>
+        <h2>📈 模拟考成绩</h2>
+        {report ? (
+          <>
+            <ScoreTrend trend={report.trend} attempts={report.attempts} />
+            {report.attempts.length > 0 && (
+              <table>
+                <thead>
+                  <tr><th>时间</th><th>试卷</th><th>客观题得分</th><th>折算总分</th></tr>
+                </thead>
+                <tbody>
+                  {report.attempts.slice(0, 10).map((a, i) => (
+                    <tr key={a.id || i}>
+                      <td>{new Date(a.at).toLocaleDateString('zh-CN')}</td>
+                      <td>{a.session} {LEVEL_NAMES[a.level]}</td>
+                      <td>{a.objective}</td>
+                      <td>{a.total === null ? '待自评编程题' : a.total}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            )}
+          </>
+        ) : (
+          <p className="pb-note">{error || '加载中…'}</p>
+        )}
+      </div>
+      <div className="panel">
+        <h2>🎯 薄弱项</h2>
+        <WeakSpots report={report} error={error} />
+      </div>
+      <div className="panel">
+        <h2>🗓️ 8 周备考计划（按当前课表）</h2>
         <div className="plan">
-          {WEEKS.map((w) => <div className="wk" key={w}><b>{w.split('：')[0]}</b>{w.split('：')[1]}</div>)}
+          {(weeks || []).map((w) => <div className="wk" key={w}><b>{w.split('：')[0]}</b>{w.split('：')[1]}</div>)}
         </div>
       </div>
       <div className="panel">

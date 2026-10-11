@@ -2,106 +2,101 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import Link from 'next/link';
 import PapersBrowser from '@/components/PapersBrowser';
-import LockedPanel from '@/components/LockedPanel';
 import { getMemberContext } from '@/lib/member';
 
-const OFFICIAL = [
-  ['2026 年 6 月', 'https://gesp.ccf.org.cn/101/1010/10284.html', 'GESP 认证真题 ｜ CCF 官方'],
-  ['2026 年 3 月', 'https://gesp.ccf.org.cn/101/1010/10269.html', 'GESP 认证真题 ｜ CCF 官方'],
-  ['2025 年 12 月', 'https://gesp.ccf.org.cn/101/1010/10242.html', '含二级：环保能量球、黄金格'],
-  ['2025 年 9 月', 'https://gesp.ccf.org.cn/101/1010/10229.html', '含二级：优美的数字、菱形'],
-  ['2025 年 6 月', 'https://gesp.ccf.org.cn/101/1010/10217.html', '含二级：数三角形'],
-  ['2025 年 3 月', 'https://gesp.ccf.org.cn/101/1010/10200.html', '含二级：等差矩阵、时间跨越'],
-  ['2024 年 12 月', 'https://gesp.ccf.org.cn/101/1010/10178.html', 'GESP 认证真题 ｜ CCF 官方'],
-  ['2024 年 9 月', 'https://gesp.ccf.org.cn/101/1010/10166.html', 'GESP 认证真题 ｜ CCF 官方'],
-  ['2024 年 6 月', 'https://gesp.ccf.org.cn/101/1010/10147.html', 'GESP 认证真题 ｜ CCF 官方'],
-  ['2024 年 3 月', 'https://gesp.ccf.org.cn/101/1010/10134.html', 'GESP 认证真题 ｜ CCF 官方'],
-  ['2023 年 12 月', 'https://gesp.ccf.org.cn/101/1010/10119.html', 'GESP 认证真题 ｜ CCF 官方'],
-  ['2023 年 9 月', 'https://gesp.ccf.org.cn/101/1010/10105.html', '含二级：数字黑洞'],
-  ['2023 年 6 月', 'https://gesp.ccf.org.cn/101/1010/10092.html', '含二级：自幂数'],
-  ['2023 年 3 月', 'https://gesp.ccf.org.cn/101/1010/10068.html', 'GESP 认证真题 ｜ CCF 官方'],
-  ['2023 年合集', 'https://gesp.ccf.org.cn/101/1010/10100.html', '三月、六月、九月、十二月真题解析']
+/** CCF 官网考季汇总页（PDF 下载入口） */
+const OFFICIAL_SESSIONS = [
+  ['2026 年 6 月', 'https://gesp.ccf.org.cn/101/1010/10284.html'],
+  ['2026 年 3 月', 'https://gesp.ccf.org.cn/101/1010/10269.html'],
+  ['2025 年 12 月', 'https://gesp.ccf.org.cn/101/1010/10242.html'],
+  ['2025 年 9 月', 'https://gesp.ccf.org.cn/101/1010/10229.html'],
+  ['2025 年 6 月', 'https://gesp.ccf.org.cn/101/1010/10217.html'],
+  ['2025 年 3 月', 'https://gesp.ccf.org.cn/101/1010/10200.html'],
+  ['2024 年 12 月', 'https://gesp.ccf.org.cn/101/1010/10178.html'],
+  ['2024 年 9 月', 'https://gesp.ccf.org.cn/101/1010/10166.html'],
+  ['2024 年 6 月', 'https://gesp.ccf.org.cn/101/1010/10147.html'],
+  ['2024 年 3 月', 'https://gesp.ccf.org.cn/101/1010/10134.html'],
+  ['2023 年 12 月', 'https://gesp.ccf.org.cn/101/1010/10119.html'],
+  ['2023 年 9 月', 'https://gesp.ccf.org.cn/101/1010/10105.html'],
+  ['2023 年 6 月', 'https://gesp.ccf.org.cn/101/1010/10092.html'],
+  ['2023 年 3 月', 'https://gesp.ccf.org.cn/101/1010/10068.html']
 ];
 
-const BUILTIN = [
-  ['📐 等差矩阵', ['2025.03 二级', '嵌套循环'], '输入 n m，输出 i×j 矩阵。样例：3 4 → 1 2 3 4 / 2 4 6 8 / 3 6 9 12'],
-  ['⏰ 时间跨越', ['2025.03 二级', '闰年/分支'], '输入 y m d h k，求 k 小时后的时间。样例：2008 2 28 23 1 → 2008 2 29 0'],
-  ['📏 数三角形', ['2025.06 二级', '枚举'], '计数直角边 a、b ≤ n 且面积为整数的三角形。样例：3 → 3；5 → 9'],
-  ['✨ 优美的数字', ['2025.09 二级', '数位'], '数位全部相同的正整数个数。样例：100 → 18'],
-  ['💎 画菱形', ['2025.09 二级', '图形/循环'], '用 # 画菱形边框。样例：n=5 输出 ..#.. / .#.#. / #...# / .#.#. / ..#..'],
-  ['♻️ 环保能量球', ['2025.12 二级', '整除/枚举'], '输出 n + n/x。样例：3 组 (5,2)(10,3)(2,5) → 7 13 2'],
-  ['🌟 黄金格', ['2025.12 二级', '数学函数'], '计数满足 √(r²+c²) ≤ x+r−c 的格子。样例：4 4 2 → 4'],
-  ['🕳️ 数字黑洞', ['2023.09 二级', '数位/循环'], '三位数重排相减直到 495 的步数。样例：123 → 5'],
-  ['🌺 自幂数', ['2023.06 二级', '数位/循环'], '判断是否等于各位数字的 n 次方之和。样例：153/12/370/1634 → T F T T']
-];
-
-const INDEX = [
-  ['数位处理（n%10、n/10）', '数字黑洞、自幂数、优美的数字', '/course/2', '二级 课程'],
-  ['嵌套循环 / 图形输出', '等差矩阵、画菱形', '/course/2', '二级 课程'],
-  ['枚举 / 穷举', '环保能量球、数三角形', '/course/2', '二级 课程'],
-  ['数学函数 / 判断', '黄金格', '/course/2', '二级 课程'],
-  ['闰年 / 分支判断', '时间跨越', '/course/1', '一级 课程']
-];
+async function loadSessions() {
+  try {
+    const raw = await fs.readFile(
+      path.join(process.cwd(), 'public', 'data', 'papers', 'index.json'),
+      'utf8'
+    );
+    return JSON.parse(raw);
+  } catch {
+    return [];
+  }
+}
 
 export default async function PapersPage() {
   const { isMember } = await getMemberContext();
-  let batches = [];
-  try {
-    const raw = await fs.readFile(path.join(process.cwd(), 'public', 'data', 'papers', 'index.json'), 'utf8');
-    batches = JSON.parse(raw);
-  } catch (e) {
-    /* 题库数据缺失时仅展示原有内容 */
-  }
+  const sessions = await loadSessions();
+  const sessionCount = sessions.length;
+  const paperCount = sessions.reduce((n, s) => n + (s.levels?.length || 0), 0);
+
   return (
-    <>
-      {batches.length > 0 && isMember && (
-        <div className="panel">
-          <h2>🖥️ 真题在线练习（2023.03 ~ 2026.06，共 {batches.length} 个批次）</h2>
-          <p className="panel-sub">
-            选择题点开即看答案；2023 年四个批次附官方解析，错题可对照“考纲知识点”回课程复习。
+    <div className="papers-page">
+      <header className="papers-hero panel">
+        <h1>真题资料库</h1>
+        <p className="panel-sub">
+          官方 GESP C++ 历年试卷：按考季与 Level 归档，支持<strong>原卷模拟考</strong>与<strong>查阅解析</strong>。
+          {sessionCount > 0 && (
+            <> 当前收录 <b>{sessionCount}</b> 个考季、<b>{paperCount}</b> 份试卷（2023.03 ~ 2026.06）。</>
+          )}
+        </p>
+        <ul className="papers-hero-list">
+          <li>模拟考：限时作答，交卷后自动评分（单选、判断；编程题供自评）。</li>
+          <li>查阅：逐题展开答案；2023 年四个考季附官方文字解析。</li>
+          <li>课程中的「相关真题」从本库按知识点匹配，可在各级课程里复习。</li>
+        </ul>
+        {!isMember && sessionCount > 0 && (
+          <p className="papers-guest-hint">
+            完整题库与模拟考为 <Link href="/account">会员</Link> 专享；非会员每个 Level 可免费查看 5 道样例题，也可前往 CCF 官网下载 PDF。
           </p>
-          <PapersBrowser batches={batches} />
+        )}
+      </header>
+
+      {sessionCount > 0 && isMember && (
+        <div className="panel papers-main">
+          <h2 className="papers-section-title">选考季与 Level</h2>
+          <PapersBrowser sessions={sessions} />
         </div>
       )}
-      {batches.length > 0 && !isMember && (
-        <LockedPanel title="历年真题与解析为会员专享" />
+
+      {sessionCount > 0 && !isMember && (
+        <div className="panel papers-main">
+          <h2 className="papers-section-title">免费样例：每个 Level 5 道题</h2>
+          <PapersBrowser sessions={sessions} sample />
+          <p className="callout info papers-member-cta">
+            开通 <Link href="/account">会员</Link> 后可使用全部 {paperCount} 份试卷、模拟考与完整解析。
+          </p>
+        </div>
       )}
-      <div className="panel">
-        <h2>🧾 官方真题汇总（2023.03 ~ 2026.06）</h2>
+
+      {sessionCount === 0 && (
+        <div className="panel">
+          <p className="pb-note">站内题库数据暂未就绪，请稍后再试或从 CCF 官网获取 PDF。</p>
+        </div>
+      )}
+
+      <details className="panel papers-official">
+        <summary>CCF 官网 · 真题 PDF 下载</summary>
+        <p className="panel-sub">以下链接跳转至中国计算机学会 GESP 官方页面，可下载原始 PDF。</p>
         <div className="paper-list">
-          {OFFICIAL.map(([title, href, desc]) => (
-            <a key={href} className="paper-card" href={href} target="_blank" rel="noopener">
-              <b>{title}</b><span>{desc}</span>
+          {OFFICIAL_SESSIONS.map(([title, href]) => (
+            <a key={href} className="paper-card" href={href} target="_blank" rel="noopener noreferrer">
+              <b>{title}</b>
+              <span>打开官方页面 →</span>
             </a>
           ))}
         </div>
-      </div>
-      <div className="panel">
-        <h2>🛠️ 内置真题示例（可直接运行）</h2>
-        <div className="probs">
-          {BUILTIN.map(([name, tags, desc]) => (
-            <div className="prob" key={name}>
-              <b>{name}</b><br />
-              {tags.map((tag) => <span className="tag" key={tag}>{tag}</span>)}
-              <p>{desc}</p>
-              <a href="/course/2">去课程练习 →</a>
-            </div>
-          ))}
-        </div>
-      </div>
-      <div className="panel">
-        <h2>🧭 考点索引</h2>
-        <table>
-          <thead>
-            <tr><th>考点</th><th>相关真题</th><th>对应课程</th></tr>
-          </thead>
-          <tbody>
-            {INDEX.map(([point, papers, href, label]) => (
-              <tr key={point}><td>{point}</td><td>{papers}</td><td><Link href={href}>{label}</Link></td></tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-    </>
+      </details>
+    </div>
   );
 }

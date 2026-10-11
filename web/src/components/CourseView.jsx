@@ -21,7 +21,11 @@ export default function CourseView({ data, related, levelName, locked }) {
         <h1>{data.emoji} {data.title}</h1>
         <p>{data.description}</p>
         <ProgressBar progressKey={data.progressKey} total={data.lessons.length} />
-        <CourseMap lessons={data.lessons} progressKey={data.progressKey} />
+        {/* 客户端组件的 props 会被序列化进页面，这里只传目录需要的字段，避免把整课内容发给非会员 */}
+        <CourseMap
+          lessons={data.lessons.map((l) => ({ anchor: l.anchor, title: l.title }))}
+          progressKey={data.progressKey}
+        />
       </section>
 
       {locked ? (
