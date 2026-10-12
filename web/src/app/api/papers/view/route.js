@@ -8,9 +8,9 @@ export async function GET(request) {
   const session = url.searchParams.get('session');
   const level = url.searchParams.get('level');
   const wantSample = url.searchParams.get('sample') === '1';
-  const { isMember } = await getMemberContext();
+  const { hasLevel } = await getMemberContext();
 
-  if (wantSample || !isMember) {
+  if (wantSample || !hasLevel(level)) {
     const sample = await loadSample(level);
     return sample ? NextResponse.json(sample) : NextResponse.json({ error: '暂无样例' }, { status: 404 });
   }

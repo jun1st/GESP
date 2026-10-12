@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { query } from '@/lib/db';
+import { getPlans, publicUser } from '@/lib/auth';
 import { uncoveredStats } from '@/lib/report';
 import { readLevel } from '@/lib/courseData';
 
@@ -19,20 +20,26 @@ export async function POST(request) {
 
   const search = String(body.search || '').replace(/\D/g, '').slice(0, 11);
   const rows = await query(
-    'SELECT phone, membership_expires_at, created_at FROM users WHERE phone LIKE $1 ORDER BY created_at DESC LIMIT 200',
+    'SELECT id, phone, membership_expires_at, created_at FROM users WHERE phone LIKE $1 ORDER BY created_at DESC LIMIT 200',
     [`%${search}%`]
   );
   const now = Date.now();
-  const members = rows.map((u) => {
-    const exp = u.membership_expires_at ? new Date(u.membership_expires_at).getTime() : 0;
-    return {
+  const members = [];
+  for (const u of rows) {
+    const pub = publicUser(u, await getPlans(u.id));
+    members.push({
       phone: u.phone,
       createdAt: u.created_at,
-      expiresAt: u.membership_expires_at || null,
-      active: exp > now,
-      daysLeft: exp > now ? Math.ceil((exp - now) / 86400000) : 0
-    };
-  });
+      active: pub.isMember,
+      tiers: pub.tiers.map((t) => ({
+        tier: t.tier,
+        label: t.label,
+        active: t.active,
+        expiresAt: t.expiresAt,
+        daysLeft: t.active ? Math.ceil((new Date(t.expiresAt).getTime() - now) / 86400000) : 0
+      }))
+    });
+  }
 
   const stats = await uncoveredStats();
   for (const row of stats) {

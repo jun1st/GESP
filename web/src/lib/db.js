@@ -61,6 +61,14 @@ async function init() {
         PRIMARY KEY (user_id, key)
       )
     `);
+    await impl.run(`
+      CREATE TABLE IF NOT EXISTS user_plans (
+        user_id INTEGER NOT NULL,
+        tier TEXT NOT NULL,
+        expires_at TEXT NOT NULL,
+        PRIMARY KEY (user_id, tier)
+      )
+    `);
   } else {
     const { DatabaseSync } = await import('node:sqlite');
     const db = new DatabaseSync(await pickSqlitePath());
@@ -82,6 +90,14 @@ async function init() {
         value TEXT NOT NULL,
         updated_at TEXT NOT NULL,
         PRIMARY KEY (user_id, key)
+      )
+    `);
+    db.exec(`
+      CREATE TABLE IF NOT EXISTS user_plans (
+        user_id INTEGER NOT NULL,
+        tier TEXT NOT NULL,
+        expires_at TEXT NOT NULL,
+        PRIMARY KEY (user_id, tier)
       )
     `);
     impl = {

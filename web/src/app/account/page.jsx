@@ -100,8 +100,9 @@ export default function AccountPage() {
   if (loading) return <div className="panel"><p className="pb-loading">加载中…</p></div>;
 
   if (me) {
-    const expires = me.membershipExpiresAt ? new Date(me.membershipExpiresAt) : null;
-    const daysLeft = expires ? Math.max(0, Math.ceil((expires - new Date()) / 86400000)) : 0;
+    const dayMs = 86400000;
+    const tiers = me.tiers || [];
+    const daysOf = (t) => Math.max(0, Math.ceil((new Date(t.expiresAt) - new Date()) / dayMs));
   return (
     <div className="panel ac-panel">
       <DbWarning />
@@ -115,18 +116,24 @@ export default function AccountPage() {
               <span className="free-badge">未开通会员</span>
             )}
           </p>
-          {me.isMember && expires && (
-            <p><b>有效期至：</b>{expires.toLocaleDateString('zh-CN')}（还剩 {daysLeft} 天）</p>
-          )}
-          {me.isMember && daysLeft <= 30 && (
-            <p className="ac-err">⚠️ 会员还剩 {daysLeft} 天到期，请联系管理员续费，到期后将无法打开课程和真题库。</p>
-          )}
-          {!me.isMember && expires && (
-            <p className="ac-err">会员已于 {expires.toLocaleDateString('zh-CN')} 到期，请联系管理员续费。</p>
-          )}
-          {!me.isMember && (
-            <p className="ac-hint">开通会员可解锁 1~8 级全部课程、真题与解析，有效期一年。请联系管理员人工开通。</p>
-          )}
+          <ul className="ac-tiers">
+            {tiers.map((t) => (
+              <li key={t.tier}>
+                <b>{t.label}：</b>
+                {t.active ? (
+                  <>
+                    ✅ 有效期至 {new Date(t.expiresAt).toLocaleDateString('zh-CN')}（还剩 {daysOf(t)} 天）
+                    {daysOf(t) <= 15 && <span className="ac-err"> ⚠️ 即将到期，请联系管理员续费</span>}
+                  </>
+                ) : t.expiresAt ? (
+                  <span className="ac-err">已于 {new Date(t.expiresAt).toLocaleDateString('zh-CN')} 到期</span>
+                ) : (
+                  '未开通'
+                )}
+              </li>
+            ))}
+          </ul>
+          <p className="ac-hint">会员按级别分档开通：1-3 级、4-5 级、6-7 级、8 级各自独立，每次开通一个季度（90 天）。请联系管理员人工开通。</p>
         </div>
 
         <form className="ac-form" onSubmit={changePwd}>
@@ -149,7 +156,7 @@ export default function AccountPage() {
     <div className="panel ac-panel">
       <DbWarning />
       <h2>{mode === 'login' ? '👤 登录' : '📝 注册'}</h2>
-      <p className="ac-hint">使用手机号 + 密码登录。注册后联系管理员开通会员，一年内解锁全部内容。</p>
+      <p className="ac-hint">使用手机号 + 密码登录。注册后联系管理员按级别档位（1-3 / 4-5 / 6-7 / 8 级）开通会员，每次一个季度。</p>
       <div className="ac-tabs">
         <button type="button" className={mode === 'login' ? 'on' : ''} onClick={() => { setMode('login'); setMsg(null); }}>登录</button>
         <button type="button" className={mode === 'register' ? 'on' : ''} onClick={() => { setMode('register'); setMsg(null); }}>注册</button>

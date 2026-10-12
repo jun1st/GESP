@@ -15,9 +15,9 @@ export default async function CoursePage({ params }) {
   const { level } = await params;
   if (!LEVEL_IDS.includes(Number(level)) || String(Number(level)) !== level) notFound();
   const data = await readLevel(level);
-  const { isMember } = await getMemberContext();
+  const { hasLevel } = await getMemberContext();
   const related = await readRelated(`level-${data.id}`);
   const levelName = LEVEL_CN[data.id];
 
-  return <CourseView data={data} related={related} levelName={levelName} locked={!isMember} />;
+  return <CourseView data={data} related={related} levelName={levelName} locked={!hasLevel(data.id)} />;
 }

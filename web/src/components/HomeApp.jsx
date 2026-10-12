@@ -43,6 +43,7 @@ function getArr(key, n) {
 export default function HomeApp({ meta, account }) {
   const MODULES = useMemo(() => buildModules(meta), [meta]);
   const isMember = Boolean(account?.isMember);
+  const ownsLevel = (n) => Boolean(account?.levels?.includes(n));
   const [profile, setProfile] = useState(null);
   const [name, setName] = useState('');
   const [progress, setProgress] = useState(null);
@@ -91,7 +92,7 @@ export default function HomeApp({ meta, account }) {
   const hour = new Date().getHours();
   const greet = hour < 6 ? '夜深了，注意休息' : hour < 12 ? '早上好！' : hour < 18 ? '下午好！' : '晚上好！';
 
-  const lockedNote = (m) => (m.meta >= 1 && !isMember ? '会员' : '');
+  const lockedNote = (m) => (m.meta >= 1 && !ownsLevel(m.meta) ? '会员' : '');
 
   return (
     <div className="home">
@@ -133,7 +134,7 @@ export default function HomeApp({ meta, account }) {
             <span>下一步 · {firstIncomplete.m.name}{firstIncomplete.m.meta === 0 ? '' : '级'} 第 {firstIncomplete.arr.indexOf(false) + 1} / {firstIncomplete.m.total} 课</span>
             <b>继续学习</b>
           </div>
-          {firstIncomplete.m.meta >= 1 && !isMember ? (
+          {firstIncomplete.m.meta >= 1 && !ownsLevel(firstIncomplete.m.meta) ? (
             <Link href="/account">开通会员</Link>
           ) : (
             <Link href={firstIncomplete.m.page}>开始</Link>
@@ -146,7 +147,7 @@ export default function HomeApp({ meta, account }) {
         <div className="level-list">
           {state.map(({ m, done: d }, i) => {
             const routeLocked = Boolean(profile) && i > 0 && state[i - 1].done < state[i - 1].m.total;
-            const vipLocked = m.meta >= 1 && !isMember;
+            const vipLocked = m.meta >= 1 && !ownsLevel(m.meta);
             const complete = d === m.total;
             return (
               <div className={'level-row' + (routeLocked || vipLocked ? ' is-locked' : '')} key={m.key}>

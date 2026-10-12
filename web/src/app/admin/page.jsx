@@ -2,11 +2,12 @@
 
 import { useState } from 'react';
 import DbWarning from '@/components/DbWarning';
+import { TIERS, TIER_IDS } from '@/lib/plans';
 
 export default function AdminPage() {
   const [token, setToken] = useState('');
   const [phone, setPhone] = useState('');
-  const [months, setMonths] = useState(12);
+  const [tier, setTier] = useState(TIER_IDS[0]);
   const [msg, setMsg] = useState(null);
   const [search, setSearch] = useState('');
   const [overview, setOverview] = useState(null);
@@ -34,7 +35,7 @@ export default function AdminPage() {
     const res = await fetch('/api/admin/activate', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ token, phone, months: Number(months) })
+      body: JSON.stringify({ token, phone, tier })
     });
     const data = await res.json();
     if (!res.ok) {
@@ -42,7 +43,7 @@ export default function AdminPage() {
       return;
     }
     const expires = new Date(data.expiresAt);
-    setMsg({ type: 'ok', text: `✅ 已开通：${phone} 会员有效期至 ${expires.toLocaleDateString('zh-CN')}` });
+    setMsg({ type: 'ok', text: `✅ 已开通：${phone} ${data.label} 有效期至 ${expires.toLocaleDateString('zh-CN')}` });
     setPhone('');
     if (overview) loadOverview();
   };
@@ -51,7 +52,7 @@ export default function AdminPage() {
     <div className="panel ac-panel">
       <DbWarning />
       <h2>🔐 管理员：人工开通会员</h2>
-      <p className="ac-hint">此页面仅限管理员使用。输入管理员密码，为已注册手机号开通/延长会员（按自然月累加，一年 = 12 个月）。</p>
+      <p className="ac-hint">此页面仅限管理员使用。输入管理员密码，按 GESP 级别分档为已注册手机号开通：1-3 级、4-5 级、6-7 级、8 级各自独立开通，每次开通一个季度（90 天），重复开通则顺延。</p>
       <form className="ac-form" onSubmit={submit}>
         <label className="ac-field">
           <span>管理员密码</span>
@@ -62,8 +63,10 @@ export default function AdminPage() {
           <input type="tel" value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="11 位手机号" />
         </label>
         <label className="ac-field">
-          <span>开通月数</span>
-          <input type="number" min="1" max="120" value={months} onChange={(e) => setMonths(e.target.value)} />
+          <span>开通档位（每次一个季度）</span>
+          <select value={tier} onChange={(e) => setTier(e.target.value)}>
+            {TIER_IDS.map((id) => <option key={id} value={id}>{TIERS[id].label}</option>)}
+          </select>
         </label>
         {msg && <p className={msg.type === 'ok' ? 'ac-ok' : 'ac-err'}>{msg.text}</p>}
         <button type="submit" className="ac-btn">开通会员</button>
@@ -82,15 +85,22 @@ export default function AdminPage() {
         <>
           <table>
             <thead>
-              <tr><th>手机号</th><th>状态</th><th>到期日</th><th>剩余</th></tr>
+              <tr><th>手机号</th><th>状态</th><th>各档位到期日</th></tr>
             </thead>
             <tbody>
               {overview.members.map((m) => (
                 <tr key={m.phone}>
                   <td>{m.phone}</td>
-                  <td>{m.active ? (m.daysLeft <= 30 ? '⚠️ 即将到期' : '✅ 会员') : '非会员'}</td>
-                  <td>{m.expiresAt ? new Date(m.expiresAt).toLocaleDateString('zh-CN') : '-'}</td>
-                  <td>{m.active ? `${m.daysLeft} 天` : '-'}</td>
+                  <td>{m.active ? '✅ 会员' : '非会员'}</td>
+                  <td>
+                    {m.tiers.filter((t) => t.expiresAt).map((t) => (
+                      <div key={t.tier}>
+                        {t.label}：{new Date(t.expiresAt).toLocaleDateString('zh-CN')}
+                        {t.active ? (t.daysLeft <= 15 ? `（⚠️ 剩 ${t.daysLeft} 天）` : `（剩 ${t.daysLeft} 天）`) : '（已到期）'}
+                      </div>
+                    ))}
+                    {!m.tiers.some((t) => t.expiresAt) && '-'}
+                  </td>
                 </tr>
               ))}
             </tbody>

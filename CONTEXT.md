@@ -20,7 +20,7 @@ The page that teaches one Level (or Fundamentals) as an ordered set of Lessons. 
 _Avoid_: 乐园, 学习乐园, 课程 as a synonym for Level
 
 **Member (会员)**:
-A registered user who has been activated and can open Level Courses. Fundamentals is open to everyone.
+A registered user who has been activated and can open Level Courses. Fundamentals is open to everyone. Membership is activated per Tier (Levels 1-3, 4-5, 6-7, 8), each activation lasting one quarter (90 days); repeating it extends the expiry.
 
 **Past Paper Library (真题资料库)**:
 The archive of official historical GESP exam papers, organised by exam session and Level, each with questions, official answers and analysis. Separate from any Course.

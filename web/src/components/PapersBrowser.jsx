@@ -65,7 +65,7 @@ function QCard({ q, type }) {
   );
 }
 
-export default function PapersBrowser({ sessions, sample = false }) {
+export default function PapersBrowser({ sessions, sample = false, ownedLevels = [] }) {
   const [session, setSession] = useState(sessions[sessions.length - 1]?.batch || '');
   const [level, setLevel] = useState('');
   const [browse, setBrowse] = useState(sample);
@@ -82,13 +82,13 @@ export default function PapersBrowser({ sessions, sample = false }) {
   useEffect(() => {
     if (!browse || !session || !level) return;
     setLoading(true);
-    const qs = sample ? `sample=1&level=${level}` : `session=${session}&level=${level}`;
+    const qs = sample || !owned ? `sample=1&level=${level}` : `session=${session}&level=${level}`;
     fetch(`${BASE}/api/papers/view?${qs}`)
       .then((r) => (r.ok ? r.json() : Promise.reject(new Error('HTTP ' + r.status))))
       .then(setData)
       .catch(() => setData(null))
       .finally(() => setLoading(false));
-  }, [browse, session, level, sample]);
+  }, [browse, session, level, sample, owned]);
 
   const counts = {
     single: data?.single?.length || 0,
@@ -96,6 +96,7 @@ export default function PapersBrowser({ sessions, sample = false }) {
     program: data?.program?.length || 0
   };
 
+  const owned = sample || ownedLevels.includes(Number(level));
   const examHref = session && level ? `/papers/exam/${session}/${level}/` : '#';
 
   return (
@@ -128,7 +129,13 @@ export default function PapersBrowser({ sessions, sample = false }) {
         </label>
       </div>
 
-      {level && !sample && (
+      {level && !sample && !owned && (
+        <p className="callout info papers-member-cta">
+          你尚未开通 {level} 级所在档位（1-3 / 4-5 / 6-7 / 8 级分档开通，每次一个季度），下方仅显示样例题。请到 <Link href="/account">我的账号</Link> 查看并联系管理员开通。
+        </p>
+      )}
+
+      {level && !sample && owned && (
         <div className="papers-actions">
           <Link className="mx-btn primary big" href={examHref}>开始模拟考</Link>
           <button
@@ -143,12 +150,12 @@ export default function PapersBrowser({ sessions, sample = false }) {
 
       {browse && level && (
         <>
-          {sample && data?.batch && (
+          {(sample || !owned) && data?.batch && (
             <p className="pb-count papers-meta">
               样例：{data.batch.replace('-', ' 年 ')} 月 {level} 级的前 {data.single.length} 道单选题。开通会员可查看全部试卷并参加模拟考。
             </p>
           )}
-          {!sample && <p className="pb-count papers-meta">
+          {!sample && owned && <p className="pb-count papers-meta">
             本卷：单选 {counts.single || '—'} · 判断 {counts.judge || '—'} · 编程 {counts.program || '—'}
             {current.hasAnalysis && ' · 部分题目附官方解析'}
           </p>}

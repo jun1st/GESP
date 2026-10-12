@@ -7,8 +7,8 @@ import { loadPaper, toExamView } from '@/lib/papers';
 
 export default async function MockExamPage({ params }) {
   const { session, level } = await params;
-  const { isMember } = await getMemberContext();
-  if (!isMember) return <LockedPanel title="模拟考为会员专享" />;
+  const { hasLevel } = await getMemberContext();
+  if (!hasLevel(level)) return <LockedPanel title={`${level} 级模拟考需开通对应级别会员`} />;
   const paper = await loadPaper(session, level);
   if (!paper) notFound();
   return (

@@ -35,7 +35,7 @@ async function loadSessions() {
 }
 
 export default async function PapersPage() {
-  const { isMember } = await getMemberContext();
+  const { isMember, levels: ownedLevels } = await getMemberContext();
   const sessions = await loadSessions();
   const sessionCount = sessions.length;
   const paperCount = sessions.reduce((n, s) => n + (s.levels?.length || 0), 0);
@@ -65,7 +65,7 @@ export default async function PapersPage() {
       {sessionCount > 0 && isMember && (
         <div className="panel papers-main">
           <h2 className="papers-section-title">选考季与 Level</h2>
-          <PapersBrowser sessions={sessions} />
+          <PapersBrowser sessions={sessions} ownedLevels={ownedLevels} />
         </div>
       )}
 

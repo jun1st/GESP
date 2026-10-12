@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import { getSession } from '@/lib/session';
-import { findUserByPhone, publicUser } from '@/lib/auth';
+import { findUserByPhone, getPlans, publicUser } from '@/lib/auth';
 
 export async function GET() {
   const session = await getSession();
@@ -11,5 +11,5 @@ export async function GET() {
   if (!user) {
     return NextResponse.json({ user: null });
   }
-  return NextResponse.json({ user: publicUser(user) });
+  return NextResponse.json({ user: publicUser(user, await getPlans(user.id)) });
 }

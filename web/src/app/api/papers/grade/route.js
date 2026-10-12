@@ -35,17 +35,17 @@ function cleanAnswers(raw) {
 }
 
 async function guard() {
-  const { user, isMember } = await getMemberContext();
+  const { user, isMember, hasLevel } = await getMemberContext();
   if (!user) return { error: NextResponse.json({ error: '请先登录' }, { status: 401 }) };
   if (!isMember) return { error: NextResponse.json({ error: '会员专享' }, { status: 403 }) };
-  return { user };
+  return { user, hasLevel };
 }
 
 // 交卷：自动判分并保存完整 Attempt（含每题作答）
 export async function POST(request) {
   const g = await guard();
   if (g.error) return g.error;
-  const { user } = g;
+  const { user, hasLevel } = g;
 
   let body;
   try {
@@ -53,6 +53,7 @@ export async function POST(request) {
   } catch {
     return NextResponse.json({ error: '请求格式错误' }, { status: 400 });
   }
+  if (!hasLevel(body.level)) return NextResponse.json({ error: '该级别未开通会员' }, { status: 403 });
   const paper = await loadPaper(body.session, body.level);
   if (!paper) return NextResponse.json({ error: '试卷不存在' }, { status: 404 });
 
